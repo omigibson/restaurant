@@ -19,12 +19,35 @@ class App extends Component {
       .then((bookings) => {
         console.log(bookings);
       });
+
+    /* Calls the postToAPI-function and resolved the promise. */
+    this.postToAPI()
+      .then((response) => {
+        console.log(response);
+      })
+        .catch((error) => {
+          console.log(error);
+        })
   }
 
   /* Fetches the fetch_bookings.php from the server folder and returns
   the promise.  */
   fetchAPI = () => {
     return fetch('http://localhost:8888/fetch_bookings.php')
+      .then((response) => response.json())
+  }
+
+  /* Posts the object inside JSON.stringify to our post_booking.php file. */
+  postToAPI = () => {
+    return fetch('http://localhost:8888/post_booking.php', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({
+        date: '2018-08-15',
+        time: '21',
+        userID: '2'
+      })
+    })
       .then((response) => response.json())
   }
 
