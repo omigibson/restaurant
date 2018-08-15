@@ -1,6 +1,10 @@
 .App {
   text-align: center; }
 
+.booking-calendar-container {
+  width: 50%;
+  margin: 0 auto; }
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px; }
