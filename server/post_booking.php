@@ -21,6 +21,6 @@ $id = $pdo->lastInsertId();
 $array['bookingID'] = $id;
 
 /* Before the array is sent back to JavaScript we need to encode it back to JSON.
-It is then echoed back to JS. */ 
+It is then echoed back to JS. */
 echo json_encode($array);
 ?>
