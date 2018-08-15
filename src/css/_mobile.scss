@@ -1,18 +1,6 @@
-
 .App {
   text-align: center;
 }
-
-.booking-calendar-container {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -28,7 +16,44 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+
+/***********************************/
+/************* CALENDAR ************/
+/***********************************/
+
+.booking-calendar-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.booking-calendar {
+  .header {
+    .header-content {
+      .icon-previous {}
+      .icon-next {}
+      .month-label {}
+    }
+  }
+
+  .week {
+    &.names {
+      .day-box .day {}
+    }
+
+    .day-box .day {
+      &.different-month {}
+      &.selected {}
+      &.today {}
+      &.booked-day:before, &.booked-night:after {
+        -webkit-transform: skewX(0)!important;
+        transform: skewX(0)!important;
+        left:0!important;
+      }
+      &.booked-day:before {}
+      &.booked-night:after {
+        width: 0!important;
+      }
+    }
+  }
 }

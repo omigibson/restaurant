@@ -25,13 +25,13 @@ class App extends Component {
       });
 
     /* Calls the postToAPI-function and resolved the promise. */
-    this.postToAPI()
-      .then((response) => {
-        console.log(response);
-      })
-        .catch((error) => {
-          console.log(error);
-        })
+    // this.postToAPI()
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
   }
 
   /* Fetches the fetch_bookings.php from the server folder and returns
