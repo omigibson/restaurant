@@ -4,15 +4,18 @@ import './../css/style.css';
 
 class App extends Component {
   componentWillMount = () => {
-    this.fetchAPI();
+    /* The promise is resolved and we console log response. */ 
+    this.fetchAPI()
+      .then((bookings) => {
+        console.log(bookings);
+      });
   }
 
+  /* Fetches the fetch_bookings.php from the server folder and returns
+  the promise.  */
   fetchAPI = () => {
-    fetch('http://localhost:8888/fetch_bookings.php')
+    return fetch('http://localhost:8888/fetch_bookings.php')
       .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-        })
   }
 
   render() {
