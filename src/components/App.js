@@ -1,23 +1,27 @@
-import React, { Component } from 'react';
-import logo from './../logo.svg';
-import './../css/style.css';
+import React, { Component } from "react";
+import "./../css/style.css";
 
-import Hello from './HelloComponent';
-import About from './AboutComponent';
-import Booking from './BookingComponent';
+import Hello from "./HelloComponent";
+import About from "./AboutComponent";
+import Booking from "./BookingComponent";
+import BookingCalendar from "./BookingCalendar";
 
 import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom';
+} from "react-router-dom";
 
 class App extends Component {
+  state = {
+    bookings: null
+  }
+
   componentWillMount = () => {
     /* The promise is resolved and we console log response. */
     this.fetchAPI()
       .then((bookings) => {
-        console.log(bookings);
+        this.setState({ bookings: bookings });
       });
 
     /* Calls the postToAPI-function and resolved the promise. */
@@ -33,19 +37,19 @@ class App extends Component {
   /* Fetches the fetch_bookings.php from the server folder and returns
   the promise.  */
   fetchAPI = () => {
-    return fetch('http://localhost:8888/fetch_bookings.php')
+    return fetch("http://localhost:8888/fetch_bookings.php")
       .then((response) => response.json())
   }
 
   /* Posts the object inside JSON.stringify to our post_booking.php file. */
   postToAPI = () => {
-    return fetch('http://localhost:8888/post_booking.php', {
-      method: 'POST',
-      mode: 'cors',
+    return fetch("http://localhost:8888/post_booking.php", {
+      method: "POST",
+      mode: "cors",
       body: JSON.stringify({
-        date: '2018-08-15',
-        time: '21',
-        userID: '2'
+        date: "2018-08-15",
+        time: "21",
+        userID: "2"
       })
     })
       .then((response) => response.json())
@@ -56,7 +60,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Godaste restaurangen!! :-)))</h1>
             <ul>
                <li><Link to="/hello">Hello</Link></li>
@@ -71,6 +74,9 @@ class App extends Component {
           <Route path="/hello" component={Hello} />
           <Route path="/about" component={About} />
           <Route path="/booking" component={Booking} />
+          <div className="booking-calendar-container">
+            <BookingCalendar bookings={ this.state.bookings } />
+          </div>
 
         </div>
       </Router>
