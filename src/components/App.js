@@ -3,6 +3,18 @@ import logo from './../logo.svg';
 import './../css/style.css';
 
 class App extends Component {
+  componentWillMount = () => {
+    this.fetchAPI();
+  }
+
+  fetchAPI = () => {
+    fetch('http://localhost:8888/fetch_bookings.php')
+      .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        })
+  }
+
   render() {
     return (
       <div className="App">
