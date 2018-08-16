@@ -7,6 +7,7 @@ class AdminComponent extends React.Component {
       allBookings: null,
       convertedBookings: []
     }
+
     /* Before the component is mounted fetchBookings is called and the result is
     stored in this.state.allBookings. */
     componentWillMount = () => {
@@ -19,7 +20,6 @@ class AdminComponent extends React.Component {
           });
         })
     }
-
     fetchBookings = () => {
       return fetch("http://localhost:8888/fetch_bookings.php")
         .then((response) => response.json())
@@ -43,6 +43,7 @@ class AdminComponent extends React.Component {
           return (
             <div className="container admin-panel">
               <h2>Upcoming bookings</h2>
+
               <ul>
                 <li>Datum</li>
                 <li>Datum</li>
