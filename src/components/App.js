@@ -3,7 +3,6 @@ import "./../css/style.css";
 
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
-import Booking from "./BookingComponent";
 import BookingCalendar from "./BookingCalendar";
 
 import {
@@ -58,26 +57,21 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">Godaste restaurangen!! :-)))</h1>
-            <ul>
-               <li><Link to="/hello">Hello</Link></li>
-               <li><Link to="/about">About</Link></li>
-               <li><Link to="/booking">Booking</Link></li>
-            </ul>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
+        <div className="outer-container">
+          <div className="navbar-container">
+            <header className="navbar-header">
+              <ul>
+                 <li><Link to="/hello">Hello</Link></li>
+                 <li><Link to="/about">About</Link></li>
+                 <li><Link to="/booking">Booking</Link></li>
+              </ul>
+            </header>
 
-          <Route path="/hello" component={Hello} />
-          <Route path="/about" component={About} />
-          <Route path="/booking" component={Booking} />
-          <div className="booking-calendar-container">
-            <BookingCalendar bookings={ this.state.bookings } />
+            <Route path="/hello" component={Hello} />
+            <Route path="/about" component={About} />
+            <Route path="/booking" component={BookingCalendar} />
+
           </div>
-
         </div>
       </Router>
     );

@@ -1,22 +1,35 @@
-.App {
-  text-align: center;
+
+a {
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
 }
-.App-header {
+
+.outer-container {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.navbar-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  width: 100%;
+  height: 70px;
   color: white;
+  display: inline-flex;
+  align-content: center;
+  ul {
+    margin: auto;
+    li {
+      margin: 5px;
+      display: inline-flex;
+    }
+  }
 }
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-
 
 /***********************************/
 /************* CALENDAR ************/
@@ -24,6 +37,7 @@
 
 .booking-calendar-container {
   width: 50%;
+  height: 100%;
   margin: 0 auto;
 }
 
