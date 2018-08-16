@@ -20,26 +20,39 @@ class Booking extends React.Component {
           /* After all the bookings are present in this.state.allBookings they
           are converted to the Date format through the convertBookingtoDates-method. */
           this.convertBookingstoDates();
+          this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
         });
       })
+  }
+
+  initiateMonthPaginationEventListeners = () => {
+    const previousButton = document.getElementsByClassName('icon-previous')[0];
+    const nextButton = document.getElementsByClassName('icon-next')[0];
+    const paginationButtons = [previousButton, nextButton];
+    paginationButtons.map((button) => {
+      button.addEventListener('click', () => {
+        this.initiateCalendarEventListeners();
+      });
+    });
   }
 
   /* Since the npm-package react-booking-calendar doesn't support click-events
   this is a solution that is not very Reactesque, but solves the problem of
   gathering the neccessary data through good old JavaScript. */
   initiateCalendarEventListeners = () => {
-    const monthAndYear = document.getElementsByClassName("month-label")[0].innerText;
-    const dayBox = document.getElementsByClassName("day");
-    const arrayFromHTMLCollection = Array.from(dayBox);
-    arrayFromHTMLCollection.map((item) => {
-      item.addEventListener('click', () => {
-        const todayDate = item.childNodes[0].innerText;
-        const todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
-        this.setState({ stepCompleted: true, dateSelected: todaysFullDate });
+    setTimeout(() => {
+      let monthAndYear = document.getElementsByClassName("month-label")[0].innerText;
+      let dayBox = document.getElementsByClassName("day");
+      let arrayFromHTMLCollection = Array.from(dayBox);
+      arrayFromHTMLCollection.map((item, i) => {
+        item.addEventListener('click', () => {
+          let todayDate = item.childNodes[0].innerText;
+          let todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
+          this.setState({ stepCompleted: true, dateSelected: todaysFullDate });
+        });
       });
-    });
-
+    }, 100)
   }
 
   fetchBookings = () => {
@@ -77,9 +90,9 @@ class Booking extends React.Component {
       return null;
     }
   }
-  else {
-    return <p> { this.state.dateSelected.toString() } </p>
-  }
+    else {
+      return <p> { this.state.dateSelected.toString() } </p>
+    }
   }
 }
 
