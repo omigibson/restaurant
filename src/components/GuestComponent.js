@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Guest = () => {
+const GuestComponent = () => {
 
     return (
         <div className="guest">
@@ -17,4 +17,4 @@ const Guest = () => {
     );
 }
 
-export default Guest;
+export default GuestComponent;
