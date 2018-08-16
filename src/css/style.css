@@ -1,3 +1,7 @@
+html, body {
+  min-height: 100vh;
+  height: auto; }
+
 a {
   text-decoration: none; }
   a:visited {
@@ -23,10 +27,25 @@ a {
       margin: 5px;
       display: inline-flex; }
 
-/****************GuestComponent*******************/
-/***********************************/
-/************* CALENDAR ************/
-/***********************************/
+/************************************/
+/************** INPUTS **************/
+/************************************/
+input {
+  display: block;
+  height: 30px;
+  margin: 0 0 10px;
+  padding: 7px;
+  font-size: 1em; }
+
+input[type=text],
+input[type=email],
+input[type=tel] {
+  width: 100%; }
+
+/************************************/
+/************* CALENDAR *************/
+/************************************/
+> > > > > > > master
 .booking-calendar-container {
   width: 50%;
   height: 100%;
@@ -40,13 +59,9 @@ a {
 .booking-calendar .week .day-box .day.booked-night:after {
   width: 0 !important; }
 
-@media screen and (min-width: 768px) {
-  /***************************************/
-  /************* TYPOGRAPHY **************/
-  /***************************************/
-  html {
-    font-size: 14px; } }
-
-@media screen and (min-width: 992px) {
-  body {
-    overflow: hidden; } }
+/************************************/
+/*********** CONTACT FORM ***********/
+/************************************/
+.contact-form {
+  width: 100%;
+  margin: auto; }
