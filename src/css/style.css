@@ -39,7 +39,8 @@ input {
 
 input[type=text],
 input[type=email],
-input[type=tel] {
+input[type=tel],
+input[type=password] {
   width: 100%; }
 
 /************************************/
@@ -64,3 +65,10 @@ input[type=tel] {
 .contact-form {
   width: 100%;
   margin: auto; }
+
+/************************************/
+/*************** ADMIN **************/
+/************************************/
+.login-form {
+  width: 300px;
+  margin: 50px auto; }

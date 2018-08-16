@@ -4,6 +4,7 @@ import "./../css/style.css";
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
 import BookingCalendar from "./BookingCalendar";
+import Admin from "./admin/AdminComponent";
 
 import {
   BrowserRouter as Router,
@@ -54,7 +55,7 @@ class App extends Component {
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
             <Route path="/booking" component={BookingCalendar} />
-
+            <Route path="/admin" component={Admin} />
           </div>
         </div>
       </Router>
