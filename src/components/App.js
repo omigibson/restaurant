@@ -12,17 +12,8 @@ import {
 } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    bookings: null
-  }
 
   componentWillMount = () => {
-    /* The promise is resolved and we console log response. */
-    this.fetchAPI()
-      .then((bookings) => {
-        this.setState({ bookings: bookings });
-      });
-
     /* Calls the postToAPI-function and resolved the promise. */
     // this.postToAPI()
     //   .then((response) => {
@@ -31,13 +22,6 @@ class App extends Component {
     //     .catch((error) => {
     //       console.log(error);
     //     })
-  }
-
-  /* Fetches the fetch_bookings.php from the server folder and returns
-  the promise.  */
-  fetchAPI = () => {
-    return fetch("http://localhost:8888/fetch_bookings.php")
-      .then((response) => response.json())
   }
 
   /* Posts the object inside JSON.stringify to our post_booking.php file. */

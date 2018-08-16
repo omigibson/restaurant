@@ -2,16 +2,21 @@ import React from 'react';
 import BookingCalendar from 'react-booking-calendar';
 
 class Booking extends React.Component {
-
+  /* State will contain objects that are retreived from MYSQL. convertedBookings
+  is the same data, but converted to Date-format. */
   state = {
     allBookings: null,
     convertedBookings: []
   }
 
+  /* Before the component is mounted fetchBookings is called and the result is
+  stored in this.state.allBookings. */
   componentWillMount = () => {
     this.fetchBookings()
       .then((bookings) => {
         this.setState({ allBookings: bookings }, () => {
+          /* After all the bookings are present in this.state.allBookings they
+          are converted to the Date format through the convertBookingtoDates-method. */
           this.convertBookingstoDates();
         });
       })
@@ -22,6 +27,8 @@ class Booking extends React.Component {
       .then((response) => response.json())
   }
 
+  /* Converts this.state.allBookings from MySQL date-format to something that
+  JavaScript can understand through new Date. */
   convertBookingstoDates = (props) => {
     if (this.state.allBookings) {
       let allConvertedBookings = [];
@@ -33,6 +40,7 @@ class Booking extends React.Component {
   }
 
   render = () => {
+    /* Only render if this.state.convertedBookings returns true. */
     if (this.state.convertedBookings) {
       return (
         <div className="booking-calendar-container">
