@@ -1,6 +1,7 @@
 import React from 'react';
 import BookingCalendar from 'react-booking-calendar';
 import ContactForm from "./ContactForm";
+import GuestComponent from "./GuestComponent";
 
 class Booking extends React.Component {
   /* State will contain objects that are retreived from MYSQL. convertedBookings
@@ -45,6 +46,7 @@ class Booking extends React.Component {
     if (this.state.convertedBookings) {
       return (
         <div className="booking-calendar-container">
+          <GuestComponent />
           <BookingCalendar bookings={this.state.convertedBookings} clickable={true} />
           <ContactForm />
         </div>

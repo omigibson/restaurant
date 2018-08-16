@@ -4,7 +4,7 @@ import "./../css/style.css";
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
 import BookingCalendar from "./BookingCalendar";
-import GuestComponent from "./Guest";
+
 
 import {
   BrowserRouter as Router,
@@ -52,7 +52,7 @@ class App extends Component {
               </ul>
             </header>
 
-            <GuestComponent />
+
 
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
