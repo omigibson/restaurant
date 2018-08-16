@@ -45,10 +45,20 @@ class AdminComponent extends React.Component {
           return (
             <div className="container admin-panel">
               <h2>Upcoming bookings</h2>
-
-              <ul>
-                <BookingItem BookingItem={ this.state.allBookings } />
-              </ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Name</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <BookingItem BookingItem={ this.state.allBookings } />
+                </tbody>
+              </table>
 
               <h2>Past bookings</h2>
               <ul>

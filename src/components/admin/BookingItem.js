@@ -5,7 +5,16 @@ const BookingItem = (props) => {
 
   if (props.BookingItem) {
     return props.BookingItem.map((item, i) => {
-      return (<li key={i}>{ item.date }</li>)
+      return (
+        <tr key={i}>
+          <td>{ item.date }</td>
+          <td>{ item.time }</td>
+          <td>{ item.userID }</td>
+          <td>{ item.userID }</td>
+          <td>{ item.userID }</td>
+          <button>Remove booking</button>
+        </tr>
+      )
     });
   } else {
     console.log("No bookings yet");
