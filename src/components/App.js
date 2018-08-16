@@ -4,6 +4,7 @@ import "./../css/style.css";
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
 import BookingCalendar from "./BookingCalendar";
+import Guest from "./Guest";
 
 import {
   BrowserRouter as Router,
@@ -45,11 +46,13 @@ class App extends Component {
           <div className="navbar-container">
             <header className="navbar-header">
               <ul>
-                 <li><Link to="/hello">Hello</Link></li>
-                 <li><Link to="/about">About</Link></li>
-                 <li><Link to="/booking">Booking</Link></li>
+                <li><Link to="/hello">Hello</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/booking">Booking</Link></li>
               </ul>
             </header>
+
+            <Guest />
 
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
