@@ -7,6 +7,7 @@ import BookingCalendar from "./BookingCalendar";
 import Login from "./admin/LoginComponent";
 import Admin from "./admin/AdminComponent";
 
+
 import {
   BrowserRouter as Router,
   Route,
@@ -47,11 +48,13 @@ class App extends Component {
           <div className="navbar-container">
             <header className="navbar-header">
               <ul>
-                 <li><Link to="/hello">Hello</Link></li>
-                 <li><Link to="/about">About</Link></li>
-                 <li><Link to="/booking">Booking</Link></li>
+                <li><Link to="/hello">Hello</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/booking">Booking</Link></li>
               </ul>
             </header>
+
+
 
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
