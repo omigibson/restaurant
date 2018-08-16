@@ -1,3 +1,11 @@
+/************************************/
+/************** RESET ***************/
+/************************************/
+table, tr, td {
+  margin:0;
+  padding:0;
+}
+
 html, body {
   min-height: 100vh;
   height: auto;
@@ -65,7 +73,6 @@ input[type=password] {
 /************************************/
 /************* CALENDAR *************/
 /************************************/
->>>>>>> master
 
 .booking-calendar-container {
   width: 50%;
@@ -124,4 +131,13 @@ input[type=password] {
 .login-form {
   width: 300px;
   margin: 50px auto;
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  padding: .5em 1em;
+  text-align: left;
 }
