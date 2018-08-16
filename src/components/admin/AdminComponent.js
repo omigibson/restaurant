@@ -14,11 +14,7 @@ class AdminComponent extends React.Component {
     componentWillMount = () => {
       this.fetchBookings()
         .then((bookings) => {
-          this.setState({ allBookings: bookings }, () => {
-            /* After all the bookings are present in this.state.allBookings they
-            are converted to the Date format through the convertBookingtoDates-method. */
-            this.convertBookingstoDates();
-          });
+          this.setState({ allBookings: bookings });
         })
     }
     fetchBookings = () => {
@@ -26,18 +22,6 @@ class AdminComponent extends React.Component {
         .then((response) => response.json())
     }
 
-    /* Converts this.state.allBookings from MySQL date-format to something that
-    JavaScript can understand through new Date. */
-    convertBookingstoDates = (props) => {
-      if (this.state.allBookings) {
-        let allConvertedBookings = [];
-        this.state.allBookings.map((booking, i) => {
-          allConvertedBookings.push(new Date(booking.date));
-        });
-        this.setState({ convertedBookings: allConvertedBookings });
-        console.log(allConvertedBookings);
-      }
-    }
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -50,6 +34,7 @@ class AdminComponent extends React.Component {
                   <tr>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Guests</th>
                     <th>Name</th>
                     <th>Telephone</th>
                     <th>Email</th>
@@ -59,13 +44,23 @@ class AdminComponent extends React.Component {
                   <BookingItem BookingItem={ this.state.allBookings } />
                 </tbody>
               </table>
-
+{/*
               <h2>Past bookings</h2>
-              <ul>
-                <li>Datum</li>
-                <li>Datum</li>
-                <li>Datum</li>
-              </ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Guests</th>
+                    <th>Name</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <BookingItem BookingItem={ this.state.allBookings } />
+                </tbody>
+              </table> */}
           </div>
         );
       } else {
