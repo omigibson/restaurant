@@ -1,4 +1,5 @@
 import React from 'react';
+import BookingItem from './BookingItem';
 
 class AdminComponent extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
@@ -34,6 +35,7 @@ class AdminComponent extends React.Component {
           allConvertedBookings.push(new Date(booking.date));
         });
         this.setState({ convertedBookings: allConvertedBookings });
+        console.log(allConvertedBookings);
       }
     }
 
@@ -45,9 +47,7 @@ class AdminComponent extends React.Component {
               <h2>Upcoming bookings</h2>
 
               <ul>
-                <li>Datum</li>
-                <li>Datum</li>
-                <li>Datum</li>
+                <BookingItem BookingItem={ this.state.allBookings } />
               </ul>
 
               <h2>Past bookings</h2>
