@@ -44,23 +44,6 @@ class AdminComponent extends React.Component {
                   <BookingItem BookingItem={ this.state.allBookings } />
                 </tbody>
               </table>
-{/*
-              <h2>Past bookings</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Guests</th>
-                    <th>Name</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <BookingItem BookingItem={ this.state.allBookings } />
-                </tbody>
-              </table> */}
           </div>
         );
       } else {

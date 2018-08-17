@@ -10,9 +10,9 @@ const BookingItem = (props) => {
           <td>{ item.date }</td>
           <td>{ item.time }</td>
           <td>{ item.guests }</td>
-          <td>{ item.userID }</td>
-          <td>{ item.userID }</td>
-          <td>{ item.userID }</td>
+          <td>{ item.name }</td>
+          <td>{ item.tel }</td>
+          <td>{ item.email }</td>
           <td><button>Remove booking</button></td>
         </tr>
       )
