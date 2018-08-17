@@ -22,6 +22,11 @@ class AdminComponent extends React.Component {
         .then((response) => response.json())
     }
 
+    deleteBooking = () => {
+      // return fetch("http://localhost:8888/delete_bookings.php")
+      //   .then((response) => response.json())
+      console.log('this booking will be deleted');
+    }
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -41,7 +46,7 @@ class AdminComponent extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <BookingItem BookingItem={ this.state.allBookings } />
+                  <BookingItem BookingItem={ this.state.allBookings } onClick={ this.deleteBooking } />
                 </tbody>
               </table>
           </div>
