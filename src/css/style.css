@@ -1,3 +1,10 @@
+/************************************/
+/************** RESET ***************/
+/************************************/
+table, tr, td {
+  margin: 0;
+  padding: 0; }
+
 html, body {
   min-height: 100vh;
   height: auto; }
@@ -28,6 +35,14 @@ a {
       display: inline-flex; }
 
 /************************************/
+/************** LAYOUT **************/
+/************************************/
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto; }
+
+/************************************/
 /************** INPUTS **************/
 /************************************/
 input {
@@ -39,13 +54,13 @@ input {
 
 input[type=text],
 input[type=email],
-input[type=tel] {
+input[type=tel],
+input[type=password] {
   width: 100%; }
 
 /************************************/
 /************* CALENDAR *************/
 /************************************/
-> > > > > > > master
 .booking-calendar-container {
   width: 50%;
   height: 100%;
@@ -70,3 +85,17 @@ input[type=tel] {
 .contact-form {
   width: 100%;
   margin: auto; }
+
+/************************************/
+/*************** ADMIN **************/
+/************************************/
+.login-form {
+  width: 300px;
+  margin: 50px auto; }
+
+table {
+  width: 100%; }
+
+th, td {
+  padding: .5em 1em;
+  text-align: left; }

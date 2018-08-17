@@ -4,6 +4,8 @@ import "./../css/style.css";
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
 import BookingCalendar from "./BookingCalendar";
+import Login from "./admin/LoginComponent";
+import Admin from "./admin/AdminComponent";
 
 
 import {
@@ -57,7 +59,8 @@ class App extends Component {
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
             <Route path="/booking" component={BookingCalendar} />
-
+            <Route path="/login" component={Login} />
+            <Route path="/admin" component={Admin} />
           </div>
         </div>
       </Router>

@@ -1,7 +1,9 @@
 <?php
 require_once('db.php');
 /* We select all the content from bookings. */
-$statement = $pdo->prepare("SELECT * FROM bookings");
+$statement = $pdo->prepare("SELECT *
+  FROM bookings
+  INNER JOIN customers ON bookings.userID");
 $statement->execute();
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
