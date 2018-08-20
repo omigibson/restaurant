@@ -75,6 +75,7 @@ class Booking extends React.Component {
   }
 
   render = () => {
+    console.log(this.props.amountOfGuests);
     /* Only render if this.state.convertedBookings returns true. */
     if (!this.state.stepCompleted) {
       if (this.state.convertedBookings) {
@@ -94,11 +95,10 @@ class Booking extends React.Component {
   }
     else {
       return (
-        <div className="booking-calendar-container">
-          <GuestComponent />
-          <p> { this.state.dateSelected.toString() } </p>
-          <ContactForm />
-        </div>
+        <ContactForm bookingDetails={ {
+            dateSelected: this.state.dateSelected,
+            amountOfGuests: this.props.amountOfGuests
+        } } />
       )
     }
   }
