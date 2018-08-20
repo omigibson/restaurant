@@ -56,7 +56,7 @@ class ContactForm extends React.Component {
                       const dateObjectToString = this.props.bookingDetails.dateSelected.toISOString().slice(0,10);
                       this.postToAPI({
                         date: dateObjectToString,
-                        guests: 5,
+                        guests: this.props.bookingDetails.amountOfGuests,
                         time: 18,
                         userID: userDetailsResponse.id
                       }, 'post_booking.php')
