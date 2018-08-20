@@ -24,44 +24,50 @@ class Booking extends React.Component {
           this.convertBookingstoDates();
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
-          this.makeSingleDateArrays();
+          // this.makeSingleDateArrays();
+          this.countBookingsForSingleDate();
+          var testArray = new Array(this.state.allBookings.map(
+              (object) => object.date));
+          var newArray = this.countBookingsForSingleDate(testArray);
+          console.log(newArray);
         });
       })
   }
 
-  makeSingleDateArrays = () => {
-    const dates = this.state.allBookings.map(
+
+  countBookingsForSingleDate = () => {
+
+  const dates = this.state.allBookings.map(
       (object) => object.date);
-      console.log(dates);
 
-     let array0 = [dates[0]];
+	var compressed = [];
+	// make a copy of the input array
+	var copy = dates.slice(0);
 
-     for(let i = 1; i < dates.length; i++){
-       if (dates[i] === dates[i-1]){
-      {
-        for(let j = 2; j < dates.length; j++){
-          array0.push(dates[i])
-        }
-      }
-    }
-    console.log(array0);
-  }
-}
+	// first loop goes over every element
+	for (var i = 0; i < dates.length; i++) {
 
-// makeSingleDateArrays = () => {
-//     const dates = this.state.allBookings.map(
-//       (object) => object.date);
-//       console.log(dates);
-//
-//       let singleDateArray = [];
-//
-//       for (let i = 0; i < dates.length; i++){
-//         if (dates[i] === "2018-08-01") {
-//           singleDateArray.push(dates[i]);
-//         }
-//       }
-//       console.log(singleDateArray);
-// }
+		var myCount = 0;
+		// loop over every element in the copy and see if it's the same
+		for (var w = 0; w < copy.length; w++) {
+			if (dates[i] == copy[w]) {
+				// increase amount of times duplicate is found
+				myCount++;
+				// sets item to undefined
+				delete copy[w];
+			}
+		}
+
+		if (myCount > 0) {
+			var a = new Object();
+			a.value = dates[i];
+			a.count = myCount;
+			compressed.push(a);
+		}
+	}
+
+	return compressed;
+};
 
 
   initiateMonthPaginationEventListeners = () => {
