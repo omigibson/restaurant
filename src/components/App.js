@@ -3,6 +3,7 @@ import "./../css/style.css";
 
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
+import GuestComponent from "./GuestComponent";
 import Booking from "./Booking";
 import Login from "./admin/LoginComponent";
 import Admin from "./admin/AdminComponent";
@@ -58,7 +59,7 @@ class App extends Component {
 
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
-            <Route path="/Booking" component={Booking} />
+            <Route path="/Booking" component={GuestComponent} />
             <Route path="/login" component={Login} />
             <Route path="/admin" component={Admin} />
           </div>
