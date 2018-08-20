@@ -25,6 +25,9 @@ class Booking extends React.Component {
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
         });
+        const dates = this.state.allBookings.map(
+          (object) => object.date);
+        console.log(dates);
       })
   }
 
@@ -73,6 +76,7 @@ class Booking extends React.Component {
       this.setState({ convertedBookings: allConvertedBookings });
     }
   }
+
 
   render = () => {
     /* Only render if this.state.convertedBookings returns true. */
