@@ -1,5 +1,5 @@
 import React from 'react';
-import BookingCalendar from 'react-booking-calendar';
+import Calendar from 'react-booking-calendar';
 import ContactForm from "./ContactForm";
 import GuestComponent from "./GuestComponent";
 
@@ -80,7 +80,7 @@ class Booking extends React.Component {
       if (this.state.convertedBookings) {
         return (
           <div className="booking-calendar-container">
-            <BookingCalendar
+            <Calendar
             disableHistory={true}
             bookings={this.state.convertedBookings}
             clickable={true}
