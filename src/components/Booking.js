@@ -10,7 +10,8 @@ class Booking extends React.Component {
     allBookings: null,
     convertedBookings: [],
     stepCompleted: false,
-    dateSelected: null
+    dateSelected: null,
+    bookingsPerDate: null
   }
 
   /* Before the component is mounted fetchBookings is called and the result is
@@ -24,12 +25,7 @@ class Booking extends React.Component {
           this.convertBookingstoDates();
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
-          // this.makeSingleDateArrays();
           this.countBookingsForSingleDate();
-          var testArray = new Array(this.state.allBookings.map(
-              (object) => object.date));
-          var newArray = this.countBookingsForSingleDate(testArray);
-          console.log(newArray);
         });
       })
   }
@@ -37,36 +33,34 @@ class Booking extends React.Component {
 
   countBookingsForSingleDate = () => {
 
-  const dates = this.state.allBookings.map(
-      (object) => object.date);
+  const dates = this.state.allBookings.map((object) => object.date);
 
-	var compressed = [];
+	let bookingsPerDate = [];
 	// make a copy of the input array
-	var copy = dates.slice(0);
+	const copy = dates.slice(0);
 
 	// first loop goes over every element
-	for (var i = 0; i < dates.length; i++) {
+	for (let i = 0; i < dates.length; i++) {
 
-		var myCount = 0;
+		let countBookings = 0;
 		// loop over every element in the copy and see if it's the same
-		for (var w = 0; w < copy.length; w++) {
-			if (dates[i] == copy[w]) {
+		for (let j = 0; j < copy.length; j++) {
+			if (dates[i] === copy[j]) {
 				// increase amount of times duplicate is found
-				myCount++;
+				countBookings++;
 				// sets item to undefined
-				delete copy[w];
+				delete copy[j];
 			}
 		}
 
-		if (myCount > 0) {
-			var a = new Object();
-			a.value = dates[i];
-			a.count = myCount;
-			compressed.push(a);
+		if (countBookings > 0) {
+			const dateInfo = {};
+			dateInfo.date = dates[i];
+			dateInfo.numberOfBookings = countBookings;
+			bookingsPerDate.push(dateInfo);
 		}
 	}
-
-	return compressed;
+  this.setState({ bookingsPerDate }, () => console.log(this.state.bookingsPerDate));
 };
 
 
