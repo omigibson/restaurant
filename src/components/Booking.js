@@ -107,7 +107,7 @@ initiateMonthPaginationEventListeners = () => {
     const { bookingsPerDate } = this.state;
     for(let i = 0; i < bookingsPerDate.length; i++ ){
       if(bookingsPerDate[i].numberOfBookings >= 5) {
-        console.log(bookingsPerDate[i] + " is full");
+        console.log(bookingsPerDate[i].date + " is full");
       }
     }
   }
