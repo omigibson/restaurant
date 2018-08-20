@@ -24,12 +24,45 @@ class Booking extends React.Component {
           this.convertBookingstoDates();
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
+          this.makeSingleDateArrays();
         });
-        const dates = this.state.allBookings.map(
-          (object) => object.date);
-        console.log(dates);
       })
   }
+
+  makeSingleDateArrays = () => {
+    const dates = this.state.allBookings.map(
+      (object) => object.date);
+      console.log(dates);
+
+     let array0 = [dates[0]];
+
+     for(let i = 1; i < dates.length; i++){
+       if (dates[i] === dates[i-1]){
+      {
+        for(let j = 2; j < dates.length; j++){
+          array0.push(dates[i])
+        }
+      }
+    }
+    console.log(array0);
+  }
+}
+
+// makeSingleDateArrays = () => {
+//     const dates = this.state.allBookings.map(
+//       (object) => object.date);
+//       console.log(dates);
+//
+//       let singleDateArray = [];
+//
+//       for (let i = 0; i < dates.length; i++){
+//         if (dates[i] === "2018-08-01") {
+//           singleDateArray.push(dates[i]);
+//         }
+//       }
+//       console.log(singleDateArray);
+// }
+
 
   initiateMonthPaginationEventListeners = () => {
     const previousButton = document.getElementsByClassName('icon-previous')[0];
