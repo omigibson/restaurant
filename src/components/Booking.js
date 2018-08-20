@@ -16,19 +16,29 @@ class Booking extends React.Component {
 
   /* Before the component is mounted fetchBookings is called and the result is
   stored in this.state.allBookings. */
+  // componentWillMount = () => {
+  //   this.fetchBookings()
+  //     .then((bookings) => {
+  //       this.setState({ allBookings: bookings }, () => {
+  //         /* After all the bookings are present in this.state.allBookings they
+  //         are converted to the Date format through the convertBookingtoDates-method. */
+  //         this.convertBookingstoDates();
+  //         this.initiateMonthPaginationEventListeners();
+  //         this.initiateCalendarEventListeners();
+  //         this.countBookingsForSingleDate();
+  //         this.checkIfDateIsFull();
+  //       });
+  //     })
+  // }
   componentWillMount = () => {
     this.fetchBookings()
-      .then((bookings) => {
-        this.setState({ allBookings: bookings }, () => {
-          /* After all the bookings are present in this.state.allBookings they
-          are converted to the Date format through the convertBookingtoDates-method. */
-          this.convertBookingstoDates();
-          this.initiateMonthPaginationEventListeners();
-          this.initiateCalendarEventListeners();
-          this.countBookingsForSingleDate();
-        });
-      })
-  }
+      .then((bookings) => this.setState({ allBookings: bookings }))
+      .then(this.convertBookingstoDates)
+      .then(this.initiateMonthPaginationEventListeners)
+      .then(this.initiateCalendarEventListeners)
+      .then(this.countBookingsForSingleDate)
+      .then(this.checkIfDateIsFull)
+    }
 
 
   countBookingsForSingleDate = () => {
@@ -64,7 +74,7 @@ class Booking extends React.Component {
 };
 
 
-  initiateMonthPaginationEventListeners = () => {
+initiateMonthPaginationEventListeners = () => {
     const previousButton = document.getElementsByClassName('icon-previous')[0];
     const nextButton = document.getElementsByClassName('icon-next')[0];
     const paginationButtons = [previousButton, nextButton];
@@ -91,6 +101,15 @@ class Booking extends React.Component {
         });
       });
     }, 100)
+  }
+
+  checkIfDateIsFull = async () => {
+    const { bookingsPerDate } = this.state;
+    for(let i = 0; i < bookingsPerDate.length; i++ ){
+      if(bookingsPerDate[i].numberOfBookings >= 5) {
+        console.log(bookingsPerDate[i] + " is full");
+      }
+    }
   }
 
   fetchBookings = () => {
