@@ -3,7 +3,7 @@ import "./../css/style.css";
 
 import Hello from "./HelloComponent";
 import About from "./AboutComponent";
-import BookingCalendar from "./BookingCalendar";
+import Booking from "./Booking";
 import Login from "./admin/LoginComponent";
 import Admin from "./admin/AdminComponent";
 
@@ -27,9 +27,9 @@ class App extends Component {
     //     })
   }
 
-  /* Posts the object inside JSON.stringify to our post_booking.php file. */
+  /* Posts the object inside JSON.stringify to our post_Booking.php file. */
   postToAPI = () => {
-    return fetch("http://localhost:8888/post_booking.php", {
+    return fetch("http://localhost:8888/post_Booking.php", {
       method: "POST",
       mode: "cors",
       body: JSON.stringify({
@@ -50,7 +50,7 @@ class App extends Component {
               <ul>
                 <li><Link to="/hello">Hello</Link></li>
                 <li><Link to="/about">About</Link></li>
-                <li><Link to="/booking">Booking</Link></li>
+                <li><Link to="/Booking">Booking</Link></li>
               </ul>
             </header>
 
@@ -58,7 +58,7 @@ class App extends Component {
 
             <Route path="/hello" component={Hello} />
             <Route path="/about" component={About} />
-            <Route path="/booking" component={BookingCalendar} />
+            <Route path="/Booking" component={Booking} />
             <Route path="/login" component={Login} />
             <Route path="/admin" component={Admin} />
           </div>
