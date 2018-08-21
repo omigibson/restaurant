@@ -32,49 +32,32 @@ class Booking extends React.Component {
   // }
   componentWillMount = () => {
     this.fetchBookings()
-      .then((bookings) => this.setState({ allBookings: bookings }))
-      .then(this.convertBookingstoDates)
-      .then(this.initiateMonthPaginationEventListeners)
-      .then(this.initiateCalendarEventListeners)
-      .then(this.countBookingsForSingleDate)
-      .then(this.checkIfDateIsFull)
+      .then((bookings) => {
+        this.setState({ allBookings: bookings }, () => {
+          /* After all the bookings are present in this.state.allBookings they
+          are converted to the Date format through the convertBookingtoDates-method. */
+          this.convertBookingstoDates();
+          this.initiateMonthPaginationEventListeners();
+          this.initiateCalendarEventListeners();
+          console.log(this.sortBookingsPerDate());
+        });
+      })
+  }
+
+  sortBookingsPerDate = () => {
+    const allBookings = this.state.allBookings;
+    let bookingsPerDateAndTime = {};
+    for (let i = 0; i < allBookings.length; i++) {
+      if (!bookingsPerDateAndTime[allBookings[i].date]) {
+        bookingsPerDateAndTime[allBookings[i].date] = { '18': [], '21': [] };
+      }
+      const oldArray = bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time];
+      bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
     }
+    return bookingsPerDateAndTime;
+  }
 
-
-  countBookingsForSingleDate = () => {
-
-  const dates = this.state.allBookings.map((object) => object.date);
-
-	let bookingsPerDate = [];
-	// make a copy of the input array
-	const copy = dates.slice(0);
-
-	// first loop goes over every element
-	for (let i = 0; i < dates.length; i++) {
-
-		let countBookings = 0;
-		// loop over every element in the copy and see if it's the same
-		for (let j = 0; j < copy.length; j++) {
-			if (dates[i] === copy[j]) {
-				// increase amount of times duplicate is found
-				countBookings++;
-				// sets item to undefined
-				delete copy[j];
-			}
-		}
-
-		if (countBookings > 0) {
-			const dateInfo = {};
-			dateInfo.date = dates[i];
-			dateInfo.numberOfBookings = countBookings;
-			bookingsPerDate.push(dateInfo);
-		}
-	}
-  this.setState({ bookingsPerDate }, () => console.log(this.state.bookingsPerDate));
-};
-
-
-initiateMonthPaginationEventListeners = () => {
+  initiateMonthPaginationEventListeners = () => {
     const previousButton = document.getElementsByClassName('icon-previous')[0];
     const nextButton = document.getElementsByClassName('icon-next')[0];
     const paginationButtons = [previousButton, nextButton];
@@ -131,6 +114,7 @@ initiateMonthPaginationEventListeners = () => {
 
 
   render = () => {
+    console.log(this.props.amountOfGuests);
     /* Only render if this.state.convertedBookings returns true. */
     if (!this.state.stepCompleted) {
       if (this.state.convertedBookings) {
@@ -150,11 +134,10 @@ initiateMonthPaginationEventListeners = () => {
   }
     else {
       return (
-        <div className="booking-calendar-container">
-          <GuestComponent />
-          <p> { this.state.dateSelected.toString() } </p>
-          <ContactForm />
-        </div>
+        <ContactForm bookingDetails={ {
+            dateSelected: this.state.dateSelected,
+            amountOfGuests: this.props.amountOfGuests
+        } } />
       )
     }
   }

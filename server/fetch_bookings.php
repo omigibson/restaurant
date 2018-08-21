@@ -1,9 +1,7 @@
 <?php
 require_once('db.php');
 /* We select all the content from bookings. */
-$statement = $pdo->prepare("SELECT *
-  FROM bookings
-  ORDER BY date ASC");
+$statement = $pdo->prepare("SELECT * FROM bookings");
 $statement->execute();
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
