@@ -24,22 +24,22 @@ class Booking extends React.Component {
           this.convertBookingstoDates();
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
-          this.compileBookings();
+          console.log(this.sortBookingsPerDate());
         });
       })
   }
 
-  compileBookings = () => {
+  sortBookingsPerDate = () => {
     const allBookings = this.state.allBookings;
-    let bookingsCompiled = {};
+    let bookingsPerDateAndTime = {};
     for (let i = 0; i < allBookings.length; i++) {
-      if (!bookingsCompiled[allBookings[i].date]) {
-        bookingsCompiled[allBookings[i].date] = { '18': [], '21': [] };
+      if (!bookingsPerDateAndTime[allBookings[i].date]) {
+        bookingsPerDateAndTime[allBookings[i].date] = { '18': [], '21': [] };
       }
-      const oldArray = bookingsCompiled[allBookings[i].date][allBookings[i].time];
-      bookingsCompiled[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
+      const oldArray = bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time];
+      bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
     }
-    console.log(bookingsCompiled);
+    return bookingsPerDateAndTime;
   }
 
   initiateMonthPaginationEventListeners = () => {
