@@ -11,6 +11,14 @@ class ContactForm extends React.Component {
       this.setState({ [e.target.name]: e.target.value });
     }
 
+    convertDateObjectToString = (dateObject) => {
+    const yyyy = dateObject.getFullYear().toString();
+    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
+    const dd = (dateObject.getDate() + 100).toString().slice(-2);
+    return yyyy + '-' + mm + '-' + dd;
+}
+
+
     postToAPI = (json, serverFile) => {
       return fetch(`http://localhost:8888/${serverFile}`, {
         method: "POST",
@@ -21,7 +29,6 @@ class ContactForm extends React.Component {
     }
 
     render = () => {
-      console.log(this.state);
       return (
           <div className="contact-form">
               <h2>Contact details</h2>
@@ -53,7 +60,7 @@ class ContactForm extends React.Component {
                     userTelephone: this.state.userTelephone
                   }, 'post_user_details.php')
                     .then((userDetailsResponse) => {
-                      const dateObjectToString = this.props.bookingDetails.dateSelected.toISOString().slice(0,10);
+                      const dateObjectToString = this.convertDateObjectToString(this.props.bookingDetails.dateSelected);
                       this.postToAPI({
                         date: dateObjectToString,
                         guests: this.props.bookingDetails.amountOfGuests,
