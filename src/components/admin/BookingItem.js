@@ -13,7 +13,7 @@ const BookingItem = (props) => {
           <td>{ item.name }</td>
           <td>{ item.tel }</td>
           <td>{ item.email }</td>
-          <td><button>Remove booking</button></td>
+          <td><button onClick={ props.onClick }>Remove booking</button></td>
         </tr>
       )
     });
