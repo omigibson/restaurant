@@ -12,9 +12,9 @@ class ContactForm extends React.Component {
     }
 
     convertDateObjectToString = (dateObject) => {
-    const yyyy = d.getFullYear().toString();
-    const mm = (d.getMonth() + 101).toString().slice(-2);
-    const dd = (d.getDate() + 100).toString().slice(-2);
+    const yyyy = dateObject.getFullYear().toString();
+    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
+    const dd = (dateObject.getDate() + 100).toString().slice(-2);
     return yyyy + '-' + mm + '-' + dd;
 }
 
