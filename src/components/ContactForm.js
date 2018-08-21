@@ -54,10 +54,18 @@ class ContactForm extends React.Component {
                 <button
                   type="button"
                   value="Book"
-                  onClick={ () => this.postToAPI({
-                    userName: this.state.userName,
-                    userEmail: this.state.userEmail,
-                    userTelephone: this.state.userTelephone
+                  onClick={ () => {
+                    this.postToAPI({
+                      userName: this.state.userName,
+                      userEmail: this.state.userEmail,
+                      guests: this.props.bookingDetails.amountOfGuests,
+                      date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
+                      time: 18
+                    }, 'send_email.php');
+                    this.postToAPI({
+                      userName: this.state.userName,
+                      userEmail: this.state.userEmail,
+                      userTelephone: this.state.userTelephone
                   }, 'post_user_details.php')
                     .then((userDetailsResponse) => {
                       const dateObjectToString = this.convertDateObjectToString(this.props.bookingDetails.dateSelected);
@@ -69,6 +77,7 @@ class ContactForm extends React.Component {
                       }, 'post_booking.php')
                         .then((bookingDetailsResponse) => console.log(bookingDetailsResponse))
                     })}
+                  }
                 />
               </form>
           </div>
