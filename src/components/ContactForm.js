@@ -24,6 +24,7 @@ class ContactForm extends React.Component {
     this.sendToAPI({
       userName: this.state.userName,
       userEmail: this.state.userEmail,
+      userTelephone: this.state.userTelephone,
       guests: this.props.bookingDetails.amountOfGuests,
       date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
       time: 18
@@ -52,7 +53,7 @@ class ContactForm extends React.Component {
     })
   }
 
-  /* Handles our API-requests. */ 
+  /* Handles our API-requests. */
   sendToAPI = (json, serverFile) => {
     return fetch(`http://localhost:8888/${serverFile}`, {
       method: "POST",
