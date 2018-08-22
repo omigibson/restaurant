@@ -40,9 +40,18 @@ class AdminComponent extends React.Component {
       }
     }
 
+    sendToAPI = (json, serverFile) => {
+      return fetch(`http://localhost:8888/${serverFile}`, {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(json)
+      })
+        .then((response) => response.json())
+    }
+
     deleteBooking = () => {
-      // return fetch("http://localhost:8888/delete_bookings.php")
-      //   .then((response) => response.json())
+      return fetch("http://localhost:8888/delete_bookings.php")
+        .then((response) => response.json())
       console.log('this booking will be deleted');
     }
 
