@@ -5,6 +5,15 @@ table, tr, td {
   margin: 0;
   padding: 0; }
 
+button {
+  cursor: pointer; }
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit; }
+
 html, body {
   min-height: 100vh;
   height: auto; }
@@ -85,6 +94,9 @@ input[type=password] {
 .contact-form {
   width: 100%;
   margin: auto; }
+  .contact-form .contact-form-button {
+    margin: 0 auto;
+    padding: 10px; }
 
 /************************************/
 /*************** ADMIN **************/
