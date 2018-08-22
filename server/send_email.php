@@ -16,6 +16,7 @@ $message = "
 <table>
 <tr>
 <p> Your name: " . $array['userName'] . " </p>
+<p> Your telephone number: " . $array['userTelephone'] . " </p>
 <p> Time: " . $array['time'] . " </p>
 <p> Date: " . $array['date'] . " </p>
 <p> Guests: " . $array['guests'] . " </p>
