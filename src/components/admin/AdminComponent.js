@@ -30,7 +30,6 @@ class AdminComponent extends React.Component {
     /* Converts this.state.allBookings from MySQL date-format to something that
     JavaScript can understand through new Date. */
     convertBookingstoDates = (props) => {
-      console.log('körs')
       if (this.state.allBookings) {
         let allConvertedBookings = [];
         this.state.allBookings.map((booking) => {
@@ -49,10 +48,13 @@ class AdminComponent extends React.Component {
         .then((response) => response.json())
     }
 
-    deleteBooking = () => {
-      return fetch("http://localhost:8888/delete_bookings.php")
-        .then((response) => response.json())
-      console.log('this booking will be deleted');
+    deleteBooking = (e) => {
+      const itemToDelete = {
+        itemToDelete: e.target.id
+      };
+
+      this.sendToAPI(itemToDelete, 'delete_bookings.php');
+      console.log('this booking will be deleted', e.target.id);
     }
 
       render = () => {
