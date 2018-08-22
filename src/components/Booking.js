@@ -24,7 +24,8 @@ class Booking extends React.Component {
           this.convertBookingstoDates();
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
-          console.log(this.sortBookingsPerDate());
+          const bookingsPerDateAndTime = this.sortBookingsPerDate();
+          this.checkIfFull(bookingsPerDateAndTime);
         });
       })
   }
@@ -40,6 +41,35 @@ class Booking extends React.Component {
       bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
     }
     return bookingsPerDateAndTime;
+  }
+
+  checkIfFull = (object) => {
+    for (let key in object) {
+      if (object[key]['18'].length >= 15) {
+        object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
+      }
+      else {
+        object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] }
+      }
+      if (object[key]['21'].length >= 15) {
+        object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
+      }
+      else {
+        object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] }
+      }
+    }
+    for (let key in object) {
+      if(object[key]['21'].fullyBooked && object[key]['18'].fullyBooked) {
+        console.log(`The day ${key} is fully booked for both.`);
+        continue;
+      }
+      if(object[key]['18'].fullyBooked) {
+        console.log(`The day ${key} and time 18 is fully booked.`);
+      }
+      if(object[key]['21'].fullyBooked) {
+        console.log(`The day ${key} and time 21 is fully booked.`);
+      }
+    }
   }
 
   initiateMonthPaginationEventListeners = () => {
