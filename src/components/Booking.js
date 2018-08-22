@@ -36,10 +36,11 @@ class Booking extends React.Component {
         this.setState({ allBookings: bookings }, () => {
           /* After all the bookings are present in this.state.allBookings they
           are converted to the Date format through the convertBookingtoDates-method. */
-          this.convertBookingstoDates();
+          const bookingsPerDateAndTime = this.sortBookingsPerDate();
+          const controlledBookings = this.controlIfDateOrTimesAreBooked(bookingsPerDateAndTime);
+          this.ifDateOrTimesAreBooked(controlledBookings);
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
-          console.log(this.sortBookingsPerDate());
         });
       })
   }
@@ -55,6 +56,43 @@ class Booking extends React.Component {
       bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
     }
     return bookingsPerDateAndTime;
+  }
+
+  controlIfDateOrTimesAreBooked = (object) => {
+    for (let key in object) {
+      if (object[key]['18'].length >= 15) {
+        object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
+      }
+      else {
+        object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] }
+      }
+      if (object[key]['21'].length >= 15) {
+        object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
+      }
+      else {
+        object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] }
+      }
+    }
+    return object;
+  }
+
+  ifDateOrTimesAreBooked = (object) => {
+    let datesThatAreFullyBooked = [];
+    for (let key in object) {
+      if(object[key]['21'].fullyBooked && object[key]['18'].fullyBooked) {
+        console.log(`The day ${key} is fully booked for both.`);
+        datesThatAreFullyBooked.push(key);
+        continue;
+      }
+      if(object[key]['18'].fullyBooked) {
+        console.log(`The day ${key} and time 18 is fully booked.`);
+      }
+      if(object[key]['21'].fullyBooked) {
+        console.log(`The day ${key} and time 21 is fully booked.`);
+      }
+    }
+    const convertToDateFormat = this.convertFromStringToDate(datesThatAreFullyBooked);
+    this.setState({ convertedBookings: convertToDateFormat })
   }
 
   initiateMonthPaginationEventListeners = () => {
@@ -102,13 +140,13 @@ class Booking extends React.Component {
 
   /* Converts this.state.allBookings from MySQL date-format to something that
   JavaScript can understand through new Date. */
-  convertBookingstoDates = (props) => {
-    if (this.state.allBookings) {
+  convertFromStringToDate = (arrayWithBookedDates) => {
+    if (arrayWithBookedDates) {
       let allConvertedBookings = [];
-      this.state.allBookings.map((booking) => {
-        allConvertedBookings.push(new Date(booking.date));
+      arrayWithBookedDates.map((date) => {
+        allConvertedBookings.push(new Date(date));
       });
-      this.setState({ convertedBookings: allConvertedBookings });
+      return allConvertedBookings;
     }
   }
 
