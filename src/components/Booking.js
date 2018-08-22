@@ -100,11 +100,13 @@ class Booking extends React.Component {
       let dayBox = document.getElementsByClassName("day");
       let arrayFromHTMLCollection = Array.from(dayBox);
       arrayFromHTMLCollection.map((item, i) => {
-        item.addEventListener('click', () => {
-          let todayDate = item.childNodes[0].innerText;
-          let todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
-          this.setState({ stepCompleted: true, dateSelected: todaysFullDate });
-        });
+        if (!item.classList.contains('booked-day')) {
+          item.addEventListener('click', () => {
+            let todayDate = item.childNodes[0].innerText;
+            let todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
+            this.setState({ stepCompleted: true, dateSelected: todaysFullDate });
+          });
+        }
       });
     }, 100)
   }
