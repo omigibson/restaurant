@@ -89,7 +89,6 @@ class Booking extends React.Component {
   }
 
   render = () => {
-    console.log(this.props.amountOfGuests);
     /* Only render if this.state.convertedBookings returns true. */
     if (!this.state.stepCompleted) {
       if (this.state.convertedBookings) {
