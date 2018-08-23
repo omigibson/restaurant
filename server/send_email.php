@@ -20,6 +20,7 @@ $message = "
 <p> Time: " . $array['time'] . " </p>
 <p> Date: " . $array['date'] . " </p>
 <p> Guests: " . $array['guests'] . " </p>
+<p> Link to cancel: localhost:3000/cancel?id=" . $array['hash'] . "</p>
 </tr>
 </table>
 </body>

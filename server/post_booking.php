@@ -7,14 +7,15 @@ $array = json_decode(json_encode($post), True);
 
 /* The JSON-object is now an associative array and is injected into our SQL-database. */
 $statement = $pdo->prepare(
-  "INSERT INTO bookings (date, time, userID, guests)
-  VALUES (:date, :time, :userID, :guests)"
+  "INSERT INTO bookings (date, time, userID, guests, hash)
+  VALUES (:date, :time, :userID, :guests, :hash)"
   );
 $statement->execute(array(
   ":date"     => $array["date"],
   ":time"     => $array["time"],
   ":userID"    => $array["userID"],
-  ":guests"    => $array["guests"]
+  ":guests"    => $array["guests"],
+  ":hash"      => $array["hash"]
 ));
 
 /* The ID of the SQL-row is inserted into the associative array. */

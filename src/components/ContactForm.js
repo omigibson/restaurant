@@ -11,6 +11,8 @@ class ContactForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  generateHash = () => Math.random().toString(36).substr(2);
+
   convertDateObjectToString = (dateObject) => {
     const yyyy = dateObject.getFullYear().toString();
     const mm = (dateObject.getMonth() + 101).toString().slice(-2);
@@ -19,24 +21,14 @@ class ContactForm extends React.Component {
   }
 
   sendAllToAPI = () => {
-    /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
-    to the user. */
-    this.sendToAPI({
-      userName: this.state.userName,
-      userEmail: this.state.userEmail,
-      userTelephone: this.state.userTelephone,
-      guests: this.props.bookingDetails.amountOfGuests,
-      date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
-      time: 18
-    }, 'send_email.php')
-      .then((emailResponse) => console.log(emailResponse))
-
+    const hash = this.generateHash();
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
     this.sendToAPI({
       userName: this.state.userName,
       userEmail: this.state.userEmail,
-      userTelephone: this.state.userTelephone
+      userTelephone: this.state.userTelephone,
+      hash: hash
   }, 'post_user_details.php')
     .then((userDetailsResponse) => {
       /* A response comes back from the DB with an id that is used when inserting
@@ -47,9 +39,23 @@ class ContactForm extends React.Component {
         date: dateObjectToString,
         guests: this.props.bookingDetails.amountOfGuests,
         time: 18,
-        userID: userDetailsResponse.id
+        userID: userDetailsResponse.id,
+        hash: hash
       }, 'post_booking.php')
-        .then((bookingDetailsResponse) => console.log(bookingDetailsResponse))
+        .then((bookingDetailsResponse) => {
+          /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
+          to the user. */
+          this.sendToAPI({
+            userName: this.state.userName,
+            userEmail: this.state.userEmail,
+            userTelephone: this.state.userTelephone,
+            guests: this.props.bookingDetails.amountOfGuests,
+            date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
+            time: 18,
+            hash: hash
+          }, 'send_email.php')
+            .then((emailResponse) => console.log(emailResponse))
+        });
     })
   }
 
