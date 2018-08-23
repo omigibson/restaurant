@@ -10,11 +10,26 @@ class Booking extends React.Component {
     allBookings: null,
     convertedBookings: [],
     stepCompleted: false,
-    dateSelected: null
+    dateSelected: null,
+    bookingsPerDate: null
   }
 
   /* Before the component is mounted fetchBookings is called and the result is
   stored in this.state.allBookings. */
+  // componentWillMount = () => {
+  //   this.fetchBookings()
+  //     .then((bookings) => {
+  //       this.setState({ allBookings: bookings }, () => {
+  //         /* After all the bookings are present in this.state.allBookings they
+  //         are converted to the Date format through the convertBookingtoDates-method. */
+  //         this.convertBookingstoDates();
+  //         this.initiateMonthPaginationEventListeners();
+  //         this.initiateCalendarEventListeners();
+  //         this.countBookingsForSingleDate();
+  //         this.checkIfDateIsFull();
+  //       });
+  //     })
+  // }
   componentWillMount = () => {
     this.fetchBookings()
       .then((bookings) => {
@@ -111,6 +126,15 @@ class Booking extends React.Component {
     }, 100)
   }
 
+  checkIfDateIsFull = async () => {
+    const { bookingsPerDate } = this.state;
+    for(let i = 0; i < bookingsPerDate.length; i++ ){
+      if(bookingsPerDate[i].numberOfBookings >= 5) {
+        console.log(bookingsPerDate[i].date + " is full");
+      }
+    }
+  }
+
   fetchBookings = () => {
     return fetch("http://localhost:8888/fetch_bookings.php")
       .then((response) => response.json())
@@ -127,6 +151,7 @@ class Booking extends React.Component {
       return allConvertedBookings;
     }
   }
+
 
   render = () => {
     /* Only render if this.state.convertedBookings returns true. */

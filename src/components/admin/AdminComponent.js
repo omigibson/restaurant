@@ -14,13 +14,55 @@ class AdminComponent extends React.Component {
     componentWillMount = () => {
       this.fetchBookings()
         .then((bookings) => {
-          this.setState({ allBookings: bookings });
+          this.setState({ allBookings: bookings }, () => {
+            this.convertBookingstoDates();
+            console.log(this.state.allBookings);
+
+          });
         })
     }
+
     fetchBookings = () => {
-      return fetch("http://localhost:8888/fetch_bookings.php")
+      return fetch("http://localhost:8888/fetch_bookings_and_customers.php")
         .then((response) => response.json())
     }
+
+    /* Converts this.state.allBookings from MySQL date-format to something that
+    JavaScript can understand through new Date. */
+    convertBookingstoDates = (props) => {
+      if (this.state.allBookings) {
+        let allConvertedBookings = [];
+        this.state.allBookings.map((booking) => {
+          allConvertedBookings.push(new Date(booking.date));
+        });
+        this.setState({ convertedBookings: allConvertedBookings }, () => console.log(this.state.convertedBookings));
+      }
+    }
+
+    sendToAPI = (json, serverFile) => {
+      return fetch(`http://localhost:8888/${serverFile}`, {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(json)
+      })
+        .then((response) => response.json())
+    }
+
+    deleteBooking = (e) => {
+      const itemToDelete = {
+        itemToDelete: e.target.id
+      };
+
+      //Delete booking from DB
+      this.sendToAPI(itemToDelete, 'delete_bookings.php');
+      console.log(e.target.name);
+
+      //Delete bookig from DOM
+      let updatedBookingArray = this.state.allBookings;
+      updatedBookingArray.splice(e.target.name, 1);
+      this.setState({ allBookings: updatedBookingArray });
+    }
+
 
 
       render = () => {
@@ -32,6 +74,7 @@ class AdminComponent extends React.Component {
               <table>
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Guests</th>
@@ -41,7 +84,7 @@ class AdminComponent extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <BookingItem BookingItem={ this.state.allBookings } />
+                  <BookingItem bookingItem={ this.state.allBookings } onClick={ this.deleteBooking } />
                 </tbody>
               </table>
           </div>
