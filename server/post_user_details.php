@@ -7,13 +7,14 @@ $array = json_decode(json_encode($post), True);
 
 /* The JSON-object is now an associative array and is injected into our SQL-database. */
 $statement = $pdo->prepare(
-  "INSERT INTO customers (name, email, tel)
-  VALUES (:name, :email, :tel)"
+  "INSERT INTO customers (name, email, tel, hash)
+  VALUES (:name, :email, :tel, :hash)"
   );
 $statement->execute(array(
   ":name"     => $array["userName"],
   ":email"     => $array["userEmail"],
-  ":tel"    => $array["userTelephone"]
+  ":tel"    => $array["userTelephone"],
+  ":hash"    => $array["hash"]
 ));
 
 /* The ID of the SQL-row is inserted into the associative array. */

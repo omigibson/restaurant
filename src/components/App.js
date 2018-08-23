@@ -7,6 +7,7 @@ import GuestComponent from "./GuestComponent";
 import Booking from "./Booking";
 import Login from "./admin/LoginComponent";
 import Admin from "./admin/AdminComponent";
+import CancelBooking from "./CancelBooking";
 
 
 import {
@@ -18,14 +19,7 @@ import {
 class App extends Component {
 
   componentWillMount = () => {
-    /* Calls the postToAPI-function and resolved the promise. */
-    // this.postToAPI()
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     })
+
   }
 
   /* Posts the object inside JSON.stringify to our post_Booking.php file. */
@@ -62,6 +56,7 @@ class App extends Component {
             <Route path="/Booking" component={GuestComponent} />
             <Route path="/login" component={Login} />
             <Route path="/admin" component={Admin} />
+            <Route path="/cancel" component={CancelBooking} />
           </div>
         </div>
       </Router>
