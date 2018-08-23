@@ -63,7 +63,9 @@ class AdminComponent extends React.Component {
       this.setState({ allBookings: updatedBookingArray });
     }
 
-
+    editBooking = (e) => {
+      console.log('This item will be edited!', e.target.id);
+    }
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -84,7 +86,11 @@ class AdminComponent extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <BookingItem bookingItem={ this.state.allBookings } onClick={ this.deleteBooking } />
+                  <BookingItem
+                    bookingItem={ this.state.allBookings }
+                    onEditClick={ this.editBooking }
+                    onDeleteClick={ this.deleteBooking }
+                  />
                 </tbody>
               </table>
           </div>
