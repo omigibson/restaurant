@@ -14,7 +14,9 @@ const BookingItem = (props) => {
           <td>{ item.tel }</td>
           <td>{ item.email }</td>
           <td>
-            <button onClick={ props.onClick }
+            <button name={i}
+                    type="submit"
+                    onClick={ props.onClick }
                     id={item.bookingID}>
                     Remove booking
             </button>

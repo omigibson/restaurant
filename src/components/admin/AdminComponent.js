@@ -53,9 +53,17 @@ class AdminComponent extends React.Component {
         itemToDelete: e.target.id
       };
 
+      //Delete booking from DB
       this.sendToAPI(itemToDelete, 'delete_bookings.php');
-      console.log('this booking will be deleted', e.target.id);
+      console.log(e.target.name);
+
+      //Delete bookig from DOM
+      let updatedBookingArray = this.state.allBookings;
+      updatedBookingArray.splice(e.target.name, 1);
+      this.setState({ allBookings: updatedBookingArray });
     }
+
+
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
