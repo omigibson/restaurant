@@ -39,34 +39,29 @@ class AdminComponent extends React.Component {
       }
     }
 
-    sendToAPI = (json, serverFile) => {
-      return fetch(`http://localhost:8888/${serverFile}`, {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(json)
-      })
-        .then((response) => response.json())
-    }
-
-    deleteBooking = (e) => {
-      const itemToDelete = {
-        itemToDelete: e.target.id
-      };
-
-      //Delete booking from DB
-      this.sendToAPI(itemToDelete, 'delete_bookings.php');
-      console.log(e.target.name);
-
-      //Delete bookig from DOM
-      let updatedBookingArray = this.state.allBookings;
-      updatedBookingArray.splice(e.target.name, 1);
-      this.setState({ allBookings: updatedBookingArray });
-    }
-
-    saveUpdatedBooking = () => {
-      console.log('Spara!');
-    }
-
+    // sendToAPI = (json, serverFile) => {
+    //   return fetch(`http://localhost:8888/${serverFile}`, {
+    //     method: "POST",
+    //     mode: "cors",
+    //     body: JSON.stringify(json)
+    //   })
+    //     .then((response) => response.json())
+    // }
+    //
+    // deleteBooking = (e) => {
+    //   const itemToDelete = {
+    //     itemToDelete: e.target.id
+    //   };
+    //
+    //   //Delete booking from DB
+    //   this.sendToAPI(itemToDelete, 'delete_bookings.php');
+    //   console.log(e.target.name);
+    //
+    //   //Delete bookig from DOM
+    //   let updatedBookingArray = this.state.allBookings;
+    //   updatedBookingArray.splice(e.target.name, 1);
+    //   this.setState({ allBookings: updatedBookingArray });
+    // }
 
 
       render = () => {
@@ -75,26 +70,24 @@ class AdminComponent extends React.Component {
           return (
             <div className="container admin-panel">
               <h2>Upcoming bookings</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Guests</th>
-                    <th>Name</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <BookingItem
-                    bookingItems={ this.state.allBookings }
-                    onDeleteClick={ this.deleteBooking }
-                    onSave={ this.saveUpdatedBooking }
-                  />
-                </tbody>
-              </table>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Guests</th>
+                      <th>Name</th>
+                      <th>Telephone</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <BookingItem
+                      bookingItems={ this.state.allBookings }
+                      onDeleteClick={ this.deleteBooking }
+                    />
+                  </tbody>
+                </table>
           </div>
         );
       } else {
