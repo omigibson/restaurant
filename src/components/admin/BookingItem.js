@@ -6,12 +6,29 @@ class BookingItem extends React.Component {
     bookingToEdit: {}
   }
 
+  editBooking = (e) => {
+    this.setState({
+      editing: true,
+      bookingToEdit: this.props.bookingItems[e.target.name]
+    });
+    console.log('This item will be edited!', this.props.bookingItems[e.target.name]);
+  }
 
   render(){
     if (this.props.bookingItems) {
         return this.props.bookingItems.map((item, i) => {
-            return (
-                <tr key={i}>
+          if(this.state.bookingToEdit && item.bookingID === this.state.bookingToEdit.bookingID){
+            return <tr key={i}>
+                  <td><input type="text" defaultValue={ item.bookingID } /></td>
+                  <td><input type="date" defaultValue={ item.date } /></td>
+                  <td><input type="time" defaultValue={ item.time } /></td>
+                  <td><input type="number" defaultValue={ item.guests } min="1" max="6" /></td>
+                  <td><input type="text" defaultValue={ item.name } /></td>
+                  <td><input type="tel" defaultValue={ item.tel } /></td>
+                  <td><input type="email" defaultValue={ item.email } /></td>
+                </tr>
+            } else {
+               return <tr key={i}>
                   <td>{ item.bookingID }</td>
                   <td>{ item.date }</td>
                   <td>{ item.time }</td>
@@ -21,7 +38,7 @@ class BookingItem extends React.Component {
                   <td>{ item.email }</td>
                   <td>
                     <button name={i}
-                            onClick={ this.props.onEditClick }
+                            onClick={ this.editBooking }
                             id={ item.bookingID }>
                             Edit booking
                     </button>
@@ -34,8 +51,8 @@ class BookingItem extends React.Component {
                     </button>
                   </td>
                 </tr>
-              )
-            })
+            }
+          })
 
         // else {
         //     return(

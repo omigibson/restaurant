@@ -7,7 +7,7 @@ class AdminComponent extends React.Component {
     state = {
       allBookings: null,
       convertedBookings: [],
-      bookingToEdit: {}
+      // bookingToEdit: {}
     }
 
     /* Before the component is mounted fetchBookings is called and the result is
@@ -64,13 +64,7 @@ class AdminComponent extends React.Component {
       this.setState({ allBookings: updatedBookingArray });
     }
 
-    editBooking = (e) => {
-      this.setState({
-        editing: true,
-        bookingToEdit: this.state.allBookings[e.target.name]
-      });
-      console.log('This item will be edited!', this.state.allBookings[e.target.name]);
-    }
+
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -93,7 +87,7 @@ class AdminComponent extends React.Component {
                 <tbody>
                   <BookingItem
                     bookingItems={ this.state.allBookings }
-                    onEditClick={ this.editBooking }
+                  //  onEditClick={ this.editBooking }
                     onDeleteClick={ this.deleteBooking }
                   />
                 </tbody>
