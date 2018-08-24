@@ -2,7 +2,7 @@
 require_once('db.php');
 /* We select all the content from bookings. */
 $statement = $pdo->prepare("SELECT * FROM bookings
-INNER JOIN customers ON bookings.userID = customers.ID
+INNER JOIN customers ON bookings.userID = customers.id
 ORDER BY date ASC");
 $statement->execute();
 $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);

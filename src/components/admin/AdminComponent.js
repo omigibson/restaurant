@@ -6,8 +6,7 @@ class AdminComponent extends React.Component {
     is the same data, but converted to Date-format. */
     state = {
       allBookings: null,
-      convertedBookings: [],
-      // bookingToEdit: {}
+      convertedBookings: []
     }
 
     /* Before the component is mounted fetchBookings is called and the result is
@@ -64,6 +63,10 @@ class AdminComponent extends React.Component {
       this.setState({ allBookings: updatedBookingArray });
     }
 
+    saveUpdatedBooking = () => {
+      console.log('Spara!');
+    }
+
 
 
       render = () => {
@@ -87,8 +90,8 @@ class AdminComponent extends React.Component {
                 <tbody>
                   <BookingItem
                     bookingItems={ this.state.allBookings }
-                  //  onEditClick={ this.editBooking }
                     onDeleteClick={ this.deleteBooking }
+                    onSave={ this.saveUpdatedBooking }
                   />
                 </tbody>
               </table>

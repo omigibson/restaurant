@@ -26,6 +26,13 @@ class BookingItem extends React.Component {
                   <td><input type="text" defaultValue={ item.name } /></td>
                   <td><input type="tel" defaultValue={ item.tel } /></td>
                   <td><input type="email" defaultValue={ item.email } /></td>
+                  <td>
+                    <button name={i}
+                            onClick={ this.props.onSave }
+                            id={ item.bookingID }>
+                            Save
+                    </button>
+                  </td>
                 </tr>
             } else {
                return <tr key={i}>
