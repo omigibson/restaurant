@@ -2,13 +2,11 @@ import React from 'react';
 
 class BookingItem extends React.Component {
   state = {
-    editing: false,
     bookingToEdit: {}
   }
 
   editBooking = (e) => {
     this.setState({
-      editing: true,
       bookingToEdit: this.props.bookingItems[e.target.name]
     });
     console.log('This item will be edited!', this.props.bookingItems[e.target.name]);
@@ -17,9 +15,9 @@ class BookingItem extends React.Component {
   render(){
     if (this.props.bookingItems) {
         return this.props.bookingItems.map((item, i) => {
-          if(this.state.bookingToEdit && item.bookingID === this.state.bookingToEdit.bookingID){
+          if(this.state.bookingToEdit && item.id === this.state.bookingToEdit.id){
             return <tr key={i}>
-                  <td><input type="text" defaultValue={ item.bookingID } /></td>
+                  <td><input type="text" defaultValue={ item.id } /></td>
                   <td><input type="date" defaultValue={ item.date } /></td>
                   <td><input type="time" defaultValue={ item.time } /></td>
                   <td><input type="number" defaultValue={ item.guests } min="1" max="6" /></td>
@@ -29,14 +27,14 @@ class BookingItem extends React.Component {
                   <td>
                     <button name={i}
                             onClick={ this.props.onSave }
-                            id={ item.bookingID }>
+                            id={ item.id }>
                             Save
                     </button>
                   </td>
                 </tr>
             } else {
                return <tr key={i}>
-                  <td>{ item.bookingID }</td>
+                  <td>{ item.id }</td>
                   <td>{ item.date }</td>
                   <td>{ item.time }</td>
                   <td>{ item.guests }</td>
@@ -46,14 +44,14 @@ class BookingItem extends React.Component {
                   <td>
                     <button name={i}
                             onClick={ this.editBooking }
-                            id={ item.bookingID }>
+                            id={ item.id }>
                             Edit booking
                     </button>
                   </td>
                   <td>
                     <button name={i}
                             onClick={ this.props.onDeleteClick }
-                            id={ item.bookingID }>
+                            id={ item.id }>
                             Remove booking
                     </button>
                   </td>
@@ -65,7 +63,7 @@ class BookingItem extends React.Component {
         //     return(
         //       <form>
         //         <tr key={i}>
-        //           <td><input type="text" value={ item.bookingID } /></td>
+        //           <td><input type="text" value={ item.id } /></td>
         //           <td><input type="date" value={ item.date } /></td>
         //           <td><input type="time" value={ item.time } /></td>
         //           <td><input type="number" value={ item.guests } min="1" max="6" /></td>
@@ -75,7 +73,7 @@ class BookingItem extends React.Component {
         //           // <td>
         //           //   <button name={i}
         //           //           onClick={ this.props.onEditClick }
-        //           //           id={ item.bookingID }>
+        //           //           id={ item.id }>
         //           //           Save
         //           //   </button>
         //           // </td>

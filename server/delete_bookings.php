@@ -6,7 +6,7 @@ $array = json_decode(json_encode($post), True);
 
 
 /* We select all the content from bookings. */
-$statement = $pdo->prepare("DELETE FROM bookings WHERE bookingID = :bookingID");
+$statement = $pdo->prepare("DELETE FROM bookings WHERE id = :bookingID");
 $statement->execute(array(
   ":bookingID" => $array[itemToDelete]
   )
