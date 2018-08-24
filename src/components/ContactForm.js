@@ -4,7 +4,9 @@ class ContactForm extends React.Component {
   state = {
     userName: '',
     userEmail: '',
-    userTelephone: ''
+    userTelephone: '',
+    stepCompleted: false,
+    allBookingDetails: {}
   }
 
   handleChange = (e) => {
@@ -66,7 +68,7 @@ class ContactForm extends React.Component {
       this.sendToAPI({
         date: dateObjectToString,
         guests: this.props.bookingDetails.amountOfGuests,
-        time: 18,
+        time: this.props.bookingDetails.timeSelected,
         userID: userDetailsResponse.id,
         hash: hash
       }, 'post_booking.php')
@@ -79,10 +81,13 @@ class ContactForm extends React.Component {
             userTelephone: this.state.userTelephone,
             guests: this.props.bookingDetails.amountOfGuests,
             date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
-            time: 18,
+            time: this.props.bookingDetails.timeSelected,
             hash: hash
           }, 'send_email.php')
-            .then((emailResponse) => console.log(emailResponse))
+            .then((emailResponse) => {
+              console.log(emailResponse);
+              this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
+            })
         });
     })
   }
@@ -98,46 +103,63 @@ class ContactForm extends React.Component {
   }
 
   render = () => {
+    if (!this.state.stepCompleted) {
     return (
-      <div className="container">
-        <div className="contact-form">
-            <h2>Contact details</h2>
-            <form>
-              <input
-                type="text"
-                placeholder="Name"
-                name="userName"
-                onChange={this.handleChange.bind(this)}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                name="userEmail"
-                onChange={this.handleChange.bind(this)}
-              />
-              <input
-                type="tel"
-                placeholder="Tel"
-                name="userTelephone"
-                onChange={this.handleChange.bind(this)}
-              />
-              <button
-                className="contact-form-button"
-                type="button"
-                value="Book"
-                onClick={ () => {
-                  if (this.validateInput()) {
-                    this.sendAllToAPI();
+        <div className="container">
+          <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
+          <p> Date: { this.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+          <p> Time: { this.props.bookingDetails.timeSelected } </p>
+          <div className="contact-form">
+              <h2>Contact details</h2>
+              <form>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="userName"
+                  onChange={this.handleChange.bind(this)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="userEmail"
+                  onChange={this.handleChange.bind(this)}
+                />
+                <input
+                  type="tel"
+                  placeholder="Tel"
+                  name="userTelephone"
+                  onChange={this.handleChange.bind(this)}
+                />
+                <button
+                  className="contact-form-button"
+                  type="button"
+                  value="Book"
+                  onClick={ () => {
+                    if (this.validateInput()) {
+                      this.sendAllToAPI();
+                    }
                   }
                 }
-              }
-              >
-              Send
-              </button>
-            </form>
+                >
+                Send
+                </button>
+              </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <div className="container">
+          <h1>Your reservation was successful.</h1>
+          <h2>Details:</h2>
+          <p>Name: { this.state.allBookingDetails.userName } </p>
+          <p>Date: { this.state.allBookingDetails.date } </p>
+          <p>Time: { this.state.allBookingDetails.time } </p>
+          <p>Guests: { this.state.allBookingDetails.guests } </p>
+        </div>
+      );
+    }
   }
 }
 export default ContactForm;

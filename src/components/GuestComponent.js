@@ -22,6 +22,7 @@ class GuestComponent extends React.Component {
               <select
                 onChange={ this.handleChange.bind(this) }
                 name="amountOfGuests">
+                  <option value="" selected disabled hidden>Choose here</option>
                   <option value="1">1 Guests</option>
                   <option value="2">2 Guests</option>
                   <option value="3">3 Guests</option>
