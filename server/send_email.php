@@ -15,12 +15,12 @@ $message = "
 <body>
 <table>
 <tr>
-<p> Your name: " . $array['userName'] . " </p>
-<p> Your telephone number: " . $array['userTelephone'] . " </p>
-<p> Time: " . $array['time'] . " </p>
-<p> Date: " . $array['date'] . " </p>
-<p> Guests: " . $array['guests'] . " </p>
-<p> Link to cancel: localhost:3000/cancel?id=" . $array['hash'] . "</p>
+<p> Your name: ${array['userName']} </p>
+<p> Your telephone number: ${array['userTelephone']} </p>
+<p> Time: ${array['time']} </p>
+<p> Date: ${array['date']} </p>
+<p> Guests: ${array['guests']} </p>
+<a href='localhost:3000/cancel?id=${array['hash']}'>Click here to cancel reservation</a>
 </tr>
 </table>
 </body>
@@ -32,7 +32,7 @@ $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 // More headers
-$headers .= 'From: <noreply@restaurant.com>' . "\r\n";
+$headers .= 'From: <noreply@arestaurant.com>' . "\r\n";
 
 mail($to,$subject,$message,$headers);
 echo json_encode($array);
