@@ -10,7 +10,6 @@ class BookingItem extends React.Component {
     let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
       [e.target.name]: e.target.value
     });
-
     this.setState({ updatedBooking });
   }
 
@@ -23,13 +22,9 @@ class BookingItem extends React.Component {
   }
 
   saveUpdatedBooking = () => {
-    // this.setState({ updatedBooking: updatedBooking, () => {
-    //   //skicka in updatedBooking i DB
-    //   //this.setState({ updatedBooking: {}, bookingToEdit: {} });
-    //
-    //   }
-    // });
-
+    //skicka in updatedBooking i DB
+    this.props.updateDB(this.state.updatedBooking, "update_booking.php");
+    //this.setState({ updatedBooking: {}, bookingToEdit: {} });
     console.log('This is our updated booking object:', this.state.updatedBooking);
   }
 
