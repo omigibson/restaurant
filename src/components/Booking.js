@@ -1,35 +1,24 @@
 import React from 'react';
 import Calendar from 'react-booking-calendar';
 import ContactForm from "./ContactForm";
+import ChooseTime from "./ChooseTime";
 import GuestComponent from "./GuestComponent";
 
 class Booking extends React.Component {
-  /* State will contain objects that are retreived from MYSQL. convertedBookings
+  /* State will contain objects that are retreived from MYSQL. daysThatAreFull
   is the same data, but converted to Date-format. */
   state = {
     allBookings: null,
-    convertedBookings: [],
+    daysThatAreFull: [],
     stepCompleted: false,
+    decideWhatTime: false,
     dateSelected: null,
-    bookingsPerDate: null
+    bookingsPerDate: null,
+    timeSelected: null
   }
 
   /* Before the component is mounted fetchBookings is called and the result is
   stored in this.state.allBookings. */
-  // componentWillMount = () => {
-  //   this.fetchBookings()
-  //     .then((bookings) => {
-  //       this.setState({ allBookings: bookings }, () => {
-  //         /* After all the bookings are present in this.state.allBookings they
-  //         are converted to the Date format through the convertBookingtoDates-method. */
-  //         this.convertBookingstoDates();
-  //         this.initiateMonthPaginationEventListeners();
-  //         this.initiateCalendarEventListeners();
-  //         this.countBookingsForSingleDate();
-  //         this.checkIfDateIsFull();
-  //       });
-  //     })
-  // }
   componentWillMount = () => {
     this.fetchBookings()
       .then((bookings) => {
@@ -92,7 +81,7 @@ class Booking extends React.Component {
       }
     }
     const convertToDateFormat = this.convertFromStringToDate(datesThatAreFullyBooked);
-    this.setState({ convertedBookings: convertToDateFormat })
+    this.setState({ daysThatAreFull: convertToDateFormat })
   }
 
   initiateMonthPaginationEventListeners = () => {
@@ -119,20 +108,11 @@ class Booking extends React.Component {
           item.addEventListener('click', () => {
             let todayDate = item.childNodes[0].innerText;
             let todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
-            this.setState({ stepCompleted: true, dateSelected: todaysFullDate });
+            this.setState({ decideWhatTime: true, dateSelected: todaysFullDate });
           });
         }
       });
     }, 100)
-  }
-
-  checkIfDateIsFull = async () => {
-    const { bookingsPerDate } = this.state;
-    for(let i = 0; i < bookingsPerDate.length; i++ ){
-      if(bookingsPerDate[i].numberOfBookings >= 5) {
-        console.log(bookingsPerDate[i].date + " is full");
-      }
-    }
   }
 
   fetchBookings = () => {
@@ -144,26 +124,29 @@ class Booking extends React.Component {
   JavaScript can understand through new Date. */
   convertFromStringToDate = (arrayWithBookedDates) => {
     if (arrayWithBookedDates) {
-      let allConvertedBookings = [];
+      let alldaysThatAreFull = [];
       arrayWithBookedDates.map((date) => {
-        allConvertedBookings.push(new Date(date));
+        alldaysThatAreFull.push(new Date(date));
       });
-      return allConvertedBookings;
+      return alldaysThatAreFull;
     }
   }
 
+  setBookingState = (object) => this.setState(object);
 
   render = () => {
-    /* Only render if this.state.convertedBookings returns true. */
+    console.log(this.state);
+    /* Only render if this.state.daysThatAreFull returns true. */
     if (!this.state.stepCompleted) {
-      if (this.state.convertedBookings) {
+      if (this.state.daysThatAreFull) {
         return (
           <div className="booking-calendar-container">
             <Calendar
             disableHistory={true}
-            bookings={this.state.convertedBookings}
+            bookings={this.state.daysThatAreFull}
             clickable={true}
             />
+          { this.state.decideWhatTime && <ChooseTime setBookingState={ this.setBookingState.bind(this) } /> }
           </div>
         );
       }
@@ -175,6 +158,7 @@ class Booking extends React.Component {
       return (
         <ContactForm bookingDetails={ {
             dateSelected: this.state.dateSelected,
+            timeSelected: this.state.timeSelected,
             amountOfGuests: this.props.amountOfGuests
         } } />
       )
