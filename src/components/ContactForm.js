@@ -11,8 +11,34 @@ class ContactForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /* Uses an advanced RegEx (from StackOverflow) that controls if email is correct.
+  Returns true or false. */
+  validateEmail = (email) => {
+    const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regEx.test(String(email).toLowerCase());
+  }
+
+  /* Controls if the phone number consists of digits and if its length is more than six. */
+  validatePhone = (number) => !isNaN(number) && number.length >= 6;
+
+  /* Controls if the input fields are valid. */
+  validateInput = () => {
+    if (this.state.userName.length >= 5 && this.validateEmail(this.state.userEmail) && this.validatePhone(this.state.userTelephone)) {
+      return true;
+    }
+    return false;
+  }
+
+  /* A hash is generated for all bookings and customers. This is because we want
+  a way for the user to delete a reservation without using auto-incremented IDs
+  that in this case are pretty unsafe since you can cancel a reservation by using
+  http://host/cancel?id={hash}. By generating a unique hash we prevent users from
+  cancelling other peoples reservations. The URL is sent to the user in the
+  confirmation E-mail. So by using this method, only the user will have access to the
+  unique ID(hash). */
   generateHash = () => Math.random().toString(36).substr(2);
 
+  /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
   convertDateObjectToString = (dateObject) => {
     const yyyy = dateObject.getFullYear().toString();
     const mm = (dateObject.getMonth() + 101).toString().slice(-2);
@@ -20,7 +46,9 @@ class ContactForm extends React.Component {
     return yyyy + '-' + mm + '-' + dd;
   }
 
+  /* Handles all the requests to our API. */
   sendAllToAPI = () => {
+    /* A unique hash is generated */
     const hash = this.generateHash();
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
@@ -97,7 +125,12 @@ class ContactForm extends React.Component {
                 className="contact-form-button"
                 type="button"
                 value="Book"
-                onClick={ () => this.sendAllToAPI() }
+                onClick={ () => {
+                  if (this.validateInput()) {
+                    this.sendAllToAPI();
+                  }
+                }
+              }
               >
               Send
               </button>
