@@ -8,13 +8,14 @@ class Booking extends React.Component {
   /* State will contain objects that are retreived from MYSQL. daysThatAreFull
   is the same data, but converted to Date-format. */
   state = {
-    allBookings: null,
+    allBookings: [],
     daysThatAreFull: [],
+    datesAndTimes: {},
     stepCompleted: false,
     decideWhatTime: false,
     dateSelected: null,
     bookingsPerDate: null,
-    timeSelected: null
+    timeSelected: null,
   }
 
   /* Before the component is mounted fetchBookings is called and the result is
@@ -27,6 +28,7 @@ class Booking extends React.Component {
           are converted to the Date format through the convertBookingtoDates-method. */
           const bookingsPerDateAndTime = this.sortBookingsPerDate();
           const controlledBookings = this.controlIfDateOrTimesAreBooked(bookingsPerDateAndTime);
+          this.setState({ datesAndTimes: controlledBookings });
           this.ifDateOrTimesAreBooked(controlledBookings);
           this.initiateMonthPaginationEventListeners();
           this.initiateCalendarEventListeners();
@@ -135,7 +137,7 @@ class Booking extends React.Component {
   setBookingState = (object) => this.setState(object);
 
   render = () => {
-    console.log(this.state);
+    console.log(this.state.datesAndTimes);
     /* Only render if this.state.daysThatAreFull returns true. */
     if (!this.state.stepCompleted) {
       if (this.state.daysThatAreFull) {
@@ -146,7 +148,11 @@ class Booking extends React.Component {
             bookings={this.state.daysThatAreFull}
             clickable={true}
             />
-          { this.state.decideWhatTime && <ChooseTime setBookingState={ this.setBookingState.bind(this) } /> }
+          { this.state.decideWhatTime && <ChooseTime
+            setBookingState={ this.setBookingState.bind(this) }
+            datesAndTimes={ this.state.datesAndTimes }
+            dateSelected={ this.state.dateSelected }
+            /> }
           </div>
         );
       }
