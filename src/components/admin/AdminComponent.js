@@ -17,7 +17,6 @@ class AdminComponent extends React.Component {
           this.setState({ allBookings: bookings }, () => {
             this.convertBookingstoDates();
             console.log(this.state.allBookings);
-
           });
         })
     }
