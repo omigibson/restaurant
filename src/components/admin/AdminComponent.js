@@ -38,22 +38,13 @@ class AdminComponent extends React.Component {
       }
     }
 
-    sendToAPI = (json, serverFile) => {
-      return fetch(`http://localhost:8888/${serverFile}`, {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(json)
-      })
-        .then((response) => response.json())
-    }
-
     deleteBooking = (e) => {
       const itemToDelete = {
         itemToDelete: e.target.id
       };
 
       //Delete booking from DB
-      this.sendToAPI(itemToDelete, 'delete_bookings.php');
+      this.props.sendToAPI(itemToDelete, 'delete_bookings.php');
       console.log(e.target.name);
 
       //Delete bookig from DOM
@@ -84,7 +75,7 @@ class AdminComponent extends React.Component {
                     <BookingItem
                       bookingItems={ this.state.allBookings }
                       onDeleteClick={ this.deleteBooking }
-                      updateDB={ this.sendToAPI }
+                      updateDB={ this.props.sendToAPI }
                     />
                   </tbody>
                 </table>

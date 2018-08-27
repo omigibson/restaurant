@@ -2,6 +2,7 @@ import React from 'react';
 
 class BookingItem extends React.Component {
   state = {
+    editing: false,
     bookingToEdit: {},
     updatedBooking: {}
   }
@@ -16,15 +17,19 @@ class BookingItem extends React.Component {
 
   editBooking = (e) => {
     this.setState({
+      editing: true,
       bookingToEdit: this.props.bookingItems[e.target.name]}, () => {
         console.log('This item will be edited!', this.state.bookingToEdit)
       });
   }
 
   saveUpdatedBooking = () => {
-    //skicka in updatedBooking i DB
+    //Send updatedBooking to DB
     this.props.updateDB(this.state.updatedBooking, "update_booking.php");
-    //this.setState({ updatedBooking: {}, bookingToEdit: {} });
+
+    this.setState({ editing: false }, () => {
+      this.setState({ updatedBooking: {}, bookingToEdit: {} })
+    });
     console.log('This is our updated booking object:', this.state.updatedBooking);
   }
 
@@ -32,7 +37,7 @@ class BookingItem extends React.Component {
   render(){
     if (this.props.bookingItems) {
         return this.props.bookingItems.map((item, i) => {
-          if(this.state.bookingToEdit && item.id === this.state.bookingToEdit.id){
+          if(this.state.editing && item.id === this.state.bookingToEdit.id){
             return <tr key={i}>
                   <td>
                     <input
