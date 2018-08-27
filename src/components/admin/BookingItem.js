@@ -94,6 +94,8 @@ class BookingItem extends React.Component {
                 </tr>
             } else {
                return <tr key={i}>
+                  <td>{ item.id }</td>
+                  <td>{ item.userID }</td>
                   <td>{ item.date }</td>
                   <td>{ item.time }</td>
                   <td>{ item.guests }</td>
