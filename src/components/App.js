@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./../css/style.css";
 import About from "./AboutComponent";
 import GuestComponent from "./GuestComponent";
-import Login from "./admin/LoginComponent";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import {
@@ -41,7 +40,6 @@ class App extends Component {
               render={(props) => <GuestComponent {...props}
               sendToAPI={ this.sendToAPI } />}
             />
-            <Route path="/login" component={Login} />
             <Route
               path='/admin'
               render={(props) => <Admin {...props}

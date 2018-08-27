@@ -6,7 +6,10 @@ class AdminComponent extends React.Component {
     is the same data, but converted to Date-format. */
     state = {
       allBookings: null,
-      convertedBookings: []
+      convertedBookings: [],
+      editing: false,
+      bookingToEdit: {},
+      updatedBooking: {}
     }
 
     /* Before the component is mounted fetchBookings is called and the result is
@@ -53,6 +56,32 @@ class AdminComponent extends React.Component {
       this.setState({ allBookings: updatedBookingArray });
     }
 
+    handleEdit = (e) => {
+      let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
+        [e.target.name]: e.target.value
+      });
+      this.setState({ updatedBooking });
+    }
+
+
+    editBooking = (e) => {
+      this.setState({
+        editing: true,
+        bookingToEdit: this.state.allBookings[e.target.name]}, () => {
+          console.log('This item will be edited!', this.state.bookingToEdit)
+        });
+    }
+
+    saveUpdatedBooking = () => {
+      //Send updatedBooking to DB
+      this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
+
+      this.setState({ editing: false }, () => {
+        this.setState({ updatedBooking: {}, bookingToEdit: {} })
+      });
+      console.log('This is our updated booking object:', this.state.updatedBooking);
+    }
+
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -74,8 +103,12 @@ class AdminComponent extends React.Component {
                   <tbody>
                     <BookingItem
                       bookingItems={ this.state.allBookings }
-                      onDeleteClick={ this.deleteBooking }
-                      updateDB={ this.props.sendToAPI }
+                      onEdit={ this.editBooking }
+                      handleEdit={ this.handleEdit }
+                      onSave={ this.saveUpdatedBooking }
+                      onDelete={ this.deleteBooking }
+                      isEditing={ this.state.editing }
+                      bookingToEdit={ this.state.bookingToEdit }
                     />
                   </tbody>
                 </table>
