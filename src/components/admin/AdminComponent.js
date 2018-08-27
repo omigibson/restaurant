@@ -6,7 +6,10 @@ class AdminComponent extends React.Component {
     is the same data, but converted to Date-format. */
     state = {
       allBookings: null,
-      convertedBookings: []
+      convertedBookings: [],
+      editing: false,
+      bookingToEdit: {},
+      updatedBooking: {}
     }
 
     /* Before the component is mounted fetchBookings is called and the result is
@@ -38,14 +41,10 @@ class AdminComponent extends React.Component {
       }
     }
 
-    sendToAPI = (json, serverFile) => {
-      return fetch(`http://localhost:8888/${serverFile}`, {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(json)
-      })
-        .then((response) => response.json())
-    }
+
+    /*******************************************/
+    /************* DELETE BOOKING **************/
+    /*******************************************/
 
     deleteBooking = (e) => {
       const itemToDelete = {
@@ -53,13 +52,51 @@ class AdminComponent extends React.Component {
       };
 
       //Delete booking from DB
-      this.sendToAPI(itemToDelete, 'delete_bookings.php');
+      this.props.sendToAPI(itemToDelete, 'delete_bookings.php');
       console.log(e.target.name);
 
       //Delete bookig from DOM
       let updatedBookingArray = this.state.allBookings;
       updatedBookingArray.splice(e.target.name, 1);
       this.setState({ allBookings: updatedBookingArray });
+    }
+
+    /*******************************************/
+    /*************** EDIT BOOKING **************/
+    /*******************************************/
+
+    handleEdit = (e) => {
+      let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
+        [e.target.name]: e.target.value
+      });
+      this.setState({ updatedBooking });
+    }
+
+
+    editBooking = (e) => {
+      this.setState({
+        editing: true,
+        editIndex: e.target.name,
+        bookingToEdit: this.state.allBookings[e.target.name]}, () => {
+          console.log('This item will be edited!', this.state.editIndex)
+        });
+    }
+
+    saveUpdatedBooking = () => {
+      this.state.allBookings[this.state.editIndex] = this.state.updatedBooking;
+
+      this.setState({ allBookings: this.state.allBookings }, () => {
+        this.setState({
+          editing:false,
+          updatedBooking: {},
+          bookingToEdit: {}
+        });
+      });
+
+      //Send updatedBooking to DB
+      this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
+
+      console.log('This is our updated booking object:', this.state.updatedBooking);
     }
 
 
@@ -83,8 +120,12 @@ class AdminComponent extends React.Component {
                   <tbody>
                     <BookingItem
                       bookingItems={ this.state.allBookings }
-                      onDeleteClick={ this.deleteBooking }
-                      updateDB={ this.sendToAPI }
+                      onEdit={ this.editBooking }
+                      handleEdit={ this.handleEdit }
+                      onSave={ this.saveUpdatedBooking }
+                      onDelete={ this.deleteBooking }
+                      isEditing={ this.state.editing }
+                      bookingToEdit={ this.state.bookingToEdit }
                     />
                   </tbody>
                 </table>

@@ -1,42 +1,14 @@
 import React from 'react';
 
 class BookingItem extends React.Component {
-  state = {
-    bookingToEdit: {},
-    updatedBooking: {}
-  }
-
-  handleEdit = (e) => {
-    let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
-      [e.target.name]: e.target.value
-    });
-    this.setState({ updatedBooking });
-  }
-
-
-  editBooking = (e) => {
-    this.setState({
-      bookingToEdit: this.props.bookingItems[e.target.name]}, () => {
-        console.log('This item will be edited!', this.state.bookingToEdit)
-      });
-  }
-
-  saveUpdatedBooking = () => {
-    //skicka in updatedBooking i DB
-    this.props.updateDB(this.state.updatedBooking, "update_booking.php");
-    //this.setState({ updatedBooking: {}, bookingToEdit: {} });
-    console.log('This is our updated booking object:', this.state.updatedBooking);
-  }
-
-
   render(){
     if (this.props.bookingItems) {
         return this.props.bookingItems.map((item, i) => {
-          if(this.state.bookingToEdit && item.id === this.state.bookingToEdit.id){
+          if(this.props.isEditing && item.id === this.props.bookingToEdit.id){
             return <tr key={i}>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="date"
                       type="date"
                       defaultValue={ item.date }
@@ -44,7 +16,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="time"
                       type="text"
                       defaultValue={ item.time }
@@ -52,7 +24,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="guests"
                       type="number"
                       defaultValue={ item.guests }
@@ -62,7 +34,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="name"
                       type="text"
                       defaultValue={ item.name }
@@ -70,7 +42,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="tel"
                       type="tel"
                       defaultValue={ item.tel }
@@ -78,7 +50,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.handleEdit.bind(this)}
+                      onChange={this.props.handleEdit.bind(this)}
                       name="email"
                       type="email"
                       defaultValue={ item.email }
@@ -86,7 +58,7 @@ class BookingItem extends React.Component {
                   </td>
                   <td>
                     <button name={i}
-                            onClick={ this.saveUpdatedBooking }
+                            onClick={ this.props.onSave }
                             id={ item.id }>
                             Save
                     </button>
@@ -103,14 +75,14 @@ class BookingItem extends React.Component {
                   <td>
                     <button
                             name={i}
-                            onClick={ this.editBooking }
+                            onClick={ this.props.onEdit }
                             id={ item.id }>
                             Edit booking
                     </button>
                   </td>
                   <td>
                     <button name={i}
-                            onClick={ this.props.onDeleteClick }
+                            onClick={ this.props.onDelete }
                             id={ item.id }>
                             Remove booking
                     </button>
@@ -118,29 +90,6 @@ class BookingItem extends React.Component {
                 </tr>
             }
           })
-
-        // else {
-        //     return(
-        //       <form>
-        //         <tr key={i}>
-        //           <td><input type="text" value={ item.id } /></td>
-        //           <td><input type="date" value={ item.date } /></td>
-        //           <td><input type="time" value={ item.time } /></td>
-        //           <td><input type="number" value={ item.guests } min="1" max="6" /></td>
-        //           <td><input type="text" value={ item.name } /></td>
-        //           <td><input type="tel" value={ item.tel } /></td>
-        //           <td><input type="email" value={ item.email } /></td>
-        //           // <td>
-        //           //   <button name={i}
-        //           //           onClick={ this.props.onEditClick }
-        //           //           id={ item.id }>
-        //           //           Save
-        //           //   </button>
-        //           // </td>
-        //         </tr>
-        //       </form>
-        //   )
-        // }
       } else {
         console.log("No bookings yet");
         return null;
