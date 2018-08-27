@@ -15,23 +15,38 @@ class GuestComponent extends React.Component {
     });
   }
 
+  amountOfGuestsButtons = (object) => {
+    return Object.keys(object).map((key, index) => {
+      return (
+        <button
+          value={key}
+          className='amount-of-button'
+          name='amountOfGuests'
+          onClick={ this.handleChange.bind(this) }
+        >
+          { key + ' Guests' }
+        </button>
+      );
+    });
+  }
+
   render = () => {
       if (!this.state.stepCompleted) {
         return (
-          <div className="guest">
-              <h2>Select Number Guests</h2>
-              <select
-                onChange={ this.handleChange.bind(this) }
-                name="amountOfGuests"
-                defaultValue='Choose here'>
-                  <option value="1">1 Guests</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5">5 Guests</option>
-                  <option value="6">6 Guests</option>
-              </select>
-          </div>
+          <div className='container'>
+            <h2>Select an amount of guests</h2>
+            <div className='amount-of-guests-container'>
+              { this.amountOfGuestsButtons({
+                  1: '1 Guests',
+                  2: '2 Guests',
+                  3: '3 Guests',
+                  4: '4 Guests',
+                  5: '5 Guests',
+                  6: '6 Guests'
+                })
+              }
+            </div>
+          </div >
         );
       }
     else {
