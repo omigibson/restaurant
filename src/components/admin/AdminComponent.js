@@ -41,6 +41,11 @@ class AdminComponent extends React.Component {
       }
     }
 
+
+    /*******************************************/
+    /************* DELETE BOOKING **************/
+    /*******************************************/
+
     deleteBooking = (e) => {
       const itemToDelete = {
         itemToDelete: e.target.id
@@ -56,6 +61,10 @@ class AdminComponent extends React.Component {
       this.setState({ allBookings: updatedBookingArray });
     }
 
+    /*******************************************/
+    /*************** EDIT BOOKING **************/
+    /*******************************************/
+
     handleEdit = (e) => {
       let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
         [e.target.name]: e.target.value
@@ -67,18 +76,26 @@ class AdminComponent extends React.Component {
     editBooking = (e) => {
       this.setState({
         editing: true,
+        editIndex: e.target.name,
         bookingToEdit: this.state.allBookings[e.target.name]}, () => {
-          console.log('This item will be edited!', this.state.bookingToEdit)
+          console.log('This item will be edited!', this.state.editIndex)
         });
     }
 
     saveUpdatedBooking = () => {
+      this.state.allBookings[this.state.editIndex] = this.state.updatedBooking;
+
+      this.setState({ allBookings: this.state.allBookings }, () => {
+        this.setState({
+          editing:false,
+          updatedBooking: {},
+          bookingToEdit: {}
+        });
+      });
+
       //Send updatedBooking to DB
       this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
 
-      this.setState({ editing: false }, () => {
-        this.setState({ updatedBooking: {}, bookingToEdit: {} })
-      });
       console.log('This is our updated booking object:', this.state.updatedBooking);
     }
 
