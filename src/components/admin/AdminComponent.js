@@ -72,8 +72,6 @@ class AdminComponent extends React.Component {
                 <table>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>UserID</th>
                       <th>Date</th>
                       <th>Time</th>
                       <th>Guests</th>
