@@ -18,16 +18,24 @@ class ChooseTime extends React.Component {
     const dateSelected = this.props.convertDateObjectToString(this.props.dateSelected);
     const datesAndTimes = this.checkIfNoBookingForDateAndTime(this.props.datesAndTimes, dateSelected);
     return (
-      <div className="time">
+      <div className="select-time-container">
         <h2>Select what time to dine</h2>
-        <select
-          onChange={ this.handleChange.bind(this) }
-          name="timeSelected"
-        >
-            <option value="" disabled hidden>Choose here</option>
-            { !datesAndTimes['18']['fullyBooked'] ? <option value="18">18.00</option> : '' }
-            { !datesAndTimes['21']['fullyBooked'] ? <option value="21">21.00</option> : '' }
-        </select>
+          { !datesAndTimes['18']['fullyBooked'] ?
+              <button
+                className='amount-of-button'
+                value="18"
+                name="timeSelected"
+                onClick={ this.handleChange.bind(this) }>18.00
+              </button> : ''
+          }
+          { !datesAndTimes['21']['fullyBooked'] ?
+              <button
+                className='amount-of-button'
+                value="21"
+                name="timeSelected"
+                onClick={ this.handleChange.bind(this) }>21.00
+              </button> : ''
+          }
       </div>
     );
   }

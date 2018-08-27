@@ -118,7 +118,7 @@ class Booking extends React.Component {
       let arrayFromHTMLCollection = Array.from(dayBox);
       arrayFromHTMLCollection.forEach((item) => {
         /* The only way to know if a date is booked is through the CSS-class.
-        If it contains booked-day, don't add an event listener. */ 
+        If it contains booked-day, don't add an event listener. */
         if (!item.classList.contains('booked-day')) {
           item.addEventListener('click', () => {
             let todayDate = item.childNodes[0].innerText;
@@ -154,19 +154,21 @@ class Booking extends React.Component {
     if (!this.state.stepCompleted) {
       if (this.state.daysThatAreFull) {
         return (
-          <div className="booking-calendar-container">
-            <Calendar
-              disableHistory={true}
-              bookings={this.state.daysThatAreFull}
-              clickable={true}
-            />
-          { this.state.decideWhatTime && <ChooseTime
-            setBookingState={ this.setBookingState.bind(this) }
-            datesAndTimes={ this.state.datesAndTimes }
-            dateSelected={ this.state.dateSelected }
-            convertDateObjectToString={ this.convertDateObjectToString }
-            /> }
-          </div>
+          <React.Fragment>
+            <div className="booking-calendar-container">
+              <Calendar
+                disableHistory={true}
+                bookings={this.state.daysThatAreFull}
+                clickable={true}
+              />
+            </div>
+            { this.state.decideWhatTime && <ChooseTime
+              setBookingState={ this.setBookingState.bind(this) }
+              datesAndTimes={ this.state.datesAndTimes }
+              dateSelected={ this.state.dateSelected }
+              convertDateObjectToString={ this.convertDateObjectToString }
+              /> }
+          </React.Fragment>
         );
       }
     else {
