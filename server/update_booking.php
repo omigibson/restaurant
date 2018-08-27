@@ -10,33 +10,33 @@ $bookingStatement = $pdo->prepare(
   "UPDATE bookings
    SET date = :date,
        time = :time,
-       guests = :guests,
+       guests = :guests
     WHERE id = :id"
   );
 $bookingStatement->execute(array(
-  ":id"       => $array["id"],
   ":date"     => $array["date"],
   ":time"     => $array["time"],
   ":guests"   => $array["guests"],
+  ":id"       => $array["id"]
 ));
 
-// $customerStatement = $pdo->prepare(
-//   "UPDATE customers
-//    SET name = :name,
-//        tel = :tel,
-//        email = :email,
-//    WHERE id = :userID"
-//   );
-// $customerStatement->execute(array(
-//   ":name"    => $array["name"],
-//   ":tel"     => $array["tel"],
-//   ":email"   => $array["email"],
-//   ":id"      => $array["id"],
-// ));
+$customerStatement = $pdo->prepare(
+  "UPDATE customers
+   SET    name = :name,
+          tel = :tel,
+          email = :email
+   WHERE  id = :userID"
+  );
+$customerStatement->execute(array(
+  ":name"    => $array["name"],
+  ":tel"     => $array["tel"],
+  ":email"   => $array["email"],
+  ":userID"  => $array["userID"]
+));
 
 /* The ID of the SQL-row is inserted into the associative array. */
-$id = $pdo->lastInsertId();
-$array['id'] = $id;
+// $id = $pdo->lastInsertId();
+// $array['id'] = $id;
 
 /* Before the array is sent back to JavaScript we need to encode it back to JSON.
 It is then echoed back to JS. */

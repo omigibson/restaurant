@@ -16,9 +16,9 @@ class BookingItem extends React.Component {
 
   editBooking = (e) => {
     this.setState({
-      bookingToEdit: this.props.bookingItems[e.target.name]
-    });
-    console.log('This item will be edited!', this.props.bookingItems[e.target.name]);
+      bookingToEdit: this.props.bookingItems[e.target.name]}, () => {
+        console.log('This item will be edited!', this.state.bookingToEdit)
+      });
   }
 
   saveUpdatedBooking = () => {
