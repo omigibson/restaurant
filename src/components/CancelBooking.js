@@ -10,7 +10,7 @@ class CancelBooking extends React.Component {
 
   componentWillMount = () => {
     if (this.getParameterByName('id')) {
-      this.sendToAPI({ hash: this.getParameterByName('id') }, 'fetch_booking_with_hash.php')
+      this.props.sendToAPI({ hash: this.getParameterByName('id') }, 'fetch_booking_with_hash.php')
         .then((booking) => {
           if (booking.length > 0) {
             this.setState({ bookingFetched: true, bookingDetails: booking });
@@ -29,19 +29,10 @@ class CancelBooking extends React.Component {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
-  sendToAPI = (json, serverFile) => {
-    return fetch(`http://localhost:8888/${serverFile}`, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(json)
-    })
-      .then((response) => response.json())
-  }
-
   deleteBookingAndCustomerFromDB = () => {
-    this.sendToAPI({ hash: this.getParameterByName('id')}, 'delete_booking_with_hash.php' )
+    this.props.sendToAPI({ hash: this.getParameterByName('id')}, 'delete_booking_with_hash.php' )
       .then((response) => {
-        this.sendToAPI({ hash: this.getParameterByName('id')}, 'delete_customer_with_hash.php' )
+        this.props.sendToAPI({ hash: this.getParameterByName('id')}, 'delete_customer_with_hash.php' )
           .then((response) => {
             this.setState({ deleteSuccess: true });
           })

@@ -40,21 +40,13 @@ class ContactForm extends React.Component {
   unique ID(hash). */
   generateHash = () => Math.random().toString(36).substr(2);
 
-  /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
-  convertDateObjectToString = (dateObject) => {
-    const yyyy = dateObject.getFullYear().toString();
-    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
-    const dd = (dateObject.getDate() + 100).toString().slice(-2);
-    return yyyy + '-' + mm + '-' + dd;
-  }
-
   /* Handles all the requests to our API. */
   sendAllToAPI = () => {
     /* A unique hash is generated */
     const hash = this.generateHash();
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
-    this.sendToAPI({
+    this.props.sendToAPI({
       userName: this.state.userName,
       userEmail: this.state.userEmail,
       userTelephone: this.state.userTelephone,
@@ -64,8 +56,8 @@ class ContactForm extends React.Component {
       /* A response comes back from the DB with an id that is used when inserting
       a row into the post_booking.php file. This is because we want to separate
       the user and the booking tables. */
-      const dateObjectToString = this.convertDateObjectToString(this.props.bookingDetails.dateSelected);
-      this.sendToAPI({
+      const dateObjectToString = this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected);
+      this.props.sendToAPI({
         date: dateObjectToString,
         guests: this.props.bookingDetails.amountOfGuests,
         time: this.props.bookingDetails.timeSelected,
@@ -75,12 +67,12 @@ class ContactForm extends React.Component {
         .then((bookingDetailsResponse) => {
           /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
           to the user. */
-          this.sendToAPI({
+          this.props.sendToAPI({
             userName: this.state.userName,
             userEmail: this.state.userEmail,
             userTelephone: this.state.userTelephone,
             guests: this.props.bookingDetails.amountOfGuests,
-            date: this.convertDateObjectToString(this.props.bookingDetails.dateSelected),
+            date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
             time: this.props.bookingDetails.timeSelected,
             hash: hash
           }, 'send_email.php')
@@ -92,22 +84,12 @@ class ContactForm extends React.Component {
     })
   }
 
-  /* Handles our API-requests. */
-  sendToAPI = (json, serverFile) => {
-    return fetch(`http://localhost:8888/${serverFile}`, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(json)
-    })
-      .then((response) => response.json())
-  }
-
   render = () => {
     if (!this.state.stepCompleted) {
     return (
         <div className="container">
           <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-          <p> Date: { this.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+          <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
           <p> Time: { this.props.bookingDetails.timeSelected } </p>
           <div className="contact-form">
               <h2>Contact details</h2>
@@ -134,12 +116,7 @@ class ContactForm extends React.Component {
                   className="contact-form-button"
                   type="button"
                   value="Book"
-                  onClick={ () => {
-                    if (this.validateInput()) {
-                      this.sendAllToAPI();
-                    }
-                  }
-                }
+                  onClick={ () => this.validateInput() && this.sendAllToAPI() }
                 >
                 Send
                 </button>

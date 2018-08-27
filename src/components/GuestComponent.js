@@ -3,6 +3,7 @@ import Booking from './Booking';
 
 class GuestComponent extends React.Component {
 
+
   state = {
     amountOfGuests: 0,
     stepCompleted: false
@@ -21,8 +22,8 @@ class GuestComponent extends React.Component {
               <h2>Select Number Guests</h2>
               <select
                 onChange={ this.handleChange.bind(this) }
-                name="amountOfGuests">
-                  <option value="" selected disabled hidden>Choose here</option>
+                name="amountOfGuests"
+                defaultValue='Choose here'>
                   <option value="1">1 Guests</option>
                   <option value="2">2 Guests</option>
                   <option value="3">3 Guests</option>
@@ -35,7 +36,10 @@ class GuestComponent extends React.Component {
       }
     else {
       return (
-        <Booking amountOfGuests={ this.state.amountOfGuests } />
+        <Booking
+          amountOfGuests={ this.state.amountOfGuests }
+          sendToAPI={ this.props.sendToAPI }
+        />
       );
     }
   }
