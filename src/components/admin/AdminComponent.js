@@ -17,7 +17,6 @@ class AdminComponent extends React.Component {
           this.setState({ allBookings: bookings }, () => {
             this.convertBookingstoDates();
             console.log(this.state.allBookings);
-
           });
         })
     }
@@ -64,29 +63,33 @@ class AdminComponent extends React.Component {
     }
 
 
-
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
         if (this.state.convertedBookings) {
           return (
             <div className="container admin-panel">
               <h2>Upcoming bookings</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Guests</th>
-                    <th>Name</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <BookingItem bookingItem={ this.state.allBookings } onClick={ this.deleteBooking } />
-                </tbody>
-              </table>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>UserID</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Guests</th>
+                      <th>Name</th>
+                      <th>Telephone</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <BookingItem
+                      bookingItems={ this.state.allBookings }
+                      onDeleteClick={ this.deleteBooking }
+                      updateDB={ this.sendToAPI }
+                    />
+                  </tbody>
+                </table>
           </div>
         );
       } else {
