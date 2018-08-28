@@ -6,7 +6,10 @@ class ContactForm extends React.Component {
     userEmail: '',
     userTelephone: '',
     stepCompleted: false,
-    allBookingDetails: {}
+    allBookingDetails: {},
+    emailStyle: '',
+    phoneStyle: '',
+    usernameStyle: ''
   }
 
   handleChange = (e) => {
@@ -24,12 +27,15 @@ class ContactForm extends React.Component {
   validatePhone = (number) => !isNaN(number) && number.length >= 6;
 
   /* Controls if the input fields are valid. */
-  validateInput = () => {
-    if (this.state.userName.length >= 5 && this.validateEmail(this.state.userEmail) && this.validatePhone(this.state.userTelephone)) {
-      return true;
-    }
-    return false;
+  giveFeedbackToUser = () => {
+    this.setState({
+      emailStyle: this.validateEmail(this.state.userEmail) ? 'valid-input' : 'invalid-input',
+      phoneStyle: this.validatePhone(this.state.userTelephone) ? 'valid-input' : 'invalid-input',
+      usernameStyle: this.state.userName.length >= 5 ? 'valid-input' : 'invalid-input'
+    });
   }
+
+  areAllInputsValid = () => this.validateEmail(this.state.userEmail) && this.state.userName.length >= 5 && this.validatePhone(this.state.userTelephone);
 
   /* A hash is generated for all bookings and customers. This is because we want
   a way for the user to delete a reservation without using auto-incremented IDs
@@ -87,42 +93,45 @@ class ContactForm extends React.Component {
   render = () => {
     if (!this.state.stepCompleted) {
     return (
-        <div className="container">
-          <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-          <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
-          <p> Time: { this.props.bookingDetails.timeSelected } </p>
-          <div className="contact-form">
-              <h2>Contact details</h2>
-              <form>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="userName"
-                  onChange={this.handleChange.bind(this)}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="userEmail"
-                  onChange={this.handleChange.bind(this)}
-                />
-                <input
-                  type="tel"
-                  placeholder="Tel"
-                  name="userTelephone"
-                  onChange={this.handleChange.bind(this)}
-                />
-                <button
-                  className="contact-form-button"
-                  type="button"
-                  value="Book"
-                  onClick={ () => this.validateInput() && this.sendAllToAPI() }
-                >
-                Send
-                </button>
-              </form>
-          </div>
+      <div className="container">
+        <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
+        <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+        <p> Time: { this.props.bookingDetails.timeSelected } </p>
+        <div className="contact-form">
+          <h2>Contact details</h2>
+          <form>
+            <input
+              type="text"
+              placeholder="Name"
+              name="userName"
+              onChange={this.handleChange.bind(this)}
+              className={ this.state.usernameStyle }
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="userEmail"
+              onChange={this.handleChange.bind(this)}
+              className={ this.state.emailStyle }
+            />
+            <input
+              type="tel"
+              placeholder="Tel"
+              name="userTelephone"
+              onChange={this.handleChange.bind(this)}
+              className={ this.state.phoneStyle }
+            />
+            <button
+              className="contact-form-button"
+              type="button"
+              value="Book"
+              onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+            >
+            Send
+            </button>
+          </form>
         </div>
+      </div>
       );
     }
     else {
