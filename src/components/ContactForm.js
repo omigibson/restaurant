@@ -5,6 +5,7 @@ class ContactForm extends React.Component {
     userName: '',
     userEmail: '',
     userTelephone: '',
+    consent: false,
     stepCompleted: false,
     allBookingDetails: {},
     emailStyle: '',
@@ -14,6 +15,15 @@ class ContactForm extends React.Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleConsent = () => {
+    if (this.state.consent === false){
+      this.setState({consent: true})
+    }
+    else {
+      this.setState({consent: false})
+    }
   }
 
   /* Uses an advanced RegEx (from StackOverflow) that controls if email is correct.
@@ -35,7 +45,7 @@ class ContactForm extends React.Component {
     });
   }
 
-  areAllInputsValid = () => this.validateEmail(this.state.userEmail) && this.state.userName.length >= 5 && this.validatePhone(this.state.userTelephone);
+  areAllInputsValid = () => this.validateEmail(this.state.userEmail) && this.state.userName.length >= 5 && this.validatePhone(this.state.userTelephone) && this.state.consent;
 
   /* A hash is generated for all bookings and customers. This is because we want
   a way for the user to delete a reservation without using auto-incremented IDs
@@ -121,6 +131,15 @@ class ContactForm extends React.Component {
               onChange={this.handleChange.bind(this)}
               className={ this.state.phoneStyle }
             />
+            <input
+              type="checkbox"
+              name="consent"
+              onChange={this.handleConsent}
+            />
+            <label for="consent">
+              I give Nano Food consent to store and manage the information
+              I left here, in order to enable table reservation.
+            </label>
             <button
               className="contact-form-button"
               type="button"
@@ -130,6 +149,11 @@ class ContactForm extends React.Component {
             Send
             </button>
           </form>
+          <p>
+            Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
+            Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
+          </p>
+          <p>Your data will be removed when the date for your booking has passed.</p>
         </div>
       </div>
       );
