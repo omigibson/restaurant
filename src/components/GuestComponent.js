@@ -53,7 +53,9 @@ class GuestComponent extends React.Component {
       return (
         <Booking
           amountOfGuests={ this.state.amountOfGuests }
+          fetchBookings={ this.props.fetchBookings }
           sendToAPI={ this.props.sendToAPI }
+          convertFromStringToDate={ this.props.convertFromStringToDate }
         />
       );
     }
