@@ -83,7 +83,12 @@ class AdminComponent extends React.Component {
     }
 
     saveUpdatedBooking = () => {
+      if (Object.keys(this.state.updatedBooking).length === 0) {
+        this.state.allBookings[this.state.editIndex] = this.state.bookingToEdit
+      }
+      else {
       this.state.allBookings[this.state.editIndex] = this.state.updatedBooking;
+    }
 
       this.setState({ allBookings: this.state.allBookings }, () => {
         this.setState({
