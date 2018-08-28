@@ -12,7 +12,7 @@ import {
 
 class App extends Component {
 
-  /* Posts the object inside JSON.stringify to our post_Booking.php file. */
+  /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
     return fetch(`http://localhost:8888/${fileName}`, {
       method: "POST",
@@ -20,6 +20,24 @@ class App extends Component {
       body: JSON.stringify(json)
     })
       .then((response) => response.json())
+  }
+
+  fetchBookings = (fileName) => {
+    return fetch(`http://localhost:8888/${fileName}`)
+      .then((response) => response.json())
+  }
+
+  /* Converts this.state.allBookings from MySQL date-format to something that
+  JavaScript can understand through new Date. */
+
+  convertFromStringToDate = (arrayWithBookedDates) => {
+    if (arrayWithBookedDates) {
+      let alldaysThatAreFull = [];
+      arrayWithBookedDates.forEach((date) => {
+        alldaysThatAreFull.push(new Date(date));
+      });
+      return alldaysThatAreFull;
+    }
   }
 
   render() {
@@ -38,11 +56,15 @@ class App extends Component {
             <Route
               path='/booking'
               render={(props) => <GuestComponent {...props}
+              fetchBookings={ this.fetchBookings }
+              convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route
               path='/admin'
               render={(props) => <Admin {...props}
+              fetchBookings={ this.fetchBookings }
+              convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route

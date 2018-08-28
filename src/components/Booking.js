@@ -20,7 +20,7 @@ class Booking extends React.Component {
   /* Before the component is mounted fetchBookings is called and the result is
   stored in this.state.allBookings. */
   componentWillMount = () => {
-    this.fetchBookings()
+    this.props.fetchBookings('fetch_bookings.php')
       .then((bookings) => {
         this.setState({ allBookings: bookings }, () => {
           /* After all the bookings are present in this.state.allBookings they
@@ -91,7 +91,7 @@ class Booking extends React.Component {
         continue;
       }
     }
-    const convertToDateFormat = this.convertFromStringToDate(datesThatAreFullyBooked);
+    const convertToDateFormat = this.props.convertFromStringToDate(datesThatAreFullyBooked);
     return convertToDateFormat;
   }
 
@@ -128,23 +128,6 @@ class Booking extends React.Component {
         }
       });
     }, 100)
-  }
-
-  fetchBookings = () => {
-    return fetch("http://localhost:8888/fetch_bookings.php")
-      .then((response) => response.json())
-  }
-
-  /* Converts this.state.allBookings from MySQL date-format to something that
-  JavaScript can understand through new Date. */
-  convertFromStringToDate = (arrayWithBookedDates) => {
-    if (arrayWithBookedDates) {
-      let alldaysThatAreFull = [];
-      arrayWithBookedDates.forEach((date) => {
-        alldaysThatAreFull.push(new Date(date));
-      });
-      return alldaysThatAreFull;
-    }
   }
 
   setBookingState = (object) => this.setState(object);

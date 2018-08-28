@@ -15,32 +15,14 @@ class AdminComponent extends React.Component {
     /* Before the component is mounted fetchBookings is called and the result is
     stored in this.state.allBookings. */
     componentWillMount = () => {
-      this.fetchBookings()
+      this.props.fetchBookings('fetch_bookings_and_customers.php')
         .then((bookings) => {
           this.setState({ allBookings: bookings }, () => {
-            this.convertBookingstoDates();
-            console.log(this.state.allBookings);
-          });
+            const convertedBookings = this.props.convertFromStringToDate(bookings);
+            this.setState({ convertedBookings });
         })
+      })
     }
-
-    fetchBookings = () => {
-      return fetch("http://localhost:8888/fetch_bookings_and_customers.php")
-        .then((response) => response.json())
-    }
-
-    /* Converts this.state.allBookings from MySQL date-format to something that
-    JavaScript can understand through new Date. */
-    convertBookingstoDates = (props) => {
-      if (this.state.allBookings) {
-        let allConvertedBookings = [];
-        this.state.allBookings.map((booking) => {
-          allConvertedBookings.push(new Date(booking.date));
-        });
-        this.setState({ convertedBookings: allConvertedBookings }, () => console.log(this.state.convertedBookings));
-      }
-    }
-
 
     /*******************************************/
     /************* DELETE BOOKING **************/
