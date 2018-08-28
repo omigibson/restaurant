@@ -17,8 +17,8 @@ class ContactForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleConsent = () => {
-    if (this.state.consent === false){
+  handleConsent = (e) => {
+    if (e.target.checked){
       this.setState({consent: true})
     }
     else {
@@ -133,7 +133,6 @@ class ContactForm extends React.Component {
             />
             <input
               type="checkbox"
-              name="consent"
               onChange={this.handleConsent}
             />
             <label for="consent">
