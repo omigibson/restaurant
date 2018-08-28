@@ -1,10 +1,18 @@
 import React from 'react';
 
 class BookingItem extends React.Component {
+
   render(){
     if (this.props.bookingItems) {
         return this.props.bookingItems.map((item, i) => {
           if(this.props.isEditing && item.id === this.props.bookingToEdit.id){
+            let timeOption = "";
+            if (item.time === "18"){
+              timeOption = "21"
+            }
+            else {
+              timeOption = "18"
+            }
             return <tr key={i}>
                   <td>
                     <input
@@ -15,12 +23,12 @@ class BookingItem extends React.Component {
                     />
                   </td>
                   <td>
-                    <input
-                      onChange={this.props.handleEdit.bind(this)}
+                    <select
                       name="time"
-                      type="text"
-                      defaultValue={ item.time }
-                    />
+                      onChange={this.props.handleEdit.bind(this)}>
+                      <option value ={ item.time } >{ item.time }</option>
+                      <option value={timeOption}>{timeOption}</option>
+                    </select>
                   </td>
                   <td>
                     <input
