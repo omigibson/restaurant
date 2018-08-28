@@ -114,6 +114,12 @@ input[type=password] {
     margin: 0 auto;
     padding: 10px; }
 
+.valid-input {
+  border: 2px solid green; }
+
+.invalid-input {
+  border: 2px solid red; }
+
 /************************************/
 /*************** ADMIN **************/
 /************************************/
