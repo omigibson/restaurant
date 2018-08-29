@@ -58,12 +58,21 @@ class GuestComponent extends React.Component {
       }
     else {
       return (
-        <Booking
-          amountOfGuests={ this.state.amountOfGuests }
-          fetchBookings={ this.props.fetchBookings }
-          sendToAPI={ this.props.sendToAPI }
-          convertFromStringToDate={ this.props.convertFromStringToDate }
-        />
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+        { styles =>
+          <Booking
+            style={ styles }
+            amountOfGuests={ this.state.amountOfGuests }
+            fetchBookings={ this.props.fetchBookings }
+            sendToAPI={ this.props.sendToAPI }
+            convertFromStringToDate={ this.props.convertFromStringToDate }
+          />
+        }
+      </Transition>
       );
     }
   }

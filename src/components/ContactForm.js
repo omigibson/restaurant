@@ -112,14 +112,13 @@ class ContactForm extends React.Component {
   render = () => {
     if (!this.state.stepCompleted) {
     return (
-      <div className="container">
-        <Transition
-          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
-          enter={{right: '50%', transform: 'translateX(50%)' }}
-          leave={{ transform: 'translateX(-200%)' }}
-        >
-        { styles =>
-          <div style={this.props.style}>
+      <Transition
+        from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+        enter={{right: '50%', transform: 'translateX(50%)' }}
+        leave={{ transform: 'translateX(-200%)' }}
+      >
+      { styles =>
+        <div className="container" style={styles}>
             <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
             <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
             <p> Time: { this.props.bookingDetails.timeSelected } </p>
@@ -177,10 +176,8 @@ class ContactForm extends React.Component {
               </p>
               <p>Your data will be removed when the date for your booking has passed.</p>
             </div>
-          </div>
-        }
-      </Transition>
-      </div>
+      </div> }
+    </Transition>
       );
     }
     else {
