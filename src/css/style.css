@@ -52,12 +52,27 @@ a {
 /************************************/
 /************** LAYOUT **************/
 /************************************/
+div {
+  box-sizing: border-box; }
+
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   display: flex;
   flex-direction: column; }
+
+section {
+  min-height: 100vh; }
+
+/************************************/
+/*************** FLEX ***************/
+/************************************/
+.flex {
+  display: flex; }
+
+.space-between {
+  justify-content: space-between; }
 
 /************************************/
 /************** INPUTS **************/
@@ -134,9 +149,9 @@ th, td {
   padding: .5em 1em;
   text-align: left; }
 
-/************************************/
+/***********************************************/
 /*************** AMOUNT OF GUESTS **************/
-/************************************/
+/***********************************************/
 .amount-of-button {
   flex-basis: calc(100% / 3);
   background: black;
@@ -149,3 +164,23 @@ th, td {
   display: inline-flex;
   flex-wrap: wrap;
   width: 50%; }
+
+/************************************/
+/************** FOOTER **************/
+/************************************/
+footer {
+  width: 90%;
+  margin: auto;
+  color: #FCF9F4;
+  background: #453D3D; }
+
+@media screen and (min-width: 768px) {
+  /************************************/
+  /************** FOOTER **************/
+  /************************************/
+  footer div {
+    padding: 2em; }
+  footer .our-story, footer .address {
+    width: 50%; }
+  footer .address {
+    border-right: 1px solid #FCF9F4; } }

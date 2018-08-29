@@ -64,12 +64,30 @@ a {
 /************************************/
 /************** LAYOUT **************/
 /************************************/
+div {
+  box-sizing: border-box;
+}
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   display: flex;
   flex-direction: column;
+}
+
+section {
+  min-height: 100vh;
+}
+
+/************************************/
+/*************** FLEX ***************/
+/************************************/
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 /************************************/
@@ -87,6 +105,14 @@ input[type=email],
 input[type=tel],
 input[type=password] {
   width: 100%;
+}
+
+/************************************/
+/************** HEADER **************/
+/************************************/
+.navbar-header {
+  background: none;
+  color: $color__dark-1;
 }
 
 /************************************/
@@ -180,9 +206,9 @@ th, td {
   text-align: left;
 }
 
-/************************************/
+/***********************************************/
 /*************** AMOUNT OF GUESTS **************/
-/************************************/
+/***********************************************/
 
 .amount-of-button {
   flex-basis: calc(100% / 3);
@@ -197,4 +223,14 @@ th, td {
   display: inline-flex;
   flex-wrap: wrap;
   width: 50%;
+}
+
+/************************************/
+/************** FOOTER **************/
+/************************************/
+footer {
+  width: 90%;
+  margin: auto;
+  color: $color__light--1;
+  background: $color__dark--2;
 }

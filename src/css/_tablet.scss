@@ -1,0 +1,16 @@
+/************************************/
+/************** FOOTER **************/
+/************************************/
+
+footer {
+  div {
+    padding: 2em;
+  }
+  .our-story, .address {
+    width: 50%;
+  }
+  .address {
+    border-right: 1px solid $color__font--light;
+  }
+
+}

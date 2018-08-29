@@ -31,7 +31,7 @@ const LandingPage = () => {
             </div>
           </section>
           <footer>
-            <div className="footer__top">
+            <div className="footer__top flex">
               <div className="address">
                 <h3>Find us</h3>
                 <address>
@@ -50,7 +50,8 @@ const LandingPage = () => {
                 <p>Read the full story.</p>
               </div>
             </div>
-            <div className="footer__bottom">
+            <hr />
+            <div className="footer__bottom flex space-between">
               <div><small>Terms & Conditions / Privacy Policy © Nano Food AB</small></div>
               <div>
                 <a href="tel:0812345678">08 — 123 45 678</a>
