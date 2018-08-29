@@ -4,9 +4,9 @@
   font-weight: normal;
   font-style: normal; }
 
-/************************************/
-/************** RESET ***************/
-/************************************/
+/*************************************/
+/*************** RESET ***************/
+/*************************************/
 table, tr, td {
   margin: 0;
   padding: 0; }
@@ -43,10 +43,8 @@ a {
   overflow: scroll; }
 
 .navbar-header {
-  background-color: #222;
   width: 100%;
   height: 70px;
-  color: white;
   display: inline-flex;
   align-content: center; }
   .navbar-header ul {
@@ -55,21 +53,57 @@ a {
       margin: 5px;
       display: inline-flex; }
 
-/****************************************/
-/************** TYPOGRAPHY **************/
-/****************************************/
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+body {
+  font-family: 'Karla';
+  color: #453D3D; }
+
 h1, h2, h3, h4 {
   font-family: 'facultad'; }
+
+p {
+  font-weight: 300;
+  line-height: 1.7; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
 
 /************************************/
 /************** LAYOUT **************/
 /************************************/
+body {
+  background: #FCF9F4; }
+
+div, section, footer {
+  box-sizing: border-box; }
+
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   display: flex;
   flex-direction: column; }
+
+img {
+  width: 100%; }
+
+/************************************/
+/*************** FLEX ***************/
+/************************************/
+.flex {
+  display: flex; }
+
+.space-between {
+  justify-content: space-between; }
+
+.hcenter {
+  justify-content: center; }
+
+.vcenter {
+  align-items: center; }
 
 /************************************/
 /************** INPUTS **************/
@@ -86,6 +120,44 @@ input[type=email],
 input[type=tel],
 input[type=password] {
   width: 100%; }
+
+/************************************/
+/************** HEADER **************/
+/************************************/
+.navbar-header {
+  background: none;
+  color: #453D3D; }
+  .navbar-header li {
+    font-family: 'facultad'; }
+
+/************************************/
+/*********** LANDING PAGE ***********/
+/************************************/
+.landingpage-container {
+  width: 100%; }
+  .landingpage-container .menu .text div {
+    background: #87B586;
+    color: #475A51; }
+  .landingpage-container .booking .text div {
+    background: #BC9E7B;
+    color: #453D3D; }
+
+.jumbotron {
+  background: #87B586;
+  margin: 0 70px 70px;
+  height: calc(100vh - (70px * 2)); }
+
+.landingpage__section {
+  margin: 0 auto 100px; }
+  .landingpage__section.menu, .landingpage__section.booking {
+    flex-direction: column; }
+  .landingpage__section .image, .landingpage__section .text {
+    width: 100%; }
+  .landingpage__section .text {
+    margin: -50px 20px 0; }
+    .landingpage__section .text div {
+      width: 90%;
+      padding: 2em; }
 
 /************************************/
 /************* CALENDAR *************/
@@ -159,9 +231,9 @@ th, td {
   padding: .5em 1em;
   text-align: left; }
 
-/************************************/
-/*************** AMOUNT OF GUESTS **************/
-/************************************/
+/***************************************/
+/*********** AMOUNT OF GUESTS **********/
+/***************************************/
 .amount-of-button {
   flex-basis: calc(100% / 3);
   background: black;
@@ -177,7 +249,55 @@ th, td {
   width: 50%; }
 
 /************************************/
-/*************** GENERAL STYLES **************/
+/************** FOOTER **************/
+/************************************/
+footer {
+  margin: 70px 70px 0;
+  color: #DACBC4;
+  background: #453D3D;
+  padding: 2em; }
+
+/************************************/
+/********** GENERAL STYLES **********/
 /************************************/
 .hidden {
   display: none; }
+
+@media screen and (min-width: 768px) {
+  /************************************/
+  /********** LANDING PAGE ************/
+  /************************************/
+  .landingpage__section {
+    min-height: 50vh; }
+    .landingpage__section .text, .landingpage__section .image {
+      width: 50%; }
+    .landingpage__section .text {
+      margin: 0;
+      align-self: start; }
+    .landingpage__section.menu {
+      flex-direction: row-reverse; }
+      .landingpage__section.menu .text {
+        transform: translate(70px, 70px);
+        justify-content: flex-end; }
+    .landingpage__section.booking {
+      flex-direction: row; }
+      .landingpage__section.booking .text {
+        transform: translate(-70px, 70px); }
+  /************************************/
+  /************** FOOTER **************/
+  /************************************/
+  footer > div {
+    padding: 2em; }
+  footer .our-story, footer .address {
+    width: 50%; }
+  footer .our-story {
+    padding: 0 0 2em 2em; }
+  footer .address {
+    padding: 0 2em 2em 0;
+    border-right: 1px solid #FCF9F4; } }
+
+@media screen and (min-width: 992px) {
+  .landingpage__section {
+    min-height: 60vh; }
+    .landingpage__section .text div {
+      padding: 2em 4em; } }

@@ -6,9 +6,9 @@
     font-style: normal;
 }
 
-/************************************/
-/************** RESET ***************/
-/************************************/
+/*************************************/
+/*************** RESET ***************/
+/*************************************/
 table, tr, td {
   margin:0;
   padding:0;
@@ -53,10 +53,8 @@ a {
 }
 
 .navbar-header {
-  background-color: #222;
   width: 100%;
-  height: 70px;
-  color: white;
+  height: $height__navbar;
   display: inline-flex;
   align-content: center;
   ul {
@@ -68,23 +66,63 @@ a {
   }
 }
 
-/****************************************/
-/************** TYPOGRAPHY **************/
-/****************************************/
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+body {
+  font-family: 'Karla';
+  color: $color__dark-1;
+}
 h1, h2, h3, h4 {
   font-family: 'facultad';
 }
 
+p {
+  font-weight: 300;
+  line-height: 1.7;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /************************************/
 /************** LAYOUT **************/
 /************************************/
+body {
+  background: $color__light-1;
+}
+div, section, footer {
+  box-sizing: border-box;
+}
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   display: flex;
   flex-direction: column;
+}
+img {
+  width: 100%;
+}
+
+/************************************/
+/*************** FLEX ***************/
+/************************************/
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.hcenter {
+  justify-content: center;
+}
+
+.vcenter {
+  align-items: center;
 }
 
 /************************************/
@@ -103,6 +141,57 @@ input[type=tel],
 input[type=password] {
   width: 100%;
 }
+
+/************************************/
+/************** HEADER **************/
+/************************************/
+.navbar-header {
+  background: none;
+  color: $color__dark-1;
+  li {
+    font-family: 'facultad';
+  }
+}
+
+/************************************/
+/*********** LANDING PAGE ***********/
+/************************************/
+.landingpage-container {
+  width: 100%;
+  .menu .text div {
+    background: $color__accent-1;
+    color: $color__accent-2;
+  }
+  .booking .text div {
+    background: $color__light-3;
+    color: $color__dark-2;
+  }
+}
+.jumbotron {
+  background: $color__accent-1;
+  // Make sure left-right-bottom margins are equal to top-margin
+  margin: 0 $height__navbar $height__navbar;
+  height: calc(100vh - (#{$height__navbar} * 2));
+}
+.landingpage__section {
+  margin: 0 auto 100px;
+
+  &.menu, &.booking {
+    flex-direction: column;
+  }
+  .image, .text {
+    width: 100%;
+  }
+  .text {
+    margin: -50px 20px 0;
+    div {
+      width: 90%;
+      padding: 2em;
+    }
+  }
+}
+
+
 
 /************************************/
 /************* CALENDAR *************/
@@ -209,9 +298,9 @@ th, td {
   text-align: left;
 }
 
-/************************************/
-/*************** AMOUNT OF GUESTS **************/
-/************************************/
+/***************************************/
+/*********** AMOUNT OF GUESTS **********/
+/***************************************/
 
 .amount-of-button {
   flex-basis: calc(100% / 3);
@@ -229,9 +318,18 @@ th, td {
   width: 50%;
 }
 
+/************************************/
+/************** FOOTER **************/
+/************************************/
+footer {
+  margin: $height__navbar $height__navbar 0;
+  color: $color__light-2;
+  background: $color__dark-2;
+  padding: 2em;
+}
 
 /************************************/
-/*************** GENERAL STYLES **************/
+/********** GENERAL STYLES **********/
 /************************************/
 
 .hidden {

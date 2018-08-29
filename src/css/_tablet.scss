@@ -1,0 +1,47 @@
+/************************************/
+/********** LANDING PAGE ************/
+/************************************/
+.landingpage__section {
+  min-height: 50vh;
+  .text, .image {
+    width: 50%;
+  }
+  .text {
+    margin: 0;
+    align-self:start;
+  }
+  &.menu {
+    flex-direction: row-reverse;
+    .text {
+      transform: translate($height__navbar, $height__navbar);
+      justify-content: flex-end;
+    }
+  }
+  &.booking {
+    flex-direction: row;
+    .text {
+      transform: translate(-$height__navbar, $height__navbar);
+    }
+  }
+}
+
+
+/************************************/
+/************** FOOTER **************/
+/************************************/
+
+footer {
+  &>div {
+    padding: 2em;
+  }
+  .our-story, .address {
+    width: 50%;
+  }
+  .our-story {
+    padding: 0 0 2em 2em;
+  }
+  .address {
+    padding: 0 2em 2em 0;
+    border-right: 1px solid $color__light-1;
+  }
+}
