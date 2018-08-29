@@ -94,8 +94,7 @@ input[type=password] {
 /************************************/
 
 .booking-calendar-container {
-  width: 50%;
-  height: 100%;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -210,6 +209,7 @@ th, td {
 .amount-of-guests-container {
   margin: 0px auto;
   display: inline-flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 50%;
 }

@@ -34,9 +34,12 @@ class GuestComponent extends React.Component {
   render = () => {
       if (!this.state.stepCompleted) {
         return (
-          <Transition from={{position: 'absolute', left: -400 }} enter={{ left: 400 }} leave={{ left: 1000 }}>
-            { styles => <div className='container' style={styles}>
-              <h2>Select an amount of guests</h2>
+          <Transition
+            from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+            enter={{right: '50%', transform: 'translateX(50%)' }}
+            leave={{ transform: 'translateX(-200%)' }}
+          >
+            {styles => <div className='container' style={styles}>
               <div className='amount-of-guests-container'>
                 { this.amountOfGuestsButtons({
                     1: '1 Guests',

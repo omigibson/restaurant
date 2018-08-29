@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from 'react-spring';
 
 class ContactForm extends React.Component {
   state = {
@@ -104,70 +105,89 @@ class ContactForm extends React.Component {
     if (!this.state.stepCompleted) {
     return (
       <div className="container">
-        <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-        <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
-        <p> Time: { this.props.bookingDetails.timeSelected } </p>
-        <div className="contact-form">
-          <h2>Contact details</h2>
-          <form>
-            <input
-              type="text"
-              placeholder="Name"
-              name="userName"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.usernameStyle }
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              name="userEmail"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.emailStyle }
-            />
-            <input
-              type="tel"
-              placeholder="Tel"
-              name="userTelephone"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.phoneStyle }
-            />
-            <input
-              type="checkbox"
-              name="consent"
-              onChange={this.handleConsent}
-            />
-            <label for="consent">
-              I give Nano Food consent to store and manage the information
-              I left here, in order to enable table reservation.
-            </label>
-            <button
-              className="contact-form-button"
-              type="button"
-              value="Book"
-              onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
-            >
-            Send
-            </button>
-          </form>
-          <p>
-            Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
-            Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
-          </p>
-          <p>Your data will be removed when the date for your booking has passed.</p>
-        </div>
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+        { styles =>
+          <div className="contact-form-container" style={styles}>
+            <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
+            <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+            <p> Time: { this.props.bookingDetails.timeSelected } </p>
+            <div className="contact-form">
+              <h2>Contact details</h2>
+              <form>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="userName"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.usernameStyle }
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="userEmail"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.emailStyle }
+                />
+                <input
+                  type="tel"
+                  placeholder="Tel"
+                  name="userTelephone"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.phoneStyle }
+                />
+                <input
+                  type="checkbox"
+                  name="consent"
+                  onChange={this.handleConsent}
+                />
+                <label for="consent">
+                  I give Nano Food consent to store and manage the information
+                  I left here, in order to enable table reservation.
+                </label>
+                <button
+                  className="contact-form-button"
+                  type="button"
+                  value="Book"
+                  onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+                >
+                Send
+                </button>
+              </form>
+              <p>
+                Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
+                Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
+              </p>
+              <p>Your data will be removed when the date for your booking has passed.</p>
+            </div>
+          </div> }
+        </Transition>
       </div>
       );
     }
     else {
       return (
-        <div className="container">
-          <h1>Your reservation was successful.</h1>
-          <h2>Details:</h2>
-          <p>Name: { this.state.allBookingDetails.userName } </p>
-          <p>Date: { this.state.allBookingDetails.date } </p>
-          <p>Time: { this.state.allBookingDetails.time } </p>
-          <p>Guests: { this.state.allBookingDetails.guests } </p>
-        </div>
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+        { styles =>
+          <div className="container">
+            <div className="booking-details-container" style={styles}>
+              <h1>Your reservation was successful.</h1>
+              <h2>Details:</h2>
+              <p>Name: { this.state.allBookingDetails.userName } </p>
+              <p>Date: { this.state.allBookingDetails.date } </p>
+              <p>Time: { this.state.allBookingDetails.time } </p>
+              <p>Guests: { this.state.allBookingDetails.guests } </p>
+            </div>
+          </div>
+        }
+      </Transition>
       );
     }
   }
