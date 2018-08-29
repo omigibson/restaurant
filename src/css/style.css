@@ -268,7 +268,7 @@ footer {
   /********** LANDING PAGE ************/
   /************************************/
   .landingpage__section {
-    min-height: 70vh; }
+    min-height: 50vh; }
     .landingpage__section .text, .landingpage__section .image {
       width: 50%; }
     .landingpage__section .text {
@@ -295,3 +295,9 @@ footer {
   footer .address {
     padding: 0 2em 2em 0;
     border-right: 1px solid #FCF9F4; } }
+
+@media screen and (min-width: 992px) {
+  .landingpage__section {
+    min-height: 60vh; }
+    .landingpage__section .text div {
+      padding: 2em 4em; } }
