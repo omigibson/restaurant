@@ -1,7 +1,7 @@
 import React from 'react';
 import Calendar from 'react-booking-calendar';
-import ContactForm from "./ContactForm";
-import ChooseTime from "./ChooseTime";
+import ContactForm from './ContactForm';
+import ChooseTime from './ChooseTime';
 import { Transition } from 'react-spring';
 
 class Booking extends React.Component {
@@ -32,10 +32,10 @@ class Booking extends React.Component {
             this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
               this.initiateMonthPaginationEventListeners();
               this.initiateCalendarEventListeners();
-            })
+            });
           });
         });
-      })
+      });
   }
 
   /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
@@ -67,16 +67,16 @@ class Booking extends React.Component {
   controlIfDateOrTimesAreBooked = (object) => {
     for (let key in object) {
       if (object[key]['18'].length >= 15) {
-        object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
+        object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] };
       }
       else {
-        object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] }
+        object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] };
       }
       if (object[key]['21'].length >= 15) {
-        object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
+        object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] };
       }
       else {
-        object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] }
+        object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] };
       }
     }
     return object;
@@ -114,8 +114,8 @@ class Booking extends React.Component {
     /* A small timeout is used because the DOM isn't updated quickly enough.
     This solved that problem, and is hardly noticeable for the user. */
     setTimeout(() => {
-      let monthAndYear = document.getElementsByClassName("month-label")[0].innerText;
-      let dayBox = document.getElementsByClassName("day");
+      let monthAndYear = document.getElementsByClassName('month-label')[0].innerText;
+      let dayBox = document.getElementsByClassName('day');
       let arrayFromHTMLCollection = Array.from(dayBox);
       arrayFromHTMLCollection.forEach((item) => {
         /* The only way to know if a date is booked is through the CSS-class.
@@ -128,7 +128,7 @@ class Booking extends React.Component {
           });
         }
       });
-    }, 100)
+    }, 100);
   }
 
   setBookingState = (object) => this.setState(object);
@@ -143,28 +143,28 @@ class Booking extends React.Component {
             enter={{right: '50%', transform: 'translateX(50%)' }}
             leave={{ transform: 'translateX(-200%)' }}
           >
-          { styles =>
-            <div className="booking-calendar-container" style={styles}>
-              <Calendar
-                disableHistory={true}
-                bookings={this.state.daysThatAreFull}
-                clickable={true}
-              />
-              { this.state.decideWhatTime && <ChooseTime
-                setBookingState={ this.setBookingState.bind(this) }
-                datesAndTimes={ this.state.datesAndTimes }
-                dateSelected={ this.state.dateSelected }
-                convertDateObjectToString={ this.convertDateObjectToString }
+            { styles =>
+              <div className="booking-calendar-container" style={styles}>
+                <Calendar
+                  disableHistory={true}
+                  bookings={this.state.daysThatAreFull}
+                  clickable={true}
+                />
+                { this.state.decideWhatTime && <ChooseTime
+                  setBookingState={ this.setBookingState.bind(this) }
+                  datesAndTimes={ this.state.datesAndTimes }
+                  dateSelected={ this.state.dateSelected }
+                  convertDateObjectToString={ this.convertDateObjectToString }
                 /> }
-            </div>
-          }
+              </div>
+            }
           </Transition>
         );
       }
-    else {
-      return null;
+      else {
+        return null;
+      }
     }
-  }
     else {
       return (
         <Transition
@@ -172,7 +172,7 @@ class Booking extends React.Component {
           enter={{right: '50%', transform: 'translateX(50%)' }}
           leave={{ transform: 'translateX(-200%)' }}
         >
-        { styles =>
+          { styles =>
             <ContactForm
               style={styles}
               convertDateObjectToString={ this.convertDateObjectToString }
@@ -181,11 +181,11 @@ class Booking extends React.Component {
                 dateSelected: this.state.dateSelected,
                 timeSelected: this.state.timeSelected,
                 amountOfGuests: this.props.amountOfGuests
-            } }
+              } }
             />
-        }
-      </Transition>
-      )
+          }
+        </Transition>
+      );
     }
   }
 }

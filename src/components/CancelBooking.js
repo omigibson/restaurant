@@ -21,12 +21,12 @@ class CancelBooking extends React.Component {
 
   getParameterByName = (name, url) => {
     if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
   deleteBookingAndCustomerFromDB = () => {
@@ -35,7 +35,7 @@ class CancelBooking extends React.Component {
         this.props.sendToAPI({ hash: this.getParameterByName('id')}, 'delete_customer_with_hash.php' )
           .then((response) => {
             this.setState({ deleteSuccess: true });
-          })
+          });
       });
   }
 
@@ -48,11 +48,11 @@ class CancelBooking extends React.Component {
           <p> Time: { this.state.bookingDetails[0].time } </p>
           <p> Guests: { this.state.bookingDetails[0].guests } </p>
           { !this.state.deleteSuccess ?
-              <React.Fragment>
-                <button onClick={ () => this.deleteBookingAndCustomerFromDB() }>
+            <React.Fragment>
+              <button onClick={ () => this.deleteBookingAndCustomerFromDB() }>
                   Cancel booking
-                </button>
-              </React.Fragment>
+              </button>
+            </React.Fragment>
             : <p>The reservation has been cancelled.</p>
           }
         </React.Fragment>

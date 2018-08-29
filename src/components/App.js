@@ -1,30 +1,30 @@
-import React, { Component } from "react";
-import "./../css/style.css";
-import About from "./AboutComponent";
-import GuestComponent from "./GuestComponent";
-import Admin from "./admin/AdminComponent";
-import CancelBooking from "./CancelBooking";
+import React, { Component } from 'react';
+import './../css/style.css';
+import About from './AboutComponent';
+import GuestComponent from './GuestComponent';
+import Admin from './admin/AdminComponent';
+import CancelBooking from './CancelBooking';
 import {
   BrowserRouter as Router,
   Route,
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
 
 class App extends Component {
 
   /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
     return fetch(`http://localhost:8888/${fileName}`, {
-      method: "POST",
-      mode: "cors",
+      method: 'POST',
+      mode: 'cors',
       body: JSON.stringify(json)
     })
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   fetchBookings = (fileName) => {
     return fetch(`http://localhost:8888/${fileName}`)
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   /* Converts this.state.allBookings from MySQL date-format to something that
@@ -56,21 +56,21 @@ class App extends Component {
             <Route
               path='/booking'
               render={(props) => <GuestComponent {...props}
-              fetchBookings={ this.fetchBookings }
-              convertFromStringToDate={ this.convertFromStringToDate }
-              sendToAPI={ this.sendToAPI } />}
+                fetchBookings={ this.fetchBookings }
+                convertFromStringToDate={ this.convertFromStringToDate }
+                sendToAPI={ this.sendToAPI } />}
             />
             <Route
               path='/admin'
               render={(props) => <Admin {...props}
-              fetchBookings={ this.fetchBookings }
-              convertFromStringToDate={ this.convertFromStringToDate }
-              sendToAPI={ this.sendToAPI } />}
+                fetchBookings={ this.fetchBookings }
+                convertFromStringToDate={ this.convertFromStringToDate }
+                sendToAPI={ this.sendToAPI } />}
             />
             <Route
               path='/cancel'
               render={(props) => <CancelBooking {...props}
-              sendToAPI={ this.sendToAPI } />}
+                sendToAPI={ this.sendToAPI } />}
             />
           </div>
         </div>

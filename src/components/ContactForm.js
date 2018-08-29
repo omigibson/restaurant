@@ -24,10 +24,10 @@ class ContactForm extends React.Component {
 
   handleConsent = (e) => {
     if (e.target.checked){
-      this.setState({consent: true})
+      this.setState({consent: true});
     }
     else {
-      this.setState({consent: false})
+      this.setState({consent: false});
     }
   }
 
@@ -76,108 +76,108 @@ class ContactForm extends React.Component {
       userEmail: this.state.userEmail,
       userTelephone: this.state.userTelephone,
       hash: hash
-  }, 'post_user_details.php')
-    .then((userDetailsResponse) => {
+    }, 'post_user_details.php')
+      .then((userDetailsResponse) => {
       /* A response comes back from the DB with an id that is used when inserting
       a row into the post_booking.php file. This is because we want to separate
       the user and the booking tables. */
-      const dateObjectToString = this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected);
-      this.props.sendToAPI({
-        date: dateObjectToString,
-        guests: this.props.bookingDetails.amountOfGuests,
-        time: this.props.bookingDetails.timeSelected,
-        userID: userDetailsResponse.id,
-        hash: hash
-      }, 'post_booking.php')
-        .then((bookingDetailsResponse) => {
+        const dateObjectToString = this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected);
+        this.props.sendToAPI({
+          date: dateObjectToString,
+          guests: this.props.bookingDetails.amountOfGuests,
+          time: this.props.bookingDetails.timeSelected,
+          userID: userDetailsResponse.id,
+          hash: hash
+        }, 'post_booking.php')
+          .then((bookingDetailsResponse) => {
           /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
           to the user. */
-          this.props.sendToAPI({
-            userName: this.state.userName,
-            userEmail: this.state.userEmail,
-            userTelephone: this.state.userTelephone,
-            guests: this.props.bookingDetails.amountOfGuests,
-            date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
-            time: this.props.bookingDetails.timeSelected,
-            hash: hash
-          }, 'send_email.php')
-            .then((emailResponse) => {
-              console.log(emailResponse);
-              this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
-            })
-        });
-    })
+            this.props.sendToAPI({
+              userName: this.state.userName,
+              userEmail: this.state.userEmail,
+              userTelephone: this.state.userTelephone,
+              guests: this.props.bookingDetails.amountOfGuests,
+              date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
+              time: this.props.bookingDetails.timeSelected,
+              hash: hash
+            }, 'send_email.php')
+              .then((emailResponse) => {
+                console.log(emailResponse);
+                this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
+              });
+          });
+      });
   }
 
   render = () => {
     if (!this.state.stepCompleted) {
-    return (
-      <Transition
-        from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
-        enter={{right: '50%', transform: 'translateX(50%)' }}
-        leave={{ transform: 'translateX(-200%)' }}
-      >
-      { styles =>
-        <div className="container" style={styles}>
-            <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-            <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
-            <p> Time: { this.props.bookingDetails.timeSelected } </p>
-            <div className="contact-form">
-              <h2>Contact details</h2>
-              <form>
-                <label htmlFor="userName">Name</label>
-                <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="userName"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.usernameStyle }
-                />
-                <label htmlFor="userEmail">Email</label>
-                <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="userEmail"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.emailStyle }
-                />
-                <label htmlFor="userTelephone">Phone number</label>
-                <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
-                <input
-                  type="tel"
-                  placeholder="Tel"
-                  name="userTelephone"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.phoneStyle }
-                />
-                <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
-                <input
-                  type="checkbox"
-                  onChange={this.handleConsent}
-                />
-                <label htmlFor="consent">
+      return (
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+          { styles =>
+            <div className="container" style={styles}>
+              <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
+              <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+              <p> Time: { this.props.bookingDetails.timeSelected } </p>
+              <div className="contact-form">
+                <h2>Contact details</h2>
+                <form>
+                  <label htmlFor="userName">Name</label>
+                  <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    name="userName"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.usernameStyle }
+                  />
+                  <label htmlFor="userEmail">Email</label>
+                  <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    name="userEmail"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.emailStyle }
+                  />
+                  <label htmlFor="userTelephone">Phone number</label>
+                  <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
+                  <input
+                    type="tel"
+                    placeholder="Tel"
+                    name="userTelephone"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.phoneStyle }
+                  />
+                  <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
+                  <input
+                    type="checkbox"
+                    onChange={this.handleConsent}
+                  />
+                  <label htmlFor="consent">
                   I give Nano Food consent to store and manage the information
                   I left here, in order to enable table reservation.
-                </label>
-                <button
-                  className="contact-form-button"
-                  type="button"
-                  value="Book"
-                  onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
-                >
+                  </label>
+                  <button
+                    className="contact-form-button"
+                    type="button"
+                    value="Book"
+                    onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+                  >
                 Send
-                </button>
-              </form>
-              <p>
+                  </button>
+                </form>
+                <p>
                 Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
                 Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
-              </p>
-              <p>Your data will be removed when the date for your booking has passed.</p>
-            </div>
-      </div> }
-    </Transition>
+                </p>
+                <p>Your data will be removed when the date for your booking has passed.</p>
+              </div>
+            </div> }
+        </Transition>
       );
     }
     else {
@@ -187,19 +187,19 @@ class ContactForm extends React.Component {
           enter={{right: '50%', transform: 'translateX(50%)' }}
           leave={{ transform: 'translateX(-200%)' }}
         >
-        { styles =>
-          <div className="container">
-            <div className="booking-details-container" style={styles}>
-              <h1>Your reservation was successful.</h1>
-              <h2>Details:</h2>
-              <p>Name: { this.state.allBookingDetails.userName } </p>
-              <p>Date: { this.state.allBookingDetails.date } </p>
-              <p>Time: { this.state.allBookingDetails.time } </p>
-              <p>Guests: { this.state.allBookingDetails.guests } </p>
+          { styles =>
+            <div className="container">
+              <div className="booking-details-container" style={styles}>
+                <h1>Your reservation was successful.</h1>
+                <h2>Details:</h2>
+                <p>Name: { this.state.allBookingDetails.userName } </p>
+                <p>Date: { this.state.allBookingDetails.date } </p>
+                <p>Time: { this.state.allBookingDetails.time } </p>
+                <p>Guests: { this.state.allBookingDetails.guests } </p>
+              </div>
             </div>
-          </div>
-        }
-      </Transition>
+          }
+        </Transition>
       );
     }
   }

@@ -20,8 +20,8 @@ class AdminComponent extends React.Component {
           this.setState({ allBookings: bookings }, () => {
             const convertedBookings = this.props.convertFromStringToDate(bookings);
             this.setState({ convertedBookings });
-        })
-      })
+          });
+        });
     }
 
     /*******************************************/
@@ -35,7 +35,6 @@ class AdminComponent extends React.Component {
 
       //Delete booking from DB
       this.props.sendToAPI(itemToDelete, 'delete_bookings.php');
-      console.log(e.target.name);
 
       //Delete bookig from DOM
       let updatedBookingArray = this.state.allBookings;
@@ -59,9 +58,8 @@ class AdminComponent extends React.Component {
       this.setState({
         editing: true,
         editIndex: e.target.name,
-        bookingToEdit: this.state.allBookings[e.target.name]}, () => {
-          console.log('This item will be edited!', this.state.editIndex)
-        });
+        bookingToEdit: this.state.allBookings[e.target.name]}
+      );
     }
 
     saveUpdatedBooking = () => {
@@ -72,9 +70,9 @@ class AdminComponent extends React.Component {
         //this.state.allBookings[this.state.editIndex] = this.state.bookingToEdit
       }
       else {
-      allBookings[this.state.editIndex] = this.state.updatedBooking;
-      this.setState({ allBookings });
-    }
+        allBookings[this.state.editIndex] = this.state.updatedBooking;
+        this.setState({ allBookings });
+      }
 
       this.setState({ allBookings: this.state.allBookings }, () => {
         this.setState({
@@ -85,11 +83,8 @@ class AdminComponent extends React.Component {
       });
 
       //Send updatedBooking to DB
-      this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
-
-      console.log('This is our updated booking object:', this.state.updatedBooking);
+      this.props.sendToAPI(this.state.updatedBooking, 'update_booking.php');
     }
-
 
       render = () => {
         /* Only render if this.state.convertedBookings returns true. */
@@ -97,34 +92,34 @@ class AdminComponent extends React.Component {
           return (
             <div className="container admin-panel">
               <h2>Upcoming bookings</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Guests</th>
-                      <th>Name</th>
-                      <th>Telephone</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <BookingItem
-                      bookingItems={ this.state.allBookings }
-                      onEdit={ this.editBooking }
-                      handleEdit={ this.handleEdit }
-                      onSave={ this.saveUpdatedBooking }
-                      onDelete={ this.deleteBooking }
-                      isEditing={ this.state.editing }
-                      bookingToEdit={ this.state.bookingToEdit }
-                    />
-                  </tbody>
-                </table>
-          </div>
-        );
-      } else {
-        return null;
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Guests</th>
+                    <th>Name</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <BookingItem
+                    bookingItems={ this.state.allBookings }
+                    onEdit={ this.editBooking }
+                    handleEdit={ this.handleEdit }
+                    onSave={ this.saveUpdatedBooking }
+                    onDelete={ this.deleteBooking }
+                    isEditing={ this.state.editing }
+                    bookingToEdit={ this.state.bookingToEdit }
+                  />
+                </tbody>
+              </table>
+            </div>
+          );
+        } else {
+          return null;
+        }
       }
-    }
-  }
+}
 export default AdminComponent;
