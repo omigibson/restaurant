@@ -150,12 +150,14 @@ class Booking extends React.Component {
                 bookings={this.state.daysThatAreFull}
                 clickable={true}
               />
-              { this.state.decideWhatTime && <ChooseTime
-                setBookingState={ this.setBookingState.bind(this) }
-                datesAndTimes={ this.state.datesAndTimes }
-                dateSelected={ this.state.dateSelected }
-                convertDateObjectToString={ this.convertDateObjectToString }
-                /> }
+              { this.state.decideWhatTime &&
+                  <ChooseTime
+                    setBookingState={ this.setBookingState.bind(this) }
+                    datesAndTimes={ this.state.datesAndTimes }
+                    dateSelected={ this.state.dateSelected }
+                    convertDateObjectToString={ this.convertDateObjectToString }
+                  />
+              }
             </div>
           }
           </Transition>
