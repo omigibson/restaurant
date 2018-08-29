@@ -167,15 +167,24 @@ class Booking extends React.Component {
   }
     else {
       return (
-        <ContactForm
-          convertDateObjectToString={ this.convertDateObjectToString }
-          sendToAPI={ this.props.sendToAPI }
-          bookingDetails={ {
-            dateSelected: this.state.dateSelected,
-            timeSelected: this.state.timeSelected,
-            amountOfGuests: this.props.amountOfGuests
-        } }
-        />
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+        { styles =>
+            <ContactForm
+              style={styles}
+              convertDateObjectToString={ this.convertDateObjectToString }
+              sendToAPI={ this.props.sendToAPI }
+              bookingDetails={ {
+                dateSelected: this.state.dateSelected,
+                timeSelected: this.state.timeSelected,
+                amountOfGuests: this.props.amountOfGuests
+            } }
+            />
+        }
+      </Transition>
       )
     }
   }
