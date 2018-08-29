@@ -20,6 +20,7 @@ class GuestComponent extends React.Component {
     return Object.keys(object).map((key, index) => {
       return (
         <button
+          key={index}
           value={key}
           className='amount-of-button'
           name='amountOfGuests'

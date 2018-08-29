@@ -163,3 +163,9 @@ th, td {
   justify-content: center;
   flex-wrap: wrap;
   width: 50%; }
+
+/************************************/
+/*************** GENERAL STYLES **************/
+/************************************/
+.hidden {
+  display: none; }
