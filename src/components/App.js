@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./../css/style.css";
+import LandingPage from "./LandingPageComponent";
 import About from "./AboutComponent";
 import GuestComponent from "./GuestComponent";
 import Admin from "./admin/AdminComponent";
@@ -47,10 +48,14 @@ class App extends Component {
           <div className="navbar-container">
             <header className="navbar-header">
               <ul>
+                <li><Link to="/home">Home</Link></li>
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/booking">Booking</Link></li>
               </ul>
             </header>
+
+
+            <Route path="/home" component={LandingPage} />
 
             <Route path="/about" component={About} />
             <Route
