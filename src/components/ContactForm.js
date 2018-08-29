@@ -22,15 +22,6 @@ class ContactForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleConsent = (e) => {
-    if (e.target.checked){
-      this.setState({consent: true})
-    }
-    else {
-      this.setState({consent: false})
-    }
-  }
-
   /* Uses an advanced RegEx (from StackOverflow) that controls if email is correct.
   Returns true or false. */
   validateEmail = (email) => {
@@ -155,7 +146,7 @@ class ContactForm extends React.Component {
                 <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
                 <input
                   type="checkbox"
-                  onChange={this.handleConsent}
+                  onChange={() => this.setState({ consent: !this.state.consent })}
                 />
                 <label htmlFor="consent">
                   I give Nano Food consent to store and manage the information
