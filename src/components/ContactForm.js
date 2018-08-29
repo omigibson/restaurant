@@ -10,7 +10,11 @@ class ContactForm extends React.Component {
     allBookingDetails: {},
     emailStyle: '',
     phoneStyle: '',
-    usernameStyle: ''
+    usernameStyle: '',
+    nameErrorMessage: 'hidden',
+    emailErrorMessage: 'hidden',
+    phoneErrorMessage: 'hidden',
+    checkboxErrorMessage: 'hidden'
   }
 
   handleChange = (e) => {
@@ -41,7 +45,11 @@ class ContactForm extends React.Component {
     this.setState({
       emailStyle: this.validateEmail(this.state.userEmail) ? 'valid-input' : 'invalid-input',
       phoneStyle: this.validatePhone(this.state.userTelephone) ? 'valid-input' : 'invalid-input',
-      usernameStyle: this.state.userName.length >= 5 ? 'valid-input' : 'invalid-input'
+      usernameStyle: this.state.userName.length >= 5 ? 'valid-input' : 'invalid-input',
+      nameErrorMessage: this.state.userName.length >= 5 ? 'hidden' : '',
+      emailErrorMessage: this.validateEmail(this.state.userEmail) ? 'hidden' : '',
+      phoneErrorMessage: this.validatePhone(this.state.userTelephone) ? 'hidden' : '',
+      checkboxErrorMessage: this.state.consent ? 'hidden' : ''
     });
   }
 
@@ -110,6 +118,8 @@ class ContactForm extends React.Component {
         <div className="contact-form">
           <h2>Contact details</h2>
           <form>
+            <label htmlFor="userName">Name</label>
+            <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
             <input
               type="text"
               placeholder="Name"
@@ -117,6 +127,8 @@ class ContactForm extends React.Component {
               onChange={this.handleChange.bind(this)}
               className={ this.state.usernameStyle }
             />
+            <label htmlFor="userEmail">Email</label>
+            <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
             <input
               type="email"
               placeholder="Email"
@@ -124,6 +136,8 @@ class ContactForm extends React.Component {
               onChange={this.handleChange.bind(this)}
               className={ this.state.emailStyle }
             />
+            <label htmlFor="userTelephone">Phone number</label>
+            <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
             <input
               type="tel"
               placeholder="Tel"
@@ -131,11 +145,12 @@ class ContactForm extends React.Component {
               onChange={this.handleChange.bind(this)}
               className={ this.state.phoneStyle }
             />
+            <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
             <input
               type="checkbox"
               onChange={this.handleConsent}
             />
-            <label for="consent">
+            <label htmlFor="consent">
               I give Nano Food consent to store and manage the information
               I left here, in order to enable table reservation.
             </label>

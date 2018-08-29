@@ -149,3 +149,9 @@ th, td {
   display: inline-flex;
   flex-wrap: wrap;
   width: 50%; }
+
+/************************************/
+/*************** GENERAL STYLES **************/
+/************************************/
+.hidden {
+  display: none; }
