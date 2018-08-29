@@ -43,10 +43,8 @@ a {
   overflow: scroll; }
 
 .navbar-header {
-  background-color: #222;
   width: 100%;
   height: 70px;
-  color: white;
   display: inline-flex;
   align-content: center; }
   .navbar-header ul {
@@ -61,10 +59,15 @@ a {
 h1, h2, h3, h4 {
   font-family: 'facultad'; }
 
+p {
+  font-family: 'Karla';
+  font-weight: 300;
+  line-height: 1.7; }
+
 /************************************/
 /************** LAYOUT **************/
 /************************************/
-div {
+div, section {
   box-sizing: border-box; }
 
 .container {
@@ -74,9 +77,6 @@ div {
   display: flex;
   flex-direction: column; }
 
-section {
-  min-height: 100vh; }
-
 /************************************/
 /*************** FLEX ***************/
 /************************************/
@@ -85,6 +85,12 @@ section {
 
 .space-between {
   justify-content: space-between; }
+
+.hcenter {
+  justify-content: center; }
+
+.vcenter {
+  align-items: center; }
 
 /************************************/
 /************** INPUTS **************/
@@ -101,6 +107,42 @@ input[type=email],
 input[type=tel],
 input[type=password] {
   width: 100%; }
+
+/************************************/
+/************** HEADER **************/
+/************************************/
+.navbar-header {
+  background: none;
+  color: #453D3D; }
+  .navbar-header li {
+    font-family: 'facultad'; }
+
+/************************************/
+/*********** LANDING PAGE ***********/
+/************************************/
+.landingpage-container {
+  width: 100%; }
+  .landingpage-container .jumbotron {
+    background: #87B586;
+    margin: 0 70px 70px;
+    height: calc(100vh - (70px * 2)); }
+  .landingpage-container .image, .landingpage-container .text {
+    width: 50%; }
+    .landingpage-container .image div, .landingpage-container .text div {
+      width: 100%;
+      max-width: 500px;
+      padding: 2em;
+      height: auto; }
+  .landingpage-container .image {
+    width: 50%;
+    height: 350px;
+    background: #87B586; }
+  .landingpage-container .menu .text div {
+    background: #87B586;
+    color: #475A51; }
+  .landingpage-container .booking .text div {
+    background: #BC9E7B;
+    color: #453D3D; }
 
 /************************************/
 /************* CALENDAR *************/
@@ -174,9 +216,9 @@ th, td {
   padding: .5em 1em;
   text-align: left; }
 
-/***********************************************/
-/*************** AMOUNT OF GUESTS **************/
-/***********************************************/
+/***************************************/
+/*********** AMOUNT OF GUESTS **********/
+/***************************************/
 .amount-of-button {
   flex-basis: calc(100% / 3);
   background: black;
@@ -197,8 +239,14 @@ th, td {
 footer {
   width: 90%;
   margin: auto;
-  color: #FCF9F4;
+  color: #DACBC4;
   background: #453D3D; }
+
+/************************************/
+/********** GENERAL STYLES **********/
+/************************************/
+.hidden {
+  display: none; }
 
 @media screen and (min-width: 768px) {
   /************************************/
@@ -210,9 +258,3 @@ footer {
     width: 50%; }
   footer .address {
     border-right: 1px solid #FCF9F4; } }
-
-/************************************/
-/*************** GENERAL STYLES **************/
-/************************************/
-.hidden {
-  display: none; }

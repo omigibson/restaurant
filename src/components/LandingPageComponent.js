@@ -3,31 +3,35 @@ const LandingPage = () => {
     return (
         <div className="landingpage-container">
 
-          <section className="jumbotron">
+          <section className="jumbotron flex hcenter vcenter">
             <h1>Nano Food</h1>
           </section>
 
-          <section className="landingpage__section menu">
+          <section className="landingpage__section menu flex">
 
             <div className="image"></div>
 
             <div className="text">
-              <h2>Vietnamese cuisine meets Swedish tradition</h2>
-              <p>Vietnamese cuisine meets Swedish tradition.
-                  Vietnamese cuisine meets Swedish tradition.
-                  Vietnamese cuisine meets Swedish tradition.
-              </p>
+              <div>
+                <h2>Vietnamese cuisine meets Swedish tradition</h2>
+                <p>Vietnamese cuisine meets Swedish tradition.
+                    Vietnamese cuisine meets Swedish tradition.
+                    Vietnamese cuisine meets Swedish tradition.
+                </p>
+              </div>
             </div>
           </section>
 
-          <section className="landingpage__section booking">
+          <section className="landingpage__section booking flex">
 
             <div className="image"></div>
 
             <div className="text">
-              <h2>Breakfast, lunch or dinner?</h2>
-              <p>You are welcome at any time. You are welcome at any time.
-              You are welcome at any time. You are welcome at any time. </p>
+              <div>
+                <h2>Breakfast, lunch or dinner?</h2>
+                <p>You are welcome at any time. You are welcome at any time.
+                You are welcome at any time. You are welcome at any time. </p>
+              </div>
             </div>
           </section>
           <footer>
