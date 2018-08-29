@@ -6,9 +6,9 @@
     font-style: normal;
 }
 
-/************************************/
-/************** RESET ***************/
-/************************************/
+/*************************************/
+/*************** RESET ***************/
+/*************************************/
 table, tr, td {
   margin:0;
   padding:0;
@@ -66,24 +66,33 @@ a {
   }
 }
 
-/****************************************/
-/************** TYPOGRAPHY **************/
-/****************************************/
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+body {
+  font-family: 'Karla';
+  color: $color__dark-1;
+}
 h1, h2, h3, h4 {
   font-family: 'facultad';
 }
 
 p {
-  font-family: 'Karla';
   font-weight: 300;
   line-height: 1.7;
 }
-
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /************************************/
 /************** LAYOUT **************/
 /************************************/
-div, section {
+body {
+  background: $color__light-1;
+}
+div, section, footer {
   box-sizing: border-box;
 }
 .container {
@@ -92,6 +101,9 @@ div, section {
   margin: auto;
   display: flex;
   flex-direction: column;
+}
+img {
+  width: 100%;
 }
 
 /************************************/
@@ -146,28 +158,6 @@ input[type=password] {
 /************************************/
 .landingpage-container {
   width: 100%;
-
-  .jumbotron {
-    background: $color__accent-1;
-    // Make sure left-right-bottom margins are equal to top-margin
-    margin: 0 $height__navbar $height__navbar;
-    height: calc(100vh - (#{$height__navbar} * 2));
-  }
-
-  .image, .text {
-    width: 50%;
-    div {
-      width: 100%;
-      max-width: 500px;
-      padding: 2em;
-      height: auto;
-    }
-  }
-  .image {
-    width: 50%;
-    height: 350px;
-    background: $color__accent-1;
-  }
   .menu .text div {
     background: $color__accent-1;
     color: $color__accent-2;
@@ -177,6 +167,30 @@ input[type=password] {
     color: $color__dark-2;
   }
 }
+.jumbotron {
+  background: $color__accent-1;
+  // Make sure left-right-bottom margins are equal to top-margin
+  margin: 0 $height__navbar $height__navbar;
+  height: calc(100vh - (#{$height__navbar} * 2));
+}
+.landingpage__section {
+  margin: 0 auto 100px;
+
+  &.menu, &.booking {
+    flex-direction: column;
+  }
+  .image, .text {
+    width: 100%;
+  }
+  .text {
+    margin: -50px 20px 0;
+    div {
+      width: 90%;
+      padding: 2em;
+    }
+  }
+}
+
 
 
 /************************************/
@@ -308,12 +322,11 @@ th, td {
 /************** FOOTER **************/
 /************************************/
 footer {
-  width: 90%;
-  margin: auto;
+  margin: $height__navbar $height__navbar 0;
   color: $color__light-2;
   background: $color__dark-2;
+  padding: 2em;
 }
-
 
 /************************************/
 /********** GENERAL STYLES **********/
