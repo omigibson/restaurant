@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'facultad';
+    src: url('../fonts/facultad-regular-webfont.woff2') format('woff2'),
+         url('../fonts/facultad-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /************************************/
 /************** RESET ***************/
 /************************************/
@@ -58,6 +66,13 @@ a {
       display: inline-flex;
     }
   }
+}
+
+/****************************************/
+/************** TYPOGRAPHY **************/
+/****************************************/
+h1, h2, h3, h4 {
+  font-family: 'facultad';
 }
 
 
