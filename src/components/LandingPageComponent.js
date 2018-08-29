@@ -1,4 +1,8 @@
 import React from 'react';
+
+import menuImage from './../images/nanofood-2';
+import bookingImage from './../images/nanofood-3';
+
 const LandingPage = () => {
     return (
         <div className="landingpage-container">
@@ -9,9 +13,11 @@ const LandingPage = () => {
 
           <section className="landingpage__section menu flex">
 
-            <div className="image"></div>
+            <div className="image">
+              <img src={ menuImage } />
+            </div>
 
-            <div className="text">
+            <div className="text flex">
               <div>
                 <h2>Vietnamese cuisine meets Swedish tradition</h2>
                 <p>Vietnamese cuisine meets Swedish tradition.
@@ -24,9 +30,11 @@ const LandingPage = () => {
 
           <section className="landingpage__section booking flex">
 
-            <div className="image"></div>
+            <div className="image">
+              <img src={ bookingImage } />
+            </div>
 
-            <div className="text">
+            <div className="text flex">
               <div>
                 <h2>Breakfast, lunch or dinner?</h2>
                 <p>You are welcome at any time. You are welcome at any time.
