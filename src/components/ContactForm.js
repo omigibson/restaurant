@@ -112,65 +112,72 @@ class ContactForm extends React.Component {
   render = () => {
     if (!this.state.stepCompleted) {
     return (
-      <div className="container">
-        <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-        <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
-        <p> Time: { this.props.bookingDetails.timeSelected } </p>
-        <div className="contact-form">
-          <h2>Contact details</h2>
-          <form>
-            <label htmlFor="userName">Name</label>
-            <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
-            <input
-              type="text"
-              placeholder="Name"
-              name="userName"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.usernameStyle }
-            />
-            <label htmlFor="userEmail">Email</label>
-            <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
-            <input
-              type="email"
-              placeholder="Email"
-              name="userEmail"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.emailStyle }
-            />
-            <label htmlFor="userTelephone">Phone number</label>
-            <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
-            <input
-              type="tel"
-              placeholder="Tel"
-              name="userTelephone"
-              onChange={this.handleChange.bind(this)}
-              className={ this.state.phoneStyle }
-            />
-            <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
-            <input
-              type="checkbox"
-              onChange={this.handleConsent}
-            />
-            <label htmlFor="consent">
-              I give Nano Food consent to store and manage the information
-              I left here, in order to enable table reservation.
-            </label>
-            <button
-              className="contact-form-button"
-              type="button"
-              value="Book"
-              onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
-            >
-            Send
-            </button>
-          </form>
-          <p>
-            Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
-            Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
-          </p>
-          <p>Your data will be removed when the date for your booking has passed.</p>
-        </div>
-      </div>
+      <Transition
+        from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+        enter={{right: '50%', transform: 'translateX(50%)' }}
+        leave={{ transform: 'translateX(-200%)' }}
+      >
+      { styles =>
+        <div className="container" style={styles}>
+            <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
+            <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
+            <p> Time: { this.props.bookingDetails.timeSelected } </p>
+            <div className="contact-form">
+              <h2>Contact details</h2>
+              <form>
+                <label htmlFor="userName">Name</label>
+                <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="userName"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.usernameStyle }
+                />
+                <label htmlFor="userEmail">Email</label>
+                <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="userEmail"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.emailStyle }
+                />
+                <label htmlFor="userTelephone">Phone number</label>
+                <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
+                <input
+                  type="tel"
+                  placeholder="Tel"
+                  name="userTelephone"
+                  onChange={this.handleChange.bind(this)}
+                  className={ this.state.phoneStyle }
+                />
+                <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
+                <input
+                  type="checkbox"
+                  onChange={this.handleConsent}
+                />
+                <label htmlFor="consent">
+                  I give Nano Food consent to store and manage the information
+                  I left here, in order to enable table reservation.
+                </label>
+                <button
+                  className="contact-form-button"
+                  type="button"
+                  value="Book"
+                  onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+                >
+                Send
+                </button>
+              </form>
+              <p>
+                Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
+                Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
+              </p>
+              <p>Your data will be removed when the date for your booking has passed.</p>
+            </div>
+      </div> }
+    </Transition>
       );
     }
     else {
