@@ -18,7 +18,7 @@ class ChooseTime extends React.Component {
     const dateSelected = this.props.convertDateObjectToString(this.props.dateSelected);
     const datesAndTimes = this.checkIfNoBookingForDateAndTime(this.props.datesAndTimes, dateSelected);
     return (
-      <div className="select-time-container">
+    <div className="select-time-container">
         <h2>Select what time to dine</h2>
           { !datesAndTimes['18']['fullyBooked'] ?
               <button

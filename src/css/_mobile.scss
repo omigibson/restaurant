@@ -94,8 +94,7 @@ input[type=password] {
 /************************************/
 
 .booking-calendar-container {
-  width: 50%;
-  height: 100%;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -163,6 +162,21 @@ input[type=password] {
   border: 2px solid red;
 }
 
+.fade-enter {
+  opacity: 0.01;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}
+
 /************************************/
 /*************** ADMIN **************/
 /************************************/
@@ -195,6 +209,7 @@ th, td {
 .amount-of-guests-container {
   margin: 0px auto;
   display: inline-flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 50%;
 }
