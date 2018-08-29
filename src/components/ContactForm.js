@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from 'react-spring';
 
 class ContactForm extends React.Component {
   state = {
@@ -174,14 +175,24 @@ class ContactForm extends React.Component {
     }
     else {
       return (
-        <div className="container">
-          <h1>Your reservation was successful.</h1>
-          <h2>Details:</h2>
-          <p>Name: { this.state.allBookingDetails.userName } </p>
-          <p>Date: { this.state.allBookingDetails.date } </p>
-          <p>Time: { this.state.allBookingDetails.time } </p>
-          <p>Guests: { this.state.allBookingDetails.guests } </p>
-        </div>
+        <Transition
+          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
+          enter={{right: '50%', transform: 'translateX(50%)' }}
+          leave={{ transform: 'translateX(-200%)' }}
+        >
+        { styles =>
+          <div className="container">
+            <div className="booking-details-container" style={styles}>
+              <h1>Your reservation was successful.</h1>
+              <h2>Details:</h2>
+              <p>Name: { this.state.allBookingDetails.userName } </p>
+              <p>Date: { this.state.allBookingDetails.date } </p>
+              <p>Time: { this.state.allBookingDetails.time } </p>
+              <p>Guests: { this.state.allBookingDetails.guests } </p>
+            </div>
+          </div>
+        }
+      </Transition>
       );
     }
   }
