@@ -77,6 +77,10 @@ h1, h2, h3, h4 {
   font-family: 'facultad';
 }
 
+h2 {
+  font-size: 2em;
+}
+
 p {
   font-weight: 300;
   line-height: 1.7;
@@ -97,7 +101,7 @@ div, section, footer {
 }
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -140,6 +144,21 @@ input[type=email],
 input[type=tel],
 input[type=password] {
   width: 100%;
+}
+
+button {
+  padding: .7em 3em 1em;
+  font-family: 'facultad';
+}
+
+button.green {
+  background: $color__accent-2;
+  color: rgba(252, 249, 244, .8);
+}
+
+button.brown {
+  background: $color__dark-2;
+  color: rgba(252, 249, 244, .8);
 }
 
 /************************************/
@@ -186,7 +205,7 @@ input[type=password] {
     margin: -50px 20px 0;
     div {
       width: 90%;
-      padding: 2em;
+      padding: 2em 2em 4em;
     }
   }
 }

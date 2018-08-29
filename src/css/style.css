@@ -63,6 +63,9 @@ body {
 h1, h2, h3, h4 {
   font-family: 'facultad'; }
 
+h2 {
+  font-size: 2em; }
+
 p {
   font-weight: 300;
   line-height: 1.7; }
@@ -82,7 +85,7 @@ div, section, footer {
 
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin: auto;
   display: flex;
   flex-direction: column; }
@@ -121,6 +124,18 @@ input[type=tel],
 input[type=password] {
   width: 100%; }
 
+button {
+  padding: .7em 3em 1em;
+  font-family: 'facultad'; }
+
+button.green {
+  background: #475A51;
+  color: rgba(252, 249, 244, 0.8); }
+
+button.brown {
+  background: #453D3D;
+  color: rgba(252, 249, 244, 0.8); }
+
 /************************************/
 /************** HEADER **************/
 /************************************/
@@ -157,7 +172,7 @@ input[type=password] {
     margin: -50px 20px 0; }
     .landingpage__section .text div {
       width: 90%;
-      padding: 2em; }
+      padding: 2em 2em 4em; }
 
 /************************************/
 /************* CALENDAR *************/
@@ -273,7 +288,8 @@ footer {
       width: 50%; }
     .landingpage__section .text {
       margin: 0;
-      align-self: start; }
+      align-self: start;
+      max-width: 580px; }
     .landingpage__section.menu {
       flex-direction: row-reverse; }
       .landingpage__section.menu .text {
@@ -300,4 +316,4 @@ footer {
   .landingpage__section {
     min-height: 60vh; }
     .landingpage__section .text div {
-      padding: 2em 4em; } }
+      padding: 2em 4em 4em; } }

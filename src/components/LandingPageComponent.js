@@ -24,6 +24,7 @@ const LandingPage = () => {
                     Vietnamese cuisine meets Swedish tradition.
                     Vietnamese cuisine meets Swedish tradition.
                 </p>
+                <button className="green">See our menu</button>
               </div>
             </div>
           </section>
@@ -39,6 +40,7 @@ const LandingPage = () => {
                 <h2>Breakfast, lunch or dinner?</h2>
                 <p>You are welcome at any time. You are welcome at any time.
                 You are welcome at any time. You are welcome at any time. </p>
+                <button className="brown">Book a table</button>
               </div>
             </div>
           </section>
