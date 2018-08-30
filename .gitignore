@@ -22,3 +22,5 @@ yarn-error.log*
 
 src/css/*.css
 .tern-project
+
+*.css
