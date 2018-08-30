@@ -27,7 +27,7 @@ class Booking extends React.Component {
           /* After all the bookings are present in this.state.allBookings they
           are converted to the Date format through the convertBookingtoDates-method. */
           const bookingsPerDateAndTime = this.sortBookingsPerDate();
-          const controlledBookings = this.controlIfDateOrTimesAreBooked(bookingsPerDateAndTime);
+          const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
           this.setState({ datesAndTimes: controlledBookings }, () => {
             this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
               this.initiateMonthPaginationEventListeners();
@@ -64,16 +64,25 @@ class Booking extends React.Component {
     return bookingsPerDateAndTime;
   }
 
-  controlIfDateOrTimesAreBooked = (object) => {
+  controlIfDatesAreBookedOrPassed = (object) => {
     for (let key in object) {
+      const todaysDate = new Date(key);
+      const firstSitting = todaysDate.setHours(todaysDate.getHours() + 18);
+      const secondSitting = todaysDate.setHours(todaysDate.getHours() + 21);
       if (object[key]['18'].length >= 15) {
         object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
+      }
+      else if (this.controlIfDateIsPassed(firstSitting)) {
+          object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
       }
       else {
         object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] }
       }
       if (object[key]['21'].length >= 15) {
         object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
+      }
+      else if (this.controlIfDateIsPassed(secondSitting)) {
+          object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
       }
       else {
         object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] }
@@ -140,7 +149,7 @@ class Booking extends React.Component {
         /*  If the date is fully booked and the date has passed, remove the
         fully booked class and just add the different-month class that gives the
         box a non-clickable appearence. */
-        else if (this.controlIfDateIsPassed(todayWithHourRestriction)) {
+        else {
           item.classList.remove('booked-day');
           item.classList.add('different-month');
         }

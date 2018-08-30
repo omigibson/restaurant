@@ -288,7 +288,7 @@ button {
 
 .different-month {
   user-select: none !important;
-  cursor: not-allowed !important;
+  cursor: none;
   pointer-events: none;
 }
 
