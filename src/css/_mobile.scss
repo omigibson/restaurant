@@ -6,6 +6,8 @@
     font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Roboto:300,400');
+
 /*************************************/
 /*************** RESET ***************/
 /*************************************/
@@ -78,7 +80,7 @@ a {
 /************* TYPOGRAPHY *************/
 /**************************************/
 body {
-  font-family: 'Karla';
+  font-family: 'Lato';
   color: $color__dark-1;
 }
 h1, h2, h3, h4 {
@@ -97,6 +99,7 @@ h3 {
 p {
   font-weight: 300;
   line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 a {
   color: inherit;
@@ -377,6 +380,14 @@ th, td {
 }
 
 /************************************/
+/************** MENU **************/
+/************************************/
+
+.menuContainer li {
+  margin-bottom: 1em;
+}
+
+/************************************/
 /************** FOOTER **************/
 /************************************/
 footer {
@@ -392,4 +403,8 @@ footer {
 
 .hidden {
   display: none;
+}
+
+ul {
+  list-style: none;
 }
