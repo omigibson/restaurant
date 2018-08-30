@@ -115,13 +115,13 @@ class ContactForm extends React.Component {
                 <ul>
                   <li> Guests: { this.props.bookingDetails.amountOfGuests } </li>
                   <li> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                  <li> Time: { this.props.bookingDetails.timeSelected } </li>
+                  <li> Time: { this.props.bookingDetails.timeSelected + ':00' } </li>
                 </ul>
               </div>
               <h2>Contact details</h2>
               <form>
                 <label htmlFor="userName">Name</label>
-                <span className={ this.state.nameErrorMessage }>This input field is not filled out correctly</span>
+                <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="text"
                   placeholder="Name"
@@ -130,7 +130,7 @@ class ContactForm extends React.Component {
                   className={ this.state.usernameStyle }
                 />
               <label htmlFor="userEmail">E-mail</label>
-                <span className={ this.state.emailErrorMessage }>This input field is not filled out correctly</span>
+                <span className={ this.state.emailErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="email"
                   placeholder="E-mail"
@@ -139,7 +139,7 @@ class ContactForm extends React.Component {
                   className={ this.state.emailStyle }
                 />
                 <label htmlFor="userTelephone">Phone number</label>
-                <span className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</span>
+                <span className={ this.state.phoneErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="tel"
                   placeholder="Telephone"
@@ -192,7 +192,7 @@ class ContactForm extends React.Component {
               <h2>Details:</h2>
               <p>Name: { this.state.allBookingDetails.userName } </p>
               <p>Date: { this.state.allBookingDetails.date } </p>
-              <p>Time: { this.state.allBookingDetails.time } </p>
+              <p>Time: { this.state.allBookingDetails.time + ':00' } </p>
               <p>Guests: { this.state.allBookingDetails.guests } </p>
             </div>
           </div>

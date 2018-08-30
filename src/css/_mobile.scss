@@ -299,7 +299,7 @@ button.brown {
 /*********** CONTACT FORM ***********/
 /************************************/
 .contact-form {
-  width: 100%;
+  width: 90%;
   margin:auto;
   h2 {
     padding: 0px;
@@ -327,6 +327,7 @@ button.brown {
   }
   .gdpr-info {
     font-size: 0.6em;
+    margin-top: 5px;
     a {
       text-decoration: underline;
     }
