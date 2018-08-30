@@ -55,7 +55,7 @@ a {
 .navbar-header {
   width: 100%;
   height: $height__navbar;
-  display: inline-flex;
+  display: flex;
   align-content: center;
   ul {
     margin: auto;
@@ -75,6 +75,10 @@ body {
 }
 h1, h2, h3, h4 {
   font-family: 'facultad';
+}
+
+h2 {
+  font-size: 2em;
 }
 
 p {
@@ -97,7 +101,8 @@ div, section, footer {
 }
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
+  min-height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -140,6 +145,23 @@ input[type=email],
 input[type=tel],
 input[type=password] {
   width: 100%;
+}
+
+button, input[type=submit] {
+  padding: .7em 3em 1em;
+  font-family: 'facultad';
+  background: $color__dark-1;
+  color: rgba(252, 249, 244, .8);
+}
+
+button.green {
+  background: $color__accent-2;
+  color: rgba(252, 249, 244, .8);
+}
+
+button.brown {
+  background: $color__dark-2;
+  color: rgba(252, 249, 244, .8);
 }
 
 /************************************/
@@ -186,7 +208,7 @@ input[type=password] {
     margin: -50px 20px 0;
     div {
       width: 90%;
-      padding: 2em;
+      padding: 2em 2em 4em;
     }
   }
 }
@@ -198,8 +220,9 @@ input[type=password] {
 /************************************/
 
 .booking-calendar-container {
-  width: 40%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  height: 100vh;
 }
 
 .different-month {
@@ -209,21 +232,39 @@ input[type=password] {
 }
 
 .booking-calendar {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 450px;
   .header {
+    background: $color__accent-1!important;
     .header-content {
-      .icon-previous {}
-      .icon-next {}
-      .month-label {}
+      .icon-previous {
+        color: $color__accent-2!important;
+      }
+      .icon-next {
+        color: $color__accent-2!important;
+      }
+      .month-label {
+        color: $color__accent-2!important;
+      }
     }
   }
 
   .week {
+    background: $color__accent-1!important;
     &.names {
       .day-box .day {}
     }
-
+    .day-box::before {
+      border: 1px solid rgba(71,90,81,.2)!important;
+    }
     .day-box .day {
-      &.different-month {}
+      background: $color__accent-1!important;
+      color: $color__accent-2!important;
+
+      &.different-month {
+        color: rgba(71,90,81,.4)!important;
+      }
       &.selected {}
       &.today {}
       &.booked-day:before, &.booked-night:after {
@@ -237,7 +278,7 @@ input[type=password] {
         pointer-events: none;
       }
       &.booked-day:before {
-        background: red !important;
+        background: $color__accent-3!important;
       }
       &.booked-night:after {
         width: 0!important;
@@ -304,8 +345,6 @@ th, td {
 
 .amount-of-button {
   flex-basis: calc(100% / 3);
-  background: black;
-  color: white;
   padding: 10px;
   margin: 5px;
 }
