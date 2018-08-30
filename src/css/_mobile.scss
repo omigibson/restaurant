@@ -57,7 +57,6 @@ html, body {
     margin: auto;
     li {
       margin: 5px;
-      display: inline-flex;
     }
   }
 }
@@ -110,6 +109,9 @@ a:hover {
 small {
   font-weight: 300;
   letter-spacing: .03em;
+}
+.bold {
+  font-weight: 700;
 }
 
 /************************************/
@@ -183,10 +185,12 @@ input[type=tel],
 input[type=password] {
   width: 100%;
 }
-
+input:focus {
+  outline: none;
+  border: 2px solid $color__light-2;
+}
 button, .button, input[type=submit] {
   padding: .7em 3em 1em;
-  font-family: 'facultad';
 }
 button {
   background: $color__dark-1;

@@ -6,7 +6,6 @@ import logo from './../images/nanofood-logo.svg';
 import Footer from './Footer';
 import {
   BrowserRouter as Router,
-  Route,
   Link
 } from "react-router-dom";
 
