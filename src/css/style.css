@@ -89,9 +89,7 @@ div, section, footer {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
-  margin: auto;
-  display: flex;
-  flex-direction: column; }
+  margin: auto; }
 
 img {
   width: 100%; }
@@ -110,6 +108,9 @@ img {
 
 .vcenter {
   align-items: center; }
+
+.column {
+  flex-direction: column; }
 
 /************************************/
 /************** INPUTS **************/
@@ -288,8 +289,15 @@ th, td {
 /************************************/
 /************** MENU **************/
 /************************************/
-.menuContainer li {
-  margin-bottom: 1em; }
+.price {
+  color: #87B586; }
+
+.menu-container section {
+  width: 80%; }
+  .menu-container section ul {
+    padding-left: 0; }
+    .menu-container section ul li {
+      margin-bottom: 1rem; }
 
 /************************************/
 /************** FOOTER **************/
@@ -331,6 +339,11 @@ ul {
       .landingpage__section.booking .text {
         transform: translate(-70px, 70px); }
   /************************************/
+  /************** MENU **************/
+  /************************************/
+  .menu-container section {
+    width: 60%; }
+  /************************************/
   /************** FOOTER **************/
   /************************************/
   footer > div {
@@ -347,4 +360,9 @@ ul {
   .landingpage__section {
     min-height: 60vh; }
     .landingpage__section .text div {
-      padding: 2em 4em 4em; } }
+      padding: 2em 4em 4em; }
+  /************************************/
+  /************** MENU **************/
+  /************************************/
+  .menu-container section {
+    width: 40%; } }

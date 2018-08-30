@@ -2,18 +2,18 @@ import React from 'react';
 
 const Menu = () => {
   return (
-    <div className="menuContainer">
+    <div className="menu-container flex column vcenter">
       <h1>Menu</h1>
-      <div>
+      <section>
         <h2>Starters</h2>
         <ul>
-          <li>Spring rolls</li>
-          <li>Fried shrimp chips</li>
-          <li>Dumplings. Pork or tofu</li>
+          <li>Spring rolls <span className="price">70:-</span></li>
+          <li>Fried shrimp chips <span className="price">30:-</span></li>
+          <li>Dumplings. Pork or tofu <span className="price">80:-</span></li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Main Courses</h2>
         <ul>
         <li>Grilled squid with green pepper, ginger and glass noodle salad</li>
@@ -26,18 +26,18 @@ const Menu = () => {
         <li>Tuna prawns on grilled skewers with fried vegetables</li>
         <li>Fried lotus root in tomato sauce with mango, cucumber and sunflower seeds</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Desserts</h2>
         <ul>
           <li>Coconut icecream with fresh berries</li>
           <li>Deep fried bananas with vanilla icecream</li>
           <li>Pannacotta with lime sorbet</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Beverages</h2>
         <ul>
           <li>Soft drinks</li>
@@ -46,7 +46,7 @@ const Menu = () => {
           <li>Tea</li>
           <li>Coffee</li>
         </ul>
-      </div>
+      </section>
     </div>
   )
 }
