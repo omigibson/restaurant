@@ -163,6 +163,11 @@ button.brown {
   .navbar-header li {
     font-family: 'facultad'; }
 
+.container-logo {
+  width: 200px; }
+  .container-logo img {
+    transform: translateX(16px); }
+
 /************************************/
 /*********** LANDING PAGE ***********/
 /************************************/
@@ -178,7 +183,7 @@ button.brown {
 .jumbotron {
   background: #87B586;
   margin: 0 70px 70px;
-  height: calc(100vh - (70px * 2)); }
+  height: calc(70vh - (70px * 2)); }
 
 .landingpage__section {
   margin: 0 auto 100px; }

@@ -2,6 +2,7 @@ import React from 'react';
 
 import menuImage from './../images/nanofood-2';
 import bookingImage from './../images/nanofood-3';
+import logo from './../images/nanofood-logo.svg';
 import Footer from './Footer';
 
 const LandingPage = () => {
@@ -9,7 +10,9 @@ const LandingPage = () => {
         <div className="landingpage-container">
 
           <section className="jumbotron flex hcenter vcenter">
-            <h1>Nano Food</h1>
+            <div className="container-logo">
+              <img src={ logo } alt="Nano Food logo" />
+            </div>
           </section>
 
           <section className="landingpage__section menu flex">

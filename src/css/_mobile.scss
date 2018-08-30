@@ -187,6 +187,12 @@ button.brown {
     font-family: 'facultad';
   }
 }
+.container-logo {
+  width: 200px;
+  img {
+    transform: translateX(16px);
+  }
+}
 
 /************************************/
 /*********** LANDING PAGE ***********/
@@ -206,7 +212,7 @@ button.brown {
   background: $color__accent-1;
   // Make sure left-right-bottom margins are equal to top-margin
   margin: 0 $height__navbar $height__navbar;
-  height: calc(100vh - (#{$height__navbar} * 2));
+  height: calc(70vh - (#{$height__navbar} * 2));
 }
 .landingpage__section {
   margin: 0 auto 100px;
