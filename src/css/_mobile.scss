@@ -47,8 +47,9 @@ html, body {
 .navbar-header {
   width: 100%;
   height: $height__navbar;
-  display: flex;
-  align-content: center;
+  a {
+    color: $color__dark-1;
+  }
   ul {
     margin: auto;
     li {
@@ -97,11 +98,16 @@ a:active,
 a:visited {
   text-decoration: none;
   cursor: pointer;
+  transition: ease .2s;
 }
 a:hover {
   color: $color__light-3;
+  transition: ease .1s;
 }
-
+small {
+  font-weight: 300;
+  letter-spacing: .03em;
+}
 
 /************************************/
 /************** LAYOUT **************/
@@ -117,7 +123,6 @@ div, section, footer {
   max-width: 800px;
   min-height: 100vh;
   margin: auto;
-  display: flex;
   flex-direction: column;
 }
 img {
@@ -398,8 +403,13 @@ footer {
   color: $color__light-2;
   background: $color__dark-2;
   padding: 2em;
+  p {
+    font-size: .8em;
+    letter-spacing: .03em;
+  }
   a {
     color:inherit;
+    margin-right: 20px;
   }
 }
 
