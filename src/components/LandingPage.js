@@ -4,6 +4,11 @@ import menuImage from './../images/nanofood-2';
 import bookingImage from './../images/nanofood-3';
 import logo from './../images/nanofood-logo.svg';
 import Footer from './Footer';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom";
 
 const LandingPage = () => {
     return (
@@ -28,7 +33,7 @@ const LandingPage = () => {
                     Vietnamese cuisine meets Swedish tradition.
                     Vietnamese cuisine meets Swedish tradition.
                 </p>
-                <a href="" className="button green">See our menu</a>
+                <Link to="/menu" className="button green">See our menu</Link>
               </div>
             </div>
           </section>
@@ -44,7 +49,7 @@ const LandingPage = () => {
                 <h2>Breakfast, lunch or dinner?</h2>
                 <p>You are welcome at any time. You are welcome at any time.
                 You are welcome at any time. You are welcome at any time. </p>
-                <a href="" className="button brown">Book a table</a>
+                <Link to="/booking" className="button brown">Book a table</Link>
               </div>
             </div>
           </section>
