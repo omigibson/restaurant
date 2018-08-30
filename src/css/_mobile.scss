@@ -17,13 +17,13 @@ table, tr, td {
 }
 
 button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 *,
@@ -38,16 +38,6 @@ html, body {
   height: auto;
 }
 
-a {
-  text-decoration: none;
-  &:visited {
-    color: inherit;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .outer-container {
   width: 100%;
   height: 100%;
@@ -57,8 +47,12 @@ a {
 .navbar-header {
   width: 100%;
   height: $height__navbar;
-  display: flex;
-  align-content: center;
+  a {
+    color: $color__dark-1;
+  }
+  a:hover {
+    color: $color__light-3;
+  }
   ul {
     margin: auto;
     li {
@@ -66,6 +60,14 @@ a {
       display: inline-flex;
     }
   }
+}
+  ul, menu, dir {
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
 }
 
 /**************************************/
@@ -79,18 +81,35 @@ h1, h2, h3, h4 {
   font-family: 'facultad';
 }
 
+h1 {
+  font-size: 3em;
+}
 h2 {
   font-size: 1.4em;
 }
-
+h3 {
+  font-size: 1.5;
+}
 p {
   font-weight: 300;
   line-height: 1.7;
   letter-spacing: 0.01em;
+  margin-bottom: 1em;
 }
-a {
-  color: inherit;
+a,
+a:active,
+a:visited {
   text-decoration: none;
+  cursor: pointer;
+  transition: ease .2s;
+}
+a:hover {
+  color: $color__light-3;
+  transition: ease .1s;
+}
+small {
+  font-weight: 300;
+  letter-spacing: .03em;
 }
 
 /************************************/
@@ -157,21 +176,27 @@ input[type=password] {
   width: 100%;
 }
 
-button, input[type=submit] {
+button, .button, input[type=submit] {
   padding: .7em 3em 1em;
   font-family: 'facultad';
+}
+button {
   background: $color__dark-1;
   color: rgba(252, 249, 244, .8);
 }
-
-button.green {
+.green {
   background: $color__accent-2;
   color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__accent-1;
+  }
 }
-
-button.brown {
+.brown {
   background: $color__dark-2;
   color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__light-3;
+  }
 }
 
 /************************************/
@@ -179,9 +204,20 @@ button.brown {
 /************************************/
 .navbar-header {
   background: none;
-  color: $color__dark-1;
   li {
     font-family: 'facultad';
+  }
+  a {
+    color: $color__dark-1;
+    a:hover {
+      color: $color__light-3;
+    }
+  }
+}
+.container-logo {
+  width: 200px;
+  img {
+    transform: translateX(16px);
   }
 }
 
@@ -203,7 +239,7 @@ button.brown {
   background: $color__accent-1;
   // Make sure left-right-bottom margins are equal to top-margin
   margin: 0 $height__navbar $height__navbar;
-  height: calc(100vh - (#{$height__navbar} * 2));
+  height: calc(70vh - (#{$height__navbar} * 2));
 }
 .landingpage__section {
   margin: 0 auto 100px;
@@ -421,6 +457,14 @@ footer {
   color: $color__light-2;
   background: $color__dark-2;
   padding: 2em;
+  p {
+    font-size: .8em;
+    letter-spacing: .03em;
+  }
+  a {
+    color:inherit;
+    margin-right: 20px;
+  }
 }
 
 /************************************/

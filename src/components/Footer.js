@@ -26,9 +26,11 @@ const Footer = () => {
       <div className="footer__bottom flex space-between">
         <div><small>Terms & Conditions / Privacy Policy © Nano Food AB</small></div>
         <div>
-          <a href="tel:0812345678">08 — 123 45 678</a>
-          <a href="email:info@nanofood.io">info@nanofood.io</a>
-          <a href="http://facebook.com/nanofood">Facebook</a>
+          <small>
+            <a href="tel:0812345678">08 — 123 45 678</a>
+            <a href="email:info@nanofood.io">info@nanofood.io</a>
+            <a href="http://facebook.com/nanofood">Facebook</a>
+          </small>
         </div>
       </div>
     </footer>
