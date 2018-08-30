@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400|Roboto:300,400");
 @font-face {
   font-family: 'facultad';
   src: url("../fonts/facultad-regular-webfont.woff2") format("woff2"), url("../fonts/facultad-regular-webfont.woff") format("woff");
@@ -31,13 +32,6 @@ html, body {
   min-height: 100vh;
   height: auto; }
 
-a {
-  text-decoration: none; }
-  a:visited {
-    color: inherit; }
-  a:hover {
-    text-decoration: underline; }
-
 .outer-container {
   width: 100%;
   height: 100%;
@@ -66,7 +60,7 @@ ul, menu, dir {
 /************* TYPOGRAPHY *************/
 /**************************************/
 body {
-  font-family: 'Karla';
+  font-family: 'Lato';
   color: #453D3D; }
 
 h1, h2, h3, h4 {
@@ -83,11 +77,18 @@ h3  {
 
 p {
   font-weight: 300;
-  line-height: 1.7; }
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  margin-bottom: 1em; }
 
-a {
-  color: inherit;
-  text-decoration: none; }
+a,
+a:active,
+a:visited {
+  text-decoration: none;
+  cursor: pointer; }
+
+a:hover {
+  color: #BC9E7B; }
 
 /************************************/
 /************** LAYOUT **************/
@@ -140,19 +141,25 @@ input[type=tel],
 input[type=password] {
   width: 100%; }
 
-button, input[type=submit] {
+button, .button, input[type=submit] {
   padding: .7em 3em 1em;
-  font-family: 'facultad';
+  font-family: 'facultad'; }
+
+button {
   background: #453D3D;
   color: rgba(252, 249, 244, 0.8); }
 
-button.green {
+.green {
   background: #475A51;
   color: rgba(252, 249, 244, 0.8); }
+  .green:hover {
+    color: #87B586; }
 
-button.brown {
+.brown {
   background: #453D3D;
   color: rgba(252, 249, 244, 0.8); }
+  .brown:hover {
+    color: #BC9E7B; }
 
 /************************************/
 /************** HEADER **************/
@@ -304,6 +311,12 @@ th, td {
   width: 50%; }
 
 /************************************/
+/************** MENU **************/
+/************************************/
+.menuContainer li {
+  margin-bottom: 1em; }
+
+/************************************/
 /************** FOOTER **************/
 /************************************/
 footer {
@@ -311,12 +324,17 @@ footer {
   color: #DACBC4;
   background: #453D3D;
   padding: 2em; }
+  footer a {
+    color: inherit; }
 
 /************************************/
 /********** GENERAL STYLES **********/
 /************************************/
 .hidden {
   display: none; }
+
+ul {
+  list-style: none; }
 
 @media screen and (min-width: 768px) {
   /************************************/

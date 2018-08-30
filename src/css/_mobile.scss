@@ -17,13 +17,13 @@ table, tr, td {
 }
 
 button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 *,
@@ -36,16 +36,6 @@ button, input[type="submit"], input[type="reset"] {
 html, body {
   min-height: 100vh;
   height: auto;
-}
-
-a {
-  text-decoration: none;
-  &:visited {
-    color: inherit;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .outer-container {
@@ -100,11 +90,18 @@ p {
   font-weight: 300;
   line-height: 1.7;
   letter-spacing: 0.01em;
+  margin-bottom: 1em;
 }
-a {
-  color: inherit;
+a,
+a:active,
+a:visited {
   text-decoration: none;
+  cursor: pointer;
 }
+a:hover {
+  color: $color__light-3;
+}
+
 
 /************************************/
 /************** LAYOUT **************/
@@ -163,21 +160,27 @@ input[type=password] {
   width: 100%;
 }
 
-button, input[type=submit] {
+button, .button, input[type=submit] {
   padding: .7em 3em 1em;
   font-family: 'facultad';
+}
+button {
   background: $color__dark-1;
   color: rgba(252, 249, 244, .8);
 }
-
-button.green {
+.green {
   background: $color__accent-2;
   color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__accent-1;
+  }
 }
-
-button.brown {
+.brown {
   background: $color__dark-2;
   color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__light-3;
+  }
 }
 
 /************************************/
@@ -395,6 +398,9 @@ footer {
   color: $color__light-2;
   background: $color__dark-2;
   padding: 2em;
+  a {
+    color:inherit;
+  }
 }
 
 /************************************/
