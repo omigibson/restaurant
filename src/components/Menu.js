@@ -2,51 +2,51 @@ import React from 'react';
 
 const Menu = () => {
   return (
-    <div className="menuContainer">
+    <div className="container flex column vcenter">
       <h1>Menu</h1>
-      <div>
+      <section>
         <h2>Starters</h2>
         <ul>
-          <li>Spring rolls</li>
-          <li>Fried shrimp chips</li>
-          <li>Dumplings. Pork or tofu</li>
+          <li>Spring rolls 70:-</li>
+          <li>Fried shrimp chips 30:-</li>
+          <li>Dumplings. Pork or tofu 80:-</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Main Courses</h2>
         <ul>
-        <li>Grilled squid with green pepper, ginger and glass noodle salad</li>
-        <li>Vietnamese crepes with beans, onion, coriander and chicken</li>
-        <li>Rice noodle soup with entrecote and fresh herbs</li>
-        <li>Woked tofu with lemon grass and chives</li>
-        <li>Fried tofubolls with puffed green rice, cashew nuts and glass noodle salad</li>
-        <li>Baguettes with filling. Pork tenderloin, chicken or vegetarian sausage</li>
-        <li>Woked vegetables with rice</li>
-        <li>Tuna prawns on grilled skewers with fried vegetables</li>
-        <li>Fried lotus root in tomato sauce with mango, cucumber and sunflower seeds</li>
+        <li>Grilled squid with green pepper, ginger and glass noodle salad 180:-</li>
+        <li>Vietnamese crepes with beans, onion, coriander and chicken 180 :-</li>
+        <li>Rice noodle soup with entrecote and fresh herbs 170:-</li>
+        <li>Woked tofu with lemon grass and chives 160:-</li>
+        <li>Fried tofubolls with puffed green rice, cashew nuts and glass noodle salad 160:-</li>
+        <li>Baguettes with filling. Pork tenderloin, chicken or vegetarian sausage 160:-</li>
+        <li>Woked vegetables with rice 150:-</li>
+        <li>Tuna prawns on grilled skewers with fried vegetables 170:-</li>
+        <li>Fried lotus root in tomato sauce with mango, cucumber and sunflower seeds 170:-</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Desserts</h2>
         <ul>
-          <li>Coconut icecream with fresh berries</li>
-          <li>Deep fried bananas with vanilla icecream</li>
-          <li>Pannacotta with lime sorbet</li>
+          <li>Coconut icecream with fresh berries 70:-</li>
+          <li>Deep fried bananas with vanilla icecream 80:-</li>
+          <li>Pannacotta with lime sorbet 80:-</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Beverages</h2>
         <ul>
-          <li>Soft drinks</li>
-          <li>Beer</li>
-          <li>Wine, red and white</li>
-          <li>Tea</li>
-          <li>Coffee</li>
+          <li>Soft drinks 40:-</li>
+          <li>Beer 50:-</li>
+          <li>Wine, red and white 80:-</li>
+          <li>Tea 40:-</li>
+          <li>Coffee 40:-</li>
         </ul>
-      </div>
+      </section>
     </div>
   )
 }
