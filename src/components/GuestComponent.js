@@ -4,10 +4,17 @@ import { Transition } from 'react-spring';
 
 class GuestComponent extends React.Component {
 
-
   state = {
     amountOfGuests: 0,
     stepCompleted: false
+  }
+
+  componentWillMount = () => {
+    this.props.setAppState({ displayFixed: 'position-absolute' });
+  }
+
+  componentWillUnmount = () => {
+    this.props.setAppState({ displayFixed: '' });
   }
 
   handleChange = (e) => {
@@ -66,6 +73,7 @@ class GuestComponent extends React.Component {
         { styles =>
           <Booking
             style={ styles }
+            setAppState={ this.props.setAppState }
             amountOfGuests={ this.state.amountOfGuests }
             fetchBookings={ this.props.fetchBookings }
             sendToAPI={ this.props.sendToAPI }

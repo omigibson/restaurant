@@ -127,9 +127,6 @@ div, section, footer {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
-  margin: auto;
-  position: absolute;
-  top: 0px;
 }
 img {
   width: 100%;
@@ -218,8 +215,6 @@ button {
 /************************************/
 .navbar-header {
   background: none;
-  position: fixed;
-  z-index: 9999;
   li {
     font-family: 'facultad';
   }
@@ -505,4 +500,10 @@ ul {
 
 .cancel-booking-container {
   margin: 0px auto;
+}
+
+.position-absolute {
+  top: 0px;
+  position: absolute;
+  z-index: 99999;
 }
