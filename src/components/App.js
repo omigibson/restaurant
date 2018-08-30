@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./../css/style.css";
-import LandingPage from "./LandingPageComponent";
+import LandingPage from "./LandingPage";
 import About from "./AboutComponent";
 import GuestComponent from "./GuestComponent";
 import Admin from "./admin/AdminComponent";
