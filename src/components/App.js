@@ -5,6 +5,7 @@ import About from "./AboutComponent";
 import GuestComponent from "./GuestComponent";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
+import Menu from "./Menu";
 import {
   BrowserRouter as Router,
   Route,
@@ -77,6 +78,7 @@ class App extends Component {
               render={(props) => <CancelBooking {...props}
               sendToAPI={ this.sendToAPI } />}
             />
+            <Route path="/menu" component={Menu} />
           </div>
         </div>
       </Router>
