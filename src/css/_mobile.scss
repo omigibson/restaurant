@@ -218,6 +218,8 @@ button {
 /************************************/
 .navbar-header {
   background: none;
+  position: fixed;
+  z-index: 9999;
   li {
     font-family: 'facultad';
   }
