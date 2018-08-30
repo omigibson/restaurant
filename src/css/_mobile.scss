@@ -85,7 +85,7 @@ h1 {
   font-size: 3em;
 }
 h2 {
-  font-size: 2em;
+  font-size: 1.4em;
 }
 h3 {
   font-size: 1.5;
@@ -153,6 +153,10 @@ img {
 
 .vcenter {
   align-items: center;
+}
+
+.column {
+flex-direction: column;
 }
 
 /************************************/
@@ -435,8 +439,14 @@ th, td {
 /************** MENU **************/
 /************************************/
 
-.menuContainer li {
-  margin-bottom: 1em;
+.container section {
+  width: 80%;
+  ul {
+  padding-left: 0;
+  li {
+    margin-bottom: 1rem;
+  }
+}
 }
 
 /************************************/
