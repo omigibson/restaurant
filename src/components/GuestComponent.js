@@ -41,7 +41,7 @@ class GuestComponent extends React.Component {
             leave={{ transform: 'translateX(-200%)' }}
           >
             {styles => <div className='container flex vcenter hcenter' style={styles}>
-              <div className='amount-of-guests-container'>
+              <div className='amount-of-guests-container flex hcenter'>
                 { this.amountOfGuestsButtons({
                     1: '1 Guests',
                     2: '2 Guests',

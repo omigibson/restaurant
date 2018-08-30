@@ -113,9 +113,9 @@ class ContactForm extends React.Component {
             <div className="contact-form">
               <div className="booking-details">
                 <ul>
-                  <li> Guests: { this.props.bookingDetails.amountOfGuests } </li>
-                  <li> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                  <li> Time: { this.props.bookingDetails.timeSelected + ':00' } </li>
+                  <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
+                  <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
+                  <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ':00' } </li>
                 </ul>
               </div>
               <h2>Contact details</h2>
@@ -148,7 +148,7 @@ class ContactForm extends React.Component {
                   className={ this.state.phoneStyle }
                 />
               <span className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</span>
-                <div className="consent-container">
+                <div className="consent-container flex">
                   <input
                     type="checkbox"
                     onChange={() => this.setState({ consent: !this.state.consent })}
@@ -164,7 +164,7 @@ class ContactForm extends React.Component {
                     Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
                     Your data will be removed when the date for your booking has passed.</span>
                   <button
-                    className="contact-form-button"
+                    className="contact-form-button button green"
                     type="button"
                     value="Book"
                     onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
