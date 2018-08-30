@@ -1,4 +1,5 @@
 import React from 'react';
+import { Transition } from 'react-spring';
 
 class CancelBooking extends React.Component {
 
@@ -42,20 +43,22 @@ class CancelBooking extends React.Component {
   render = () => {
     if (this.state.bookingFetched) {
       return (
-        <React.Fragment>
-          <h1>Your reservation</h1>
-          <p> Date: { this.state.bookingDetails[0].date } </p>
-          <p> Time: { this.state.bookingDetails[0].time } </p>
-          <p> Guests: { this.state.bookingDetails[0].guests } </p>
-          { !this.state.deleteSuccess ?
-              <React.Fragment>
-                <button onClick={ () => this.deleteBookingAndCustomerFromDB() }>
-                  Cancel booking
-                </button>
-              </React.Fragment>
-            : <p>The reservation has been cancelled.</p>
-          }
-        </React.Fragment>
+        <div className='container'>
+          <div className='cancel-booking-container hcenter vcenter'>
+            <h1>Your reservation</h1>
+            <p> Date: { this.state.bookingDetails[0].date } </p>
+            <p> Time: { this.state.bookingDetails[0].time } </p>
+            <p> Guests: { this.state.bookingDetails[0].guests } </p>
+            { !this.state.deleteSuccess ?
+                <div>
+                  <button onClick={ () => this.deleteBookingAndCustomerFromDB() }>
+                    Cancel booking
+                  </button>
+                </div>
+              : <p>The reservation has been cancelled.</p>
+            }
+          </div>
+        </div>
       );
     }
     else {

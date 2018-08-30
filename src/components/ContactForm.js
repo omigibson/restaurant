@@ -110,14 +110,18 @@ class ContactForm extends React.Component {
       >
       { styles =>
         <div className="container" style={styles}>
-            <p> Guests: { this.props.bookingDetails.amountOfGuests } </p>
-            <p> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </p>
-            <p> Time: { this.props.bookingDetails.timeSelected } </p>
             <div className="contact-form">
+              <div className="booking-details">
+                <ul>
+                  <li> Guests: { this.props.bookingDetails.amountOfGuests } </li>
+                  <li> Date: { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
+                  <li> Time: { this.props.bookingDetails.timeSelected + ':00' } </li>
+                </ul>
+              </div>
               <h2>Contact details</h2>
               <form>
                 <label htmlFor="userName">Name</label>
-                <p className={ this.state.nameErrorMessage }>This input field is not filled out correctly</p>
+                <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="text"
                   placeholder="Name"
@@ -125,47 +129,50 @@ class ContactForm extends React.Component {
                   onChange={this.handleChange.bind(this)}
                   className={ this.state.usernameStyle }
                 />
-                <label htmlFor="userEmail">Email</label>
-                <p className={ this.state.emailErrorMessage }>This input field is not filled out correctly</p>
+              <label htmlFor="userEmail">E-mail</label>
+                <span className={ this.state.emailErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="E-mail"
                   name="userEmail"
                   onChange={this.handleChange.bind(this)}
                   className={ this.state.emailStyle }
                 />
                 <label htmlFor="userTelephone">Phone number</label>
-                <p className={ this.state.phoneErrorMessage }>This input field is not filled out correctly</p>
+                <span className={ this.state.phoneErrorMessage }> (This input field is not filled out correctly)</span>
                 <input
                   type="tel"
-                  placeholder="Tel"
+                  placeholder="Telephone"
                   name="userTelephone"
                   onChange={this.handleChange.bind(this)}
                   className={ this.state.phoneStyle }
                 />
-                <p className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</p>
-                <input
-                  type="checkbox"
-                  onChange={() => this.setState({ consent: !this.state.consent })}
-                />
-                <label htmlFor="consent">
-                  I give Nano Food consent to store and manage the information
-                  I left here, in order to enable table reservation.
-                </label>
-                <button
-                  className="contact-form-button"
-                  type="button"
-                  value="Book"
-                  onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
-                >
-                Send
-                </button>
+              <span className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</span>
+                <div className="consent-container">
+                  <input
+                    type="checkbox"
+                    onChange={() => this.setState({ consent: !this.state.consent })}
+                  />
+                  <label htmlFor="consent">
+                    I give Nano Food consent to store and manage the information
+                    I left here, in order to enable table reservation.
+                  </label>
+                </div>
+                <div className='flex-column'>
+                  <span className='gdpr-info'>
+                    Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
+                    Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
+                    Your data will be removed when the date for your booking has passed.</span>
+                  <button
+                    className="contact-form-button"
+                    type="button"
+                    value="Book"
+                    onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+                  >
+                  Send
+                  </button>
+                </div>
               </form>
-              <p>
-                Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
-                Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
-              </p>
-              <p>Your data will be removed when the date for your booking has passed.</p>
             </div>
       </div> }
     </Transition>
@@ -185,7 +192,7 @@ class ContactForm extends React.Component {
               <h2>Details:</h2>
               <p>Name: { this.state.allBookingDetails.userName } </p>
               <p>Date: { this.state.allBookingDetails.date } </p>
-              <p>Time: { this.state.allBookingDetails.time } </p>
+              <p>Time: { this.state.allBookingDetails.time + ':00' } </p>
               <p>Guests: { this.state.allBookingDetails.guests } </p>
             </div>
           </div>
