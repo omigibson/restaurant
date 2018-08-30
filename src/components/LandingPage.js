@@ -14,10 +14,11 @@ const LandingPage = () => {
     return (
         <div className="landingpage-container">
 
-          <section className="jumbotron flex hcenter vcenter">
+          <section className="jumbotron flex hcenter vcenter column">
             <div className="container-logo">
               <img src={ logo } alt="Nano Food logo" />
             </div>
+            <h2>Welcome to our Vietnamese-Swedish kitchen</h2>
           </section>
 
           <section className="landingpage__section menu flex">

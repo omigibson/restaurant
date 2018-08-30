@@ -156,18 +156,26 @@ img {
 }
 
 .column {
-flex-direction: column;
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
 }
 
 /************************************/
-/************** INPUTS **************/
+/********* INPUTS & BUTTONS *********/
 /************************************/
 input {
   display:block;
   height: 30px;
   margin: 0 0 10px;
-  padding: 7px;
+  padding: 22px 0;
+  text-indent: 12px;
   font-size: 1em;
+  font-family: 'Lato';
+  letter-spacing: .02em;
+  border: 2px solid #d6d6d6;
 }
 input[type=text],
 input[type=email],
@@ -341,6 +349,7 @@ button {
 /************************************/
 .contact-form {
   width: 90%;
+  max-width: 500px;
   margin:auto;
   h2 {
     padding: 0px;
@@ -348,37 +357,33 @@ button {
   }
   label {
     padding-left: 0px;
+    font-size: .9em;
+    letter-spacing: .04em;
   }
   input {
-    margin-top: 5px;
-    padding: 20px;
-    padding-left: 15px;
+    margin: .4em 0 1.6em;
     &::placeholder {
       color: #a2a2a2;
     }
   }
   .contact-form-button {
-    margin-top: 10px;
-    width: 70px;
-    padding: 10px;
-    &:hover {
-      background: $color__accent-2;
-      transition: all 300ms;
-    }
+    // margin-top: 10px;
+    max-width: 300px;
+    margin: auto;
+    // padding: 10px;
+    // &:hover {
+    //   background: $color__accent-2;
+    //   transition: all 300ms;
+    // }
   }
   .gdpr-info {
     font-size: 0.6em;
-    margin-top: 5px;
+    margin: 0 0 2em;
     a {
       text-decoration: underline;
     }
   }
   .consent-container {
-    display: flex;
-    align-items: center;
-    input {
-      margin: 0px;
-    }
     label {
       margin-left: 10px;
     }
@@ -386,6 +391,14 @@ button {
 }
 
 .booking-details {
+  width: 200px;
+  margin: 4em auto 2em;
+  background: $color__light-2;
+  padding: 2em;
+  line-height: 2em;
+  font-size: .9em;
+  font-weight: 300;
+  letter-spacing: .02em;
   ul {
     list-style: none;
     padding-left: 0px;
@@ -432,8 +445,6 @@ th, td {
 
 .amount-of-guests-container {
   margin: 0px auto;
-  display: inline-flex;
-  justify-content: center;
   flex-wrap: wrap;
   width: 50%;
 }

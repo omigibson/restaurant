@@ -48,7 +48,7 @@ class App extends Component {
         <div className="outer-container">
           <div className="navbar-container">
             <header className="navbar-header flex hcenter">
-              <ul>
+              <ul className="flex">
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/menu">Menu</Link></li>
                 <li><Link to="/booking">Booking</Link></li>
