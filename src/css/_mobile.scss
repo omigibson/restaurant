@@ -65,6 +65,14 @@ a {
     }
   }
 }
+  ul, menu, dir {
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
 
 /**************************************/
 /************* TYPOGRAPHY *************/
@@ -77,10 +85,15 @@ h1, h2, h3, h4 {
   font-family: 'facultad';
 }
 
+h1 {
+  font-size: 3em;
+}
 h2 {
   font-size: 2em;
 }
-
+h3 {
+  font-size: 1.5;
+}
 p {
   font-weight: 300;
   line-height: 1.7;
