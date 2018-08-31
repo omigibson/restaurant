@@ -160,7 +160,7 @@ class Booking extends React.Component {
             leave={{ transform: 'translateX(-200%)' }}
           >
           { styles =>
-            <div className="booking-calendar-container flex hcenter vcenter" style={styles}>
+            <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
               <Calendar
                 disableHistory={true}
                 bookings={this.state.daysThatAreFull}
