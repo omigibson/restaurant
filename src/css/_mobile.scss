@@ -292,43 +292,65 @@ button {
   cursor: not-allowed !important;
   pointer-events: none;
 }
+.day-content {
+  font-size: 1rem;
+}
 
 .booking-calendar {
   margin: 0 auto;
   width: 100%;
   max-width: 450px;
   .header {
-    background: $color__accent-1!important;
+    background: #ededed!important;
+    border: none!important;
     .header-content {
       .icon-previous {
-        color: $color__accent-2!important;
+        color: $color__dark-2!important;
       }
       .icon-next {
-        color: $color__accent-2!important;
+        color: $color__dark-2!important;
       }
       .month-label {
-        color: $color__accent-2!important;
+        color: $color__dark-2!important;
+        font-size: 1.2rem!important;
+        letter-spacing: 0.05em;
       }
     }
   }
 
   .week {
-    background: $color__accent-1!important;
+    background: #fff!important;
+    border-right: none!important;
+    border-top: $border__calendar;
     &.names {
-      .day-box .day {}
+      .day-box .day {
+        border-right: $border__calendar;
+      }
     }
     .day-box::before {
-      border: 1px solid rgba(71,90,81,.2)!important;
+      border-right: $border__calendar;
     }
     .day-box .day {
-      background: $color__accent-1!important;
+      background: #fff!important;
       color: $color__accent-2!important;
+      transition: ease .2s;
+      &:hover {
+        transition: ease .3s;
+        background: $color__accent-1!important;
+      }
 
       &.different-month {
         color: rgba(71,90,81,.4)!important;
+        font-size: 1rem;
       }
-      &.selected {}
-      &.today {}
+      &.today {
+        background: #fff;
+        color: $color__dark-1;
+        font-size: 1rem;
+      }
+      &.selected {
+        background: $color__accent-1!important;
+      }
       &.booked-day:before, &.booked-night:after {
         -webkit-transform: skewX(0)!important;
         transform: skewX(0)!important;
@@ -347,6 +369,17 @@ button {
       }
     }
   }
+}
+
+.booking-calendar .week .day-box .day,
+.booking-calendar .week .day-box:before {
+  border-right: $border__calendar;
+}
+.booking-calendar .week .day-box:first-child .day  {
+  border-left: $border__calendar;
+}
+.booking-calendar .week:last-child {
+  border-bottom: $border__calendar;
 }
 
 /************************************/
@@ -444,8 +477,9 @@ th, td {
 
 .amount-of-button {
   flex-basis: calc(100% / 3);
-  padding: 10px;
+  padding: 12px 19px;
   margin: 5px;
+  font-size: 1rem;
 }
 
 .amount-of-guests-container {
