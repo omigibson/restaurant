@@ -304,15 +304,11 @@ button {
     background: #ededed!important;
     border: none!important;
     .header-content {
-      .icon-previous {
-        color: $color__dark-2!important;
-      }
-      .icon-next {
-        color: $color__dark-2!important;
-      }
-      .month-label {
+      .month-label, .icon-previous, .icon-next {
         color: $color__dark-2!important;
         font-size: 1.2rem!important;
+      }
+      .month-label {
         letter-spacing: 0.05em;
       }
     }
