@@ -14,6 +14,10 @@ import {
 
 class App extends Component {
 
+  state = {
+    displayFixed: ''
+  }
+
   /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
     return fetch(`http://localhost:8888/${fileName}`, {
@@ -42,12 +46,15 @@ class App extends Component {
     }
   }
 
+  setAppState = (object) => this.setState(object);
+
   render() {
+    console.log(this.state.displayFixed);
     return (
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <header className="navbar-header flex hcenter">
+            <header className={this.state.displayFixed + " navbar-header flex hcenter"}>
               <ul className="flex">
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/menu">Menu</Link></li>
@@ -63,6 +70,7 @@ class App extends Component {
             <Route
               path='/booking'
               render={(props) => <GuestComponent {...props}
+              setAppState={ this.setAppState.bind(this) }
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}

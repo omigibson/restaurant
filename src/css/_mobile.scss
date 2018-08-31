@@ -127,7 +127,6 @@ div, section, footer {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
-  margin: auto;
 }
 img {
   width: 100%;
@@ -284,6 +283,8 @@ button {
   width: 100%;
   max-width: 800px;
   height: 100vh;
+  position: absolute;
+  top: 0px;
 }
 
 .different-month {
@@ -499,4 +500,10 @@ ul {
 
 .cancel-booking-container {
   margin: 0px auto;
+}
+
+.position-absolute {
+  top: 0px;
+  position: absolute;
+  z-index: 99999;
 }

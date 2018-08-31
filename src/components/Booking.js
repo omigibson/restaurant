@@ -102,33 +102,49 @@ class Booking extends React.Component {
     const paginationButtons = [previousButton, nextButton];
     paginationButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        this.initiateCalendarEventListeners();
+        /* A small timeout is used because the DOM isn't updated quickly enough.
+        This solved that problem, and is hardly noticeable for the user. */
+        setTimeout(() => {
+          this.initiateCalendarEventListeners();
+        }, 50)
       });
     });
   }
+
+  controlIfDateIsPassed = (date) => date < Date.now() ? true : false;
 
   /* Since the npm-package react-booking-calendar doesn't support click-events
   this is a solution that is not very Reactesque, but solves the problem of
   gathering the neccessary data through good old JavaScript. */
   initiateCalendarEventListeners = () => {
-    /* A small timeout is used because the DOM isn't updated quickly enough.
-    This solved that problem, and is hardly noticeable for the user. */
-    setTimeout(() => {
-      let monthAndYear = document.getElementsByClassName("month-label")[0].innerText;
-      let dayBox = document.getElementsByClassName("day");
-      let arrayFromHTMLCollection = Array.from(dayBox);
+      const monthAndYear = document.getElementsByClassName("month-label")[0].innerText;
+      const dayBox = document.getElementsByClassName("day");
+      const arrayFromHTMLCollection = Array.from(dayBox);
       arrayFromHTMLCollection.forEach((item) => {
+        const todayDate = item.childNodes[0].innerText;
+        const todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
+        /* A date will only be bookable if it's before 21 the current day. */
+        const todayWithHourRestriction = todaysFullDate.setHours(todaysFullDate.getHours() + 21);
         /* The only way to know if a date is booked is through the CSS-class.
         If it contains booked-day, don't add an event listener. */
         if (!item.classList.contains('booked-day')) {
-          item.addEventListener('click', () => {
-            let todayDate = item.childNodes[0].innerText;
-            let todaysFullDate = new Date(todayDate + ' ' + monthAndYear);
-            this.setState({ decideWhatTime: true, dateSelected: todaysFullDate });
-          });
+          if (!this.controlIfDateIsPassed(todayWithHourRestriction)) {
+            item.addEventListener('click', () => {
+              this.setState({ decideWhatTime: true, dateSelected: todaysFullDate });
+            });
+          }
+          else {
+            item.classList.add('different-month');
+          }
+        }
+        /*  If the date is fully booked and the date has passed, remove the
+        fully booked class and just add the different-month class that gives the
+        box a non-clickable appearence. */
+        else if (this.controlIfDateIsPassed(todayWithHourRestriction)) {
+          item.classList.remove('booked-day');
+          item.classList.add('different-month');
         }
       });
-    }, 100)
   }
 
   setBookingState = (object) => this.setState(object);

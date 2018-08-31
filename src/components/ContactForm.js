@@ -186,8 +186,8 @@ class ContactForm extends React.Component {
           leave={{ transform: 'translateX(-200%)' }}
         >
         { styles =>
-          <div className="container">
-            <div className="booking-details-container" style={styles}>
+          <div className="container flex hcenter" style={styles}>
+            <div className="booking-details-container">
               <h1>Your reservation was successful.</h1>
               <h2>Details:</h2>
               <p>Name: { this.state.allBookingDetails.userName } </p>
