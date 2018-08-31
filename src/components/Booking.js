@@ -66,42 +66,47 @@ class Booking extends React.Component {
 
   controlIfDatesAreBookedOrPassed = (object) => {
     for (let key in object) {
-      const todaysDate = new Date(key);
-      const firstSitting = todaysDate.setHours(todaysDate.getHours() + 18);
-      const secondSitting = todaysDate.setHours(todaysDate.getHours() + 21);
-      if (object[key]['18'].length >= 15) {
-        object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
+      /* Constructs a new Date where the clock stands at 02:00. */
+      const dateOfBooking = new Date(key);
+      /* We add 16 and 19 to those numbers (the time for the sittings 18:00 and 21:00) */
+      const firstSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 16);
+      const secondSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 19);
+      /* Control if the time for the sitting at 18:00 has passed. */
+      if (this.controlIfDateIsPassed(firstSitting)) {
+          object[key]['18'] = { notBookable: true, bookings: object[key]['18'] }
       }
-      else if (this.controlIfDateIsPassed(firstSitting)) {
-          object[key]['18'] = { fullyBooked: true, bookings: object[key]['18'] }
-      }
-      else {
-        object[key]['18'] = { fullyBooked: false, bookings: object[key]['18'] }
-      }
-      if (object[key]['21'].length >= 15) {
-        object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
-      }
-      else if (this.controlIfDateIsPassed(secondSitting)) {
-          object[key]['21'] = { fullyBooked: true, bookings: object[key]['21'] }
+      else if (object[key]['18'].length >= 15) {
+        object[key]['18'] = { notBookable: true, bookings: object[key]['18'] }
       }
       else {
-        object[key]['21'] = { fullyBooked: false, bookings: object[key]['21'] }
+        object[key]['18'] = { notBookable: false, bookings: object[key]['18'] }
+      }
+      /* Control if the time for the sitting at 21:00 has passed. */
+      if (this.controlIfDateIsPassed(secondSitting)) {
+          object[key]['21'] = { notBookable: true, bookings: object[key]['21'] }
+      }
+      else if (object[key]['21'].length >= 15) {
+        object[key]['21'] = { notBookable: true, bookings: object[key]['21'] }
+      }
+      else {
+        object[key]['21'] = { notBookable: false, bookings: object[key]['21'] }
       }
     }
+    console.log(object);
     return object;
   }
 
   /*  */
   ifDateOrTimesAreBooked = () => {
     const object = this.state.datesAndTimes;
-    let datesThatAreFullyBooked = [];
+    let datesThatArenotBookable = [];
     for (let key in object) {
-      if(object[key]['21'].fullyBooked && object[key]['18'].fullyBooked) {
-        datesThatAreFullyBooked.push(key);
+      if(object[key]['21'].notBookable && object[key]['18'].notBookable) {
+        datesThatArenotBookable.push(key);
         continue;
       }
     }
-    const convertToDateFormat = this.props.convertFromStringToDate(datesThatAreFullyBooked);
+    const convertToDateFormat = this.props.convertFromStringToDate(datesThatArenotBookable);
     return convertToDateFormat;
   }
 
