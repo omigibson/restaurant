@@ -127,6 +127,7 @@ div, section, footer {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
+  margin: auto;
 }
 img {
   width: 100%;
@@ -455,9 +456,8 @@ th, td {
 }
 
 /************************************/
-/************** MENU **************/
+/************** MENU ****************/
 /************************************/
-
 .container section {
   width: 80%;
   ul {
