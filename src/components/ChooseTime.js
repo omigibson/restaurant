@@ -9,7 +9,7 @@ class ChooseTime extends React.Component {
 
   checkIfNoBookingForDateAndTime = (datesAndTimes, dateSelected) => {
     if(!datesAndTimes[dateSelected]) {
-      datesAndTimes = { [dateSelected]: { 18: { fullyBooked: false, bookings: [] }, 21: { fullyBooked: false, bookings: [] } } }
+      datesAndTimes = { [dateSelected]: { 18: { isBookable: false, bookings: [] }, 21: { isBookable: false, bookings: [] } } }
       return datesAndTimes[dateSelected];
     }
     return datesAndTimes[dateSelected];
@@ -27,7 +27,7 @@ class ChooseTime extends React.Component {
       { styles =>
         <div className="select-time-container" style={styles}>
           <h2>Select what time to dine</h2>
-            { !datesAndTimes['18']['fullyBooked'] ?
+            { !datesAndTimes['18']['isBookable'] ?
                 <button
                   className='amount-of-button'
                   value="18"
@@ -35,7 +35,7 @@ class ChooseTime extends React.Component {
                   onClick={ this.handleChange.bind(this) }>18.00
                 </button> : ''
             }
-            { !datesAndTimes['21']['fullyBooked'] ?
+            { !datesAndTimes['21']['isBookable'] ?
                 <button
                   className='amount-of-button'
                   value="21"
