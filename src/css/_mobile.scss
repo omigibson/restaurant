@@ -305,7 +305,8 @@ button {
 .booking-calendar {
   margin: 0 auto;
   width: 100%;
-  max-width: 450px;
+  max-width: 50vh;
+  min-width: 50vh;
   .header {
     background: #ededed!important;
     border: none!important;
