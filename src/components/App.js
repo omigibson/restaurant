@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./../css/style.css";
 import LandingPage from "./LandingPage";
-import About from "./AboutComponent";
-import GuestComponent from "./GuestComponent";
+import About from "./About";
+import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
@@ -13,10 +13,6 @@ import {
 } from "react-router-dom";
 
 class App extends Component {
-
-  state = {
-    displayFixed: ''
-  }
 
   /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
@@ -46,15 +42,12 @@ class App extends Component {
     }
   }
 
-  setAppState = (object) => this.setState(object);
-
   render() {
-    console.log(this.state.displayFixed);
     return (
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <header className={this.state.displayFixed + " navbar-header flex hcenter"}>
+            <header className="navbar-header flex hcenter">
               <ul className="flex">
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/menu">Menu</Link></li>
@@ -68,22 +61,21 @@ class App extends Component {
 
             <Route path="/about" component={About} />
             <Route
-              path='/booking'
-              render={(props) => <GuestComponent {...props}
-              setAppState={ this.setAppState.bind(this) }
+              path="/booking"
+              render={(props) => <SelectGuests {...props}
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route
-              path='/admin'
+              path="/admin"
               render={(props) => <Admin {...props}
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route
-              path='/cancel'
+              path="/cancel"
               render={(props) => <CancelBooking {...props}
               sendToAPI={ this.sendToAPI } />}
             />

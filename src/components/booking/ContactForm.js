@@ -1,21 +1,21 @@
-import React from 'react';
-import { Transition } from 'react-spring';
+import React from "react";
+import { Transition } from "react-spring";
 
 class ContactForm extends React.Component {
   state = {
-    userName: '',
-    userEmail: '',
-    userTelephone: '',
+    userName: "",
+    userEmail: "",
+    userTelephone: "",
     consent: false,
     stepCompleted: false,
     allBookingDetails: {},
-    emailStyle: '',
-    phoneStyle: '',
-    usernameStyle: '',
-    nameErrorMessage: 'hidden',
-    emailErrorMessage: 'hidden',
-    phoneErrorMessage: 'hidden',
-    checkboxErrorMessage: 'hidden'
+    emailStyle: "",
+    phoneStyle: "",
+    usernameStyle: "",
+    nameErrorMessage: "hidden",
+    emailErrorMessage: "hidden",
+    phoneErrorMessage: "hidden",
+    checkboxErrorMessage: "hidden"
   }
 
   handleChange = (e) => {
@@ -35,13 +35,13 @@ class ContactForm extends React.Component {
   /* Controls if the input fields are valid. */
   giveFeedbackToUser = () => {
     this.setState({
-      emailStyle: this.validateEmail(this.state.userEmail) ? 'valid-input' : 'invalid-input',
-      phoneStyle: this.validatePhone(this.state.userTelephone) ? 'valid-input' : 'invalid-input',
-      usernameStyle: this.state.userName.length >= 5 ? 'valid-input' : 'invalid-input',
-      nameErrorMessage: this.state.userName.length >= 5 ? 'hidden' : '',
-      emailErrorMessage: this.validateEmail(this.state.userEmail) ? 'hidden' : '',
-      phoneErrorMessage: this.validatePhone(this.state.userTelephone) ? 'hidden' : '',
-      checkboxErrorMessage: this.state.consent ? 'hidden' : ''
+      emailStyle: this.validateEmail(this.state.userEmail) ? "valid-input" : "invalid-input",
+      phoneStyle: this.validatePhone(this.state.userTelephone) ? "valid-input" : "invalid-input",
+      usernameStyle: this.state.userName.length >= 5 ? "valid-input" : "invalid-input",
+      nameErrorMessage: this.state.userName.length >= 5 ? "hidden" : "",
+      emailErrorMessage: this.validateEmail(this.state.userEmail) ? "hidden" : "",
+      phoneErrorMessage: this.validatePhone(this.state.userTelephone) ? "hidden" : "",
+      checkboxErrorMessage: this.state.consent ? "hidden" : ""
     });
   }
 
@@ -67,7 +67,7 @@ class ContactForm extends React.Component {
       userEmail: this.state.userEmail,
       userTelephone: this.state.userTelephone,
       hash: hash
-  }, 'post_user_details.php')
+  }, "post_user_details.php")
     .then((userDetailsResponse) => {
       /* A response comes back from the DB with an id that is used when inserting
       a row into the post_booking.php file. This is because we want to separate
@@ -79,7 +79,7 @@ class ContactForm extends React.Component {
         time: this.props.bookingDetails.timeSelected,
         userID: userDetailsResponse.id,
         hash: hash
-      }, 'post_booking.php')
+      }, "post_booking.php")
         .then((bookingDetailsResponse) => {
           /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
           to the user. */
@@ -91,7 +91,7 @@ class ContactForm extends React.Component {
             date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
             time: this.props.bookingDetails.timeSelected,
             hash: hash
-          }, 'send_email.php')
+          }, "send_email.php")
             .then((emailResponse) => {
               console.log(emailResponse);
               this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
@@ -104,9 +104,9 @@ class ContactForm extends React.Component {
     if (!this.state.stepCompleted) {
     return (
       <Transition
-        from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
-        enter={{right: '50%', transform: 'translateX(50%)' }}
-        leave={{ transform: 'translateX(-200%)' }}
+        from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+        enter={{right: "50%", transform: "translateX(50%)" }}
+        leave={{ transform: "translateX(-200%)" }}
       >
       { styles =>
         <div className="container" style={styles}>
@@ -115,7 +115,7 @@ class ContactForm extends React.Component {
                 <ul>
                   <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
                   <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                  <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ':00' } </li>
+                  <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
                 </ul>
               </div>
               <h2>Contact details</h2>
@@ -158,8 +158,8 @@ class ContactForm extends React.Component {
                     I left here, in order to enable table reservation.
                   </label>
                 </div>
-                <div className='flex-column'>
-                  <span className='gdpr-info'>
+                <div className="flex-column">
+                  <span className="gdpr-info">
                     Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
                     Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
                     Your data will be removed when the date for your booking has passed.</span>
@@ -181,9 +181,9 @@ class ContactForm extends React.Component {
     else {
       return (
         <Transition
-          from={{right: '-50%', position: 'absolute', transform: 'translateX(100%)' }}
-          enter={{right: '50%', transform: 'translateX(50%)' }}
-          leave={{ transform: 'translateX(-200%)' }}
+          from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+          enter={{right: "50%", transform: "translateX(50%)" }}
+          leave={{ transform: "translateX(-200%)" }}
         >
         { styles =>
           <div className="container flex hcenter" style={styles}>
@@ -192,7 +192,7 @@ class ContactForm extends React.Component {
               <h2>Details:</h2>
               <p>Name: { this.state.allBookingDetails.userName } </p>
               <p>Date: { this.state.allBookingDetails.date } </p>
-              <p>Time: { this.state.allBookingDetails.time + ':00' } </p>
+              <p>Time: { this.state.allBookingDetails.time + ":00" } </p>
               <p>Guests: { this.state.allBookingDetails.guests } </p>
             </div>
           </div>
