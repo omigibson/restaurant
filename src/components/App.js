@@ -51,11 +51,13 @@ class App extends Component {
   }
 
   renderLinks = () => {
+    /* Our links. */
     const links = ["Home", "Menu", "Booking", "About"];
-    return links.map((item) => {
-      let activeClass = this.state.activeClass == item ? "active-link" : " ";
+    return links.map((item, i) => {
+      /* Loop through and check what link-item is active. */
+      let activeClass = this.state.activeClass.toString() === item ? "active-link active-link-show" : "active-link";
       return (
-        <li className={ activeClass } onClick={ this.handleChange }>
+        <li key={ i } className={ activeClass } onClick={ this.handleChange }>
           <Link to={"/" + item.toLowerCase() }>{ item }</Link>
         </li>
       );

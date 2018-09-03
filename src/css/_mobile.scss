@@ -236,7 +236,18 @@ button {
     transform: translateX(16px);
   }
 }
+.active-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color__accent-2;
+  transition: width 300ms;
+}
 
+.active-link-show::after {
+  width: 100%;
+}
 /************************************/
 /*********** LANDING PAGE ***********/
 /************************************/
@@ -548,10 +559,6 @@ footer {
 /************************************/
 /********** GENERAL STYLES **********/
 /************************************/
-
-.active-link {
-  border-bottom: 2px solid $color__accent-2;
-}
 
 .hidden {
   display: none;
