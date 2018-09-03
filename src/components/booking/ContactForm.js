@@ -1,4 +1,5 @@
 import React from "react";
+import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
 class ContactForm extends React.Component {
@@ -187,14 +188,12 @@ class ContactForm extends React.Component {
         >
         { styles =>
           <div className="container flex hcenter" style={styles}>
-            <div className="booking-details-container">
-              <h1>Your reservation was successful.</h1>
-              <h2>Details:</h2>
-              <p>Name: { this.state.allBookingDetails.userName } </p>
-              <p>Date: { this.state.allBookingDetails.date } </p>
-              <p>Time: { this.state.allBookingDetails.time + ":00" } </p>
-              <p>Guests: { this.state.allBookingDetails.guests } </p>
-            </div>
+            <Confirmation
+              name={ this.state.allBookingDetails.userName }
+              date={ this.state.allBookingDetails.date }
+              time={ this.state.allBookingDetails.time + ":00" }
+              guests={ this.state.allBookingDetails.guests }
+            />
           </div>
         }
       </Transition>
