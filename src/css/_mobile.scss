@@ -128,7 +128,7 @@ div, section, footer {
   max-width: 800px;
   min-height: 100vh;
   margin: auto;
-  padding: 120px 0 140px;
+  padding: 120px 4% 140px;
   z-index: 1;
 }
 img {
@@ -295,7 +295,7 @@ button {
 
 .different-month {
   user-select: none !important;
-  cursor: not-allowed !important;
+  cursor: none;
   pointer-events: none;
 }
 .day-content {
@@ -493,14 +493,16 @@ th, td {
 /************************************/
 /************** MENU ****************/
 /************************************/
-.container section {
-  width: 80%;
-  ul {
-  padding-left: 0;
+.menu-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
   li {
+    font-size: 1rem;
     margin-bottom: 1rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.01rem;
   }
-}
 }
 
 /************************************/
