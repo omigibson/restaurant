@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "./BookingProgress";
 import Calendar from "react-booking-calendar";
 import ContactForm from "./ContactForm";
 import ChooseTime from "./ChooseTime";
@@ -168,11 +169,7 @@ class BookingCalendar extends React.Component {
     if (!this.state.stepCompleted) {
       if (this.state.daysThatAreFull) {
         return (
-          <div className="flex hcenter">
-            <div>
-            <h2>2. Select time and date</h2>
-            <progress value="60" max="90"></progress>
-            </div>
+          <React.Fragment>
             <Transition
               from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
               enter={{right: "50%", transform: "translateX(50%)" }}
@@ -180,6 +177,7 @@ class BookingCalendar extends React.Component {
             >
             { styles =>
               <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
+                <h2>2/4 Select time and date</h2>
                 <Calendar
                   disableHistory={true}
                   bookings={this.state.daysThatAreFull}
@@ -196,7 +194,8 @@ class BookingCalendar extends React.Component {
               </div>
             }
             </Transition>
-          </div>
+            <ProgressBar progressValue="50"/>
+          </React.Fragment>
         );
       }
     else {

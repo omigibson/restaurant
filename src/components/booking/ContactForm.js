@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "./BookingProgress";
 import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
@@ -104,11 +105,7 @@ class ContactForm extends React.Component {
   render = () => {
     if (!this.state.stepCompleted) {
     return (
-      <div className="flex hcenter">
-        <div>
-        <h2>3. Confirm</h2>
-        <progress value="90" max="90"></progress>
-        </div>
+      <React.Fragment>
         <Transition
           from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
           enter={{right: "50%", transform: "translateX(50%)" }}
@@ -124,8 +121,8 @@ class ContactForm extends React.Component {
                     <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
                   </ul>
                 </div>
-                <h2>Contact details</h2>
                 <form>
+                  <h2>3/4 Give us your contact details</h2>
                   <label htmlFor="userName">Name</label>
                   <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
                   <input
@@ -182,16 +179,13 @@ class ContactForm extends React.Component {
               </div>
         </div> }
         </Transition>
-      </div>
+        <ProgressBar progressValue="75"/>
+      </React.Fragment>
       );
     }
     else {
       return (
-        <div className="flex hcenter">
-          <div>
-          <h2>3. Confirm</h2>
-          <progress value="90" max="90"></progress>
-          </div>
+        <React.Fragment>
           <Transition
             from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
             enter={{right: "50%", transform: "translateX(50%)" }}
@@ -208,7 +202,8 @@ class ContactForm extends React.Component {
             </div>
           }
         </Transition>
-      </div>
+        <ProgressBar progressValue="100"/>
+      </React.Fragment>
       );
     }
   }

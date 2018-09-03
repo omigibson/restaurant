@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "./BookingProgress";
 import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
 
@@ -34,11 +35,7 @@ class SelectGuests extends React.Component {
   render = () => {
       if (!this.state.stepCompleted) {
         return (
-          <div className="flex hcenter">
-            <div>
-            <h2>1. Select amount of guests</h2>
-            <progress value="30" max="90"></progress>
-            </div>
+          <React.Fragment>
             <Transition
               from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
               enter={{right: "50%", transform: "translateX(50%)" }}
@@ -46,6 +43,7 @@ class SelectGuests extends React.Component {
             >
               {styles => <div className="container flex vcenter hcenter" style={styles}>
                 <div className="amount-of-guests-container flex hcenter">
+                    <h2>1/4 Select amount of guests</h2>
                   { this.amountOfGuestsButtons({
                       1: "1 Guests",
                       2: "2 Guests",
@@ -58,7 +56,8 @@ class SelectGuests extends React.Component {
                 </div>
               </div> }
             </Transition>
-          </div>
+            <ProgressBar progressValue="25"/>
+          </React.Fragment>
         );
       }
     else {
