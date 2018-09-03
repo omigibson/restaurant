@@ -6,6 +6,7 @@ import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
+import Logo from "./../images/nanofood-logo.svg";
 import {
   BrowserRouter as Router,
   Route,
@@ -47,15 +48,20 @@ class App extends Component {
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <header className="navbar-header flex hcenter">
-              <ul className="flex">
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/menu">Menu</Link></li>
-                <li><Link to="/booking">Booking</Link></li>
-                <li><Link to="/about">About</Link></li>
-              </ul>
-            </header>
-
+            <Link to="/home">
+              <div className="logo">
+                <img src={ Logo } className="logo" alt="Nano Food logo" />
+              </div>
+            </Link>
+              <header className="navbar-header flex hcenter vcenter">
+                <ul className="flex hcenter vcenter">
+                  <li><Link to="/home">Home</Link></li>
+                  <li><Link to="/menu">Menu</Link></li>
+                  <li><Link to="/booking">Booking</Link></li>
+                  <li><Link to="/about">About</Link></li>
+                </ul>
+              </header>
+            </div>
 
             <Route path="/home" component={LandingPage} />
 
@@ -80,7 +86,7 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
-          </div>
+
         </div>
       </Router>
     );
