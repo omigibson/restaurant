@@ -217,7 +217,7 @@ button {
 /************** HEADER **************/
 /************************************/
 .navbar-header {
-  z-index: 999;
+  z-index: 2;
   position: fixed;
   background: none;
   li {
@@ -229,12 +229,23 @@ button {
       color: $color__light-3;
     }
   }
-}
-.container-logo {
-  width: 200px;
-  img {
-    transform: translateX(16px);
+  ul {
+    margin: 0;
   }
+}
+.jumbotron {
+  .container-logo {
+    width: 200px;
+    img {
+      transform: translateX(16px);
+    }
+  }
+}
+div.logo {
+  position: fixed;
+  width: 140px;
+  margin: 16px;
+  z-index: 3;
 }
 .active-link::after {
   content: '';
