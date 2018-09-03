@@ -128,7 +128,7 @@ div, section, footer {
   max-width: 800px;
   min-height: 100vh;
   margin: auto;
-  padding: 120px 4% 140px;
+  padding: 100px 4% 120px;
   z-index: 1;
 }
 img {
@@ -444,7 +444,7 @@ button {
 
 .booking-details {
   width: 200px;
-  margin: 2em auto;
+  margin: 2em auto 0;
   background: $color__light-2;
   padding: 2em;
   line-height: 2em;
@@ -485,7 +485,7 @@ button {
   }
   .checkmark-container {
     margin: auto;
-    width: 200px;
+    width: 120px;
   }
 }
 
@@ -521,6 +521,28 @@ th, td {
   margin: 0px auto;
   flex-wrap: wrap;
   width: 50%;
+}
+
+/************************************/
+/************ PROGRESS **************/
+/************************************/
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   width: 100%;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 7px;
+   z-index: 998;
+}
+progress[value]::-webkit-progress-bar {
+  background: $color__light-1;
+}
+progress[value]::-webkit-progress-value {
+  background: $color__accent-1;
 }
 
 /************************************/

@@ -74,7 +74,7 @@ class App extends Component {
                 { this.renderLinks() }
               </ul>
             </header>
-
+          </div>
 
             <Route path="/home" component={LandingPage} />
 
@@ -99,7 +99,6 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
-          </div>
         </div>
       </Router>
     );
