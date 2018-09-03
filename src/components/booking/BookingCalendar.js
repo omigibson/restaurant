@@ -168,29 +168,35 @@ class BookingCalendar extends React.Component {
     if (!this.state.stepCompleted) {
       if (this.state.daysThatAreFull) {
         return (
-          <Transition
-            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-            enter={{right: "50%", transform: "translateX(50%)" }}
-            leave={{ transform: "translateX(-200%)" }}
-          >
-          { styles =>
-            <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
-              <Calendar
-                disableHistory={true}
-                bookings={this.state.daysThatAreFull}
-                clickable={true}
-              />
-              { this.state.decideWhatTime &&
-                  <ChooseTime
-                    setBookingState={ this.setBookingState.bind(this) }
-                    datesAndTimes={ this.state.datesAndTimes }
-                    dateSelected={ this.state.dateSelected }
-                    convertDateObjectToString={ this.convertDateObjectToString }
-                  />
-              }
+          <div className="flex hcenter">
+            <div>
+            <h2>2. Select time and date</h2>
+            <progress value="60" max="90"></progress>
             </div>
-          }
-          </Transition>
+            <Transition
+              from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+              enter={{right: "50%", transform: "translateX(50%)" }}
+              leave={{ transform: "translateX(-200%)" }}
+            >
+            { styles =>
+              <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
+                <Calendar
+                  disableHistory={true}
+                  bookings={this.state.daysThatAreFull}
+                  clickable={true}
+                />
+                { this.state.decideWhatTime &&
+                    <ChooseTime
+                      setBookingState={ this.setBookingState.bind(this) }
+                      datesAndTimes={ this.state.datesAndTimes }
+                      dateSelected={ this.state.dateSelected }
+                      convertDateObjectToString={ this.convertDateObjectToString }
+                    />
+                }
+              </div>
+            }
+            </Transition>
+          </div>
         );
       }
     else {
@@ -199,24 +205,24 @@ class BookingCalendar extends React.Component {
   }
     else {
       return (
-        <Transition
-          from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-          enter={{right: "50%", transform: "translateX(50%)" }}
-          leave={{ transform: "translateX(-200%)" }}
-        >
-        { styles =>
-            <ContactForm
-              style={styles}
-              convertDateObjectToString={ this.convertDateObjectToString }
-              sendToAPI={ this.props.sendToAPI }
-              bookingDetails={ {
-                dateSelected: this.state.dateSelected,
-                timeSelected: this.state.timeSelected,
-                amountOfGuests: this.props.amountOfGuests
-            } }
-            />
-        }
-      </Transition>
+          <Transition
+            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+            enter={{right: "50%", transform: "translateX(50%)" }}
+            leave={{ transform: "translateX(-200%)" }}
+          >
+          { styles =>
+              <ContactForm
+                style={styles}
+                convertDateObjectToString={ this.convertDateObjectToString }
+                sendToAPI={ this.props.sendToAPI }
+                bookingDetails={ {
+                  dateSelected: this.state.dateSelected,
+                  timeSelected: this.state.timeSelected,
+                  amountOfGuests: this.props.amountOfGuests
+              } }
+              />
+          }
+        </Transition>
       )
     }
   }
