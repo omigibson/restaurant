@@ -1,5 +1,5 @@
-import React from 'react';
-import BookingItem from './BookingItem';
+import React from "react";
+import BookingItem from "./BookingItem";
 
 class AdminComponent extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
@@ -15,7 +15,7 @@ class AdminComponent extends React.Component {
     /* Before the component is mounted fetchBookings is called and the result is
     stored in this.state.allBookings. */
     componentWillMount = () => {
-      this.props.fetchBookings('fetch_bookings_and_customers.php')
+      this.props.fetchBookings("fetch_bookings_and_customers.php")
         .then((bookings) => {
           this.setState({ allBookings: bookings }, () => {
             const convertedBookings = this.props.convertFromStringToDate(bookings);
@@ -34,7 +34,7 @@ class AdminComponent extends React.Component {
       };
 
       //Delete booking from DB
-      this.props.sendToAPI(itemToDelete, 'delete_bookings.php');
+      this.props.sendToAPI(itemToDelete, "delete_bookings.php");
       console.log(e.target.name);
 
       //Delete bookig from DOM
@@ -60,7 +60,7 @@ class AdminComponent extends React.Component {
         editing: true,
         editIndex: e.target.name,
         bookingToEdit: this.state.allBookings[e.target.name]}, () => {
-          console.log('This item will be edited!', this.state.editIndex)
+          console.log("This item will be edited!", this.state.editIndex)
         });
     }
 
@@ -87,7 +87,7 @@ class AdminComponent extends React.Component {
       //Send updatedBooking to DB
       this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
 
-      console.log('This is our updated booking object:', this.state.updatedBooking);
+      console.log("This is our updated booking object:", this.state.updatedBooking);
     }
 
 

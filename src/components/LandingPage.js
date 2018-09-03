@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import menuImage from './../images/nanofood-2';
-import bookingImage from './../images/nanofood-3';
-import logo from './../images/nanofood-logo.svg';
-import Footer from './Footer';
+import menuImage from "./../images/nanofood-2";
+import bookingImage from "./../images/nanofood-3";
+import logo from "./../images/nanofood-logo.svg";
+import Footer from "./Footer";
 import {
   BrowserRouter as Router,
   Link
