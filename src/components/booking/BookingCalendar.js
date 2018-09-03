@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "./BookingProgress";
 import Calendar from "react-booking-calendar";
 import ContactForm from "./ContactForm";
 import ChooseTime from "./ChooseTime";
@@ -168,29 +169,33 @@ class BookingCalendar extends React.Component {
     if (!this.state.stepCompleted) {
       if (this.state.daysThatAreFull) {
         return (
-          <Transition
-            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-            enter={{right: "50%", transform: "translateX(50%)" }}
-            leave={{ transform: "translateX(-200%)" }}
-          >
-          { styles =>
-            <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
-              <Calendar
-                disableHistory={true}
-                bookings={this.state.daysThatAreFull}
-                clickable={true}
-              />
-              { this.state.decideWhatTime &&
-                  <ChooseTime
-                    setBookingState={ this.setBookingState.bind(this) }
-                    datesAndTimes={ this.state.datesAndTimes }
-                    dateSelected={ this.state.dateSelected }
-                    convertDateObjectToString={ this.convertDateObjectToString }
-                  />
-              }
-            </div>
-          }
-          </Transition>
+          <React.Fragment>
+            <Transition
+              from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+              enter={{right: "50%", transform: "translateX(50%)" }}
+              leave={{ transform: "translateX(-200%)" }}
+            >
+            { styles =>
+              <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
+                <h2>2/4 Select time and date</h2>
+                <Calendar
+                  disableHistory={true}
+                  bookings={this.state.daysThatAreFull}
+                  clickable={true}
+                />
+                { this.state.decideWhatTime &&
+                    <ChooseTime
+                      setBookingState={ this.setBookingState.bind(this) }
+                      datesAndTimes={ this.state.datesAndTimes }
+                      dateSelected={ this.state.dateSelected }
+                      convertDateObjectToString={ this.convertDateObjectToString }
+                    />
+                }
+              </div>
+            }
+            </Transition>
+            <ProgressBar progressValue="50"/>
+          </React.Fragment>
         );
       }
     else {
@@ -199,24 +204,24 @@ class BookingCalendar extends React.Component {
   }
     else {
       return (
-        <Transition
-          from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-          enter={{right: "50%", transform: "translateX(50%)" }}
-          leave={{ transform: "translateX(-200%)" }}
-        >
-        { styles =>
-            <ContactForm
-              style={styles}
-              convertDateObjectToString={ this.convertDateObjectToString }
-              sendToAPI={ this.props.sendToAPI }
-              bookingDetails={ {
-                dateSelected: this.state.dateSelected,
-                timeSelected: this.state.timeSelected,
-                amountOfGuests: this.props.amountOfGuests
-            } }
-            />
-        }
-      </Transition>
+          <Transition
+            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+            enter={{right: "50%", transform: "translateX(50%)" }}
+            leave={{ transform: "translateX(-200%)" }}
+          >
+          { styles =>
+              <ContactForm
+                style={styles}
+                convertDateObjectToString={ this.convertDateObjectToString }
+                sendToAPI={ this.props.sendToAPI }
+                bookingDetails={ {
+                  dateSelected: this.state.dateSelected,
+                  timeSelected: this.state.timeSelected,
+                  amountOfGuests: this.props.amountOfGuests
+              } }
+              />
+          }
+        </Transition>
       )
     }
   }
