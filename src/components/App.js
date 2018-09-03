@@ -15,6 +15,10 @@ import {
 
 class App extends Component {
 
+  state = {
+    activeClass: "Home"
+  }
+
   /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
     return fetch(`http://localhost:8888/${fileName}`, {
@@ -43,25 +47,35 @@ class App extends Component {
     }
   }
 
+  handleChange = (e) => {
+    this.setState({ activeClass: [e.target.innerHTML] });
+  }
+
+  renderLinks = () => {
+    /* Our links. */
+    const links = ["Home", "Menu", "Booking", "About"];
+    return links.map((item, i) => {
+      /* Loop through and check what link-item is active. */
+      let activeClass = this.state.activeClass.toString() === item ? "active-link active-link-show" : "active-link";
+      return (
+        <li key={ i } className={ activeClass } onClick={ this.handleChange }>
+          <Link to={"/" + item.toLowerCase() }>{ item }</Link>
+        </li>
+      );
+    });
+  }
+
   render() {
     return (
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <Link to="/home">
-              <div className="logo">
-                <img src={ Logo } className="logo" alt="Nano Food logo" />
-              </div>
-            </Link>
-              <header className="navbar-header flex hcenter vcenter">
-                <ul className="flex hcenter vcenter">
-                  <li><Link to="/home">Home</Link></li>
-                  <li><Link to="/menu">Menu</Link></li>
-                  <li><Link to="/booking">Booking</Link></li>
-                  <li><Link to="/about">About</Link></li>
-                </ul>
-              </header>
-            </div>
+            <header className="navbar-header flex hcenter">
+              <ul className="flex">
+                { this.renderLinks() }
+              </ul>
+            </header>
+          </div>
 
             <Route path="/home" component={LandingPage} />
 
@@ -86,7 +100,6 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
-
         </div>
       </Router>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "./BookingProgress";
 import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
@@ -104,99 +105,105 @@ class ContactForm extends React.Component {
   render = () => {
     if (!this.state.stepCompleted) {
     return (
-      <Transition
-        from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-        enter={{right: "50%", transform: "translateX(50%)" }}
-        leave={{ transform: "translateX(-200%)" }}
-      >
-      { styles =>
-        <div className="container" style={styles}>
-            <div className="contact-form">
-              <div className="booking-details">
-                <ul>
-                  <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
-                  <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                  <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
-                </ul>
-              </div>
-              <h2>Contact details</h2>
-              <form>
-                <label htmlFor="userName">Name</label>
-                <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="userName"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.usernameStyle }
-                />
-              <label htmlFor="userEmail">E-mail</label>
-                <span className={ this.state.emailErrorMessage }> (This input field is not filled out correctly)</span>
-                <input
-                  type="email"
-                  placeholder="E-mail"
-                  name="userEmail"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.emailStyle }
-                />
-                <label htmlFor="userTelephone">Phone number</label>
-                <span className={ this.state.phoneErrorMessage }> (This input field is not filled out correctly)</span>
-                <input
-                  type="tel"
-                  placeholder="Telephone"
-                  name="userTelephone"
-                  onChange={this.handleChange.bind(this)}
-                  className={ this.state.phoneStyle }
-                />
-              <span className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</span>
-                <div className="consent-container flex">
-                  <input
-                    type="checkbox"
-                    onChange={() => this.setState({ consent: !this.state.consent })}
-                  />
-                  <label htmlFor="consent">
-                    I give Nano Food consent to store and manage the information
-                    I left here, in order to enable table reservation.
-                  </label>
-                </div>
-                <div className="flex-column">
-                  <span className="gdpr-info">
-                    Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
-                    Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
-                    Your data will be removed when the date for your booking has passed.</span>
-                  <button
-                    className="contact-form-button button green"
-                    type="button"
-                    value="Book"
-                    onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
-                  >
-                  Send
-                  </button>
-                </div>
-              </form>
-            </div>
-      </div> }
-    </Transition>
-      );
-    }
-    else {
-      return (
+      <React.Fragment>
         <Transition
           from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
           enter={{right: "50%", transform: "translateX(50%)" }}
           leave={{ transform: "translateX(-200%)" }}
         >
         { styles =>
-          <div className="container flex hcenter" style={styles}>
-            <Confirmation
-              name={ this.state.allBookingDetails.userName }
-              date={ this.state.allBookingDetails.date }
-              time={ this.state.allBookingDetails.time + ":00" }
-              guests={ this.state.allBookingDetails.guests }
-            />
-          </div>
-        }
-      </Transition>
+          <div className="container" style={styles}>
+              <div className="contact-form">
+                <div className="booking-details">
+                  <ul>
+                    <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
+                    <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
+                    <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
+                  </ul>
+                </div>
+                <form>
+                  <h2>3/4 Give us your contact details</h2>
+                  <label htmlFor="userName">Name</label>
+                  <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    name="userName"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.usernameStyle }
+                  />
+                <label htmlFor="userEmail">E-mail</label>
+                  <span className={ this.state.emailErrorMessage }> (This input field is not filled out correctly)</span>
+                  <input
+                    type="email"
+                    placeholder="E-mail"
+                    name="userEmail"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.emailStyle }
+                  />
+                  <label htmlFor="userTelephone">Phone number</label>
+                  <span className={ this.state.phoneErrorMessage }> (This input field is not filled out correctly)</span>
+                  <input
+                    type="tel"
+                    placeholder="Telephone"
+                    name="userTelephone"
+                    onChange={this.handleChange.bind(this)}
+                    className={ this.state.phoneStyle }
+                  />
+                <span className={ this.state.checkboxErrorMessage }>You need to check the box in order to make a booking</span>
+                  <div className="consent-container flex">
+                    <input
+                      type="checkbox"
+                      onChange={() => this.setState({ consent: !this.state.consent })}
+                    />
+                    <label htmlFor="consent">
+                      I give Nano Food consent to store and manage the information
+                      I left here, in order to enable table reservation.
+                    </label>
+                  </div>
+                  <div className="flex-column">
+                    <span className="gdpr-info">
+                      Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
+                      Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.
+                      Your data will be removed when the date for your booking has passed.</span>
+                    <button
+                      className="contact-form-button button green"
+                      type="button"
+                      value="Book"
+                      onClick={ () => this.areAllInputsValid() ? this.sendAllToAPI() : this.giveFeedbackToUser() }
+                    >
+                    Send
+                    </button>
+                  </div>
+                </form>
+              </div>
+        </div> }
+        </Transition>
+        <ProgressBar progressValue="75"/>
+      </React.Fragment>
+      );
+    }
+    else {
+      return (
+        <React.Fragment>
+          <Transition
+            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
+            enter={{right: "50%", transform: "translateX(50%)" }}
+            leave={{ transform: "translateX(-200%)" }}
+          >
+          { styles =>
+            <div className="container flex hcenter" style={styles}>
+              <Confirmation
+                name={ this.state.allBookingDetails.userName }
+                date={ this.state.allBookingDetails.date }
+                time={ this.state.allBookingDetails.time + ":00" }
+                guests={ this.state.allBookingDetails.guests }
+              />
+            </div>
+          }
+        </Transition>
+        <ProgressBar progressValue="100"/>
+      </React.Fragment>
       );
     }
   }
