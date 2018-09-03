@@ -549,6 +549,10 @@ footer {
 /********** GENERAL STYLES **********/
 /************************************/
 
+.active-link {
+  border-bottom: 2px solid $color__accent-2;
+}
+
 .hidden {
   display: none;
 }

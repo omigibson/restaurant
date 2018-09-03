@@ -14,6 +14,10 @@ import {
 
 class App extends Component {
 
+  state = {
+    activeClass: "Home"
+  }
+
   /* Sends JSON to our back-end. */
   sendToAPI = (json, fileName) => {
     return fetch(`http://localhost:8888/${fileName}`, {
@@ -42,6 +46,22 @@ class App extends Component {
     }
   }
 
+  handleChange = (e) => {
+    this.setState({ activeClass: [e.target.innerHTML] });
+  }
+
+  renderLinks = () => {
+    const links = ["Home", "Menu", "Booking", "About"];
+    return links.map((item) => {
+      let activeClass = this.state.activeClass == item ? "active-link" : " ";
+      return (
+        <li className={ activeClass } onClick={ this.handleChange }>
+          <Link to={"/" + item.toLowerCase() }>{ item }</Link>
+        </li>
+      );
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -49,10 +69,7 @@ class App extends Component {
           <div className="navbar-container">
             <header className="navbar-header flex hcenter">
               <ul className="flex">
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/menu">Menu</Link></li>
-                <li><Link to="/booking">Booking</Link></li>
-                <li><Link to="/about">About</Link></li>
+                { this.renderLinks() }
               </ul>
             </header>
 
