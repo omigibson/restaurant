@@ -1,5 +1,5 @@
-import React from 'react';
-import { Transition } from 'react-spring';
+import React from "react";
+import { Transition } from "react-spring";
 
 class ChooseTime extends React.Component {
 
@@ -27,21 +27,21 @@ class ChooseTime extends React.Component {
       { styles =>
         <div className="select-time-container" style={styles}>
           <h2>Select what time to dine</h2>
-            { !datesAndTimes['18']['isBookable'] ?
+            { !datesAndTimes["18"]["isBookable"] ?
                 <button
-                  className='amount-of-button'
+                  className="amount-of-button"
                   value="18"
                   name="timeSelected"
                   onClick={ this.handleChange.bind(this) }>18.00
-                </button> : ''
+                </button> : ""
             }
-            { !datesAndTimes['21']['isBookable'] ?
+            { !datesAndTimes["21"]["isBookable"] ?
                 <button
-                  className='amount-of-button'
+                  className="amount-of-button"
                   value="21"
                   name="timeSelected"
                   onClick={ this.handleChange.bind(this) }>21.00
-                </button> : ''
+                </button> : ""
             }
         </div>
       }
