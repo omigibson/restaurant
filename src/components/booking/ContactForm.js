@@ -112,7 +112,7 @@ class ContactForm extends React.Component {
           leave={{ transform: "translateX(-200%)" }}
         >
         { styles =>
-          <div className="container" style={styles}>
+          <div className="container booking-step" style={styles}>
               <div className="contact-form">
                 <div className="booking-details">
                   <ul>
@@ -123,7 +123,7 @@ class ContactForm extends React.Component {
                 </div>
                 <form>
                   <h2>3/4 Give us your contact details</h2>
-                  <label htmlFor="userName">Name</label>
+                  <label htmlFor="userName">Full name</label>
                   <span className={ this.state.nameErrorMessage }> (This input field is not filled out correctly)</span>
                   <input
                     type="text"

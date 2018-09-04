@@ -42,7 +42,7 @@ class SelectGuests extends React.Component {
               leave={{ transform: "translateX(-200%)" }}
             >
               {styles => <div className="container flex vcenter hcenter" style={styles}>
-                <div className="amount-of-guests-container flex hcenter">
+                <div className="booking-step amount-of-guests-container flex hcenter">
                     <h2>1/4 Select amount of guests</h2>
                   { this.amountOfGuestsButtons({
                       1: "1 Guests",
