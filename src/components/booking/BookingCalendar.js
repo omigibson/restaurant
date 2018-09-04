@@ -22,6 +22,7 @@ class BookingCalendar extends React.Component {
   /* Before the component is mounted fetchBookings is called and the result is
   stored in this.state.allBookings. */
   componentWillMount = () => {
+    this.props.setAppState({ progressBar: 33 });
     this.props.fetchBookings("fetch_bookings.php")
       .then((bookings) => {
         this.setState({ allBookings: bookings }, () => {
@@ -176,7 +177,7 @@ class BookingCalendar extends React.Component {
               leave={{ transform: "translateX(-200%)" }}
             >
             { styles =>
-              <div className="booking-calendar-container flex hcenter vcenter column" style={styles}>
+              <div className="booking-step container flex hcenter vcenter column" style={styles}>
                 <h2>2/4 Select time and date</h2>
                 <Calendar
                   disableHistory={true}
@@ -194,7 +195,7 @@ class BookingCalendar extends React.Component {
               </div>
             }
             </Transition>
-            <ProgressBar progressValue="50"/>
+            <ProgressBar progressClass='progress-bar-show-25'/>
           </React.Fragment>
         );
       }
@@ -211,6 +212,7 @@ class BookingCalendar extends React.Component {
           >
           { styles =>
               <ContactForm
+                setAppState={ this.props.setAppState }
                 style={styles}
                 convertDateObjectToString={ this.convertDateObjectToString }
                 sendToAPI={ this.props.sendToAPI }

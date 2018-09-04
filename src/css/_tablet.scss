@@ -1,8 +1,20 @@
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+html {
+  font-size: 14px;
+}
+
+body {
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
 /************************************/
 /********** LANDING PAGE ************/
 /************************************/
 .landingpage__section {
-  min-height: 50vh;
+  min-height: 100vh;
   .text, .image {
     width: 50%;
   }
