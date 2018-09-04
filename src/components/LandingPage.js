@@ -7,11 +7,18 @@ import Footer from "./Footer";
 import {
   Link
 } from "react-router-dom";
+import { Transition } from "react-spring";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     return (
-        <div className="landingpage-container">
-          
+      <Transition
+        from={{opacity: 0, transition: "all 200ms" }}
+        enter={{opacity: 1 }}
+        leave={{opacity: 0 }}
+      >
+      { styles =>
+        <div style={ styles } className="landingpage-container">
+
           <section className="landingpage__section menu flex">
 
             <div className="image">
@@ -25,7 +32,12 @@ const LandingPage = () => {
                     Vietnamese cuisine meets Swedish tradition.
                     Vietnamese cuisine meets Swedish tradition.
                 </p>
-                <Link to="/menu" className="button green">See our menu</Link>
+                <Link
+                  onClick={ () => props.setAppState({ activeClass: "Menu" }) }
+                  to="/menu"
+                  className="button green">
+                  See our menu
+                </Link>
               </div>
             </div>
           </section>
@@ -41,13 +53,20 @@ const LandingPage = () => {
                 <h2>Breakfast, lunch or dinner?</h2>
                 <p>You are welcome at any time. You are welcome at any time.
                 You are welcome at any time. You are welcome at any time. </p>
-                <Link to="/booking" className="button brown">Book a table</Link>
+                <Link
+                  onClick={ () => props.setAppState({ activeClass: "Booking" }) }
+                  to="/booking"
+                  className="button brown">
+                  Book a table
+                </Link>
               </div>
             </div>
           </section>
           <Footer />
 
       </div> /* .landingpage-container */
+    }
+    </Transition>
 
     );
 }

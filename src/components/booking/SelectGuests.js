@@ -2,7 +2,7 @@ import React from "react";
 import ProgressBar from "./BookingProgress";
 import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
-/* We use the React Spring NPM-package that handles our animations. */ 
+/* We use the React Spring NPM-package that handles our animations. */
 
 class SelectGuests extends React.Component {
 
