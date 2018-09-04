@@ -56,7 +56,6 @@ class SelectGuests extends React.Component {
                 </div>
               </div> }
             </Transition>
-            <ProgressBar progressValue="25"/>
           </React.Fragment>
         );
       }
@@ -69,6 +68,7 @@ class SelectGuests extends React.Component {
           >
           { styles =>
             <BookingCalendar
+              setAppState={ this.props.setAppState }
               style={ styles }
               amountOfGuests={ this.state.amountOfGuests }
               fetchBookings={ this.props.fetchBookings }

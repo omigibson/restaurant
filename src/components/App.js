@@ -12,11 +12,13 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ProgressBar from "./booking/BookingProgress";
 
 class App extends Component {
 
   state = {
-    activeClass: "Home"
+    activeClass: "Home",
+    progressBar: 0
   }
 
   /* Sends JSON to our back-end. */
@@ -48,8 +50,10 @@ class App extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ activeClass: [e.target.innerHTML] });
+    this.setState({ activeClass: [e.target.innerHTML], progressBar: 0 });
   }
+
+  setAppState = (json) => this.setState(json);
 
   renderLinks = () => {
     /* Our links. */
@@ -71,7 +75,7 @@ class App extends Component {
         <div className="outer-container">
           <div className="navbar-container">
             <Link to="/home">
-              <div className="logo">
+              <div onClick={ () => this.setState({ activeClass: "Home", progressBar: 0 }) } className="logo">
                 <img src={ Logo } className="logo" alt="Nano Food logo" />
               </div>
             </Link>
@@ -88,6 +92,7 @@ class App extends Component {
             <Route
               path="/booking"
               render={(props) => <SelectGuests {...props}
+              setAppState={ this.setAppState.bind(this) }
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
@@ -105,6 +110,7 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
+            <ProgressBar progressClass={'progress-bar-show-' + this.state.progressBar}/>
         </div>
       </Router>
     );
