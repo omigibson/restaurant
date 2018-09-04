@@ -1,11 +1,10 @@
 import React from "react";
 
-class Bookings extends React.Component {
+const Bookings = (props) => {
 
-  render(){
-    if (this.props.bookingItems) {
-        return this.props.bookingItems.map((item, i) => {
-          if(this.props.isEditing && item.id === this.props.bookingToEdit.id){
+    if (props.bookingItems) {
+        return props.bookingItems.map((item, i) => {
+          if(props.isEditing && item.id === props.bookingToEdit.id){
             let timeOption = "";
             if (item.time === "18"){
               timeOption = "21"
@@ -16,7 +15,7 @@ class Bookings extends React.Component {
             return <tr key={i}>
                   <td>
                     <input
-                      onChange={this.props.handleEdit.bind(this)}
+                      onChange={props.handleEdit.bind(this)}
                       name="date"
                       type="date"
                       defaultValue={ item.date }
@@ -25,14 +24,14 @@ class Bookings extends React.Component {
                   <td>
                     <select
                       name="time"
-                      onChange={this.props.handleEdit.bind(this)}>
+                      onChange={props.handleEdit.bind(this)}>
                       <option value ={ item.time } >{ item.time }</option>
                       <option value={timeOption}>{timeOption}</option>
                     </select>
                   </td>
                   <td>
                     <input
-                      onChange={this.props.handleEdit.bind(this)}
+                      onChange={props.handleEdit.bind(this)}
                       name="guests"
                       type="number"
                       defaultValue={ item.guests }
@@ -42,7 +41,7 @@ class Bookings extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.props.handleEdit.bind(this)}
+                      onChange={props.handleEdit.bind(this)}
                       name="name"
                       type="text"
                       defaultValue={ item.name }
@@ -50,7 +49,7 @@ class Bookings extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.props.handleEdit.bind(this)}
+                      onChange={props.handleEdit.bind(this)}
                       name="tel"
                       type="tel"
                       defaultValue={ item.tel }
@@ -58,7 +57,7 @@ class Bookings extends React.Component {
                   </td>
                   <td>
                     <input
-                      onChange={this.props.handleEdit.bind(this)}
+                      onChange={props.handleEdit.bind(this)}
                       name="email"
                       type="email"
                       defaultValue={ item.email }
@@ -66,7 +65,7 @@ class Bookings extends React.Component {
                   </td>
                   <td>
                     <button name={i}
-                            onClick={ this.props.onSave }
+                            onClick={ props.onSave }
                             id={ item.id }
                             className="button save lightgreen">
                             Save
@@ -84,7 +83,7 @@ class Bookings extends React.Component {
                   <td>
                     <button
                             name={i}
-                            onClick={ this.props.onEdit }
+                            onClick={ props.onEdit }
                             id={ item.id }
                             className="button edit green">
                             Edit booking
@@ -92,7 +91,7 @@ class Bookings extends React.Component {
                   </td>
                   <td>
                     <button name={i}
-                            onClick={ this.props.onDelete }
+                            onClick={ props.onDelete }
                             id={ item.id }
                             className="button delete red">
                             Remove booking
@@ -105,5 +104,4 @@ class Bookings extends React.Component {
         return null;
       }
   }
-}
 export default Bookings;
