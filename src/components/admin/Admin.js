@@ -1,7 +1,7 @@
 import React from "react";
-import BookingItem from "./BookingItem";
+import Bookings from "./Bookings";
 
-class AdminComponent extends React.Component {
+class Admin extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
     is the same data, but converted to Date-format. */
     state = {
@@ -33,11 +33,10 @@ class AdminComponent extends React.Component {
         itemToDelete: e.target.id
       };
 
-      //Delete booking from DB
+      // Delete booking from DB
       this.props.sendToAPI(itemToDelete, "delete_bookings.php");
-      console.log(e.target.name);
 
-      //Delete bookig from DOM
+      // Delete bookig from DOM
       let updatedBookingArray = this.state.allBookings;
       updatedBookingArray.splice(e.target.name, 1);
       this.setState({ allBookings: updatedBookingArray });
@@ -59,9 +58,7 @@ class AdminComponent extends React.Component {
       this.setState({
         editing: true,
         editIndex: e.target.name,
-        bookingToEdit: this.state.allBookings[e.target.name]}, () => {
-          console.log("This item will be edited!", this.state.editIndex)
-        });
+        bookingToEdit: this.state.allBookings[e.target.name]});
     }
 
     saveUpdatedBooking = () => {
@@ -69,7 +66,6 @@ class AdminComponent extends React.Component {
       if (Object.keys(this.state.updatedBooking).length === 0) {
         allBookings[this.state.editIndex] = this.state.bookingToEdit;
         this.setState({ allBookings });
-        //this.state.allBookings[this.state.editIndex] = this.state.bookingToEdit
       }
       else {
       allBookings[this.state.editIndex] = this.state.updatedBooking;
@@ -84,42 +80,41 @@ class AdminComponent extends React.Component {
         });
       });
 
-      //Send updatedBooking to DB
+      // Send updatedBooking to DB
       this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
-
-      console.log("This is our updated booking object:", this.state.updatedBooking);
     }
 
-
       render = () => {
-        /* Only render if this.state.convertedBookings returns true. */
+        // Only render if this.state.convertedBookings returns true.
         if (this.state.convertedBookings) {
           return (
-            <div className="container admin-panel">
-              <h2>Upcoming bookings</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Guests</th>
-                      <th>Name</th>
-                      <th>Telephone</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <BookingItem
-                      bookingItems={ this.state.allBookings }
-                      onEdit={ this.editBooking }
-                      handleEdit={ this.handleEdit }
-                      onSave={ this.saveUpdatedBooking }
-                      onDelete={ this.deleteBooking }
-                      isEditing={ this.state.editing }
-                      bookingToEdit={ this.state.bookingToEdit }
-                    />
-                  </tbody>
-                </table>
+            <div class="admin-container">
+              <div className="admin-panel">
+                <h2>Bookings</h2>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Guests</th>
+                        <th>Name</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <Bookings
+                        bookingItems={ this.state.allBookings }
+                        onEdit={ this.editBooking }
+                        handleEdit={ this.handleEdit }
+                        onSave={ this.saveUpdatedBooking }
+                        onDelete={ this.deleteBooking }
+                        isEditing={ this.state.editing }
+                        bookingToEdit={ this.state.bookingToEdit }
+                      />
+                    </tbody>
+                  </table>
+            </div>
           </div>
         );
       } else {
@@ -127,4 +122,4 @@ class AdminComponent extends React.Component {
       }
     }
   }
-export default AdminComponent;
+export default Admin;

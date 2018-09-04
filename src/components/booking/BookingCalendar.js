@@ -1,5 +1,4 @@
 import React from "react";
-import ProgressBar from "./BookingProgress";
 import Calendar from "react-booking-calendar";
 import ContactForm from "./ContactForm";
 import ChooseTime from "./ChooseTime";
@@ -177,7 +176,7 @@ class BookingCalendar extends React.Component {
               leave={{ transform: "translateX(-200%)" }}
             >
             { styles =>
-              <div className="booking-step container flex hcenter vcenter column" style={styles}>
+              <div className="booking-step container flex vcenter column" style={styles}>
                 <h2>2/4 Select time and date</h2>
                 <Calendar
                   disableHistory={true}
@@ -195,7 +194,6 @@ class BookingCalendar extends React.Component {
               </div>
             }
             </Transition>
-            <ProgressBar progressClass='progress-bar-show-25'/>
           </React.Fragment>
         );
       }
