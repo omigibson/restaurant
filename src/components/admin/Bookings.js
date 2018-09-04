@@ -1,6 +1,6 @@
 import React from "react";
 
-class BookingItem extends React.Component {
+class Bookings extends React.Component {
 
   render(){
     if (this.props.bookingItems) {
@@ -107,4 +107,4 @@ class BookingItem extends React.Component {
       }
   }
 }
-export default BookingItem;
+export default Bookings;

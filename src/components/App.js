@@ -3,7 +3,7 @@ import "./../css/style.css";
 import LandingPage from "./LandingPage";
 import About from "./About";
 import SelectGuests from "./booking/SelectGuests";
-import Admin from "./admin/AdminComponent";
+import Admin from "./admin/Admin";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
 import Logo from "./../images/nanofood-logo.svg";
