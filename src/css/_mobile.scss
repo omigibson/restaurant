@@ -72,11 +72,16 @@ html, body {
 /**************************************/
 /************* TYPOGRAPHY *************/
 /**************************************/
+html {
+  font-size: 12px;
+}
 body {
   font-family: 'Lato';
   color: $color__dark-1;
+  font-weight: 100;
+  letter-spacing: .01em;
 }
-h1, h2, h3, h4 {
+h1, h4 {
   font-family: 'facultad';
 }
 
@@ -86,13 +91,17 @@ h1 {
 h2 {
   font-size: 1.4em;
 }
+
 h3 {
-  font-size: 1.5;
+  font-size: .8em!important;
+  font-weight: 300!important;
+  text-transform: uppercase!important;
+  letter-spacing: .05em!important;
 }
+
 p {
   font-weight: 300;
   line-height: 1.7;
-  letter-spacing: 0.01em;
   margin-bottom: 1em;
 }
 a,
@@ -112,6 +121,14 @@ small {
 }
 .bold {
   font-weight: 700;
+}
+
+.booking-step {
+  h2 {
+    font-family: 'Lato';
+    font-size: 1.2em;
+    font-weight: 100;
+  }
 }
 
 /************************************/
@@ -276,13 +293,28 @@ div.logo {
 }
 .jumbotron {
   background: $color__accent-1;
-  // Make sure left-right-bottom margins are equal to top-margin
-  margin: 0 $height__navbar $height__navbar;
-  height: calc(70vh - (#{$height__navbar} * 2));
+  margin: 0 1.5em 3em;
+  height: 30vh;
+  padding: 2em;
+  font-size: 1em;
+  text-align: center;
+  .container-logo {
+    width: 140px;
+    img {
+      //Make sure logo is optically centered
+      transform: translateX(-1%);
+    }
+  }
+  h2 {
+    display: none;
+  }
 }
+
 .landingpage__section {
   margin: 0 auto 100px;
-
+  h2 {
+    font-family: 'facultad';
+  }
   &.menu, &.booking {
     flex-direction: column;
   }
@@ -298,6 +330,9 @@ div.logo {
         margin-bottom: 3em;
       }
     }
+  }
+  .button {
+    font-family: 'facultad';
   }
 }
 
@@ -335,7 +370,7 @@ div.logo {
     .header-content {
       .month-label, .icon-previous, .icon-next {
         color: $color__dark-2!important;
-        font-size: 1.2rem!important;
+        font-size: 1rem!important;
       }
       .month-label {
         letter-spacing: 0.05em;
@@ -416,7 +451,7 @@ div.logo {
   margin:auto;
   h2 {
     padding: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 1em;
   }
   label {
     padding-left: 0px;
@@ -430,20 +465,18 @@ div.logo {
     }
   }
   .contact-form-button {
-    // margin-top: 10px;
     max-width: 300px;
     margin: auto;
-    // padding: 10px;
-    // &:hover {
-    //   background: $color__accent-2;
-    //   transition: all 300ms;
-    // }
   }
   .gdpr-info {
     font-size: 0.6em;
     margin: 0 0 2em;
     a {
+      color: $color__accent-3;
       text-decoration: underline;
+      &:hover {
+        color: $color__light-3;
+      }
     }
   }
   .consent-container {
@@ -455,13 +488,13 @@ div.logo {
 
 .booking-details {
   width: 200px;
-  margin: 2em auto 0;
+  margin: 1em auto 3em;
   background: $color__light-2;
   padding: 2em;
   line-height: 2em;
   font-size: .9em;
-  font-weight: 300;
   letter-spacing: .02em;
+  text-align: left;
   ul {
     list-style: none;
     padding-left: 0px;
@@ -479,21 +512,8 @@ div.logo {
   border: 2px solid $color__accent-3;
 }
 
-
-/************************************/
-/*************** ADMIN **************/
-/************************************/
 .booking-details-container {
-  h1 {
-    text-align: center;
-    line-height: 1.2em;
-  }
-  h2 {
-    text-align: center;
-    font-family: 'Lato';
-    letter-spacing: .02em;
-    font-size: 1.2em;
-  }
+  text-align: center;
   .checkmark-container {
     margin: auto;
     width: 120px;
@@ -556,6 +576,37 @@ progress[value]::-webkit-progress-value {
   background: $color__accent-1;
 }
 
+.progress-bar::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 7px;
+  background: $color__accent-1;
+  transition: width 800ms;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+
+.progress-bar-show-00::after {
+  width: 0%;
+}
+
+.progress-bar-show-33::after {
+  width: 33.33%
+}
+
+.progress-bar-show-66::after {
+  width: 66.66%;
+}
+
+.progress-bar-show-100::after {
+  width: 100%;
+}
+
+
 /************************************/
 /************** MENU ****************/
 /************************************/
@@ -604,9 +655,3 @@ ul {
 .cancel-booking-container {
   margin: 0px auto;
 }
-
-// .position-absolute {
-//   top: 0px;
-//   position: absolute;
-//   z-index: 99999;
-// }

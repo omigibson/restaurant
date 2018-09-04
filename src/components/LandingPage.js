@@ -5,7 +5,6 @@ import bookingImage from "./../images/nanofood-3";
 import logo from "./../images/nanofood-logo.svg";
 import Footer from "./Footer";
 import {
-  BrowserRouter as Router,
   Link
 } from "react-router-dom";
 
@@ -17,13 +16,12 @@ const LandingPage = () => {
             <div className="container-logo">
               <img src={ logo } alt="Nano Food logo" />
             </div>
-            <h2>Welcome to our Vietnamese-Swedish kitchen</h2>
           </section>
 
           <section className="landingpage__section menu flex">
 
             <div className="image">
-              <img src={ menuImage } />
+              <img src={ menuImage } alt="food"/>
             </div>
 
             <div className="text flex">
@@ -41,7 +39,7 @@ const LandingPage = () => {
           <section className="landingpage__section booking flex">
 
             <div className="image">
-              <img src={ bookingImage } />
+              <img src={ bookingImage } alt="dinner" />
             </div>
 
             <div className="text flex">

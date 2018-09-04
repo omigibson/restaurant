@@ -2,6 +2,7 @@ import React from "react";
 import ProgressBar from "./BookingProgress";
 import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
+/* We use the React Spring NPM-package that handles our animations. */ 
 
 class SelectGuests extends React.Component {
 
@@ -15,7 +16,7 @@ class SelectGuests extends React.Component {
       this.setState({ stepCompleted: true });
     });
   }
-
+  /* Takes an object and makes buttons from the key/value. */
   amountOfGuestsButtons = (object) => {
     return Object.keys(object).map((key, index) => {
       return (
@@ -42,7 +43,7 @@ class SelectGuests extends React.Component {
               leave={{ transform: "translateX(-200%)" }}
             >
               {styles => <div className="container flex vcenter hcenter" style={styles}>
-                <div className="amount-of-guests-container flex hcenter">
+                <div className="booking-step amount-of-guests-container flex hcenter">
                     <h2>1/4 Select amount of guests</h2>
                   { this.amountOfGuestsButtons({
                       1: "1 Guests",
@@ -56,7 +57,6 @@ class SelectGuests extends React.Component {
                 </div>
               </div> }
             </Transition>
-            <ProgressBar progressValue="25"/>
           </React.Fragment>
         );
       }
@@ -69,6 +69,7 @@ class SelectGuests extends React.Component {
           >
           { styles =>
             <BookingCalendar
+              setAppState={ this.props.setAppState }
               style={ styles }
               amountOfGuests={ this.state.amountOfGuests }
               fetchBookings={ this.props.fetchBookings }

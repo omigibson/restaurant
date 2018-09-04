@@ -33,7 +33,8 @@ class CancelBooking extends React.Component {
     if (!results[2]) return "";
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
-  
+
+  /* Delete the booking and the customer. */ 
   deleteBookingAndCustomerFromDB = () => {
     this.props.sendToAPI({ hash: this.getParameterByName("id")}, "delete_booking_with_hash.php" )
       .then((response) => {
