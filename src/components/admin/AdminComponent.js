@@ -95,31 +95,33 @@ class AdminComponent extends React.Component {
         /* Only render if this.state.convertedBookings returns true. */
         if (this.state.convertedBookings) {
           return (
-            <div className="container admin-panel">
-              <h2>Upcoming bookings</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Guests</th>
-                      <th>Name</th>
-                      <th>Telephone</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <BookingItem
-                      bookingItems={ this.state.allBookings }
-                      onEdit={ this.editBooking }
-                      handleEdit={ this.handleEdit }
-                      onSave={ this.saveUpdatedBooking }
-                      onDelete={ this.deleteBooking }
-                      isEditing={ this.state.editing }
-                      bookingToEdit={ this.state.bookingToEdit }
-                    />
-                  </tbody>
-                </table>
+            <div class="admin-container">
+              <div className="admin-panel">
+                <h2>Bookings</h2>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Guests</th>
+                        <th>Name</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <BookingItem
+                        bookingItems={ this.state.allBookings }
+                        onEdit={ this.editBooking }
+                        handleEdit={ this.handleEdit }
+                        onSave={ this.saveUpdatedBooking }
+                        onDelete={ this.deleteBooking }
+                        isEditing={ this.state.editing }
+                        bookingToEdit={ this.state.bookingToEdit }
+                      />
+                    </tbody>
+                  </table>
+            </div>
           </div>
         );
       } else {

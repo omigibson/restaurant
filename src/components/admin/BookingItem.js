@@ -67,7 +67,8 @@ class BookingItem extends React.Component {
                   <td>
                     <button name={i}
                             onClick={ this.props.onSave }
-                            id={ item.id }>
+                            id={ item.id }
+                            className="button save lightgreen">
                             Save
                     </button>
                   </td>
@@ -84,14 +85,16 @@ class BookingItem extends React.Component {
                     <button
                             name={i}
                             onClick={ this.props.onEdit }
-                            id={ item.id }>
+                            id={ item.id }
+                            className="button edit green">
                             Edit booking
                     </button>
                   </td>
                   <td>
                     <button name={i}
                             onClick={ this.props.onDelete }
-                            id={ item.id }>
+                            id={ item.id }
+                            className="button delete red">
                             Remove booking
                     </button>
                   </td>
