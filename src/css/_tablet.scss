@@ -5,6 +5,11 @@ html {
   font-size: 14px;
 }
 
+body {
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
 /************************************/
 /********** LANDING PAGE ************/
 /************************************/
@@ -44,9 +49,6 @@ html {
       //Make sure logo is optically centered
       transform: translateX(-1%);
     }
-  }
-  h2 {
-    display: block;
   }
 }
 
