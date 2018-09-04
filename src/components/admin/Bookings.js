@@ -102,7 +102,6 @@ class Bookings extends React.Component {
             }
           })
       } else {
-        console.log("No bookings yet");
         return null;
       }
   }
