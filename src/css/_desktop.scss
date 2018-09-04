@@ -6,6 +6,42 @@
   }
 }
 
+// .aboutpage__section .text div {
+//   padding: 2em;
+// }
+
+.aboutpage__section {
+  min-height: 50vh;
+  .text, .image {
+    width: 50%;
+  }
+  .text {
+    margin: 0;
+    align-self:start;
+    max-width: 580px;
+
+    div {
+      padding: 2em;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+  }
+  &.menu {
+    flex-direction: row-reverse;
+    .text {
+      transform: translate($height__navbar, $height__navbar);
+      justify-content: flex-end;
+    }
+  }
+  &.booking {
+    flex-direction: row;
+    .text {
+      transform: translate(-$height__navbar, $height__navbar);
+    }
+  }
+}
+
 
 /************************************/
 /************** MENU **************/
