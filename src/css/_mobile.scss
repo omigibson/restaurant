@@ -579,7 +579,7 @@ progress[value]::-webkit-progress-value {
   width: 0;
   height: 7px;
   background: $color__accent-1;
-  transition: width 800ms;
+  transition: ease-in-out 850ms;
   position: fixed;
   bottom: 0;
   left: 0;
