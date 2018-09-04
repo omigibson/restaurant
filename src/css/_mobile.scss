@@ -72,6 +72,9 @@ html, body {
 /**************************************/
 /************* TYPOGRAPHY *************/
 /**************************************/
+html {
+  font-size: 12px;
+}
 body {
   font-family: 'Lato';
   color: $color__dark-1;
@@ -234,14 +237,7 @@ button {
     margin: 0;
   }
 }
-.jumbotron {
-  .container-logo {
-    width: 200px;
-    img {
-      transform: translateX(16px);
-    }
-  }
-}
+
 div.logo {
   position: fixed;
   width: 140px;
@@ -277,10 +273,23 @@ div.logo {
 }
 .jumbotron {
   background: $color__accent-1;
-  // Make sure left-right-bottom margins are equal to top-margin
-  margin: 0 $height__navbar $height__navbar;
-  height: calc(70vh - (#{$height__navbar} * 2));
+  margin: 0 1.5em 3em;
+  height: 30vh;
+  padding: 2em;
+  font-size: 1em;
+  text-align: center;
+  .container-logo {
+    width: 140px;
+    img {
+      //Make sure logo is optically centered
+      transform: translateX(-1%);
+    }
+  }
+  h2 {
+    display: none;
+  }
 }
+
 .landingpage__section {
   margin: 0 auto 100px;
 
