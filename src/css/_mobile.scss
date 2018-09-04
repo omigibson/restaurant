@@ -1,19 +1,29 @@
-/************************************/
-/************** RESET ***************/
-/************************************/
+@font-face {
+    font-family: 'facultad';
+    src: url('../fonts/facultad-regular-webfont.woff2') format('woff2'),
+         url('../fonts/facultad-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Roboto:300,400');
+
+/*************************************/
+/*************** RESET ***************/
+/*************************************/
 table, tr, td {
   margin:0;
   padding:0;
 }
 
 button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 *,
@@ -28,16 +38,6 @@ html, body {
   height: auto;
 }
 
-a {
-  text-decoration: none;
-  &:visited {
-    color: inherit;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .outer-container {
   width: 100%;
   height: 100%;
@@ -45,42 +45,160 @@ a {
 }
 
 .navbar-header {
-  background-color: #222;
   width: 100%;
-  height: 70px;
-  color: white;
-  display: inline-flex;
-  align-content: center;
+  height: $height__navbar;
+  justify-content: flex-end;
+  padding: 1em;
+  a {
+    color: $color__dark-1;
+  }
+  a:hover {
+    color: $color__light-3;
+  }
   ul {
     margin: auto;
     li {
       margin: 5px;
-      display: inline-flex;
     }
   }
 }
+  ul, menu, dir {
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
 
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+html {
+  font-size: 12px;
+}
+body {
+  font-family: 'Lato';
+  color: $color__dark-1;
+  font-weight: 100;
+  letter-spacing: .01em;
+}
+h1, h4 {
+  font-family: 'facultad';
+}
+
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: .8rem!important;
+  font-weight: 300!important;
+  text-transform: uppercase!important;
+  letter-spacing: .05rem!important;
+}
+
+p {
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+a,
+a:active,
+a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  transition: ease .2s;
+}
+a:hover {
+  color: $color__light-3;
+  transition: ease .1s;
+}
+small {
+  font-weight: 300;
+  letter-spacing: .03em;
+}
+.bold {
+  font-weight: 700;
+}
+
+.booking-step {
+  h2 {
+    font-family: 'Lato';
+    font-size: 1.2em;
+    font-weight: 100;
+  }
+}
 
 /************************************/
-/************** LAYOUT **************/
+/********* LAYOUT/GENERAL ***********/
 /************************************/
+body {
+  background: $color__light-1;
+}
+div, section, footer {
+  box-sizing: border-box;
+}
 .container {
   width: 100%;
   max-width: 800px;
+  min-height: 100vh;
   margin: auto;
+  padding: 100px 4% 120px;
+  z-index: 1;
+}
+img {
+  width: 100%;
+}
+
+/************************************/
+/*************** FLEX ***************/
+/************************************/
+.flex {
+  display: flex;
+}
+
+.flex-column {
   display: flex;
   flex-direction: column;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
+.hcenter {
+  justify-content: center;
+}
+
+.vcenter {
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
 /************************************/
-/************** INPUTS **************/
+/********* INPUTS & BUTTONS *********/
 /************************************/
 input {
   display:block;
   height: 30px;
   margin: 0 0 10px;
-  padding: 7px;
+  padding: 22px 0;
+  text-indent: 12px;
   font-size: 1em;
+  font-family: 'Lato';
+  letter-spacing: .02em;
+  border: 2px solid #d6d6d6;
 }
 input[type=text],
 input[type=email],
@@ -88,41 +206,208 @@ input[type=tel],
 input[type=password] {
   width: 100%;
 }
+input:focus {
+  outline: none;
+  border: 2px solid $color__light-2;
+}
+button, .button, input[type=submit] {
+  padding: .7em 3em 1em;
+}
+button {
+  background: $color__dark-1;
+  color: rgba(252, 249, 244, .8);
+}
+.green {
+  background: $color__accent-2;
+  color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__accent-1;
+  }
+}
+.brown {
+  background: $color__dark-2;
+  color: rgba(252, 249, 244, .8);
+  &:hover {
+    color:$color__light-3;
+  }
+}
+
+/************************************/
+/************** HEADER **************/
+/************************************/
+.navbar-header {
+  z-index: 2;
+  position: fixed;
+  background: none;
+  li {
+    font-family: 'facultad';
+  }
+  a {
+    color: $color__dark-1;
+    a:hover {
+      color: $color__light-3;
+    }
+  }
+  ul {
+    margin: 0;
+  }
+}
+
+.logo {
+  position: fixed;
+  width: 100px;
+  margin: 16px;
+  z-index: 3;
+  transition: width .3s;
+}
+.active-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color__accent-2;
+  transition: width 300ms;
+}
+
+.active-link-show::after {
+  width: 100%;
+}
+/************************************/
+/*********** LANDING PAGE ***********/
+/************************************/
+.landingpage-container {
+  padding: $height__navbar 0 0;
+  width: 100%;
+  .menu .text div {
+    background: $color__accent-1;
+    color: $color__accent-2;
+  }
+  .booking .text div {
+    background: $color__light-3;
+    color: $color__dark-2;
+  }
+}
+.jumbotron {
+  background: $color__accent-1;
+  margin: 0 1.5em 3em;
+  height: 30vh;
+  padding: 2em;
+  font-size: 1em;
+  text-align: center;
+  .container-logo {
+    width: 140px;
+    img {
+      //Make sure logo is optically centered
+      transform: translateX(-1%);
+    }
+  }
+  h2 {
+    display: none;
+  }
+}
+
+.landingpage__section {
+  margin: 0 auto 100px;
+  h2 {
+    font-family: 'facultad';
+  }
+  &.menu, &.booking {
+    flex-direction: column;
+  }
+  .image, .text {
+    width: 100%;
+    transition: all .3s;
+  }
+  .text {
+    margin: -50px 20px 0;
+    div {
+      width: 90%;
+      padding: 2em 2em 4em;
+      p {
+        margin-bottom: 3em;
+      }
+    }
+  }
+  .button {
+    font-family: 'facultad';
+  }
+}
+
+
 
 /************************************/
 /************* CALENDAR *************/
 /************************************/
 
 .booking-calendar-container {
-  width: 50%;
-  height: 100%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
 }
 
 .different-month {
   user-select: none !important;
-  cursor: not-allowed !important;
+  cursor: none;
   pointer-events: none;
+}
+.day-content {
+  font-size: 1rem;
 }
 
 .booking-calendar {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 50vh;
+  min-width: 50vh;
   .header {
+    background: #ededed!important;
+    border: none!important;
     .header-content {
-      .icon-previous {}
-      .icon-next {}
-      .month-label {}
+      .month-label, .icon-previous, .icon-next {
+        color: $color__dark-2!important;
+        font-size: 1rem!important;
+      }
+      .month-label {
+        letter-spacing: 0.05em;
+      }
     }
   }
 
   .week {
+    background: #fff!important;
+    border-right: none!important;
+    border-top: $border__calendar;
     &.names {
-      .day-box .day {}
+      .day-box .day {
+        border-right: $border__calendar;
+      }
     }
-
+    .day-box::before {
+      border-right: $border__calendar;
+    }
     .day-box .day {
-      &.different-month {}
-      &.selected {}
-      &.today {}
+      background: #fff!important;
+      color: $color__accent-2!important;
+      transition: ease .2s;
+      &:hover {
+        transition: ease .3s;
+        background: $color__accent-1!important;
+      }
+
+      &.different-month {
+        color: rgba(71,90,81,.4)!important;
+        font-size: 1rem;
+      }
+      &.today {
+        background: #fff;
+        color: $color__dark-1;
+        font-size: 1rem;
+      }
+      &.selected {
+        background: $color__accent-1!important;
+      }
       &.booked-day:before, &.booked-night:after {
         -webkit-transform: skewX(0)!important;
         transform: skewX(0)!important;
@@ -134,7 +419,7 @@ input[type=password] {
         pointer-events: none;
       }
       &.booked-day:before {
-        background: red !important;
+        background: $color__accent-3!important;
       }
       &.booked-night:after {
         width: 0!important;
@@ -143,15 +428,92 @@ input[type=password] {
   }
 }
 
+.booking-calendar .week .day-box .day,
+.booking-calendar .week .day-box:before {
+  border-right: $border__calendar;
+}
+.booking-calendar .week .day-box:first-child .day  {
+  border-left: $border__calendar;
+}
+.booking-calendar .week:last-child {
+  border-bottom: $border__calendar;
+}
+
 /************************************/
 /*********** CONTACT FORM ***********/
 /************************************/
 .contact-form {
-  width: 100%;
+  width: 90%;
+  max-width: 500px;
   margin:auto;
+  h2 {
+    padding: 0px;
+    margin-bottom: 1em;
+  }
+  label {
+    padding-left: 0px;
+    font-size: .9rem;
+    letter-spacing: .02rem;
+  }
+  input {
+    margin: .4rem 0 1.6rem;
+    &::placeholder {
+      color: #a2a2a2;
+    }
+  }
   .contact-form-button {
-    margin: 0 auto;
-    padding: 10px;
+    max-width: 300px;
+    margin: auto;
+  }
+  .gdpr-info {
+    font-size: 0.6rem;
+    margin: 0 0 2em;
+    a {
+      color: $color__accent-3;
+      text-decoration: underline;
+      &:hover {
+        color: $color__light-3;
+      }
+    }
+  }
+  .consent-container {
+    label {
+      margin-left: 10px;
+    }
+  }
+}
+
+.booking-details {
+  width: 200px;
+  margin: 1rem auto 3rem;
+  background: $color__light-2;
+  padding: 2rem;
+  line-height: 2rem;
+  font-size: .9rem;
+  letter-spacing: .02rem;
+  text-align: left;
+  ul {
+    list-style: none;
+    padding-left: 0px;
+    li {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.valid-input {
+  border: 2px solid $color__accent-1;
+}
+
+.invalid-input {
+  border: 2px solid $color__accent-3;
+}
+
+.booking-details-container {
+  text-align: center;
+  .checkmark-container {
+    margin: auto;
+    width: 120px;
   }
 }
 
@@ -172,21 +534,121 @@ th, td {
   text-align: left;
 }
 
-/************************************/
-/*************** AMOUNT OF GUESTS **************/
-/************************************/
+/***************************************/
+/*********** AMOUNT OF GUESTS **********/
+/***************************************/
 
 .amount-of-button {
   flex-basis: calc(100% / 3);
-  background: black;
-  color: white;
-  padding: 10px;
+  padding: 12px 19px;
   margin: 5px;
+  font-size: 1rem;
 }
 
 .amount-of-guests-container {
   margin: 0px auto;
-  display: inline-flex;
   flex-wrap: wrap;
   width: 50%;
+}
+
+/************************************/
+/************ PROGRESS **************/
+/************************************/
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   width: 100%;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 7px;
+   z-index: 998;
+}
+progress[value]::-webkit-progress-bar {
+  background: $color__light-1;
+}
+progress[value]::-webkit-progress-value {
+  background: $color__accent-1;
+}
+
+.progress-bar::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 7px;
+  background: $color__accent-1;
+  transition: width 800ms;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+
+.progress-bar-show-00::after {
+  width: 0%;
+}
+
+.progress-bar-show-33::after {
+  width: 33.33%
+}
+
+.progress-bar-show-66::after {
+  width: 66.66%;
+}
+
+.progress-bar-show-100::after {
+  width: 100%;
+}
+
+
+/************************************/
+/************** MENU ****************/
+/************************************/
+.menu-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  li {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.01rem;
+  }
+}
+
+/************************************/
+/************** FOOTER **************/
+/************************************/
+footer {
+  margin: $height__navbar $height__navbar 0;
+  color: $color__light-2;
+  background: $color__dark-2;
+  padding: 2rem;
+  p {
+    font-size: .8rem;
+    letter-spacing: .03rem;
+  }
+  a {
+    color:inherit;
+    margin-right: 20px;
+  }
+}
+
+/************************************/
+/********** GENERAL STYLES **********/
+/************************************/
+
+.hidden {
+  display: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.cancel-booking-container {
+  margin: 0px auto;
 }

@@ -1,0 +1,72 @@
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+html {
+  font-size: 14px;
+}
+
+body {
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+/**************************************/
+/*************** HEADER ***************/
+/**************************************/
+.navbar-header {
+  justify-content: center;
+}
+.logo {
+  width: 160px;
+  transition: all .3s;
+}
+
+/************************************/
+/********** LANDING PAGE ************/
+/************************************/
+.landingpage__section {
+  min-height: 50vh;
+  .text, .image {
+    width: 50%;
+    transition: all .3s;
+  }
+  .text {
+    margin: 0;
+    align-self:start;
+    max-width: 580px;
+  }
+  &.menu {
+    flex-direction: row-reverse;
+    .text {
+      transform: translate($height__navbar, $height__navbar);
+      justify-content: flex-end;
+    }
+  }
+  &.booking {
+    flex-direction: row;
+    .text {
+      transform: translate(-$height__navbar, $height__navbar);
+    }
+  }
+}
+
+
+/************************************/
+/************** FOOTER **************/
+/************************************/
+
+footer {
+  &>div {
+    padding: 2em;
+  }
+  .our-story, .address {
+    width: 50%;
+  }
+  .our-story {
+    padding: 0 0 2em 2em;
+  }
+  .address {
+    padding: 0 2em 2em 0;
+    border-right: 1px solid $color__light-1;
+  }
+}

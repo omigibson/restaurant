@@ -1,5 +1,5 @@
-import React from 'react';
-import BookingItem from './BookingItem';
+import React from "react";
+import BookingItem from "./BookingItem";
 
 class AdminComponent extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
@@ -15,32 +15,14 @@ class AdminComponent extends React.Component {
     /* Before the component is mounted fetchBookings is called and the result is
     stored in this.state.allBookings. */
     componentWillMount = () => {
-      this.fetchBookings()
+      this.props.fetchBookings("fetch_bookings_and_customers.php")
         .then((bookings) => {
           this.setState({ allBookings: bookings }, () => {
-            this.convertBookingstoDates();
-            console.log(this.state.allBookings);
-          });
+            const convertedBookings = this.props.convertFromStringToDate(bookings);
+            this.setState({ convertedBookings });
         })
+      })
     }
-
-    fetchBookings = () => {
-      return fetch("http://localhost:8888/fetch_bookings_and_customers.php")
-        .then((response) => response.json())
-    }
-
-    /* Converts this.state.allBookings from MySQL date-format to something that
-    JavaScript can understand through new Date. */
-    convertBookingstoDates = (props) => {
-      if (this.state.allBookings) {
-        let allConvertedBookings = [];
-        this.state.allBookings.map((booking) => {
-          allConvertedBookings.push(new Date(booking.date));
-        });
-        this.setState({ convertedBookings: allConvertedBookings }, () => console.log(this.state.convertedBookings));
-      }
-    }
-
 
     /*******************************************/
     /************* DELETE BOOKING **************/
@@ -52,7 +34,7 @@ class AdminComponent extends React.Component {
       };
 
       //Delete booking from DB
-      this.props.sendToAPI(itemToDelete, 'delete_bookings.php');
+      this.props.sendToAPI(itemToDelete, "delete_bookings.php");
       console.log(e.target.name);
 
       //Delete bookig from DOM
@@ -78,16 +60,20 @@ class AdminComponent extends React.Component {
         editing: true,
         editIndex: e.target.name,
         bookingToEdit: this.state.allBookings[e.target.name]}, () => {
-          console.log('This item will be edited!', this.state.editIndex)
+          console.log("This item will be edited!", this.state.editIndex)
         });
     }
 
     saveUpdatedBooking = () => {
+      const allBookings = this.state.allBookings;
       if (Object.keys(this.state.updatedBooking).length === 0) {
-        this.state.allBookings[this.state.editIndex] = this.state.bookingToEdit
+        allBookings[this.state.editIndex] = this.state.bookingToEdit;
+        this.setState({ allBookings });
+        //this.state.allBookings[this.state.editIndex] = this.state.bookingToEdit
       }
       else {
-      this.state.allBookings[this.state.editIndex] = this.state.updatedBooking;
+      allBookings[this.state.editIndex] = this.state.updatedBooking;
+      this.setState({ allBookings });
     }
 
       this.setState({ allBookings: this.state.allBookings }, () => {
@@ -101,7 +87,7 @@ class AdminComponent extends React.Component {
       //Send updatedBooking to DB
       this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
 
-      console.log('This is our updated booking object:', this.state.updatedBooking);
+      console.log("This is our updated booking object:", this.state.updatedBooking);
     }
 
 
