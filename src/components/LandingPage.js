@@ -11,13 +11,7 @@ import {
 const LandingPage = () => {
     return (
         <div className="landingpage-container">
-
-          <section className="jumbotron flex hcenter vcenter column">
-            <div className="container-logo">
-              <img src={ logo } alt="Nano Food logo" />
-            </div>
-          </section>
-
+          
           <section className="landingpage__section menu flex">
 
             <div className="image">
