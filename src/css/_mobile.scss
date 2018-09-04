@@ -75,6 +75,8 @@ html, body {
 body {
   font-family: 'Lato';
   color: $color__dark-1;
+  font-weight: 100;
+  letter-spacing: .01em;
 }
 h1, h2, h3, h4 {
   font-family: 'facultad';
@@ -92,7 +94,6 @@ h3 {
 p {
   font-weight: 300;
   line-height: 1.7;
-  letter-spacing: 0.01em;
   margin-bottom: 1em;
 }
 a,
