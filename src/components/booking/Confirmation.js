@@ -1,9 +1,8 @@
 import React from "react";
-import ProgressBar from "./BookingProgress";
 import checkmark from "./../../images/checkmark.svg";
 
 class Confirmation extends React.Component {
-  
+
   componentWillMount = () => {
     this.props.setAppState({ progressBar: 100 });
   }
