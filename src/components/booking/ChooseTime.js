@@ -9,10 +9,10 @@ class ChooseTime extends React.Component {
   }
 
   /* If the selected date doesn't exist in the object (it only consists of dates that have bookings),
-  create that date so it can be used for comparison in render. */ 
+  create that date so it can be used for comparison in render. */
   checkIfNoBookingForDateAndTime = (datesAndTimes, dateSelected) => {
     if(!datesAndTimes[dateSelected]) {
-      datesAndTimes = { [dateSelected]: { 18: { isBookable: false, bookings: [] }, 21: { isBookable: false, bookings: [] } } }
+      datesAndTimes = { [dateSelected]: { 18: { notBookable: false, bookings: [] }, 21: { notBookable: false, bookings: [] } } }
       return datesAndTimes[dateSelected];
     }
     return datesAndTimes[dateSelected];
@@ -30,7 +30,7 @@ class ChooseTime extends React.Component {
       { styles =>
         <div className="booking-step select-time-container" style={styles}>
           <h2>Select what time to dine</h2>
-            { !datesAndTimes["18"]["isBookable"] ?
+            { !datesAndTimes["18"]["notBookable"] ?
                 <button
                   className="amount-of-button"
                   value="18"
@@ -38,7 +38,7 @@ class ChooseTime extends React.Component {
                   onClick={ this.handleChange.bind(this) }>18.00
                 </button> : ""
             }
-            { !datesAndTimes["21"]["isBookable"] ?
+            { !datesAndTimes["21"]["notBookable"] ?
                 <button
                   className="amount-of-button"
                   value="21"
