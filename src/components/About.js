@@ -13,7 +13,7 @@ const About = () => {
         >
         { styles =>
           <div style={ styles } className="aboutpage-container">
-            <h1>About Nano Food</h1>
+            <h1>Story of Nano Food</h1>
             <section className="aboutpage__section menu flex">
 
               <div className="image">
