@@ -9,15 +9,15 @@ import {
 import { Transition } from "react-spring";
 
 const LandingPage = (props) => {
-    return (
-      <Transition
-        from={{opacity: 0, transition: "all 200ms" }}
-        enter={{opacity: 1 }}
-        leave={{opacity: 0 }}
-      >
+  return (
+    <Transition
+      from={{opacity: 0, transition: "all 200ms" }}
+      enter={{opacity: 1 }}
+      leave={{opacity: 0 }}
+    >
       { styles =>
         <div style={ styles } className="landingpage-container">
-        <h1>Welcome to Nano Food!</h1>
+          <h1>Welcome to Nano Food!</h1>
 
           <section className="landingpage__section menu flex">
 
@@ -64,10 +64,10 @@ const LandingPage = (props) => {
           </section>
           <Footer />
 
-      </div> /* .landingpage-container */
-    }
+        </div> /* .landingpage-container */
+      }
     </Transition>
 
-    );
-}
+  );
+};
 export default LandingPage;
