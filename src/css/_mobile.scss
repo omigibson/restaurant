@@ -554,24 +554,6 @@ th, td {
 /************************************/
 /************ PROGRESS **************/
 /************************************/
-progress[value] {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-   appearance: none;
-   width: 100%;
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   height: 7px;
-   z-index: 998;
-}
-progress[value]::-webkit-progress-bar {
-  background: $color__light-1;
-}
-progress[value]::-webkit-progress-value {
-  background: $color__accent-1;
-}
 
 .progress-bar::after {
   content: '';
@@ -587,7 +569,7 @@ progress[value]::-webkit-progress-value {
   z-index: 99999;
 }
 
-.progress-bar-show-00::after {
+.progress-bar-show-0::after {
   width: 0%;
 }
 
