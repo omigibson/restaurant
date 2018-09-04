@@ -22,7 +22,7 @@ const LandingPage = () => {
           <section className="landingpage__section menu flex">
 
             <div className="image">
-              <img src={ menuImage } />
+              <img src={ menuImage } alt="food"/>
             </div>
 
             <div className="text flex">
@@ -40,7 +40,7 @@ const LandingPage = () => {
           <section className="landingpage__section booking flex">
 
             <div className="image">
-              <img src={ bookingImage } />
+              <img src={ bookingImage } alt="dinner" />
             </div>
 
             <div className="text flex">
