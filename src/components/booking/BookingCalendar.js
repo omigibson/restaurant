@@ -1,5 +1,4 @@
 import React from "react";
-import ProgressBar from "./BookingProgress";
 import Calendar from "react-booking-calendar";
 import ContactForm from "./ContactForm";
 import ChooseTime from "./ChooseTime";
@@ -195,7 +194,6 @@ class BookingCalendar extends React.Component {
               </div>
             }
             </Transition>
-            <ProgressBar progressClass='progress-bar-show-25'/>
           </React.Fragment>
         );
       }
