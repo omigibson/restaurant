@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./../css/style.css";
 import LandingPage from "./LandingPage";
-import About from "./AboutComponent";
-import GuestComponent from "./GuestComponent";
+import About from "./About";
+import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
+import Logo from "./../images/nanofood-logo.svg";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,7 +16,7 @@ import {
 class App extends Component {
 
   state = {
-    displayFixed: ''
+    activeClass: "Home"
   }
 
   /* Sends JSON to our back-end. */
@@ -46,49 +47,64 @@ class App extends Component {
     }
   }
 
-  setAppState = (object) => this.setState(object);
+  handleChange = (e) => {
+    this.setState({ activeClass: [e.target.innerHTML] });
+  }
+
+  renderLinks = () => {
+    /* Our links. */
+    const links = ["Home", "Menu", "Booking", "About"];
+    return links.map((item, i) => {
+      /* Loop through and check what link-item is active. */
+      let activeClass = this.state.activeClass.toString() === item ? "active-link active-link-show" : "active-link";
+      return (
+        <li key={ i } className={ activeClass } onClick={ this.handleChange }>
+          <Link to={"/" + item.toLowerCase() }>{ item }</Link>
+        </li>
+      );
+    });
+  }
 
   render() {
-    console.log(this.state.displayFixed);
     return (
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <header className={this.state.displayFixed + " navbar-header flex hcenter"}>
+            <Link to="/home">
+              <div className="logo">
+                <img src={ Logo } className="logo" alt="Nano Food logo" />
+              </div>
+            </Link>
+            <header className="navbar-header flex vcenter hcenter">
               <ul className="flex">
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/menu">Menu</Link></li>
-                <li><Link to="/booking">Booking</Link></li>
-                <li><Link to="/about">About</Link></li>
+                { this.renderLinks() }
               </ul>
             </header>
-
+          </div>
 
             <Route path="/home" component={LandingPage} />
 
             <Route path="/about" component={About} />
             <Route
-              path='/booking'
-              render={(props) => <GuestComponent {...props}
-              setAppState={ this.setAppState.bind(this) }
+              path="/booking"
+              render={(props) => <SelectGuests {...props}
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route
-              path='/admin'
+              path="/admin"
               render={(props) => <Admin {...props}
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
             />
             <Route
-              path='/cancel'
+              path="/cancel"
               render={(props) => <CancelBooking {...props}
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
-          </div>
         </div>
       </Router>
     );

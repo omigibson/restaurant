@@ -128,7 +128,7 @@ div, section, footer {
   max-width: 800px;
   min-height: 100vh;
   margin: auto;
-  padding: 120px 4% 140px;
+  padding: 100px 4% 120px;
   z-index: 1;
 }
 img {
@@ -217,7 +217,7 @@ button {
 /************** HEADER **************/
 /************************************/
 .navbar-header {
-  z-index: 999;
+  z-index: 2;
   position: fixed;
   background: none;
   li {
@@ -229,14 +229,36 @@ button {
       color: $color__light-3;
     }
   }
-}
-.container-logo {
-  width: 200px;
-  img {
-    transform: translateX(16px);
+  ul {
+    margin: 0;
   }
 }
+.jumbotron {
+  .container-logo {
+    width: 200px;
+    img {
+      transform: translateX(16px);
+    }
+  }
+}
+div.logo {
+  position: fixed;
+  width: 140px;
+  margin: 16px;
+  z-index: 3;
+}
+.active-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color__accent-2;
+  transition: width 300ms;
+}
 
+.active-link-show::after {
+  width: 100%;
+}
 /************************************/
 /*********** LANDING PAGE ***********/
 /************************************/
@@ -433,7 +455,7 @@ button {
 
 .booking-details {
   width: 200px;
-  margin: 2em auto;
+  margin: 2em auto 0;
   background: $color__light-2;
   padding: 2em;
   line-height: 2em;
@@ -455,6 +477,27 @@ button {
 
 .invalid-input {
   border: 2px solid $color__accent-3;
+}
+
+
+/************************************/
+/*************** ADMIN **************/
+/************************************/
+.booking-details-container {
+  h1 {
+    text-align: center;
+    line-height: 1.2em;
+  }
+  h2 {
+    text-align: center;
+    font-family: 'Lato';
+    letter-spacing: .02em;
+    font-size: 1.2em;
+  }
+  .checkmark-container {
+    margin: auto;
+    width: 120px;
+  }
 }
 
 /************************************/
@@ -489,6 +532,28 @@ th, td {
   margin: 0px auto;
   flex-wrap: wrap;
   width: 50%;
+}
+
+/************************************/
+/************ PROGRESS **************/
+/************************************/
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   width: 100%;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 7px;
+   z-index: 998;
+}
+progress[value]::-webkit-progress-bar {
+  background: $color__light-1;
+}
+progress[value]::-webkit-progress-value {
+  background: $color__accent-1;
 }
 
 /************************************/
