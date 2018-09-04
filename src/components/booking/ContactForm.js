@@ -20,6 +20,10 @@ class ContactForm extends React.Component {
     checkboxErrorMessage: "hidden"
   }
 
+  componentWillMount = () => {
+    this.props.setAppState({ progressBar: 66 });
+  }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -194,6 +198,7 @@ class ContactForm extends React.Component {
           { styles =>
             <div className="container flex hcenter" style={styles}>
               <Confirmation
+                setAppState={ this.props.setAppState }
                 name={ this.state.allBookingDetails.userName }
                 date={ this.state.allBookingDetails.date }
                 time={ this.state.allBookingDetails.time + ":00" }

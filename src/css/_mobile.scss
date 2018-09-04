@@ -576,6 +576,37 @@ progress[value]::-webkit-progress-value {
   background: $color__accent-1;
 }
 
+.progress-bar::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 7px;
+  background: $color__accent-1;
+  transition: width 800ms;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+
+.progress-bar-show-00::after {
+  width: 0%;
+}
+
+.progress-bar-show-33::after {
+  width: 33.33%
+}
+
+.progress-bar-show-66::after {
+  width: 66.66%;
+}
+
+.progress-bar-show-100::after {
+  width: 100%;
+}
+
+
 /************************************/
 /************** MENU ****************/
 /************************************/
