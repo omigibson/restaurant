@@ -699,10 +699,14 @@ footer {
   p {
     font-size: .8rem;
     letter-spacing: .03rem;
+    margin: 0;
   }
   a {
     color:inherit;
-    margin-right: 20px;
+    margin-right: 15px;
+  }
+  .footer__bottom {
+    flex-wrap: wrap;
   }
 }
 
