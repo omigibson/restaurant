@@ -99,7 +99,6 @@ class ContactForm extends React.Component {
             hash: hash
           }, "send_email.php")
             .then((emailResponse) => {
-              console.log(emailResponse);
               this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
             })
         });
@@ -165,7 +164,7 @@ class ContactForm extends React.Component {
                       I left here, in order to enable table reservation.
                     </label>
                   </div>
-                  <div className="flex-column">
+                  <div className="flex column">
                     <span className="gdpr-info">
                       Nano Food follows the EU regulation General Data Protection Regulation (GDPR).
                       Read more <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr2/">here</a>.

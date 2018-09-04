@@ -165,11 +165,6 @@ img {
   display: flex;
 }
 
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
 .space-between {
   justify-content: space-between;
 }
@@ -212,7 +207,7 @@ input[type=password] {
 }
 input:focus {
   outline: none;
-  border: 2px solid $color__light-2;
+  border: $border__focus;
 }
 button, .button, input[type=submit] {
   padding: .7em 3em 1em;
@@ -315,7 +310,7 @@ button {
   .container-logo {
     width: 140px;
     img {
-      //Make sure logo is optically centered
+      // Make sure logo is optically centered
       transform: translateX(-1%);
     }
   }
