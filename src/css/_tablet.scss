@@ -51,56 +51,6 @@ body {
 }
 
 /************************************/
-/************ ABOUT PAGE **************/
-/************************************/
-
-.aboutpage-container {
-  padding: $height__navbar 0 0;
-  width: 100%;
-  .menu .text div {
-    background: $color__accent-1;
-    color: $color__accent-2;
-  }
-  .booking .text div {
-    background: $color__light-3;
-    color: $color__dark-2;
-  }
-}
-.jumbotron {
-  background: $color__accent-1;
-  // Make sure left-right-bottom margins are equal to top-margin
-  margin: 0 $height__navbar $height__navbar;
-  height: calc(70vh - (#{$height__navbar} * 2));
-}
-
-.aboutpage__section {
-  margin: 0 70px 100px;
-
-  &.menu, &.booking {
-    flex-direction: column;
-  }
-
-  .menu.text {
-      transform: none;
-      justify-content: flex-start;
-    }
-
-  .image, .text {
-    width: 100%;
-  }
-  .text {
-    margin: -50px 20px 0;
-    div {
-      width: 90%;
-      padding: 2em 2em 4em;
-      p {
-        margin-bottom: 3em;
-      }
-    }
-  }
-}
-
-/************************************/
 /************** FOOTER **************/
 /************************************/
 

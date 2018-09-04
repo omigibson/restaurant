@@ -12,9 +12,9 @@ const About = () => {
           leave={{opacity: 0 }}
         >
         { styles =>
-          <div style={ styles } className="landingpage-container aboutpage-container">
+          <div style={ styles } className="aboutpage-container">
             <h1>About Nano Food</h1>
-            <section className="landingpage__section aboutpage__section menu flex">
+            <section className="aboutpage__section menu flex">
 
               <div className="image">
                 <img src= {foundersImage} />
