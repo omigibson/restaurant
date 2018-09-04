@@ -30,12 +30,12 @@ const Footer = () => {
         <div><p><small>Terms & Conditions / Privacy Policy © Nano Food AB</small></p></div>
         <div>
           <a href="tel:0812345678"><small>08 — 123 45 678</small></a>
-            <a href="email:info@nanofood.io"><small>info@nanofood.io</small></a>
-            <a href="http://facebook.com/nanofood"><small>Facebook</small></a>
+          <a href="email:info@nanofood.io"><small>info@nanofood.io</small></a>
+          <a href="http://facebook.com/nanofood"><small>Facebook</small></a>
         </div>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

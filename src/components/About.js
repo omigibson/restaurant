@@ -4,13 +4,13 @@ import Footer from "./Footer";
 import { Transition } from "react-spring";
 
 const About = () => {
-    return (
-      <React.Fragment>
-        <Transition
-          from={{opacity: 0, transition: "all 200ms" }}
-          enter={{opacity: 1 }}
-          leave={{opacity: 0 }}
-        >
+  return (
+    <React.Fragment>
+      <Transition
+        from={{opacity: 0, transition: "all 200ms" }}
+        enter={{opacity: 1 }}
+        leave={{opacity: 0 }}
+      >
         { styles =>
           <div style={ styles } className="aboutpage-container">
             <h1>Story of Nano Food</h1>
@@ -30,11 +30,11 @@ const About = () => {
                 </div>
               </div>
             </section>
-        </div>
-      }
+          </div>
+        }
       </Transition>
-        <Footer />
-      </React.Fragment>
-    );
-}
+      <Footer />
+    </React.Fragment>
+  );
+};
 export default About;

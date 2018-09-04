@@ -17,9 +17,9 @@ const Confirmation = (props) => {
           <p><span className="bold">Guests:</span> { props.guests } </p>
         </div>
       </div>
-  </React.Fragment>
+    </React.Fragment>
   );
-}
+};
 
 
 export default Confirmation;
