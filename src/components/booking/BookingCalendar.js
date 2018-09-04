@@ -176,7 +176,7 @@ class BookingCalendar extends React.Component {
               leave={{ transform: "translateX(-200%)" }}
             >
             { styles =>
-              <div className="booking-step container flex hcenter vcenter column" style={styles}>
+              <div className="booking-step container flex vcenter column" style={styles}>
                 <h2>2/4 Select time and date</h2>
                 <Calendar
                   disableHistory={true}
