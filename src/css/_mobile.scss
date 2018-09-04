@@ -648,11 +648,11 @@ button {
 /************************************/
 
 .aboutpage-container {
+  padding: $height__navbar 20px 0;
+  width: 100%;
   h1 {
     text-align: center;
   }
-  padding: $height__navbar 20px 0;
-  width: 100%;
   .menu .text div {
     background: $color__accent-1;
     color: $color__accent-2;
