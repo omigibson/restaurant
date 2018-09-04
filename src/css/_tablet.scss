@@ -25,6 +25,7 @@ body {
 /********** LANDING PAGE ************/
 /************************************/
 .landingpage__section {
+  margin-bottom: 100px;
   min-height: 50vh;
   .text, .image {
     width: 50%;
@@ -51,16 +52,27 @@ body {
 }
 
 /************************************/
+/************** ABOUT PAGE **************/
+/************************************/
+
+.aboutpage__section {
+  margin-bottom: 100px;
+}
+
+/************************************/
 /************** FOOTER **************/
 /************************************/
 
 footer {
+  .footer__top {
+    display: flex;
+  }
   &>div {
     padding: 2em;
   }
-  .our-story, .address {
-    width: 50%;
-  }
+  // .our-story, .address {
+  //   width: 50%;
+  // }
   .our-story {
     padding: 0 0 2em 2em;
   }

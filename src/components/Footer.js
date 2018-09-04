@@ -6,7 +6,7 @@ import {
 const Footer = () => {
   return(
     <footer>
-      <div className="footer__top flex">
+      <div className="footer__top">
         <div className="address">
           <h3>Find us</h3>
           <address>
