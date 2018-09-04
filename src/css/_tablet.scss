@@ -48,6 +48,7 @@ body {
   }
   &.menu {
     flex-direction: row-reverse;
+    margin-top: 45px;
     .text {
       transform: translate($height__navbar, $height__navbar);
       justify-content: flex-end;

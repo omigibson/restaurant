@@ -262,6 +262,7 @@ button {
   }
   ul {
     margin: 0;
+    margin-top: 40px;
   }
 }
 
@@ -331,6 +332,9 @@ button {
   }
   &.menu, &.booking {
     flex-direction: column;
+  }
+  &.menu {
+    margin-top: 30px;
   }
   .image, .text {
     width: 100%;

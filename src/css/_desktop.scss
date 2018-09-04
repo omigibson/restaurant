@@ -17,6 +17,10 @@ html {
 .landingpage__section {
   min-height: 60vh;
 
+  &.menu {
+    margin-top: 60px;
+  }
+
   .text div {
     padding: 2rem 4rem 4rem;
     transition: all .3s;
