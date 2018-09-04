@@ -49,6 +49,10 @@ html, body {
   height: $height__navbar;
   justify-content: flex-end;
   padding: 1em;
+  h1 {
+    position: absolute;
+    left: -9999px;
+  }
   a {
     color: $color__dark-1;
   }
@@ -671,7 +675,6 @@ footer {
 .hidden {
   display: none;
 }
-
 ul {
   list-style: none;
 }
