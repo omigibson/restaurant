@@ -268,7 +268,7 @@ button {
 
 .logo {
   position: fixed;
-  width: 100px;
+  width: 80px;
   margin: 8px;
   z-index: 3;
   transition: width .3s;
@@ -289,6 +289,11 @@ button {
 /*********** LANDING PAGE ***********/
 /************************************/
 .landingpage-container {
+  h1 {
+    text-align: center;
+    line-height: 50px;
+    margin: 15px;
+  }
   padding: $height__navbar 0 0;
   width: 100%;
   .menu .text div {

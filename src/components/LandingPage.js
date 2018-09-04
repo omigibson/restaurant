@@ -18,6 +18,7 @@ const LandingPage = (props) => {
       >
       { styles =>
         <div style={ styles } className="landingpage-container">
+        <h1>Welcome to Nano Food!</h1>
 
           <section className="landingpage__section menu flex">
 

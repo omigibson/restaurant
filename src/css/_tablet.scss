@@ -25,6 +25,11 @@ body {
 /************************************/
 /********** LANDING PAGE ************/
 /************************************/
+.landingpage-container {
+  h1 {
+    margin: 30px;
+  }
+}
 .landingpage__section {
   margin-bottom: 100px;
   min-height: 50vh;
