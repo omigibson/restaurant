@@ -17,7 +17,7 @@ const About = () => {
             <section className="aboutpage__section menu flex">
 
               <div className="image">
-                <img src= {foundersImage} />
+                <img src= {foundersImage} alt="Founding duo Anna Svensson and Gittan Committa" />
               </div>
 
               <div className="text flex">
