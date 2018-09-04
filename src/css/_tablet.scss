@@ -37,20 +37,6 @@ body {
     }
   }
 }
-.jumbotron {
-  background: $color__accent-1;
-  // Make sure left-right-bottom margins are equal to top-margin
-  margin: 0 $height__navbar $height__navbar;
-  height: 40vh;
-
-  .container-logo {
-    width: 200px;
-    img {
-      //Make sure logo is optically centered
-      transform: translateX(-1%);
-    }
-  }
-}
 
 
 /************************************/
