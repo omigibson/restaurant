@@ -87,7 +87,11 @@ class App extends Component {
             </header>
           </div>
             <Route exact={true} path="/" component={LandingPage}/>
-            <Route path="/home" component={LandingPage} />
+              <Route
+                path="/home"
+                render={(props) => <LandingPage {...props}
+                setAppState={ this.setAppState.bind(this) } />}
+              />
             <Route path="/about" component={About} />
             <Route
               path="/booking"
