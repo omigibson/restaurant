@@ -1,8 +1,15 @@
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+html {
+  font-size: 14px;
+}
+
 /************************************/
 /********** LANDING PAGE ************/
 /************************************/
 .landingpage__section {
-  min-height: 50vh;
+  min-height: 100vh;
   .text, .image {
     width: 50%;
   }
@@ -23,6 +30,23 @@
     .text {
       transform: translate(-$height__navbar, $height__navbar);
     }
+  }
+}
+.jumbotron {
+  background: $color__accent-1;
+  // Make sure left-right-bottom margins are equal to top-margin
+  margin: 0 $height__navbar $height__navbar;
+  height: 40vh;
+
+  .container-logo {
+    width: 200px;
+    img {
+      //Make sure logo is optically centered
+      transform: translateX(-1%);
+    }
+  }
+  h2 {
+    display: block;
   }
 }
 

@@ -25,7 +25,7 @@ class ChooseTime extends React.Component {
         leave={{opacity: 0 }}
       >
       { styles =>
-        <div className="select-time-container" style={styles}>
+        <div className="booking-step select-time-container" style={styles}>
           <h2>Select what time to dine</h2>
             { !datesAndTimes["18"]["isBookable"] ?
                 <button
