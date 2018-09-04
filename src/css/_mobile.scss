@@ -47,6 +47,8 @@ html, body {
 .navbar-header {
   width: 100%;
   height: $height__navbar;
+  justify-content: flex-end;
+  padding: 1em;
   a {
     color: $color__dark-1;
   }
@@ -251,11 +253,12 @@ button {
   }
 }
 
-div.logo {
+.logo {
   position: fixed;
-  width: 140px;
+  width: 100px;
   margin: 16px;
   z-index: 3;
+  transition: width .3s;
 }
 .active-link::after {
   content: '';
@@ -313,6 +316,7 @@ div.logo {
   }
   .image, .text {
     width: 100%;
+    transition: all .3s;
   }
   .text {
     margin: -50px 20px 0;
