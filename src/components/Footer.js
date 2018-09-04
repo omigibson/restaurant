@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  Link
+} from "react-router-dom";
 
 const Footer = () => {
   return(
@@ -19,7 +22,7 @@ const Footer = () => {
               Nano Food is the manifestation of a Vietnamese-Swedish
               love story. Seasonal, locally produced produce is our passion.
           </p>
-          <p>Read the full story.</p>
+          <Link to="/about"><p>Read the full story.</p></Link>
         </div>
       </div>
       <hr />
