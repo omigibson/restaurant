@@ -48,6 +48,9 @@ class App extends Component {
     }
   }
 
+  /* We always want the activeClass to change whenever a link is clicked.
+  Also the progressBar is set to 0 when clicking a link which causes the
+  bar to animate itself to width 0%.  */
   handleChange = (e) => {
     this.setState({ activeClass: [e.target.innerHTML], progressBar: 0 });
   }
@@ -70,7 +73,6 @@ class App extends Component {
 
   render() {
     return (
-
         <div className="outer-container">
           <div className="navbar-container">
             <Link to="/home">
