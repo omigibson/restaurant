@@ -99,7 +99,11 @@ class ContactForm extends React.Component {
             hash: hash
           }, "send_email.php")
             .then((emailResponse) => {
-              this.setState({ allBookingDetails: emailResponse, stepCompleted: true });
+              this.setState({ allBookingDetails: emailResponse, stepCompleted: true }, () => {
+                /* We set the progress bar to full width here so we don't need
+                to use componentWillMount in the Confirmation.js-file. */ 
+                this.props.setAppState({ progressBar: 100 });
+              });
             })
         });
     })
