@@ -81,6 +81,7 @@ class App extends Component {
               </div>
             </Link>
             <header className="navbar-header flex vcenter">
+              <h1>Nano Food</h1>
               <ul className="flex">
                 { this.renderLinks() }
               </ul>
