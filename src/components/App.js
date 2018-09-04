@@ -7,7 +7,6 @@ import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
 import {
-  BrowserRouter as Router,
   Route,
   Link
 } from "react-router-dom";
@@ -66,7 +65,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+
         <div className="outer-container">
           <div className="navbar-container">
             <header className="navbar-header flex hcenter">
@@ -75,9 +74,8 @@ class App extends Component {
               </ul>
             </header>
           </div>
-
+            <Route exact={true} path="/" component={LandingPage}/>
             <Route path="/home" component={LandingPage} />
-
             <Route path="/about" component={About} />
             <Route
               path="/booking"
@@ -100,7 +98,6 @@ class App extends Component {
             />
             <Route path="/menu" component={Menu} />
         </div>
-      </Router>
     );
   }
 }
