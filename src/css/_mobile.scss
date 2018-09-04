@@ -49,6 +49,10 @@ html, body {
   height: $height__navbar;
   justify-content: flex-end;
   padding: 1em;
+  h1 {
+    position: absolute;
+    left: -9999px;
+  }
   a {
     color: $color__dark-1;
   }
@@ -198,7 +202,7 @@ input {
   font-size: 1em;
   font-family: 'Lato';
   letter-spacing: .02em;
-  border: 2px solid #d6d6d6;
+  border: $border__input;
 }
 input[type=text],
 input[type=email],
@@ -229,6 +233,20 @@ button {
   color: rgba(252, 249, 244, .8);
   &:hover {
     color:$color__light-3;
+  }
+}
+.red {
+  background: $color__accent-3;
+  color: $color__light-1;
+  &:hover {
+    color:rgba(255,255,255,.6);
+  }
+}
+.lightgreen {
+  background: $color__accent-1;
+  color: $color__light-1;
+  &:hover {
+    color:rgba(255,255,255,.6);
   }
 }
 
@@ -520,19 +538,50 @@ button {
 /************************************/
 /*************** ADMIN **************/
 /************************************/
-.login-form {
-  width: 300px;
-  margin: 50px auto;
-}
 
-table {
+.admin-container {
   width: 100%;
+  max-width: 1100px;
+  margin: 200px auto;
+  table {
+    width: 100%;
+  }
+  h2 {
+    text-indent: .5em;
+    font-weight: 700;
+  }
+  th, td {
+    padding: .5em;
+    text-align: left;
+  }
+  tr {
+    transition: ease .2s;
+  }
+  tr:hover {
+    transition: ease .2s;
+    background: $color__light-2;
+    cursor: pointer;
+  }
+  input[type=number] {
+    width:40px;
+  }
+  select {
+    -webkit-appearance: none;
+    padding: .5em;
+    border-radius: 0;
+    font-size: 1rem;
+    background: white;
+    border: $border__input;
+  }
+  button {
+    transition: ease .2s;
+    font-size: .8rem;
+    letter-spacing: .03rem;
+    padding: 10px 12px;
+    border-radius: 3px;
+  }
 }
 
-th, td {
-  padding: .5em 1em;
-  text-align: left;
-}
 
 /***************************************/
 /*********** AMOUNT OF GUESTS **********/
@@ -554,24 +603,6 @@ th, td {
 /************************************/
 /************ PROGRESS **************/
 /************************************/
-progress[value] {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-   appearance: none;
-   width: 100%;
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   height: 7px;
-   z-index: 998;
-}
-progress[value]::-webkit-progress-bar {
-  background: $color__light-1;
-}
-progress[value]::-webkit-progress-value {
-  background: $color__accent-1;
-}
 
 .progress-bar::after {
   content: '';
@@ -579,7 +610,7 @@ progress[value]::-webkit-progress-value {
   width: 0;
   height: 7px;
   background: $color__accent-1;
-  transition: width 800ms;
+  transition: ease-in-out 850ms;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -587,7 +618,7 @@ progress[value]::-webkit-progress-value {
   z-index: 99999;
 }
 
-.progress-bar-show-00::after {
+.progress-bar-show-0::after {
   width: 0%;
 }
 
@@ -644,7 +675,6 @@ footer {
 .hidden {
   display: none;
 }
-
 ul {
   list-style: none;
 }

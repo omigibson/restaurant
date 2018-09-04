@@ -3,7 +3,7 @@ import "./../css/style.css";
 import LandingPage from "./LandingPage";
 import About from "./About";
 import SelectGuests from "./booking/SelectGuests";
-import Admin from "./admin/AdminComponent";
+import Admin from "./admin/Admin";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
 import Logo from "./../images/nanofood-logo.svg";
@@ -81,13 +81,18 @@ class App extends Component {
               </div>
             </Link>
             <header className="navbar-header flex vcenter">
+              <h1>Nano Food</h1>
               <ul className="flex">
                 { this.renderLinks() }
               </ul>
             </header>
           </div>
             <Route exact={true} path="/" component={LandingPage}/>
-            <Route path="/home" component={LandingPage} />
+              <Route
+                path="/home"
+                render={(props) => <LandingPage {...props}
+                setAppState={ this.setAppState.bind(this) } />}
+              />
             <Route path="/about" component={About} />
             <Route
               path="/booking"
