@@ -80,7 +80,7 @@ class App extends Component {
                 <img src={ Logo } className="logo" alt="Nano Food logo" />
               </div>
             </Link>
-            <header className="navbar-header flex vcenter hcenter">
+            <header className="navbar-header flex vcenter">
               <ul className="flex">
                 { this.renderLinks() }
               </ul>
