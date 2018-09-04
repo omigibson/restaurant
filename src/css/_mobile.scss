@@ -88,23 +88,23 @@ h1, h4 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 3rem;
 }
 h2 {
-  font-size: 1.4em;
+  font-size: 1.2rem;
 }
 
 h3 {
-  font-size: .8em!important;
+  font-size: .8rem!important;
   font-weight: 300!important;
   text-transform: uppercase!important;
-  letter-spacing: .05em!important;
+  letter-spacing: .05rem!important;
 }
 
 p {
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 a,
 a:active,
@@ -452,11 +452,11 @@ button {
   }
   label {
     padding-left: 0px;
-    font-size: .9em;
-    letter-spacing: .04em;
+    font-size: .9rem;
+    letter-spacing: .02rem;
   }
   input {
-    margin: .4em 0 1.6em;
+    margin: .4rem 0 1.6rem;
     &::placeholder {
       color: #a2a2a2;
     }
@@ -466,7 +466,7 @@ button {
     margin: auto;
   }
   .gdpr-info {
-    font-size: 0.6em;
+    font-size: 0.6rem;
     margin: 0 0 2em;
     a {
       color: $color__accent-3;
@@ -485,12 +485,12 @@ button {
 
 .booking-details {
   width: 200px;
-  margin: 1em auto 3em;
+  margin: 1rem auto 3rem;
   background: $color__light-2;
-  padding: 2em;
-  line-height: 2em;
-  font-size: .9em;
-  letter-spacing: .02em;
+  padding: 2rem;
+  line-height: 2rem;
+  font-size: .9rem;
+  letter-spacing: .02rem;
   text-align: left;
   ul {
     list-style: none;
@@ -626,10 +626,10 @@ footer {
   margin: $height__navbar $height__navbar 0;
   color: $color__light-2;
   background: $color__dark-2;
-  padding: 2em;
+  padding: 2rem;
   p {
-    font-size: .8em;
-    letter-spacing: .03em;
+    font-size: .8rem;
+    letter-spacing: .03rem;
   }
   a {
     color:inherit;
