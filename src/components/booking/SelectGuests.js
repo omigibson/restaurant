@@ -2,6 +2,7 @@ import React from "react";
 import ProgressBar from "./BookingProgress";
 import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
+/* We use the React Spring NPM-package that handles our animations. */ 
 
 class SelectGuests extends React.Component {
 
@@ -15,7 +16,7 @@ class SelectGuests extends React.Component {
       this.setState({ stepCompleted: true });
     });
   }
-
+  /* Takes an object and makes buttons from the key/value. */
   amountOfGuestsButtons = (object) => {
     return Object.keys(object).map((key, index) => {
       return (

@@ -3,10 +3,13 @@ import { Transition } from "react-spring";
 
 class ChooseTime extends React.Component {
 
+  /* Sets the state of the parent component. */
   handleChange = (e) => {
     this.props.setBookingState({ [e.target.name]: e.target.value, stepCompleted: true });
   }
 
+  /* If the selected date doesn't exist in the object (it only consists of dates that have bookings),
+  create that date so it can be used for comparison in render. */ 
   checkIfNoBookingForDateAndTime = (datesAndTimes, dateSelected) => {
     if(!datesAndTimes[dateSelected]) {
       datesAndTimes = { [dateSelected]: { 18: { isBookable: false, bookings: [] }, 21: { isBookable: false, bookings: [] } } }
