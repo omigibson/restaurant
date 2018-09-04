@@ -6,6 +6,7 @@ import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/AdminComponent";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
+import Logo from "./../images/nanofood-logo.svg";
 import {
   BrowserRouter as Router,
   Route,
@@ -69,7 +70,12 @@ class App extends Component {
       <Router>
         <div className="outer-container">
           <div className="navbar-container">
-            <header className="navbar-header flex hcenter">
+            <Link to="/home">
+              <div className="logo">
+                <img src={ Logo } className="logo" alt="Nano Food logo" />
+              </div>
+            </Link>
+            <header className="navbar-header flex vcenter hcenter">
               <ul className="flex">
                 { this.renderLinks() }
               </ul>
