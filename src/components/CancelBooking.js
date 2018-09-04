@@ -57,15 +57,22 @@ class CancelBooking extends React.Component {
           <div className="container">
             <div className="cancel-booking-container hcenter vcenter">
               <h1>Your reservation</h1>
-              <p> Date: { this.state.bookingDetails[0].date } </p>
-              <p> Time: { this.state.bookingDetails[0].time } </p>
-              <p> Guests: { this.state.bookingDetails[0].guests } </p>
+              <div className="booking-details">
+                <p> Date: { this.state.bookingDetails[0].date } </p>
+                <p> Time: { this.state.bookingDetails[0].time } </p>
+                <p> Guests: { this.state.bookingDetails[0].guests } </p>
+              </div>
               { !this.state.deleteSuccess ?
-                  <div>
-                    <button onClick={ () => this.deleteBookingAndCustomerFromDB() }>
-                      Cancel booking
-                    </button>
-                  </div>
+                  <button className="red" onClick={ () => {
+                      if(window.confirm('Are you sure you want to cancel your reservation?')) {
+                        this.deleteBookingAndCustomerFromDB();
+                      }
+                      else {
+                        return;
+                      }
+                    } }>
+                    Cancel booking
+                  </button>
                 : <p>The reservation has been cancelled.</p>
               }
             </div>
