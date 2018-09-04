@@ -5,25 +5,24 @@ import bookingImage from "./../images/nanofood-3";
 import logo from "./../images/nanofood-logo.svg";
 import Footer from "./Footer";
 import {
-  BrowserRouter as Router,
   Link
 } from "react-router-dom";
+import { Transition } from "react-spring";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
     return (
-        <div className="landingpage-container">
-
-          <section className="jumbotron flex hcenter vcenter column">
-            <div className="container-logo">
-              <img src={ logo } alt="Nano Food logo" />
-            </div>
-            <h2>Welcome to our Vietnamese-Swedish kitchen</h2>
-          </section>
+      <Transition
+        from={{opacity: 0, transition: "all 200ms" }}
+        enter={{opacity: 1 }}
+        leave={{opacity: 0 }}
+      >
+      { styles =>
+        <div style={ styles } className="landingpage-container">
 
           <section className="landingpage__section menu flex">
 
             <div className="image">
-              <img src={ menuImage } />
+              <img src={ menuImage } alt="food"/>
             </div>
 
             <div className="text flex">
@@ -33,7 +32,12 @@ const LandingPage = () => {
                     Vietnamese cuisine meets Swedish tradition.
                     Vietnamese cuisine meets Swedish tradition.
                 </p>
-                <Link to="/menu" className="button green">See our menu</Link>
+                <Link
+                  onClick={ () => props.setAppState({ activeClass: "Menu" }) }
+                  to="/menu"
+                  className="button green">
+                  See our menu
+                </Link>
               </div>
             </div>
           </section>
@@ -41,7 +45,7 @@ const LandingPage = () => {
           <section className="landingpage__section booking flex">
 
             <div className="image">
-              <img src={ bookingImage } />
+              <img src={ bookingImage } alt="dinner" />
             </div>
 
             <div className="text flex">
@@ -49,13 +53,20 @@ const LandingPage = () => {
                 <h2>Breakfast, lunch or dinner?</h2>
                 <p>You are welcome at any time. You are welcome at any time.
                 You are welcome at any time. You are welcome at any time. </p>
-                <Link to="/booking" className="button brown">Book a table</Link>
+                <Link
+                  onClick={ () => props.setAppState({ activeClass: "Booking" }) }
+                  to="/booking"
+                  className="button brown">
+                  Book a table
+                </Link>
               </div>
             </div>
           </section>
           <Footer />
 
       </div> /* .landingpage-container */
+    }
+    </Transition>
 
     );
 }

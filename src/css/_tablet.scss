@@ -1,3 +1,26 @@
+/**************************************/
+/************* TYPOGRAPHY *************/
+/**************************************/
+html {
+  font-size: 14px;
+}
+
+body {
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+/**************************************/
+/*************** HEADER ***************/
+/**************************************/
+.navbar-header {
+  justify-content: center;
+}
+.logo {
+  width: 160px;
+  transition: all .3s;
+}
+
 /************************************/
 /********** LANDING PAGE ************/
 /************************************/
@@ -5,6 +28,7 @@
   min-height: 50vh;
   .text, .image {
     width: 50%;
+    transition: all .3s;
   }
   .text {
     margin: 0;

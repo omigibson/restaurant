@@ -1,11 +1,18 @@
 import React from "react";
 import foundersImage from "./../images/founding_duo.jpg";
 import Footer from "./Footer";
+import { Transition } from "react-spring";
 
 const About = () => {
     return (
       <React.Fragment>
-        <div className="landingpage-container aboutpage-container">
+        <Transition
+          from={{opacity: 0, transition: "all 200ms" }}
+          enter={{opacity: 1 }}
+          leave={{opacity: 0 }}
+        >
+        { styles =>
+          <div style={ styles } className="landingpage-container aboutpage-container">
             <h1>About Nano Food</h1>
             <section className="landingpage__section aboutpage__section menu flex">
 
@@ -24,6 +31,8 @@ const About = () => {
               </div>
             </section>
         </div>
+      }
+      </Transition>
         <Footer />
       </React.Fragment>
     );

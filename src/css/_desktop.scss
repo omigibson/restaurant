@@ -1,10 +1,21 @@
+/************************************/
+/*********** TYPOGRAPHY *************/
+/************************************/
+html {
+  font-size: 16px;
+}
+/************************************/
+/********** LANDING PAGE ************/
+/************************************/
 .landingpage__section {
   min-height: 60vh;
 
   .text div {
-    padding: 2em 4em 4em;
+    padding: 2rem 4rem 4rem;
+    transition: all .3s;
   }
 }
+<<<<<<< HEAD
 
 // .aboutpage__section .text div {
 //   padding: 2em;
@@ -50,3 +61,5 @@
 // .container section {
 //   width: 40%;
 // }
+=======
+>>>>>>> master

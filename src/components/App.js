@@ -11,11 +11,13 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ProgressBar from "./booking/BookingProgress";
 
 class App extends Component {
 
   state = {
-    activeClass: "Home"
+    activeClass: "Home",
+    progressBar: 0
   }
 
   /* Sends JSON to our back-end. */
@@ -46,9 +48,14 @@ class App extends Component {
     }
   }
 
+  /* We always want the activeClass to change whenever a link is clicked.
+  Also the progressBar is set to 0 when clicking a link which causes the
+  bar to animate itself to width 0%.  */
   handleChange = (e) => {
-    this.setState({ activeClass: [e.target.innerHTML] });
+    this.setState({ activeClass: [e.target.innerHTML], progressBar: 0 });
   }
+
+  setAppState = (json) => this.setState(json);
 
   renderLinks = () => {
     /* Our links. */
@@ -66,26 +73,30 @@ class App extends Component {
 
   render() {
     return (
-
         <div className="outer-container">
           <div className="navbar-container">
             <Link to="/home">
-              <div className="logo">
+              <div onClick={ () => this.setState({ activeClass: "Home", progressBar: 0 }) } className="logo">
                 <img src={ Logo } className="logo" alt="Nano Food logo" />
               </div>
             </Link>
-            <header className="navbar-header flex vcenter hcenter">
+            <header className="navbar-header flex vcenter">
               <ul className="flex">
                 { this.renderLinks() }
               </ul>
             </header>
           </div>
             <Route exact={true} path="/" component={LandingPage}/>
-            <Route path="/home" component={LandingPage} />
+              <Route
+                path="/home"
+                render={(props) => <LandingPage {...props}
+                setAppState={ this.setAppState.bind(this) } />}
+              />
             <Route path="/about" component={About} />
             <Route
               path="/booking"
               render={(props) => <SelectGuests {...props}
+              setAppState={ this.setAppState.bind(this) }
               fetchBookings={ this.fetchBookings }
               convertFromStringToDate={ this.convertFromStringToDate }
               sendToAPI={ this.sendToAPI } />}
@@ -103,6 +114,7 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
+            <ProgressBar progressClass={'progress-bar-show-' + this.state.progressBar}/>
         </div>
     );
   }
