@@ -92,7 +92,7 @@ h1, h4 {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
 }
 h2 {
   font-size: 1.2rem;
@@ -269,7 +269,7 @@ button {
 .logo {
   position: fixed;
   width: 80px;
-  margin: 8px;
+  margin: 6px;
   z-index: 3;
   transition: width .3s;
 }
@@ -293,6 +293,7 @@ button {
     text-align: center;
     line-height: 50px;
     margin: 15px;
+    margin-top: 25px;
   }
   padding: $height__navbar 0 0;
   width: 100%;
@@ -595,7 +596,11 @@ button {
 .amount-of-guests-container {
   margin: 0px auto;
   flex-wrap: wrap;
-  width: 50%;
+  width: 55%;
+  h2 {
+    margin: 10px;
+    margin-bottom: 25px;
+  }
 }
 
 /************************************/
@@ -639,7 +644,11 @@ button {
 .menu-container {
   width: 100%;
   max-width: 600px;
+  padding-top: 60px;
   margin: auto;
+  h1 {
+    text-align: center;
+  }
   li {
     font-size: 1rem;
     margin-bottom: 1rem;
