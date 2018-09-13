@@ -12,11 +12,14 @@ import {
   Link
 } from "react-router-dom";
 import ProgressBar from "./booking/BookingProgress";
+import { connect } from 'react-redux';
+
+import { setActivePage } from '../actions/actions'
 
 class App extends Component {
 
   state = {
-    activeClass: "Home",
+    activePage: "Home",
     progressBar: 0
   }
 
@@ -48,11 +51,12 @@ class App extends Component {
     }
   }
 
-  /* We always want the activeClass to change whenever a link is clicked.
+  /* We always want the activePage to change whenever a link is clicked.
   Also the progressBar is set to 0 when clicking a link which causes the
   bar to animate itself to width 0%.  */
   handleChange = (e) => {
-    this.setState({ activeClass: [e.target.innerHTML], progressBar: 0 });
+    //dispatch(setActivePage(e.target.innerHTML))
+    this.setState({ activePage: [e.target.innerHTML], progressBar: 0 });
   }
 
   setAppState = (json) => this.setState(json);
@@ -62,9 +66,9 @@ class App extends Component {
     const links = ["Home", "Menu", "Booking", "About"];
     return links.map((item, i) => {
       /* Loop through and check what link-item is active. */
-      let activeClass = this.state.activeClass.toString() === item ? "active-link active-link-show" : "active-link";
+      let activePage = this.state.activePage.toString() === item ? "active-link active-link-show" : "active-link";
       return (
-        <li key={ i } className={ activeClass } onClick={ this.handleChange }>
+        <li key={ i } className={ activePage } onClick={ this.handleChange }>
           <Link to={"/" + item.toLowerCase() }>{ item }</Link>
         </li>
       );
@@ -76,7 +80,7 @@ class App extends Component {
         <div className="outer-container">
           <div className="navbar-container">
             <Link to="/home">
-              <div onClick={ () => this.setState({ activeClass: "Home", progressBar: 0 }) } className="logo">
+              <div onClick={ () => this.setState({ activePage: "Home", progressBar: 0 }) } className="logo">
                 <img src={ Logo } className="logo" alt="Nano Food logo" />
               </div>
             </Link>

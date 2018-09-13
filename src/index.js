@@ -1,20 +1,44 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import { createStore } from 'redux';
-import rootReducer from './reducers/rootReducer';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import createSagaMiddleware from 'redux-saga';
+
+// Components
 import App from "./components/App";
+
+// Utilities
 import registerServiceWorker from "./registerServiceWorker";
 
-const store = createStore(rootReducer)
+// Reducers
+import bookings from './reducers/bookings';
+
+// Sagas
+import bookingsSaga from './sagas/bookings';
+
+// Styling
+import "./index.css";
+
+// Setup saga
+const sagaMiddleware = createSagaMiddleware();
+const mws = applyMiddleware(sagaMiddleware)
+
+const middlewares = compose(mws, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+// Setup store
+const store = createStore(
+  bookings,
+  middlewares
+);
+
+sagaMiddleware.run(bookingsSaga);
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-    , document.getElementById("root"));
-  registerServiceWorker();
   </Provider>
+  ,document.getElementById("root"));
+registerServiceWorker();

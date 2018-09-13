@@ -1,5 +1,7 @@
 import React from "react";
 import Bookings from "./Bookings";
+import { requestBookings } from '../../actions/bookings';
+import connect from '../../utilities/connect';
 
 class Admin extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
@@ -10,6 +12,10 @@ class Admin extends React.Component {
       editing: false,
       bookingToEdit: {},
       updatedBooking: {}
+    }
+
+    componentDidMount() {
+      this.props.requestBookings();
     }
 
     /* Before the component is mounted fetchBookings is called and the result is
@@ -85,6 +91,9 @@ class Admin extends React.Component {
     }
 
       render = () => {
+
+        console.log('Bookings in admin', this.props.bookings);
+
         // Only render if this.state.convertedBookings returns true.
         if (this.state.convertedBookings) {
           return (
@@ -122,4 +131,7 @@ class Admin extends React.Component {
       }
     }
   }
-export default Admin;
+
+export default connect(Admin, { requestBookings }, (store) => ({
+  bookings: store.bookings
+}));
