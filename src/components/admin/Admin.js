@@ -18,17 +18,17 @@ class Admin extends React.Component {
       this.props.requestBookings();
     }
 
-    /* Before the component is mounted fetchBookings is called and the result is
-    stored in this.state.allBookings. */
-    componentWillMount = () => {
-      this.props.fetchBookings("fetch_bookings_and_customers.php")
-        .then((bookings) => {
-          this.setState({ allBookings: bookings }, () => {
-            const convertedBookings = this.props.convertFromStringToDate(bookings);
-            this.setState({ convertedBookings });
-        })
-      })
-    }
+    // /* Before the component is mounted fetchBookings is called and the result is
+    // stored in this.state.allBookings. */
+    // componentWillMount = () => {
+    //   this.props.fetchBookings("fetch_bookings_and_customers.php")
+    //     .then((bookings) => {
+    //       this.setState({ allBookings: bookings }, () => {
+    //         const convertedBookings = this.props.convertFromStringToDate(bookings);
+    //         this.setState({ convertedBookings });
+    //     })
+    //   })
+    // }
 
     /*******************************************/
     /************* DELETE BOOKING **************/

@@ -12,7 +12,7 @@ import App from "./components/App";
 import registerServiceWorker from "./registerServiceWorker";
 
 // Reducers
-import bookings from './reducers/bookings';
+import reducers from './reducers';
 
 // Sagas
 import bookingsSaga from './sagas/bookings';
@@ -28,7 +28,7 @@ const middlewares = compose(mws, window.__REDUX_DEVTOOLS_EXTENSION__ && window._
 
 // Setup store
 const store = createStore(
-  bookings,
+  reducers,
   middlewares
 );
 

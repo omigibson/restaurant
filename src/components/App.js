@@ -14,12 +14,9 @@ import {
 import ProgressBar from "./booking/BookingProgress";
 import { connect } from 'react-redux';
 
-import { setActivePage } from '../actions/actions'
-
 class App extends Component {
 
   state = {
-    activePage: "Home",
     progressBar: 0
   }
 
@@ -66,7 +63,7 @@ class App extends Component {
     const links = ["Home", "Menu", "Booking", "About"];
     return links.map((item, i) => {
       /* Loop through and check what link-item is active. */
-      let activePage = this.state.activePage.toString() === item ? "active-link active-link-show" : "active-link";
+      let activePage = this.state.activePage === item ? "active-link active-link-show" : "active-link";
       return (
         <li key={ i } className={ activePage } onClick={ this.handleChange }>
           <Link to={"/" + item.toLowerCase() }>{ item }</Link>
@@ -76,6 +73,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
         <div className="outer-container">
           <div className="navbar-container">

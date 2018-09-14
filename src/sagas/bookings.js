@@ -10,15 +10,12 @@ import { FETCH_BOOKINGS_REQUEST } from '../constants/actionTypes';
 import { receiveBookings } from '../actions/bookings'
 
 function* handleFetchOfBookings(action) {
-  console.log('What happend? ', action.type);
   try {
     const response = yield call(fetchBookings,'fetch_bookings_and_customers.php');
     if (response.error) throw new Error(response.error);
-
     yield put(receiveBookings(response));
-    console.log(response);
   }  catch (error) {
-      console.log('Something went wrong!');
+    console.log('Something went wrong in handleFetchOfBookings!');
   }
 }
 
