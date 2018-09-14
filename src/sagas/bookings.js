@@ -16,7 +16,6 @@ function* handleFetchOfBookings(action) {
     if (response.error) throw new Error(response.error);
 
     yield put(receiveBookings(response));
-    console.log(response);
   }  catch (error) {
       console.log('Something went wrong!');
   }
