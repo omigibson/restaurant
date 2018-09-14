@@ -11,6 +11,7 @@ const bookings = (state = initialState, action) => {
     case FETCH_BOOKINGS_SUCCESS:
       return Object.assign({}, state, action.payload.bookings);
     default:
+    console.log('yoyoyo');
       return state;
   }
 }

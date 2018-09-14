@@ -97,7 +97,7 @@ class Admin extends React.Component {
         // Only render if this.state.convertedBookings returns true.
         if (this.state.convertedBookings) {
           return (
-            <div class="admin-container">
+            <div className="admin-container">
               <div className="admin-panel">
                 <h2>Bookings</h2>
                   <table>
