@@ -1,6 +1,13 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
+//Components
 import Bookings from "./Bookings";
+
+//Actions
 import { requestBookings } from '../../actions/bookings';
+
+//Utilities
 import connect from '../../utilities/connect';
 
 class Admin extends React.Component {
@@ -91,7 +98,6 @@ class Admin extends React.Component {
     }
 
       render = () => {
-
         console.log('Bookings in admin', this.props.bookings);
 
         // Only render if this.state.convertedBookings returns true.
@@ -113,13 +119,13 @@ class Admin extends React.Component {
                     </thead>
                     <tbody>
                       <Bookings
-                        bookingItems={ this.state.allBookings }
-                        onEdit={ this.editBooking }
-                        handleEdit={ this.handleEdit }
-                        onSave={ this.saveUpdatedBooking }
-                        onDelete={ this.deleteBooking }
-                        isEditing={ this.state.editing }
-                        bookingToEdit={ this.state.bookingToEdit }
+                        bookings={ this.props.bookings }
+                        // onEdit={ this.editBooking }
+                        // handleEdit={ this.handleEdit }
+                        // onSave={ this.saveUpdatedBooking }
+                        // onDelete={ this.deleteBooking }
+                        // isEditing={ this.state.editing }
+                        // bookingToEdit={ this.state.bookingToEdit }
                       />
                     </tbody>
                   </table>

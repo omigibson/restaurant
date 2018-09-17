@@ -2,7 +2,8 @@ import {
   FETCH_BOOKINGS_SUCCESS
 } from '../constants/actionTypes';
 
-const initialState = {}
+const initialState = {
+}
 
 const bookings = (state = initialState, action) => {
   switch (action.type) {

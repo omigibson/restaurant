@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Bookings = (props) => {
+  console.log(props.bookings);
 
   if (props.bookingItems) {
     return props.bookingItems.map((item, i) => {
@@ -104,4 +106,5 @@ const Bookings = (props) => {
     return null;
   }
 };
+
 export default Bookings;
