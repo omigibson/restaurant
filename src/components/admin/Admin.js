@@ -6,6 +6,7 @@ import Bookings from "./Bookings";
 
 //Actions
 import { requestBookings } from '../../actions/bookings';
+import { requestDeleteBooking } from '../../actions/bookings';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -41,18 +42,17 @@ class Admin extends React.Component {
     /************* DELETE BOOKING **************/
     /*******************************************/
 
-    deleteBooking = (e) => {
-      const itemToDelete = {
-        itemToDelete: e.target.id
-      };
+    deleteBooking = (event) => {
+      console.log(event.target);
+      requestDeleteBooking(event.target);
 
       // Delete booking from DB
-      this.props.sendToAPI(itemToDelete, "delete_bookings.php");
+      //this.props.sendToAPI(itemToDelete, "delete_bookings.php");
 
       // Delete bookig from DOM
-      let updatedBookingArray = this.state.allBookings;
-      updatedBookingArray.splice(e.target.name, 1);
-      this.setState({ allBookings: updatedBookingArray });
+      // let updatedBookingArray = this.state.allBookings;
+      // updatedBookingArray.splice(e.target.name, 1);
+      // this.setState({ allBookings: updatedBookingArray });
     }
 
     /*******************************************/
@@ -123,7 +123,7 @@ class Admin extends React.Component {
                         // onEdit={ this.editBooking }
                         // handleEdit={ this.handleEdit }
                         // onSave={ this.saveUpdatedBooking }
-                        // onDelete={ this.deleteBooking }
+                        onDelete={ this.deleteBooking }
                         // isEditing={ this.state.editing }
                         // bookingToEdit={ this.state.bookingToEdit }
                       />

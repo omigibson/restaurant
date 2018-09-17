@@ -21,19 +21,11 @@ class App extends Component {
   }
 
   /* Sends JSON to our back-end. */
-  sendToAPI = (json, fileName) => {
-    return fetch(`http://localhost:8888/${fileName}`, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(json)
-    })
-      .then((response) => response.json())
-  }
-
-  fetchBookings = (fileName) => {
-    return fetch(`http://localhost:8888/${fileName}`)
-      .then((response) => response.json())
-  }
+  
+  // fetchBookings = (fileName) => {
+  //   return fetch(`http://localhost:8888/${fileName}`)
+  //     .then((response) => response.json())
+  // }
 
   /* Converts this.state.allBookings from MySQL date-format to something that
   JavaScript can understand through new Date. */
