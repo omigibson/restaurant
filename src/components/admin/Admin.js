@@ -43,8 +43,8 @@ class Admin extends React.Component {
     /*******************************************/
 
     deleteBooking = (event) => {
-      console.log(event.target);
-      requestDeleteBooking(event.target);
+      // console.log(event.target.id);
+      this.props.requestDeleteBooking(event.target);
 
       // Delete booking from DB
       //this.props.sendToAPI(itemToDelete, "delete_bookings.php");
@@ -138,6 +138,6 @@ class Admin extends React.Component {
     }
   }
 
-export default connect(Admin, { requestBookings }, (store) => ({
+export default connect(Admin, { requestBookings, requestDeleteBooking }, (store) => ({
   bookings: store.bookings
 }));

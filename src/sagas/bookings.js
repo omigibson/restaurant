@@ -20,20 +20,23 @@ function* handleFetchOfBookings(action) {
   }
 }
 
-  function* handleDeletetionOfBooking(action) {
+  function* handleDeletionOfBooking(action) {
+    console.log(action.payload);
     const itemToDelete = {
-      itemToDelete: action.payload
+      id: action.payload
     };
+    console.log(itemToDelete);
     try {
       const response = yield call(sendToAPI, [itemToDelete, 'delete_bookings.php']);
       if (response.error) throw new Error(response.error);
+      console.log(response);
       yield put(requestBookings());
     }  catch (error) {
-      console.log('Something went wrong in handleDeleteOfBooking!');
+      console.log('Something went wrong in handleDeleteOfBooking! ' + error);
     }
   }
 
 export default function* bookingsSaga() {
   yield takeLatest(FETCH_BOOKINGS_REQUEST, handleFetchOfBookings);
-  yield takeLatest(DELETE_BOOKING_REQUEST, handleDeletetionOfBooking);
+  yield takeLatest(DELETE_BOOKING_REQUEST, handleDeletionOfBooking);
 }
