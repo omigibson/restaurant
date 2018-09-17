@@ -10,12 +10,12 @@ export const receiveBookings = (bookings) => ({
   payload: { bookings }
 });
 
-export const requestDeleteBooking = (button) => ({
+export const requestDeleteBooking = (id) => ({
   type: DELETE_BOOKING_REQUEST,
-  payload: button.id
+  payload: { id }
 });
 
-export const deleteBookingDone = (deletedItem) => ({
+export const deleteBookingSuccess = (id) => ({
   type: DELETE_BOOKING_SUCCESS,
-  payload: deletedItem
+  payload: { id }
 });

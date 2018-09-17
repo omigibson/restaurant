@@ -44,7 +44,7 @@ class Admin extends React.Component {
 
     deleteBooking = (event) => {
       // console.log(event.target.id);
-      this.props.requestDeleteBooking(event.target);
+      this.props.requestDeleteBooking(event.target.id);
 
       // Delete booking from DB
       //this.props.sendToAPI(itemToDelete, "delete_bookings.php");
@@ -97,44 +97,41 @@ class Admin extends React.Component {
       this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
     }
 
-      render = () => {
-        console.log('Bookings in admin', this.props.bookings);
+    render() {
 
-        // Only render if this.state.convertedBookings returns true.
-        if (this.state.convertedBookings) {
-          return (
-            <div className="admin-container">
-              <div className="admin-panel">
-                <h2>Bookings</h2>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Guests</th>
-                        <th>Name</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <Bookings
-                        bookings={ this.props.bookings }
-                        // onEdit={ this.editBooking }
-                        // handleEdit={ this.handleEdit }
-                        // onSave={ this.saveUpdatedBooking }
-                        onDelete={ this.deleteBooking }
-                        // isEditing={ this.state.editing }
-                        // bookingToEdit={ this.state.bookingToEdit }
-                      />
-                    </tbody>
-                  </table>
-            </div>
-          </div>
-        );
-      } else {
-        return null;
-      }
+      console.log('Bookings in admin', this.props.bookings);
+
+
+      return (
+        <div className="admin-container">
+          <div className="admin-panel">
+            <h2>Bookings</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Guests</th>
+                    <th>Name</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <Bookings
+                    bookings={ this.props.bookings }
+                    // onEdit={ this.editBooking }
+                    // handleEdit={ this.handleEdit }
+                    // onSave={ this.saveUpdatedBooking }
+                    onDelete={ this.deleteBooking }
+                    // isEditing={ this.state.editing }
+                    // bookingToEdit={ this.state.bookingToEdit }
+                  />
+                </tbody>
+              </table>
+        </div>
+      </div>
+    );
     }
   }
 

@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   /* Sends JSON to our back-end. */
-  
+
   // fetchBookings = (fileName) => {
   //   return fetch(`http://localhost:8888/${fileName}`)
   //     .then((response) => response.json())
@@ -98,10 +98,7 @@ class App extends Component {
             />
             <Route
               path="/admin"
-              render={(props) => <Admin {...props}
-              fetchBookings={ this.fetchBookings }
-              convertFromStringToDate={ this.convertFromStringToDate }
-              sendToAPI={ this.sendToAPI } />}
+              component={Admin}
             />
             <Route
               path="/cancel"
