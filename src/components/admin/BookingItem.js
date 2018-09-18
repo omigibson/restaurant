@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Map } from 'immutable';
 
 class BookingItem extends PureComponent {
 
@@ -6,81 +7,89 @@ class BookingItem extends PureComponent {
     super(props)
     this.state = {
       editing: false,
+      bookingCopy: this.props.item
     }
   }
 
+
   handleOnEdit = () => {
+    this.setState((prevState) => ({ editing: !prevState.Editing }));
+  }
+
+
+  handleOnChange = (event) => {
+    const { name, value } = event.currentTarget;
     this.setState((prevState) => ({
-      editing: !prevState.editing
+      bookingCopy: prevState.bookingCopy.set(name, value)
     }));
   }
 
-  handleOnSave = () => {}
+  handleOnSave = () => {
+      this.props.onSave(this.state.bookingCopy.toJS());
+      console.log(this.state.bookingCopy);
+  }
 
   render() {
-
     const { item } = this.props;
-
     const timeOption = item.time === '18' ? '21' : '18';
-
 
     if ( this.state.editing ) {
       return (
         <tr key={item.get('id')}>
           <td>
             <input
-              onChange={() => {}}
+              onChange={this.handleOnChange}
               name="date"
               type="date"
-              defaultValue={ item.get('date') }
+              value={this.state.bookingCopy.get('date', item.get('date'))}
             />
           </td>
           <td>
             <select
               name="time"
-              onChange={() => {}}>
+              onChange={this.handleOnChange}>
               <option value ={ item.get('time') } >{ item.get('time') }</option>
               <option value={timeOption}>{timeOption}</option>
             </select>
           </td>
           <td>
             <input
-              onChange={() => {}}
+              onChange={this.handleOnChange}
               name="guests"
               type="number"
-              defaultValue={ item.get('guests') }
+              defaultValue={ this.state.bookingCopy.get('guests', item.get('guests')) }
               min="1"
               max="6"
             />
           </td>
           <td>
             <input
-              onChange={() => {}}
+              onChange={this.handleOnChange}
               name="name"
               type="text"
-              defaultValue={ item.get('name') }
+              defaultValue={ this.state.bookingCopy.get('name', item.get('name')) }
             />
           </td>
           <td>
             <input
-              onChange={() => {}}
+              onChange={this.handleOnChange}
               name="tel"
               type="tel"
-              defaultValue={ item.get('tel') }
+              defaultValue={ this.state.bookingCopy.get('tel', item.get('tel')) }
             />
           </td>
           <td>
             <input
-              onChange={() => {}}
+              onChange={this.handleOnChange}
               name="email"
               type="email"
-              defaultValue={ item.get('email') }
+              defaultValue={ this.state.bookingCopy.get('email', item.get('email')) }
             />
           </td>
           <td>
             <button
               onClick={ this.handleOnSave }
-              id={ item.get('id') }
+              id={ item.get('userID') }
               className="button save lightgreen">{'Save'}
             </button>
           </td>
@@ -112,9 +121,8 @@ class BookingItem extends PureComponent {
           </button>
         </td>
       </tr>
-    )
+    );
   }
-
 }
 
 export default BookingItem;

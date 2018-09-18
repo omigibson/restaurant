@@ -20,25 +20,18 @@ class App extends Component {
     progressBar: 0
   }
 
-  /* Sends JSON to our back-end. */
-
-  // fetchBookings = (fileName) => {
-  //   return fetch(`http://localhost:8888/${fileName}`)
-  //     .then((response) => response.json())
-  // }
-
   /* Converts this.state.allBookings from MySQL date-format to something that
   JavaScript can understand through new Date. */
 
-  convertFromStringToDate = (arrayWithBookedDates) => {
-    if (arrayWithBookedDates) {
-      let alldaysThatAreFull = [];
-      arrayWithBookedDates.forEach((date) => {
-        alldaysThatAreFull.push(new Date(date));
-      });
-      return alldaysThatAreFull;
-    }
-  }
+  // convertFromStringToDate = (arrayWithBookedDates) => {
+  //   if (arrayWithBookedDates) {
+  //     let alldaysThatAreFull = [];
+  //     arrayWithBookedDates.forEach((date) => {
+  //       alldaysThatAreFull.push(new Date(date));
+  //     });
+  //     return alldaysThatAreFull;
+  //   }
+  // }
 
   /* We always want the activePage to change whenever a link is clicked.
   Also the progressBar is set to 0 when clicking a link which causes the

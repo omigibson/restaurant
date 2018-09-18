@@ -7,6 +7,7 @@ import Bookings from "./Bookings";
 //Actions
 import { requestBookings } from '../../actions/bookings';
 import { requestDeleteBooking } from '../../actions/bookings';
+import { saveBookingRequest } from '../../actions/bookings'
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -15,10 +16,7 @@ class Admin extends React.Component {
     /* State will contain objects that are retreived from MYSQL. convertedBookings
     is the same data, but converted to Date-format. */
     state = {
-      allBookings: null,
-      convertedBookings: [],
-      editing: false,
-      bookingToEdit: {},
+      //convertedBookings: [],
       updatedBooking: {}
     }
 
@@ -55,53 +53,11 @@ class Admin extends React.Component {
       // this.setState({ allBookings: updatedBookingArray });
     }
 
-    /*******************************************/
-    /*************** EDIT BOOKING **************/
-    /*******************************************/
-
-    handleEdit = (e) => {
-      let updatedBooking = Object.assign({}, this.state.bookingToEdit, {
-        [e.target.name]: e.target.value
-      });
-      this.setState({ updatedBooking });
-    }
-
-
-    editBooking = (e) => {
-      this.setState({
-        editing: true,
-        editIndex: e.target.name,
-        bookingToEdit: this.state.allBookings[e.target.name]});
-    }
-
-    saveUpdatedBooking = () => {
-      const allBookings = this.state.allBookings;
-      if (Object.keys(this.state.updatedBooking).length === 0) {
-        allBookings[this.state.editIndex] = this.state.bookingToEdit;
-        this.setState({ allBookings });
-      }
-      else {
-      allBookings[this.state.editIndex] = this.state.updatedBooking;
-      this.setState({ allBookings });
-    }
-
-      this.setState({ allBookings: this.state.allBookings }, () => {
-        this.setState({
-          editing:false,
-          updatedBooking: {},
-          bookingToEdit: {}
-        });
-      });
-
-      // Send updatedBooking to DB
-      this.props.sendToAPI(this.state.updatedBooking, "update_booking.php");
+    onSave = (bookingCopy) => {
+      this.props.saveBookingRequest(bookingCopy);
     }
 
     render() {
-
-      console.log('Bookings in admin', this.props.bookings);
-
-
       return (
         <div className="admin-container">
           <div className="admin-panel">
@@ -122,7 +78,7 @@ class Admin extends React.Component {
                     bookings={ this.props.bookings }
                     // onEdit={ this.editBooking }
                     // handleEdit={ this.handleEdit }
-                    // onSave={ this.saveUpdatedBooking }
+                    onSave={ this.onSave }
                     onDelete={ this.deleteBooking }
                     // isEditing={ this.state.editing }
                     // bookingToEdit={ this.state.bookingToEdit }
@@ -135,6 +91,6 @@ class Admin extends React.Component {
     }
   }
 
-export default connect(Admin, { requestBookings, requestDeleteBooking }, (store) => ({
+export default connect(Admin, { requestBookings, requestDeleteBooking, saveBookingRequest }, (store) => ({
   bookings: store.bookings
 }));

@@ -4,7 +4,7 @@ export const fetchBookings = (fileName) => fetch(`${base_url}/${fileName}`)
     .then((response) => response.json());
 
 export const sendToAPI = (json, fileName) => {
-  console.log(json, fileName);
+  console.log(`Send to API ${json}, ${fileName}`);
   return fetch(`${base_url}/${fileName}`, {
     method: "POST",
     mode: "cors",
