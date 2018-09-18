@@ -25,8 +25,10 @@ class BookingItem extends PureComponent {
   }
 
   handleOnSave = () => {
-      this.props.onSave(this.state.bookingCopy.toJS());
-      console.log(this.state.bookingCopy);
+    this.setState(
+      () => ({ editing: false }),
+      () => this.props.onSave(this.state.bookingCopy.toJS())
+    );
   }
 
   render() {

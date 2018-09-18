@@ -13,8 +13,10 @@ const bookings = (state = initialState, action) => {
       const index = state.findIndex(item => item.get('id') === action.payload.id)
       return state.delete(index);
     }
-    case SAVE_BOOKING_SUCCESS:
-    return state.merge(action.payload.booking);
+    case SAVE_BOOKING_SUCCESS: {
+      const index = state.findIndex(item => item.get('id') === action.payload.booking.get('id'))
+      return state.set(index, action.payload.booking)
+    }
     default:
       return state;
   }

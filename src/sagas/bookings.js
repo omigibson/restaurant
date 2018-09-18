@@ -32,12 +32,12 @@ function* handleFetchOfBookings(action) {
   }
 
   function* handleSavingOfBooking(action) {
+    console.log('handleSavingOfBooking booking', action.payload.booking);
     try {
-      console.log(action.payload.booking);
       const response = yield call(sendToAPI, action.payload.booking, 'update_booking.php');
       if (response.error) throw new Error(response.error);
-      console.log(response);
-      yield put(saveBookingSuccess(action.payload.booking));
+      console.log('handleSavingOfBooking', response);
+      yield put(saveBookingSuccess(fromJS(response)));
     }  catch (error) {
       console.log('Something went wrong in handleSavingOfBooking! ' + error);
     }
