@@ -10,13 +10,15 @@ import {
   DELETE_BOOKINGS_WITH_HASH_FAILURE,
   POST_BOOKING,
   POST_BOOKING_SUCCESS,
-  POST_BOOKING_FAILURE
+  POST_BOOKING_FAILURE,
   POST_USER_DETAILS,
   SEND_EMAIL,
-  UPDATE_BOOKING
+  UPDATE_BOOKING,
+  SET_ACTIVE_PAGE,
+  SET_PROGRESSBAR_VALUE
 } from '../constants/actionTypes';
 
-export const requestBookings = () => ({
-  type: FETCH_BOOKINGS_REQUEST,
-  payload:
+export const setActivePage = (page = '') => ({
+  type: SET_ACTIVE_PAGE,
+  page: { page }
 });
