@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import Bookings from "./Bookings";
 
 //Actions
-import { requestBookings } from '../../actions/bookings';
-import { requestDeleteBooking } from '../../actions/bookings';
-import { saveBookingRequest } from '../../actions/bookings'
+import { requestBookings } from '../../actions/admin';
+import { requestDeleteBooking } from '../../actions/admin';
+import { saveBookingRequest } from '../../actions/admin'
 
 //Utilities
 import connect from '../../utilities/connect';

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
+import admin from './admin'
 import bookings from './bookings'
-import customers from './customers'
 
 export default combineReducers({
-  bookings,
-  customers
+  admin,
+  bookings
 });

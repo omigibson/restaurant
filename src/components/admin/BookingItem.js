@@ -11,7 +11,6 @@ class BookingItem extends PureComponent {
     }
   }
 
-
   handleOnEdit = () => {
     this.setState((prevState) => ({ editing: !prevState.Editing }));
   }

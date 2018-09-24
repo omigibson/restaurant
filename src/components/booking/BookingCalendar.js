@@ -4,6 +4,12 @@ import ContactForm from "./ContactForm";
 import ChooseTime from "./ChooseTime";
 import { Transition } from "react-spring";
 
+//Actions
+import { requestBookings } from '../../actions/bookings';
+
+//Utilities
+import connect from '../../utilities/connect';
+
 class BookingCalendar extends React.Component {
   /* State will contain objects that are retreived from MYSQL. daysThatAreFull
   is the same data, but converted to Date-format. */
@@ -22,21 +28,25 @@ class BookingCalendar extends React.Component {
   stored in this.state.allBookings. */
   componentWillMount = () => {
     this.props.setAppState({ progressBar: 33 });
-    this.props.fetchBookings("fetch_bookings.php")
-      .then((bookings) => {
-        this.setState({ allBookings: bookings }, () => {
-          /* After all the bookings are present in this.state.allBookings they
-          are converted to the Date format through the convertBookingtoDates-method. */
-          const bookingsPerDateAndTime = this.sortBookingsPerDate();
-          const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
-          this.setState({ datesAndTimes: controlledBookings }, () => {
-            this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
-              this.initiateMonthPaginationEventListeners();
-              this.initiateCalendarEventListeners();
-            })
-          });
-        });
-      })
+    // this.props.fetchBookings("fetch_bookings.php")
+    //   .then((bookings) => {
+    //     this.setState({ allBookings: bookings }, () => {
+    //       /* After all the bookings are present in this.state.allBookings they
+    //       are converted to the Date format through the convertBookingtoDates-method. */
+    //       const bookingsPerDateAndTime = this.sortBookingsPerDate();
+    //       const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
+    //       this.setState({ datesAndTimes: controlledBookings }, () => {
+    //         this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
+    //           this.initiateMonthPaginationEventListeners();
+    //           this.initiateCalendarEventListeners();
+    //         })
+    //       });
+    //     });
+    //   })
+  }
+
+  componentDidMount() {
+    this.props.requestBookings();
   }
 
   /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
@@ -227,4 +237,6 @@ class BookingCalendar extends React.Component {
   }
 }
 
-export default BookingCalendar;
+export default connect(BookingCalendar, { requestBookings }, (store) => ({
+  bookings: store.bookings
+}));

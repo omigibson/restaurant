@@ -15,7 +15,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import combinedreducers from './reducers/index';
 
 // Sagas
-import bookingsSaga from './sagas/bookings';
+import bookingsSaga from './sagas/admin';
 
 // Styling
 import "./index.css";
