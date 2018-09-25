@@ -15,7 +15,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import combinedreducers from './reducers/index';
 
 // Sagas
-import bookingsSaga from './sagas/admin';
+import Sagas from './sagas/RootSaga';
 
 // Styling
 import "./index.css";
@@ -32,7 +32,7 @@ const store = createStore(
   middlewares
 );
 
-sagaMiddleware.run(bookingsSaga);
+sagaMiddleware.run(Sagas);
 
 ReactDOM.render(
   <Provider store={store}>

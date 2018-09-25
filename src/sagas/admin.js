@@ -43,7 +43,7 @@ function* handleFetchOfBookings(action) {
     }
   }
 
-export default function* bookingsSaga() {
+export default function* adminSaga() {
   yield takeLatest(FETCH_BOOKINGS_REQUEST, handleFetchOfBookings);
   yield takeLatest(DELETE_BOOKING_REQUEST, handleDeletionOfBooking);
   yield takeLatest(SAVE_BOOKING_REQUEST, handleSavingOfBooking)

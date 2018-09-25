@@ -12,7 +12,6 @@ import {
   Link
 } from "react-router-dom";
 import ProgressBar from "./booking/BookingProgress";
-import { connect } from 'react-redux';
 
 class App extends Component {
 

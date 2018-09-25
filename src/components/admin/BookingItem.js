@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Map } from 'immutable';
 
 class BookingItem extends PureComponent {
 
