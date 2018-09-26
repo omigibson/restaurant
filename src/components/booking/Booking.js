@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
-import { requestBookings, checkWhichDatesAreFull } from '../../actions/bookings';
+import { requestBookings, checkWhichDatesAreFull, updateViewstate } from '../../actions/bookings';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -32,7 +32,12 @@ class Booking extends Component {
     return(
       <Fragment>
         <Switch>
-          <Route exact path={`/booking/selectguests`} component={SelectGuests} />
+        <Route
+          exact={true}
+          path='/booking/selectguests'
+          render={(props) => <SelectGuests {...props}
+          updateViewstate={ this.props.updateViewstate } />}
+          />
           <Route exact path={'/booking/calendar'} component={BookingCalendar} />
           <Route exact path={'/booking/choosetime'} component={ChooseTime} />
           <Route exact path={'/booking/contactform'} component={ContactForm} />
@@ -43,6 +48,6 @@ class Booking extends Component {
   }
 }
 
-export default connect(Booking, { requestBookings, checkWhichDatesAreFull }, (store) => ({
+export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store) => ({
   bookings: store.bookings
 }));
