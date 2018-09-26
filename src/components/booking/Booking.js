@@ -30,7 +30,7 @@ class Booking extends Component{
     return(
       <Switch>
         <Route exact path={`/booking/selectguests`} component={SelectGuests} />
-        <Route exact path={'/bookings/calendar'} component={BookingCalendar} />
+        <Route exact path={'/booking/calendar'} component={BookingCalendar} />
         <Route exact path={'/booking/choosetime'} component={ChooseTime} />
         <Route exact path={'/booking/contactform'} component={ContactForm} />
         <Route exact path={'/booking/confirmation'} component={Confirmation} />
@@ -39,6 +39,6 @@ class Booking extends Component{
   }
 }
 
-export default connect(BookingCalendar, { requestBookings, checkWhichDatesAreFull }, (store) => ({
+export default connect(Booking, { requestBookings, checkWhichDatesAreFull }, (store) => ({
   bookings: store.bookings
 }));
