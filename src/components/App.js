@@ -84,16 +84,8 @@ class App extends Component {
               setAppState={ this.setAppState.bind(this) } />}
               />
             <Route path="/about" component={About} />
-            <Route
-              path="/booking"
-              render={(props) => <Booking {...props}
-              setAppState={ this.setAppState.bind(this) }
-              convertFromStringToDate={ this.convertFromStringToDate } />}
-            />
-            <Route
-              path="/admin"
-              component={Admin}
-            />
+            <Route path="/booking" component={Booking} />
+            <Route path="/admin" component={Admin} />
             <Route
               path="/cancel"
               render={(props) => <CancelBooking {...props}

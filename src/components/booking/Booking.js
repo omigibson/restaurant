@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
@@ -14,31 +14,39 @@ import ChooseTime from './ChooseTime';
 import ContactForm from './ContactForm';
 import Confirmation from './Confirmation';
 
-class Booking extends Component{
+class Booking extends Component {
+
   defaultProps = {
-    bookingStatus: 'selectguests'
+    currentStep: 1
   }
 
   componentDidMount() {
     this.props.requestBookings();
-}
+  }
 
-  render(){
-    if (this.props.bookingStatus === 'selectguests') {
-        return <Redirect to={`/booking/selectguests`} />;
-}
+  render() {
+
+    if ( this.props.match.isExact && this.props.match.url === '/booking' ) {
+      return <Redirect to={'/booking/selectguests'} />;
+    }
+
     return(
-      <Switch>
-        <Route exact path={`/booking/selectguests`} component={SelectGuests} />
-        <Route exact path={'/bookings/calendar'} component={BookingCalendar} />
-        <Route exact path={'/booking/choosetime'} component={ChooseTime} />
-        <Route exact path={'/booking/contactform'} component={ContactForm} />
-        <Route exact path={'/booking/confirmation'} component={Confirmation} />
-      </Switch>
+      <Fragment>
+        <div>
+          <h1>{'Book a table'}</h1>
+        </div>
+        <Switch>
+          <Route exact path={`/booking/selectguests`} component={SelectGuests} />
+          <Route exact path={'/booking/calendar'} component={BookingCalendar} />
+          <Route exact path={'/booking/choosetime'} component={ChooseTime} />
+          <Route exact path={'/booking/contactform'} component={ContactForm} />
+          <Route exact path={'/booking/confirmation'} component={Confirmation} />
+        </Switch>
+      </Fragment>
     )
   }
 }
 
-export default connect(BookingCalendar, { requestBookings, checkWhichDatesAreFull }, (store) => ({
+export default connect(Booking, { requestBookings, checkWhichDatesAreFull }, (store) => ({
   bookings: store.bookings
 }));

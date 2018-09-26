@@ -26,29 +26,7 @@ class BookingCalendar extends React.Component {
     timeSelected: null
   }
 
-  /* Before the component is mounted fetchBookings is called and the result is
-  stored in this.state.allBookings. */
-  componentWillMount = () => {
-    this.props.setAppState({ progressBar: 33 });
-
-  }
-
   componentDidMount() {
-    this.props.requestBookings();
-    //   .then((bookings) => {
-    //     this.setState({ allBookings: bookings }, () => {
-    //       /* After all the bookings are present in this.state.allBookings they
-    //       are converted to the Date format through the convertBookingtoDates-method. */
-    //       const bookingsPerDateAndTime = this.sortBookingsPerDate();
-    //       const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
-    //       this.setState({ datesAndTimes: controlledBookings }, () => {
-    //         this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
-    //           this.initiateMonthPaginationEventListeners();
-    //           this.initiateCalendarEventListeners();
-    //         })
-    //       });
-    //     });
-    //   })
   }
 
   /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
