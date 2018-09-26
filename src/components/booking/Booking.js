@@ -26,15 +26,12 @@ class Booking extends Component {
 
   render() {
 
-    if ( this.props.match.isExact && this.props.match.url === '/booking' ) {
+    if ( this.props.match.isExact && (this.props.match.url === '/booking' || this.props.match.url === '/booking/') ) {
       return <Redirect to={'/booking/selectguests'} />;
     }
 
     return(
       <Fragment>
-        <div>
-          <h1>{'Book a table'}</h1>
-        </div>
         <Switch>
           <Route exact path={`/booking/selectguests`} component={SelectGuests} />
           <Route exact path={'/booking/calendar'} component={BookingCalendar} />
