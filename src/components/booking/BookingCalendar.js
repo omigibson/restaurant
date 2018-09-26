@@ -30,7 +30,11 @@ class BookingCalendar extends React.Component {
   stored in this.state.allBookings. */
   componentWillMount = () => {
     this.props.setAppState({ progressBar: 33 });
-    // this.props.fetchBookings("fetch_bookings.php")
+
+  }
+
+  componentDidMount() {
+    this.props.requestBookings();
     //   .then((bookings) => {
     //     this.setState({ allBookings: bookings }, () => {
     //       /* After all the bookings are present in this.state.allBookings they
@@ -45,11 +49,6 @@ class BookingCalendar extends React.Component {
     //       });
     //     });
     //   })
-  }
-
-  componentDidMount() {
-    this.props.requestBookings();
-    // this.props.checkWhichDatesAreFull();
   }
 
   /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */

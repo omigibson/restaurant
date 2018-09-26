@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import "./../css/style.css";
+
+//Components
 import LandingPage from "./LandingPage";
+import Booking from "./booking/Booking";
 import About from "./About";
 import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/Admin";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
+import ProgressBar from "./booking/BookingProgress";
+
 import Logo from "./../images/nanofood-logo.svg";
 import {
   Route,
   Link
 } from "react-router-dom";
-import ProgressBar from "./booking/BookingProgress";
 
 class App extends Component {
 
@@ -74,19 +78,17 @@ class App extends Component {
             </header>
           </div>
             <Route exact={true} path="/" component={LandingPage}/>
-              <Route
-                path="/home"
-                render={(props) => <LandingPage {...props}
-                setAppState={ this.setAppState.bind(this) } />}
+            <Route
+              path="/home"
+              render={(props) => <LandingPage {...props}
+              setAppState={ this.setAppState.bind(this) } />}
               />
             <Route path="/about" component={About} />
             <Route
               path="/booking"
-              render={(props) => <SelectGuests {...props}
+              render={(props) => <Booking {...props}
               setAppState={ this.setAppState.bind(this) }
-              fetchBookings={ this.fetchBookings }
-              convertFromStringToDate={ this.convertFromStringToDate }
-              sendToAPI={ this.sendToAPI } />}
+              convertFromStringToDate={ this.convertFromStringToDate } />}
             />
             <Route
               path="/admin"

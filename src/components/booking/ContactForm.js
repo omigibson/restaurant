@@ -101,7 +101,7 @@ class ContactForm extends React.Component {
             .then((emailResponse) => {
               this.setState({ allBookingDetails: emailResponse, stepCompleted: true }, () => {
                 /* We set the progress bar to full width here so we don't need
-                to use componentWillMount in the Confirmation.js-file. */ 
+                to use componentWillMount in the Confirmation.js-file. */
                 this.props.setAppState({ progressBar: 100 });
               });
             })
