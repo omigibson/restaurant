@@ -27,7 +27,7 @@ class Booking extends Component{
     if (this.props.bookingStatus === 'selectguests') {
         return <Redirect to={`/booking/selectguests`} />;
 }
-    return(
+  return(
       <Switch>
         <Route exact path={`/booking/selectguests`} component={SelectGuests} />
         <Route exact path={'/booking/calendar'} component={BookingCalendar} />
