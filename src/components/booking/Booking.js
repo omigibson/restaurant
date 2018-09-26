@@ -32,9 +32,6 @@ class Booking extends Component {
 
     return(
       <Fragment>
-        <div>
-          <h1>{'Book a table'}</h1>
-        </div>
         <Switch>
           <Route exact path={`/booking/selectguests`} component={SelectGuests} />
           <Route exact path={'/booking/calendar'} component={BookingCalendar} />
