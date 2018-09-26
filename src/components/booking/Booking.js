@@ -29,7 +29,6 @@ class Booking extends Component {
     if ( this.props.match.isExact && (this.props.match.url === '/booking' || this.props.match.url === '/booking/') ) {
       return <Redirect to={'/booking/selectguests'} />;
     }
-
     return(
       <Fragment>
         <Switch>
