@@ -3,11 +3,20 @@ import { Redirect } from 'react-router-dom';
 import Calendar from "react-booking-calendar";
 import { Transition } from "react-spring";
 
+// Actions
+import { updateViewstate } from '../../actions/bookings';
+
+//Utilities
+import connect from '../../utilities/connect';
+
 //Components
 import ChooseTime from "./ChooseTime";
 import ContactForm from "./ContactForm";
 
-export default class BookingCalendar extends React.Component {
+// Selectors
+import { getDaysThatAreFull } from '../../selectors/calendarSelectors';
+
+class BookingCalendar extends React.Component {
   /* State will contain objects that are retreived from MYSQL. daysThatAreFull
   is the same data, but converted to Date-format. */
   state = {
@@ -23,21 +32,22 @@ export default class BookingCalendar extends React.Component {
 
   componentWillMount = () => {
       // this.props.setAppState({ progressBar: 33 });
-       this.setState({ allBookings: this.props.bookings }, () => {
-         /* After all the bookings are present in this.state.allBookings they
-         are converted to the Date format through the convertBookingtoDates-method. */
-         const bookingsPerDateAndTime = this.sortBookingsPerDate();
-         const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
-         this.setState({ datesAndTimes: controlledBookings }, () => {
-           this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
-             this.initiateMonthPaginationEventListeners();
-             this.initiateCalendarEventListeners();
-           })
-         });
-       });
+       // this.setState({ allBookings: this.props.bookings }, () => {
+       //   /* After all the bookings are present in this.state.allBookings they
+       //   are converted to the Date format through the convertBookingtoDates-method. */
+       //   const bookingsPerDateAndTime = this.sortBookingsPerDate();
+       //   const controlledBookings = this.controlIfDatesAreBookedOrPassed(bookingsPerDateAndTime);
+       //   this.setState({ datesAndTimes: controlledBookings }, () => {
+       //     this.setState({ daysThatAreFull: this.ifDateOrTimesAreBooked() }, () => {
+       //
+       //     })
+       //   });
+       // });
  }
 
  componentDidMount() {
+   this.initiateMonthPaginationEventListeners();
+   this.initiateCalendarEventListeners();
 }
 
   /* Takes a JS-Date object and converts it to yyyy-mm-dd.  */
@@ -49,67 +59,80 @@ export default class BookingCalendar extends React.Component {
   // }
 
   /* Takes the array from state and loops through it. Sorts based on date and time.  */
-  sortBookingsPerDate = () => {
-    const allBookings = this.props.allBookings;
-    /* Empty object that will contain all dates with bookings. */
-    let bookingsPerDateAndTime = {};
-    for (let i = 0; i < allBookings.length; i++) {
-      /* If the date doesn"t already exist, create it (object) and add both "18" and "21" (arrays). */
-      if (!bookingsPerDateAndTime[allBookings[i].date]) {
-        bookingsPerDateAndTime[allBookings[i].date] = { "18": [], "21": [] };
-      }
-      /* Make a copy of the array */
-      const oldArray = bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time];
-      /* Add the new value into the array */
-      bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
-    }
-    return bookingsPerDateAndTime;
-  }
+  // sortBookingsPerDate = () => {
+  //   const allBookings = this.state.allBookings;
+  //   /* Empty object that will contain all dates with bookings. */
+  //   let bookingsPerDateAndTime = {};
+  //   for (let i = 0; i < allBookings.length; i++) {
+  //     /* If the date doesn"t already exist, create it (object) and add both "18" and "21" (arrays). */
+  //     if (!bookingsPerDateAndTime[allBookings[i].date]) {
+  //       bookingsPerDateAndTime[allBookings[i].date] = { "18": [], "21": [] };
+  //     }
+  //     /* Make a copy of the array */
+  //     const oldArray = bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time];
+  //     /* Add the new value into the array */
+  //     bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
+  //   }
+  //   return bookingsPerDateAndTime;
+  // }
 
-  controlIfDatesAreBookedOrPassed = (object) => {
-    for (let key in object) {
-      /* Constructs a new Date where the clock stands at 02:00. */
-      const dateOfBooking = new Date(key);
-      /* We add 16 and 19 to those numbers (the time for the sittings 18:00 and 21:00) */
-      const firstSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 16);
-      const secondSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 19);
-      /* Control if the time for the sitting at 18:00 has passed. */
-      if (this.controlIfDateIsPassed(firstSitting)) {
-          object[key]["18"] = { notBookable: true, bookings: object[key]["18"] }
-      }
-      else if (object[key]["18"].length >= 3) {
-        object[key]["18"] = { notBookable: true, bookings: object[key]["18"] }
-      }
-      else {
-        object[key]["18"] = { notBookable: false, bookings: object[key]["18"] }
-      }
-      /* Control if the time for the sitting at 21:00 has passed. */
-      if (this.controlIfDateIsPassed(secondSitting)) {
-          object[key]["21"] = { notBookable: true, bookings: object[key]["21"] }
-      }
-      else if (object[key]["21"].length >= 3) {
-        object[key]["21"] = { notBookable: true, bookings: object[key]["21"] }
-      }
-      else {
-        object[key]["21"] = { notBookable: false, bookings: object[key]["21"] }
-      }
+  // controlIfDatesAreBookedOrPassed = (object) => {
+  //   for (let key in object) {
+  //     /* Constructs a new Date where the clock stands at 02:00. */
+  //     const dateOfBooking = new Date(key);
+  //     /* We add 16 and 19 to those numbers (the time for the sittings 18:00 and 21:00) */
+  //     const firstSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 16);
+  //     const secondSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 19);
+  //     /* Control if the time for the sitting at 18:00 has passed. */
+  //     if (this.controlIfDateIsPassed(firstSitting)) {
+  //         object[key]["18"] = { notBookable: true, bookings: object[key]["18"] }
+  //     }
+  //     else if (object[key]["18"].length >= 3) {
+  //       object[key]["18"] = { notBookable: true, bookings: object[key]["18"] }
+  //     }
+  //     else {
+  //       object[key]["18"] = { notBookable: false, bookings: object[key]["18"] }
+  //     }
+  //     /* Control if the time for the sitting at 21:00 has passed. */
+  //     if (this.controlIfDateIsPassed(secondSitting)) {
+  //         object[key]["21"] = { notBookable: true, bookings: object[key]["21"] }
+  //     }
+  //     else if (object[key]["21"].length >= 3) {
+  //       object[key]["21"] = { notBookable: true, bookings: object[key]["21"] }
+  //     }
+  //     else {
+  //       object[key]["21"] = { notBookable: false, bookings: object[key]["21"] }
+  //     }
+  //   }
+  //   return object;
+  // }
+
+  /* Converts this.state.allBookings from MySQL date-format to something that
+  JavaScript can understand through new Date. */
+
+  convertFromStringToDate = (arrayWithBookedDates) => {
+    if (arrayWithBookedDates) {
+      let alldaysThatAreFull = [];
+      arrayWithBookedDates.forEach((date) => {
+        alldaysThatAreFull.push(new Date(date));
+      });
+      return alldaysThatAreFull;
     }
-    return object;
   }
 
   /* Check if the object in state contains a date with full bookings. */
-  ifDateOrTimesAreBooked = () => {
-    const object = this.state.datesAndTimes;
-    let datesThatArenotBookable = [];
-    for (let key in object) {
-      if(object[key]["21"].notBookable && object[key]["18"].notBookable) {
-        datesThatArenotBookable.push(key);
-        continue;
-      }
-    }
-    const convertToDateFormat = this.props.convertFromStringToDate(datesThatArenotBookable);
-    return convertToDateFormat;
-  }
+  // ifDateOrTimesAreBooked = () => {
+  //   const object = this.state.datesAndTimes;
+  //   let datesThatArenotBookable = [];
+  //   for (let key in object) {
+  //     if(object[key]["21"].notBookable && object[key]["18"].notBookable) {
+  //       datesThatArenotBookable.push(key);
+  //       continue;
+  //     }
+  //   }
+  //   const convertToDateFormat = this.props.convertFromStringToDate(datesThatArenotBookable);
+  //   return convertToDateFormat;
+  // }
 
   /* Initiates initiateCalendarEventListeners() when paginating between months. */
   initiateMonthPaginationEventListeners = () => {
@@ -187,7 +210,7 @@ export default class BookingCalendar extends React.Component {
                 <h2>2/4 Select time and date</h2>
                 <Calendar
                   disableHistory={true}
-                  bookings={this.state.daysThatAreFull}
+                  bookings={this.props.bookedDates}
                   clickable={true}
                 />
                 { this.state.decideWhatTime &&
@@ -234,3 +257,9 @@ export default class BookingCalendar extends React.Component {
     // }
   }
 }
+
+export default connect(BookingCalendar, { updateViewstate }, (store) => ({
+  bookings: store.bookings,
+  viewstate: store.viewstate,
+  daysThatAreFull: getDaysThatAreFull(store)
+}))

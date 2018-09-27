@@ -3,6 +3,12 @@ import { Redirect } from 'react-router-dom';
 import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
 
+// Actions
+import { updateViewstate } from '../../actions/bookings';
+
+//Utilities
+import connect from '../../utilities/connect';
+
 class SelectGuests extends React.Component {
 
   state = {
@@ -64,4 +70,6 @@ class SelectGuests extends React.Component {
   }
 }
 
-export default SelectGuests;
+export default connect(SelectGuests, { updateViewstate }, (store) => ({
+  viewstate: store.viewstate
+}));

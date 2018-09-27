@@ -60,13 +60,10 @@ class Booking extends Component {
         <Route exact path={'/booking/selectguests'} component={SelectGuests} />
         <Route exact path={'/booking/calendar'}
           render={(props) => <BookingCalendar {...props}
-          allBookings={this.props.bookings}
-          updateViewstate={ this.props.updateViewstate }
           convertFromStringToDate = {this.convertFromStringToDate} />}
         />
           <Route exact path={'/booking/choosetime'}
           render={(props) => <ChooseTime {...props}
-          updateViewstate={ this.props.updateViewstate }
           convertFromStringToDate = {this.convertFromStringToDate}
           convertDateObjectToString = {this.convertDateObjectToString} />} />
           <Route exact path={'/booking/contactform'} component={ContactForm} />
@@ -77,7 +74,7 @@ class Booking extends Component {
   }
 }
 
-export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store, props) => ({
+export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store) => ({
   bookings: store.bookings,
   viewstate: store.viewstate
 }));
