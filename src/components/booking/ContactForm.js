@@ -21,7 +21,7 @@ class ContactForm extends React.Component {
   }
 
   componentWillMount = () => {
-    this.props.setAppState({ progressBar: 66 });
+    // this.props.setAppState({ progressBar: 66 });
   }
 
   handleChange = (e) => {
@@ -124,7 +124,7 @@ class ContactForm extends React.Component {
                 <div className="booking-details">
                   <ul>
                     <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
-                    <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
+                    // <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
                     <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
                   </ul>
                 </div>

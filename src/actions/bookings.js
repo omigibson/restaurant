@@ -27,7 +27,7 @@ export const updateBookingStatus = (step) => ({
   step: { step }
 });
 
-export const updateViewstate = (selectedGuests) => ({
+export const updateViewstate = (key: string, value: any) => ({
   type: VIEWSTATE_SET_DATA,
-  payload: { selectedGuests }
+  payload: { key, value }
 });

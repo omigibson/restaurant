@@ -9,8 +9,8 @@ class SelectGuests extends React.Component {
     stepCompleted: false
   }
 
-  handleChange = (e) => {
-    this.props.updateViewstate({amountOfGuests: e.target.value});
+  handleChange = (event) => {
+    this.props.updateViewstate('amountOfGuests', event.target.value);
     this.setState({ stepCompleted: true });
   }
 

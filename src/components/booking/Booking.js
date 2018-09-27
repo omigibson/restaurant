@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { toJS } from 'immutable';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
@@ -17,12 +18,36 @@ import Confirmation from './Confirmation';
 class Booking extends Component {
 
   defaultProps = {
-    currentStep: 1
+    currentStep: 1,
+    viewstate: this.props.viewstate
   }
 
   componentDidMount() {
     this.props.requestBookings();
   }
+
+  /* Converts this.state.allBookings from MySQL date-format to something that
+  JavaScript can understand through new Date. */
+
+  convertFromStringToDate = (arrayWithBookedDates) => {
+    if (arrayWithBookedDates) {
+      let alldaysThatAreFull = [];
+      arrayWithBookedDates.forEach((date) => {
+        alldaysThatAreFull.push(new Date(date));
+      });
+      return alldaysThatAreFull;
+    }
+  }
+
+  convertDateObjectToString = () => {
+
+    const dateObject = this.props.viewstate.get('dateSelected');
+    const yyyy = dateObject.getFullYear().toString();
+    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
+    const dd = (dateObject.getDate() + 100).toString().slice(-2);
+    return yyyy + "-" + mm + "-" + dd;
+  }
+
 
   render() {
 
@@ -32,14 +57,18 @@ class Booking extends Component {
     return(
       <Fragment>
         <Switch>
-        <Route
-          exact={true}
-          path='/booking/selectguests'
-          render={(props) => <SelectGuests {...props}
-          updateViewstate={ this.props.updateViewstate } />}
-          />
-          <Route exact path={'/booking/calendar'} component={BookingCalendar} />
-          <Route exact path={'/booking/choosetime'} component={ChooseTime} />
+        <Route exact path={'/booking/selectguests'} component={SelectGuests} />
+        <Route exact path={'/booking/calendar'}
+          render={(props) => <BookingCalendar {...props}
+          allBookings={this.props.bookings}
+          updateViewstate={ this.props.updateViewstate }
+          convertFromStringToDate = {this.convertFromStringToDate} />}
+        />
+          <Route exact path={'/booking/choosetime'}
+          render={(props) => <ChooseTime {...props}
+          updateViewstate={ this.props.updateViewstate }
+          convertFromStringToDate = {this.convertFromStringToDate}
+          convertDateObjectToString = {this.convertDateObjectToString} />} />
           <Route exact path={'/booking/contactform'} component={ContactForm} />
           <Route exact path={'/booking/confirmation'} component={Confirmation} />
         </Switch>
@@ -48,6 +77,7 @@ class Booking extends Component {
   }
 }
 
-export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store) => ({
-  bookings: store.bookings
+export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store, props) => ({
+  bookings: store.bookings,
+  viewstate: store.viewstate
 }));

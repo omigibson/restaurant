@@ -5,7 +5,7 @@ const ChooseTime = (props) => {
 
   /* Sets the state of the parent component. */
   const handleChange = (e) => {
-    props.setBookingState({ [e.target.name]: e.target.value, stepCompleted: true });
+    props.updateViewstate( 'timeSelected', e.target.value/*, stepCompleted: true*/ );
   };
 
   /* If the selected date doesn't exist in the object (it only consists of dates that have bookings),
