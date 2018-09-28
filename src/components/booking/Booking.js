@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { toJS } from 'immutable';
+import { toJS, Map } from 'immutable';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
@@ -17,9 +17,9 @@ import Confirmation from './Confirmation';
 
 class Booking extends Component {
 
-  defaultProps = {
+  static defaultProps = {
     currentStep: 1,
-    viewstate: this.props.viewstate
+    viewstate: Map()
   }
 
   componentDidMount() {
@@ -58,14 +58,7 @@ class Booking extends Component {
       <Fragment>
         <Switch>
         <Route exact path={'/booking/selectguests'} component={SelectGuests} />
-        <Route exact path={'/booking/calendar'}
-          render={(props) => <BookingCalendar {...props}
-          convertFromStringToDate = {this.convertFromStringToDate} />}
-        />
-          <Route exact path={'/booking/choosetime'}
-          render={(props) => <ChooseTime {...props}
-          convertFromStringToDate = {this.convertFromStringToDate}
-          convertDateObjectToString = {this.convertDateObjectToString} />} />
+        <Route exact path={'/booking/calendar'} component={BookingCalendar} />          
           <Route exact path={'/booking/contactform'} component={ContactForm} />
           <Route exact path={'/booking/confirmation'} component={Confirmation} />
         </Switch>
