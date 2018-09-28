@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Redirect } from 'react-router-dom';
-import BookingCalendar from "./BookingCalendar";
 import { Transition } from "react-spring";
 
 // Actions

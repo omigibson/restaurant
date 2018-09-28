@@ -1,4 +1,4 @@
-const base_url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8888/resturant';
+const base_url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8888';
 
 export const fetchBookings = (fileName) => fetch(`${base_url}/${fileName}`)
     .then((response) => response.json());

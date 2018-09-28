@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { toJS, Map } from 'immutable';
+import { Map } from 'immutable';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
-import { requestBookings, checkWhichDatesAreFull, updateViewstate } from '../../actions/bookings';
+import { requestBookings, updateViewstate } from '../../actions/bookings';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -11,7 +11,6 @@ import connect from '../../utilities/connect';
 // Components
 import SelectGuests from './SelectGuests';
 import BookingCalendar from './BookingCalendar';
-import ChooseTime from './ChooseTime';
 import ContactForm from './ContactForm';
 import Confirmation from './Confirmation';
 
@@ -39,14 +38,14 @@ class Booking extends Component {
     }
   }
 
-  convertDateObjectToString = () => {
-
-    const dateObject = this.props.viewstate.get('dateSelected');
-    const yyyy = dateObject.getFullYear().toString();
-    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
-    const dd = (dateObject.getDate() + 100).toString().slice(-2);
-    return yyyy + "-" + mm + "-" + dd;
-  }
+  // convertDateObjectToString = () => {
+  //
+  //   const dateObject = this.props.viewstate.get('dateSelected');
+  //   const yyyy = dateObject.getFullYear().toString();
+  //   const mm = (dateObject.getMonth() + 101).toString().slice(-2);
+  //   const dd = (dateObject.getDate() + 100).toString().slice(-2);
+  //   return yyyy + "-" + mm + "-" + dd;
+  // }
 
 
   render() {
@@ -58,7 +57,7 @@ class Booking extends Component {
       <Fragment>
         <Switch>
         <Route exact path={'/booking/selectguests'} component={SelectGuests} />
-        <Route exact path={'/booking/calendar'} component={BookingCalendar} />          
+        <Route exact path={'/booking/calendar'} component={BookingCalendar} />
           <Route exact path={'/booking/contactform'} component={ContactForm} />
           <Route exact path={'/booking/confirmation'} component={Confirmation} />
         </Switch>
@@ -67,7 +66,7 @@ class Booking extends Component {
   }
 }
 
-export default connect(Booking, { requestBookings, checkWhichDatesAreFull, updateViewstate }, (store) => ({
+export default connect(Booking, { requestBookings, updateViewstate }, (store) => ({
   bookings: store.bookings,
   viewstate: store.viewstate
 }));

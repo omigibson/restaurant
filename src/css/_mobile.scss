@@ -377,12 +377,21 @@ button {
 }
 
 // TODO: Fix styling of new calendar
-.react-calendar {
+div.react-calendar {
+  width: 100%;
+  max-width: 65vh;
 
-  button {
-    color: inherit;
-    padding: 0;
-  }
+    .react-calendar__navigation {
+      background: #ededed;
+
+      .react-calendar__navigation__arrow {
+        padding: 0;
+      }
+    }
+
+    button {
+      color: inherit;
+    }
 
 }
 

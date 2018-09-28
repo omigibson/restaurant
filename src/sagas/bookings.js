@@ -1,14 +1,14 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { fromJS, List, Map } from 'immutable';
+import { fromJS } from 'immutable';
 
 //API
 import { fetchBookings } from '../api/bookings';
 
 //Action Types
-import { FETCH_BOOKINGS_REQUEST, CHECK_WHICH_DATES_ARE_FULL } from '../constants/actionTypes';
+import { FETCH_BOOKINGS_REQUEST } from '../constants/actionTypes';
 
 // Action Creators
-import { receiveBookings, checkWhichDatesAreFull, saveControlledDates } from '../actions/bookings';
+import { receiveBookings } from '../actions/bookings';
 
 function* handleFetchOfBookings(action) {
   try {

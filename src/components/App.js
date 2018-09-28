@@ -5,7 +5,6 @@ import "./../css/style.css";
 import LandingPage from "./LandingPage";
 import Booking from "./booking/Booking";
 import About from "./About";
-import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/Admin";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";

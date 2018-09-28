@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import { Transition } from "react-spring";
 
-// Actions
-import { updateViewstate } from '../../actions/bookings';
-
-//Utilities
-import connect from '../../utilities/connect';
-
-// Selectors
-import { getControlledBookings } from '../../selectors/calendarSelectors';
-
 class ChooseTime extends Component {
 
   handleChange = (event) => {

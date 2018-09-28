@@ -13,7 +13,6 @@ import connect from '../../utilities/connect';
 
 //Components
 import ChooseTime from "./ChooseTime";
-import ContactForm from "./ContactForm";
 
 // Selectors
 import { getBookedDates, getBookingsPerDateAndTime } from '../../selectors/calendarSelectors';
@@ -27,20 +26,22 @@ class BookingCalendar extends Component {
   //Ska inte selectedDate och selectedTime sparas i storen via viewstate reducern?
   state = {
     stepCompleted: false,
-    selectedDate: new Date(),
+    // selectedDate: new Date(),
     hasSelectedDate: false,
-    selectedTime: ''
+    // selectedTime: ''
   }
 
   handleOnDateChange = (date) => {
+    this.props.updateViewstate('selectedDate', this.convertDateObjectToString(date));
     this.setState(() => ({
-      selectedDate: date,
+      // selectedDate: date,
       hasSelectedDate: true
     }))
   }
 
   handleOnTimeChange = (time) => {
-    this.setState(() => ({ selectedTime: time }))
+    this.props.updateViewstate('selectedTime', time);
+    this.setState(() => ({ stepCompleted: true }))
   }
 
   decideIfTileShouldBeDisabled = ({activeStartDate, date, view }) => {
@@ -49,7 +50,7 @@ class BookingCalendar extends Component {
 
     // Disable if less then todays date
     if ( date.getDay() > new Date().getDay() ) {
-      return true;
+      return false;
     }
 
     // Disable if the date is contained in the fully booked array of dates
@@ -60,9 +61,16 @@ class BookingCalendar extends Component {
     return false;
   }
 
+  convertDateObjectToString = (dateObject) => {
+    const yyyy = dateObject.getFullYear().toString();
+    const mm = (dateObject.getMonth() + 101).toString().slice(-2);
+    const dd = (dateObject.getDate() + 100).toString().slice(-2);
+    return yyyy + "-" + mm + "-" + dd;
+  }
+
   render() {
 
-    if ( this.state.selectedDate && this.state.selectedTime && this.state.hasSelectedDate ) {
+    if ( this.state.stepCompleted ) {
       return <Redirect to={'/booking/contactform'} />
     }
 

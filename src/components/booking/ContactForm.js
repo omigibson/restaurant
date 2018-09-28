@@ -3,6 +3,9 @@ import ProgressBar from "./BookingProgress";
 import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
+//Utilities
+import connect from '../../utilities/connect';
+
 class ContactForm extends React.Component {
   state = {
     userName: "",
@@ -123,9 +126,9 @@ class ContactForm extends React.Component {
               <div className="contact-form">
                 <div className="booking-details">
                   <ul>
-                    <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
-                    // <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                    <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
+                    <li><span className="bold">Guests:</span> { this.props.viewstate.get('amountOfGuests') } </li>
+                    <li><span className="bold">Date:</span> { this.props.viewstate.get('selectedDate') } </li>
+                    <li><span className="bold">Time:</span> { this.props.viewstate.get('selectedTime') + ":00" } </li>
                   </ul>
                 </div>
                 <form>
@@ -216,4 +219,7 @@ class ContactForm extends React.Component {
     }
   }
 }
-export default ContactForm;
+export default connect(ContactForm, {}, (store) => ({
+  bookings: store.bookings,
+  viewstate: store.viewstate,
+}))

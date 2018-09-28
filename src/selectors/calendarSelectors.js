@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { List, Map, fromJS } from 'immutable';
+import { List, fromJS } from 'immutable';
 
 // Get bookings from store
 const getAllBookings = store => store.bookings;
@@ -38,6 +38,7 @@ export const getBookedDates = createSelector(getAllBookings, bookings => {
     if ( bookings.get('18', 0) >= 8 && bookings.get('21', 0) >= 8 ) {
       return date;
     }
+    return null;
   });
 
   // console.log('fullyBookedDates', fullyBookedDates);

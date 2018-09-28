@@ -1,4 +1,4 @@
-import { List, fromJS } from "immutable";
+import { fromJS } from "immutable";
 import { VIEWSTATE_SET_DATA } from "../constants/actionTypes";
 
 export default function viewstate(state = fromJS({}), action) {
