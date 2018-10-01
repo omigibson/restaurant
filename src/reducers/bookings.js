@@ -10,7 +10,7 @@ const bookings = (state = initialState, action) => {
     case FETCH_BOOKINGS_SUCCESS:
       return state.merge(action.payload.bookings);
     case POST_BOOKING_SUCCESS:
-      return state.merge(action.payload.bookingDetails);
+      return state.push(action.payload.bookingDetails);
     default:
       return state;
     }

@@ -23,10 +23,8 @@ function* handleFetchOfBookings(action) {
 function* handlePostOfBooking(action) {
   try {
     const userDetailsResponse = yield call(sendToAPI, action.payload.userDetails, 'post_user_details.php');
-    console.log(userDetailsResponse);
     const postObject = {...action.payload.bookingDetails, userID: userDetailsResponse.id }
     const bookingDetailsResponse = yield call(sendToAPI, postObject, 'post_booking.php');
-    console.log(bookingDetailsResponse);
     yield put(makeBookingSuccess(fromJS(bookingDetailsResponse)));
     if (userDetailsResponse.error) throw new Error(userDetailsResponse.error);
   } catch (error) {
