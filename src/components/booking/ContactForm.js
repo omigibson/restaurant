@@ -50,7 +50,7 @@ class ContactForm extends React.Component {
       nameErrorMessage: this.props.viewstate.get('userName').length >= 5 ? "hidden" : "",
       emailErrorMessage: this.validateEmail(this.props.viewstate.get('userEmail')) ? "hidden" : "",
       phoneErrorMessage: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "hidden" : "",
-      checkboxErrorMessage: this.state.consent ? "hidden" : ""
+      checkboxErrorMessage: this.state.consent ? "hidden" : "redText"
     });
   }
 
@@ -199,11 +199,11 @@ class ContactForm extends React.Component {
           { styles =>
             <div className="container flex hcenter" style={styles}>
               <Confirmation
-                setAppState={ this.props.setAppState }
-                name={ this.state.allBookingDetails.userName }
-                date={ this.state.allBookingDetails.date }
-                time={ this.state.allBookingDetails.time + ":00" }
-                guests={ this.state.allBookingDetails.guests }
+                //setAppState={ this.props.setAppState }
+                // name={ this.state.allBookingDetails.userName }
+                // date={ this.state.allBookingDetails.date }
+                // time={ this.state.allBookingDetails.time + ":00" }
+                // guests={ this.state.allBookingDetails.guests }
               />
             </div>
           }

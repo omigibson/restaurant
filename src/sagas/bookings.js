@@ -8,7 +8,7 @@ import { fetchBookings, sendToAPI } from '../api/bookings';
 import { FETCH_BOOKINGS_REQUEST, POST_BOOKING_REQUEST, MAKE_BOOKING_SUCCESS } from '../constants/actionTypes';
 
 // Action Creators
-import { receiveBookings, makeBookingSuccess } from '../actions/bookings';
+import { receiveBookings, makeBookingSuccess, sendEmailSuccess } from '../actions/bookings';
 
 function* handleFetchOfBookings(action) {
   try {
@@ -23,9 +23,15 @@ function* handleFetchOfBookings(action) {
 function* handlePostOfBooking(action) {
   try {
     const userDetailsResponse = yield call(sendToAPI, action.payload.userDetails, 'post_user_details.php');
+
     const postObject = {...action.payload.bookingDetails, userID: userDetailsResponse.id }
     const bookingDetailsResponse = yield call(sendToAPI, postObject, 'post_booking.php');
     yield put(makeBookingSuccess(fromJS(bookingDetailsResponse)));
+
+    const emailObject = { ...userDetailsResponse, ...bookingDetailsResponse };
+    const emailResponse = yield call(sendToAPI, emailObject, 'send_email.php');
+    yield put(sendEmailSuccess());
+
     if (userDetailsResponse.error) throw new Error(userDetailsResponse.error);
   } catch (error) {
     console.log('Something went wrong in handlePostOfBookings!');

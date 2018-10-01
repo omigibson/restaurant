@@ -1,6 +1,6 @@
 import {
   FETCH_BOOKINGS_REQUEST, FETCH_BOOKINGS_SUCCESS, UPDATE_BOOKING_STATUS, VIEWSTATE_SET_DATA,
-  POST_BOOKING_REQUEST, POST_BOOKING_SUCCESS
+  POST_BOOKING_REQUEST, POST_BOOKING_SUCCESS, SEND_EMAIL_REQUEST, SEND_EMAIL_SUCCESS
 } from '../constants/actionTypes';
 
 export const requestBookings = () => ({
@@ -33,4 +33,14 @@ export const makeBookingRequest = (userDetails, bookingDetails) => ({
 export const makeBookingSuccess = (bookingDetails) => ({
   type: POST_BOOKING_SUCCESS,
   payload: { bookingDetails }
+});
+
+export const sendEmailRequest = (bookingDetails) => ({
+  type: SEND_EMAIL_REQUEST,
+  payload: { bookingDetails }
+});
+
+export const sendEmailSuccess = () => ({
+  type: SEND_EMAIL_SUCCESS,
+  payload: {bookingCompleted: true}
 });
