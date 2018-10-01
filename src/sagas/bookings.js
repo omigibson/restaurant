@@ -2,10 +2,10 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
 //API
-import { fetchBookings } from '../api/bookings';
+import { fetchBookings, sendToAPI } from '../api/bookings';
 
 //Action Types
-import { FETCH_BOOKINGS_REQUEST } from '../constants/actionTypes';
+import { FETCH_BOOKINGS_REQUEST, POST_BOOKING_REQUEST } from '../constants/actionTypes';
 
 // Action Creators
 import { receiveBookings } from '../actions/bookings';
@@ -21,64 +21,18 @@ function* handleFetchOfBookings(action) {
   }
 }
 
-// function* handleCheckingWhichDatesAreFull(action) {
-//   console.log('Yoyoyo');
-//
-//   const bookingsPerDateAndTime = sortBookingsPerDate();
-//
-//   function sortBookingsPerDate() {
-//     const allBookings = action.payload;
-//     /* Empty object that will contain all dates with bookings. */
-//     let bookingsPerDateAndTime = {};
-//     for (let i = 0; i < allBookings.length; i++) {
-//       /* If the date doesn"t already exist, create it (object) and add both "18" and "21" (arrays). */
-//       if (!bookingsPerDateAndTime[allBookings[i].date]) {
-//         bookingsPerDateAndTime[allBookings[i].date] = { "18": [], "21": [] };
-//       }
-//       /* Make a copy of the array */
-//       const oldArray = bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time];
-//       /* Add the new value into the array */
-//       bookingsPerDateAndTime[allBookings[i].date][allBookings[i].time] = [...oldArray, allBookings[i].date];
-//     }
-//     return bookingsPerDateAndTime;
-//   }
-//
-//   console.log(bookingsPerDateAndTime);
-//
-//   const controlledBookings = (bookingsPerDateAndTime) => {
-//     for (let key in bookingsPerDateAndTime) {
-//       /* Constructs a new Date where the clock stands at 02:00. */
-//       const dateOfBooking = new Date(key);
-//       /* We add 16 and 19 to those numbers (the time for the sittings 18:00 and 21:00) */
-//       const firstSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 16);
-//       const secondSitting = dateOfBooking.setHours(dateOfBooking.getHours() + 19);
-//       /* Control if the time for the sitting at 18:00 has passed. */
-//       if (firstSitting < Date.now()) {
-//           bookingsPerDateAndTime[key]["18"] = { notBookable: true, bookings: bookingsPerDateAndTime[key]["18"] }
-//       }
-//       else if (bookingsPerDateAndTime[key]["18"].length >= 15) {
-//         bookingsPerDateAndTime[key]["18"] = { notBookable: true, bookings: bookingsPerDateAndTime[key]["18"] }
-//       }
-//       else {
-//         bookingsPerDateAndTime[key]["18"] = { notBookable: false, bookings: bookingsPerDateAndTime[key]["18"] }
-//       }
-//       /* Control if the time for the sitting at 21:00 has passed. */
-//       if (secondSitting < Date.now()) {
-//           bookingsPerDateAndTime[key]["21"] = { notBookable: true, bookings: bookingsPerDateAndTime[key]["21"] }
-//       }
-//       else if (bookingsPerDateAndTime[key]["21"].length >= 15) {
-//         bookingsPerDateAndTime[key]["21"] = { notBookable: true, bookings: bookingsPerDateAndTime[key]["21"] }
-//       }
-//       else {
-//         bookingsPerDateAndTime[key]["21"] = { notBookable: false, bookings: bookingsPerDateAndTime[key]["21"] }
-//       }
-//     }
-//     return bookingsPerDateAndTime;
-//   }
-//   yield put(saveControlledDates(List.of(controlledBookings)));
-// }
+function* handlePostOfBooking(action) {
+  try {
+    const userDetailsResponse = yield call(sendToAPI, action.payload.userDetails, 'post_user_details.php');
+    const postObject = yield Object.Assign({}, action.payload.bookingDetails, { userID: userDetailsResponse.id })
+    const bookingDetailsResponse = yield call(sendToAPI, postObject, 'post_booking.php');
+    if (userDetailsResponse.error) throw new Error(userDetailsResponse.error);
+  } catch (error) {
+    console.log('Something went wrong in handlePostOfBookings!');
+  }
+}
 
 export default function* bookingsSaga() {
   yield takeLatest(FETCH_BOOKINGS_REQUEST, handleFetchOfBookings);
-  // yield takeLatest(CHECK_WHICH_DATES_ARE_FULL, handleCheckingWhichDatesAreFull);
+  yield takeLatest(POST_BOOKING_REQUEST, handlePostOfBooking);
 }

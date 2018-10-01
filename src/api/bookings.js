@@ -10,5 +10,8 @@ export const sendToAPI = (json, fileName) => {
     method: "POST",
     mode: "cors",
     body: JSON.stringify(json)
-  }).then((response) => response.json())
+  }).then((response) => {console.log(response)
+  response.json();
 }
+    )
+  }

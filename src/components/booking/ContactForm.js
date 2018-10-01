@@ -3,6 +3,9 @@ import ProgressBar from "./BookingProgress";
 import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
+// Actions
+import { makeBookingRequest } from '../../actions/bookings';
+
 //Utilities
 import connect from '../../utilities/connect';
 
@@ -71,46 +74,52 @@ class ContactForm extends React.Component {
     const hash = this.generateHash();
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
-    this.props.sendToAPI({
-      userName: this.state.userName,
+    this.props.makeBookingRequest(
+      { userName: this.state.userName,
       userEmail: this.state.userEmail,
       userTelephone: this.state.userTelephone,
       hash: hash
-  }, "post_user_details.php")
-    .then((userDetailsResponse) => {
+      },
+      { date: this.props.viewstate.get('selectedDate'),
+      guests: this.props.viewstate.get('amountOfGuests'),
+      time: this.props.viewstate.get('timeSelected'),
+      userID: '',
+      hash: hash
+      }
+    )
+    // .then((userDetailsResponse) => {
       /* A response comes back from the DB with an id that is used when inserting
       a row into the post_booking.php file. This is because we want to separate
       the user and the booking tables. */
-      const dateObjectToString = this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected);
-      this.props.sendToAPI({
-        date: dateObjectToString,
-        guests: this.props.bookingDetails.amountOfGuests,
-        time: this.props.bookingDetails.timeSelected,
-        userID: userDetailsResponse.id,
-        hash: hash
-      }, "post_booking.php")
-        .then((bookingDetailsResponse) => {
-          /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
-          to the user. */
-          this.props.sendToAPI({
-            userName: this.state.userName,
-            userEmail: this.state.userEmail,
-            userTelephone: this.state.userTelephone,
-            guests: this.props.bookingDetails.amountOfGuests,
-            date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
-            time: this.props.bookingDetails.timeSelected,
-            hash: hash
-          }, "send_email.php")
-            .then((emailResponse) => {
-              this.setState({ allBookingDetails: emailResponse, stepCompleted: true }, () => {
-                /* We set the progress bar to full width here so we don't need
-                to use componentWillMount in the Confirmation.js-file. */
-                this.props.setAppState({ progressBar: 100 });
-              });
-            })
-        });
-    })
-  }
+
+      // this.props.sendToAPI({
+      //   // date: this.props.viewstate.get('selectedDate'),
+      //   // guests: this.props.viewstate.get('amountOfGuests'),
+      //   // time: this.props.viewstate.get('timeSelected'),
+      //   // userID: userDetailsResponse.id,
+      //   // hash: hash
+      // }, "post_booking.php")
+        // .then((bookingDetailsResponse) => {
+        //   /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
+        //   to the user. */
+        //   this.props.sendToAPI({
+        //     userName: this.state.userName,
+        //     userEmail: this.state.userEmail,
+        //     userTelephone: this.state.userTelephone,
+        //     guests: this.props.bookingDetails.amountOfGuests,
+        //     date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
+        //     time: this.props.bookingDetails.timeSelected,
+        //     hash: hash
+        //   }, "send_email.php")
+        //     .then((emailResponse) => {
+        //       this.setState({ allBookingDetails: emailResponse, stepCompleted: true }, () => {
+        //         /* We set the progress bar to full width here so we don't need
+        //         to use componentWillMount in the Confirmation.js-file. */
+        //         this.props.setAppState({ progressBar: 100 });
+        //       });
+        //     })
+        // });
+    }
 
   render = () => {
     if (!this.state.stepCompleted) {
@@ -219,7 +228,6 @@ class ContactForm extends React.Component {
     }
   }
 }
-export default connect(ContactForm, {}, (store) => ({
-  bookings: store.bookings,
+export default connect(ContactForm, { makeBookingRequest}, (store) => ({
   viewstate: store.viewstate,
 }))
