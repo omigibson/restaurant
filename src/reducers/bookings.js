@@ -1,5 +1,5 @@
 import {
-  FETCH_BOOKINGS_SUCCESS
+  FETCH_BOOKINGS_SUCCESS, POST_BOOKING_SUCCESS
 } from '../constants/actionTypes';
 import { List } from 'immutable';
 
@@ -9,6 +9,8 @@ const bookings = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BOOKINGS_SUCCESS:
       return state.merge(action.payload.bookings);
+    case POST_BOOKING_SUCCESS:
+      return state.merge(action.payload.bookingDetails);
     default:
       return state;
     }

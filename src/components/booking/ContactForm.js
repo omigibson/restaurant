@@ -4,16 +4,13 @@ import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
 // Actions
-import { makeBookingRequest } from '../../actions/bookings';
+import { updateViewstate, makeBookingRequest } from '../../actions/bookings';
 
 //Utilities
 import connect from '../../utilities/connect';
 
 class ContactForm extends React.Component {
   state = {
-    userName: "",
-    userEmail: "",
-    userTelephone: "",
     consent: false,
     stepCompleted: false,
     allBookingDetails: {},
@@ -31,7 +28,7 @@ class ContactForm extends React.Component {
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.props.updateViewstate(e.target.name, e.target.value);
   }
 
   /* Uses an advanced RegEx (from StackOverflow) that controls if email is correct.
@@ -47,17 +44,17 @@ class ContactForm extends React.Component {
   /* Controls if the input fields are valid. */
   giveFeedbackToUser = () => {
     this.setState({
-      emailStyle: this.validateEmail(this.state.userEmail) ? "valid-input" : "invalid-input",
-      phoneStyle: this.validatePhone(this.state.userTelephone) ? "valid-input" : "invalid-input",
-      usernameStyle: this.state.userName.length >= 5 ? "valid-input" : "invalid-input",
-      nameErrorMessage: this.state.userName.length >= 5 ? "hidden" : "",
-      emailErrorMessage: this.validateEmail(this.state.userEmail) ? "hidden" : "",
-      phoneErrorMessage: this.validatePhone(this.state.userTelephone) ? "hidden" : "",
+      emailStyle: this.validateEmail(this.props.viewstate.get('userEmail')) ? "valid-input" : "invalid-input",
+      phoneStyle: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "valid-input" : "invalid-input",
+      usernameStyle: this.props.viewstate.get('userName').length >= 5 ? "valid-input" : "invalid-input",
+      nameErrorMessage: this.props.viewstate.get('userName').length >= 5 ? "hidden" : "",
+      emailErrorMessage: this.validateEmail(this.props.viewstate.get('userEmail')) ? "hidden" : "",
+      phoneErrorMessage: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "hidden" : "",
       checkboxErrorMessage: this.state.consent ? "hidden" : ""
     });
   }
 
-  areAllInputsValid = () => this.validateEmail(this.state.userEmail) && this.state.userName.length >= 5 && this.validatePhone(this.state.userTelephone) && this.state.consent;
+  areAllInputsValid = () => this.validateEmail(this.props.viewstate.get('userEmail')) && this.props.viewstate.get('userName').length >= 5 && this.validatePhone(this.props.viewstate.get('userTelephone')) && this.state.consent;
 
   /* A hash is generated for all bookings and customers. This is because we want
   a way for the user to delete a reservation without using auto-incremented IDs
@@ -75,30 +72,19 @@ class ContactForm extends React.Component {
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
     this.props.makeBookingRequest(
-      { userName: this.state.userName,
-      userEmail: this.state.userEmail,
-      userTelephone: this.state.userTelephone,
+      { userName: this.props.viewstate.get('userName'),
+      userEmail: this.props.viewstate.get('userEmail'),
+      userTelephone: this.props.viewstate.get('userTelephone'),
       hash: hash
       },
       { date: this.props.viewstate.get('selectedDate'),
       guests: this.props.viewstate.get('amountOfGuests'),
-      time: this.props.viewstate.get('timeSelected'),
+      time: this.props.viewstate.get('selectedTime'),
       userID: '',
       hash: hash
       }
     )
-    // .then((userDetailsResponse) => {
-      /* A response comes back from the DB with an id that is used when inserting
-      a row into the post_booking.php file. This is because we want to separate
-      the user and the booking tables. */
 
-      // this.props.sendToAPI({
-      //   // date: this.props.viewstate.get('selectedDate'),
-      //   // guests: this.props.viewstate.get('amountOfGuests'),
-      //   // time: this.props.viewstate.get('timeSelected'),
-      //   // userID: userDetailsResponse.id,
-      //   // hash: hash
-      // }, "post_booking.php")
         // .then((bookingDetailsResponse) => {
         //   /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
         //   to the user. */
@@ -228,6 +214,6 @@ class ContactForm extends React.Component {
     }
   }
 }
-export default connect(ContactForm, { makeBookingRequest}, (store) => ({
+export default connect(ContactForm, { updateViewstate, makeBookingRequest}, (store) => ({
   viewstate: store.viewstate,
 }))
