@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from 'react-router-dom';
 import ProgressBar from "./BookingProgress";
-import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
 
 // Actions

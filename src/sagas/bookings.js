@@ -5,7 +5,7 @@ import { fromJS } from 'immutable';
 import { fetchBookings, sendToAPI } from '../api/bookings';
 
 //Action Types
-import { FETCH_BOOKINGS_REQUEST, POST_BOOKING_REQUEST, MAKE_BOOKING_SUCCESS } from '../constants/actionTypes';
+import { FETCH_BOOKINGS_REQUEST, POST_BOOKING_REQUEST } from '../constants/actionTypes';
 
 // Action Creators
 import { receiveBookings, makeBookingSuccess, sendEmailSuccess } from '../actions/bookings';

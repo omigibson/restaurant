@@ -1,5 +1,5 @@
 import {
-  FETCH_BOOKINGS_SUCCESS, POST_BOOKING_SUCCESS, SEND_EMAIL_SUCCESS
+  FETCH_BOOKINGS_SUCCESS, POST_BOOKING_SUCCESS
 } from '../constants/actionTypes';
 import { List } from 'immutable';
 
