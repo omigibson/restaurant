@@ -45,6 +45,7 @@ class ContactForm extends React.Component {
   /* Controls if the input fields are valid. */
   giveFeedbackToUser = () => {
     this.setState({
+      stepCompleted: false,
       emailStyle: this.validateEmail(this.props.viewstate.get('userEmail')) ? "valid-input" : "invalid-input",
       phoneStyle: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "valid-input" : "invalid-input",
       usernameStyle: this.props.viewstate.get('userName').length >= 5 ? "valid-input" : "invalid-input",
@@ -85,6 +86,7 @@ class ContactForm extends React.Component {
       hash: hash
     }
     )
+    this.setState({stepCompleted: true});
 
 
         //     .then((emailResponse) => {
@@ -99,9 +101,11 @@ class ContactForm extends React.Component {
     }
 
   render = () => {
-    switch (this.props.viewstate.bookingCompleted) {
-      case undefined:
-      console.log('Not completed')
+    if (this.props.viewstate.get('stepCompleted') === true) {
+      console.log('Completed');
+      return <Redirect to={'/booking/confirmation'} />
+    }
+    console.log('Not Completed');
       return (
         <React.Fragment>
           <Transition
@@ -180,14 +184,8 @@ class ContactForm extends React.Component {
           <ProgressBar progressValue="75"/>
         </React.Fragment>
         );
-        case true:
-        console.log('completed')
-          return <Redirect to={'/booking/confirmation'} />
-        default:
-        console.log('default');
-          return null
+      }
 
-        }
 //     else {
 //       // return (
 // // if (this.props.viewstate.bookingCompleted === true) {
@@ -216,7 +214,6 @@ class ContactForm extends React.Component {
       // </React.Fragment>
       // );
     }
-  }
 
 export default connect(ContactForm, { updateViewstate, makeBookingRequest}, (store) => ({
   viewstate: store.viewstate,
