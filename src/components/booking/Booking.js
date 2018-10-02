@@ -14,8 +14,13 @@ import SelectGuests from './SelectGuests';
 import BookingCalendar from './BookingCalendar';
 import ContactForm from './ContactForm';
 import Confirmation from './Confirmation';
+import ProgressBar from "./BookingProgress";
 
 class Booking extends Component {
+
+  state = {
+    progressBar: 0
+  }
 
   static defaultProps = {
     currentStep: 1,
@@ -24,6 +29,7 @@ class Booking extends Component {
 
   componentDidMount() {
     this.props.requestBookings();
+    this.props.setViewstate('progressBar', 0);
   }
 
   /* Converts this.state.allBookings from MySQL date-format to something that
@@ -39,16 +45,6 @@ class Booking extends Component {
     }
   }
 
-  // convertDateObjectToString = () => {
-  //
-  //   const dateObject = this.props.viewstate.get('dateSelected');
-  //   const yyyy = dateObject.getFullYear().toString();
-  //   const mm = (dateObject.getMonth() + 101).toString().slice(-2);
-  //   const dd = (dateObject.getDate() + 100).toString().slice(-2);
-  //   return yyyy + "-" + mm + "-" + dd;
-  // }
-
-
   render() {
 
     if ( this.props.match.isExact && (this.props.match.url === '/booking' || this.props.match.url === '/booking/') ) {
@@ -62,6 +58,7 @@ class Booking extends Component {
           <Route exact path={'/booking/contactform'} component={ContactForm} />
           <Route exact path={'/booking/confirmation'} component={Confirmation} />
         </Switch>
+        <ProgressBar progressClass={'progress-bar-show-' + this.props.viewstate.get('progressBar')}/>
       </Fragment>
     )
   }

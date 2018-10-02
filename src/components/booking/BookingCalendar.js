@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from 'react-router-dom';
-// import Calendar from "react-booking-calendar";
-import Calendar from 'react-calendar'; // https://github.com/wojtekmaj/react-calendar
+import Calendar from 'react-calendar';
 import { Transition } from "react-spring";
 import { List } from 'immutable';
 
@@ -25,15 +24,16 @@ class BookingCalendar extends Component {
 
   state = {
     stepCompleted: false,
-    // selectedDate: new Date(),
-    hasSelectedDate: false,
-    // selectedTime: ''
+    hasSelectedDate: false
+  }
+
+  componentDidMount() {
+    this.props.setViewstate('progressBar', 33);
   }
 
   handleOnDateChange = (date) => {
     this.props.setViewstate('selectedDate', this.convertDateObjectToString(date));
     this.setState(() => ({
-      // selectedDate: date,
       hasSelectedDate: true
     }))
   }
@@ -95,7 +95,6 @@ class BookingCalendar extends Component {
       </Fragment>
     );
   }
-
 }
 
 export default connect(BookingCalendar, { setViewstate }, (store) => ({

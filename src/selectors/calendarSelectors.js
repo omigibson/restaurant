@@ -35,7 +35,7 @@ export const getBookedDates = createSelector(getAllBookings, bookings => {
   // console.log('numberOfBookingsPerDateAndTime', numberOfBookingsPerDateAndTime.toJS());
 
   const fullyBookedDates = numberOfBookingsPerDateAndTime.filter((date) =>
-    date.get('18', 0) >= 1 && date.get('21', 0) >= 1
+    date.get('18', 0) >= 2 && date.get('21', 0) >= 2
   );
 
   // console.log('fullyBookedDates', fullyBookedDates.toJS());

@@ -24,8 +24,8 @@ class ContactForm extends React.Component {
     checkboxErrorMessage: "hidden"
   }
 
-  componentWillMount = () => {
-    // this.props.setAppState({ progressBar: 66 });
+  componentDidMount() {
+    this.props.setViewstate('progressBar', 66);
   }
 
   handleChange = (e) => {
@@ -60,11 +60,8 @@ class ContactForm extends React.Component {
 
   /* A hash is generated for all bookings and customers. This is because we want
   a way for the user to delete a reservation without using auto-incremented IDs
-  that in this case are pretty unsafe since you can cancel a reservation by using
-  http://host/cancel?id={hash}. By generating a unique hash we prevent users from
-  cancelling other peoples reservations. The URL is sent to the user in the
-  confirmation E-mail. So by using this method, only the user will have access to the
-  unique ID(hash). */
+  that in this case are pretty unsafe. The delete-URL is sent to the user in the
+  confirmation email. */
   generateHash = () => Math.random().toString(36).substr(2);
 
   /* Handles all the requests to our API. */
@@ -86,14 +83,10 @@ class ContactForm extends React.Component {
       userID: '',
       hash: hash
     };
-
     this.props.makeBookingRequest(userDetails, bookingDetails);
-
-
     }
 
   render = () => {
-
     if (this.props.viewstate.get('bookingCompleted', false) === true) {
       return <Redirect to={'/booking/confirmation'} />
     }
@@ -177,7 +170,6 @@ class ContactForm extends React.Component {
       </React.Fragment>
     );
   }
-
 }
 
 export default connect(ContactForm, { setViewstate, makeBookingRequest }, (store) => ({

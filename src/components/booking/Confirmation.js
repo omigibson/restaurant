@@ -1,10 +1,18 @@
 import React, { Component, Fragment } from "react";
 import checkmark from "./../../images/checkmark.svg";
 
+//Actions
+import { setViewstate } from '../../actions/viewstate';
+
 //Utilities
 import connect from '../../utilities/connect';
 
 class Confirmation extends Component {
+
+  componentDidMount() {
+    this.props.setViewstate('progressBar', 100);
+  }
+
   render = () => {
     return (
       <Fragment>
@@ -27,6 +35,6 @@ class Confirmation extends Component {
 }
 
 
-export default connect(Confirmation, {}, (store) => ({
+export default connect(Confirmation, {setViewstate}, (store) => ({
   viewstate: store.viewstate,
 }))

@@ -30,7 +30,7 @@ function* handlePostOfBooking(action) {
     yield put(makeBookingSuccess(fromJS(bookingDetailsResponse)));
 
     const emailObject = { ...userDetailsResponse, ...bookingDetailsResponse };
-    const emailResponse = yield call(sendToAPI, emailObject, 'send_email.php');
+    yield call(sendToAPI, emailObject, 'send_email.php');
 
     yield put(sendEmailSuccess());
     yield put(setViewstate('bookingCompleted', true));

@@ -8,7 +8,6 @@ class ChooseTime extends Component {
   };
 
   render() {
-
     return (
       <Transition
         from={{opacity: 0 }}
