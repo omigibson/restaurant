@@ -4,7 +4,7 @@ import React from "react";
 import Bookings from "./Bookings";
 
 //Actions
-import { requestBookings } from '../../actions/admin';
+import { requestAdminBookings } from '../../actions/admin';
 import { requestDeleteBooking } from '../../actions/admin';
 import { saveBookingRequest } from '../../actions/admin'
 
@@ -14,7 +14,7 @@ import connect from '../../utilities/connect';
 class Admin extends React.Component {
 
     componentDidMount() {
-      this.props.requestBookings();
+      this.props.requestAdminBookings();
     }
 
     /************* DELETE BOOKING **************/
@@ -59,6 +59,6 @@ class Admin extends React.Component {
     }
   }
 
-export default connect(Admin, { requestBookings, requestDeleteBooking, saveBookingRequest }, (store) => ({
-  bookings: store.bookings
+export default connect(Admin, { requestAdminBookings, requestDeleteBooking, saveBookingRequest }, (store) => ({
+  bookings: store.admin
 }));
