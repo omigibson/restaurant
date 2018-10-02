@@ -3,8 +3,8 @@ import { Transition } from "react-spring";
 
 class ChooseTime extends Component {
 
-  handleChange = (event) => {
-    this.props.onChange(event.target.value);
+  handleClick = (event) => {
+    this.props.onClick(event.target.value);
   };
 
   render() {
@@ -18,7 +18,7 @@ class ChooseTime extends Component {
         { styles =>
           <div className="booking-step select-time-container" style={styles}>
             <h2>Select what time to dine</h2>
-            <select onChange={this.handleChange}>
+            <select onClick={this.handleClick}>
               <option value={'18'}>18</option>
               <option value={'21'}>21</option>
             </select>

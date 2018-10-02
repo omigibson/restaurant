@@ -38,7 +38,7 @@ class BookingCalendar extends Component {
     }))
   }
 
-  handleOnTimeChange = (time) => {
+  handleOnTimeClick = (time) => {
     this.props.setViewstate('selectedTime', time);
     this.setState(() => ({ stepCompleted: true }))
   }
@@ -68,7 +68,7 @@ class BookingCalendar extends Component {
       return <Redirect to={'/booking/contactform'} />
     }
 
-    const chooseTime = this.state.hasSelectedDate ? <ChooseTime onChange={this.handleOnTimeChange} /> : null;
+    const chooseTime = this.state.hasSelectedDate ? <ChooseTime onClick={this.handleOnTimeClick} /> : null;
 
     return (
       <Fragment>
