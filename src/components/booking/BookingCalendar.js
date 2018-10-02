@@ -6,7 +6,7 @@ import { Transition } from "react-spring";
 import { List } from 'immutable';
 
 // Actions
-import { updateViewstate } from '../../actions/bookings';
+import { setViewstate } from '../../actions/viewstate';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -32,7 +32,7 @@ class BookingCalendar extends Component {
   }
 
   handleOnDateChange = (date) => {
-    this.props.updateViewstate('selectedDate', this.convertDateObjectToString(date));
+    this.props.setViewstate('selectedDate', this.convertDateObjectToString(date));
     this.setState(() => ({
       // selectedDate: date,
       hasSelectedDate: true
@@ -40,7 +40,7 @@ class BookingCalendar extends Component {
   }
 
   handleOnTimeChange = (time) => {
-    this.props.updateViewstate('selectedTime', time);
+    this.props.setViewstate('selectedTime', time);
     this.setState(() => ({ stepCompleted: true }))
   }
 
@@ -102,7 +102,7 @@ class BookingCalendar extends Component {
 
 }
 
-export default connect(BookingCalendar, { updateViewstate }, (store) => ({
+export default connect(BookingCalendar, { setViewstate }, (store) => ({
   bookings: store.bookings,
   viewstate: store.viewstate,
   fullyBookedDates: getBookedDates(store),

@@ -1,5 +1,5 @@
 import {
-  FETCH_BOOKINGS_REQUEST, FETCH_BOOKINGS_SUCCESS, UPDATE_BOOKING_STATUS, VIEWSTATE_SET_DATA,
+  FETCH_BOOKINGS_REQUEST, FETCH_BOOKINGS_SUCCESS, UPDATE_BOOKING_STATUS,
   POST_BOOKING_REQUEST, POST_BOOKING_SUCCESS, SEND_EMAIL_REQUEST, SEND_EMAIL_SUCCESS
 } from '../constants/actionTypes';
 
@@ -15,11 +15,6 @@ export const receiveBookings = (bookings) => ({
 export const updateBookingStatus = (step) => ({
   type: UPDATE_BOOKING_STATUS,
   step: { step }
-});
-
-export const updateViewstate = (key: string, value: any) => ({
-  type: VIEWSTATE_SET_DATA,
-  payload: { key, value }
 });
 
 export const makeBookingRequest = (userDetails, bookingDetails) => ({

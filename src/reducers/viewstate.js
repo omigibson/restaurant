@@ -1,13 +1,15 @@
-import { fromJS } from "immutable";
-import { VIEWSTATE_SET_DATA, SEND_EMAIL_SUCCESS } from "../constants/actionTypes";
+import { Map } from "immutable";
+import { VIEWSTATE_SET, VIEWSTATE_REMOVE } from "../constants/actionTypes";
 
-export default function viewstate(state = fromJS({}), action) {
+const initalState = Map();
+
+export default function viewstate(state = initalState, action) {
   switch (action.type) {
-    case VIEWSTATE_SET_DATA:
+    case VIEWSTATE_SET:
       const { key, value } = action.payload;
       return key ? state.set(key, value) : state.merge(value);
-    case SEND_EMAIL_SUCCESS:
-        return state.merge(action.payload);
+    case VIEWSTATE_REMOVE:
+      return state.delete(action.payload.key);
     default:
       return state;
   }

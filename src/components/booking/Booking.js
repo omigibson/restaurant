@@ -3,7 +3,8 @@ import { Map } from 'immutable';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Actions
-import { requestBookings, updateViewstate } from '../../actions/bookings';
+import { requestBookings } from '../../actions/bookings';
+import { setViewstate } from '../../actions/viewstate';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -66,7 +67,7 @@ class Booking extends Component {
   }
 }
 
-export default connect(Booking, { requestBookings, updateViewstate }, (store) => ({
+export default connect(Booking, { requestBookings, setViewstate }, (store) => ({
   bookings: store.bookings,
   viewstate: store.viewstate
 }));

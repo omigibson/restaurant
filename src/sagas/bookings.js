@@ -9,6 +9,7 @@ import { FETCH_BOOKINGS_REQUEST, POST_BOOKING_REQUEST, MAKE_BOOKING_SUCCESS } fr
 
 // Action Creators
 import { receiveBookings, makeBookingSuccess, sendEmailSuccess } from '../actions/bookings';
+import { setViewstate } from '../actions/viewstate';
 
 function* handleFetchOfBookings(action) {
   try {
@@ -30,7 +31,9 @@ function* handlePostOfBooking(action) {
 
     const emailObject = { ...userDetailsResponse, ...bookingDetailsResponse };
     const emailResponse = yield call(sendToAPI, emailObject, 'send_email.php');
+
     yield put(sendEmailSuccess());
+    yield put(setViewstate('bookingCompleted', true));
 
     if (userDetailsResponse.error) throw new Error(userDetailsResponse.error);
   } catch (error) {

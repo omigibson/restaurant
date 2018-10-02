@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Transition } from "react-spring";
 
 // Actions
-import { updateViewstate } from '../../actions/bookings';
+import { setViewstate } from '../../actions/viewstate';
 
 //Utilities
 import connect from '../../utilities/connect';
@@ -15,7 +15,7 @@ class SelectGuests extends React.Component {
   }
 
   handleChange = (event) => {
-    this.props.updateViewstate('amountOfGuests', event.target.value);
+    this.props.setViewstate('amountOfGuests', event.target.value);
     this.setState({ stepCompleted: true });
   }
 
@@ -69,6 +69,6 @@ class SelectGuests extends React.Component {
   }
 }
 
-export default connect(SelectGuests, { updateViewstate }, (store) => ({
+export default connect(SelectGuests, { setViewstate }, (store) => ({
   viewstate: store.viewstate
 }));
