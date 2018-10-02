@@ -1,13 +1,17 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import ProgressBar from "./BookingProgress";
-import Confirmation from "./Confirmation";
 import { Transition } from "react-spring";
+
+// Actions
+import { makeBookingRequest } from '../../actions/bookings';
+import { setViewstate } from '../../actions/viewstate';
+
+//Utilities
+import connect from '../../utilities/connect';
 
 class ContactForm extends React.Component {
   state = {
-    userName: "",
-    userEmail: "",
-    userTelephone: "",
     consent: false,
     stepCompleted: false,
     allBookingDetails: {},
@@ -20,12 +24,12 @@ class ContactForm extends React.Component {
     checkboxErrorMessage: "hidden"
   }
 
-  componentWillMount = () => {
-    this.props.setAppState({ progressBar: 66 });
+  componentDidMount() {
+    this.props.setViewstate('progressBar', 66);
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.props.setViewstate(e.target.name, e.target.value);
   }
 
   /* Uses an advanced RegEx (from StackOverflow) that controls if email is correct.
@@ -41,25 +45,23 @@ class ContactForm extends React.Component {
   /* Controls if the input fields are valid. */
   giveFeedbackToUser = () => {
     this.setState({
-      emailStyle: this.validateEmail(this.state.userEmail) ? "valid-input" : "invalid-input",
-      phoneStyle: this.validatePhone(this.state.userTelephone) ? "valid-input" : "invalid-input",
-      usernameStyle: this.state.userName.length >= 5 ? "valid-input" : "invalid-input",
-      nameErrorMessage: this.state.userName.length >= 5 ? "hidden" : "",
-      emailErrorMessage: this.validateEmail(this.state.userEmail) ? "hidden" : "",
-      phoneErrorMessage: this.validatePhone(this.state.userTelephone) ? "hidden" : "",
-      checkboxErrorMessage: this.state.consent ? "hidden" : ""
+      stepCompleted: false,
+      emailStyle: this.validateEmail(this.props.viewstate.get('userEmail')) ? "valid-input" : "invalid-input",
+      phoneStyle: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "valid-input" : "invalid-input",
+      usernameStyle: this.props.viewstate.get('userName').length >= 5 ? "valid-input" : "invalid-input",
+      nameErrorMessage: this.props.viewstate.get('userName').length >= 5 ? "hidden" : "",
+      emailErrorMessage: this.validateEmail(this.props.viewstate.get('userEmail')) ? "hidden" : "",
+      phoneErrorMessage: this.validatePhone(this.props.viewstate.get('userTelephone')) ? "hidden" : "",
+      checkboxErrorMessage: this.state.consent ? "hidden" : "redText"
     });
   }
 
-  areAllInputsValid = () => this.validateEmail(this.state.userEmail) && this.state.userName.length >= 5 && this.validatePhone(this.state.userTelephone) && this.state.consent;
+  areAllInputsValid = () => this.validateEmail(this.props.viewstate.get('userEmail')) && this.props.viewstate.get('userName').length >= 5 && this.validatePhone(this.props.viewstate.get('userTelephone')) && this.state.consent;
 
   /* A hash is generated for all bookings and customers. This is because we want
   a way for the user to delete a reservation without using auto-incremented IDs
-  that in this case are pretty unsafe since you can cancel a reservation by using
-  http://host/cancel?id={hash}. By generating a unique hash we prevent users from
-  cancelling other peoples reservations. The URL is sent to the user in the
-  confirmation E-mail. So by using this method, only the user will have access to the
-  unique ID(hash). */
+  that in this case are pretty unsafe. The delete-URL is sent to the user in the
+  confirmation email. */
   generateHash = () => Math.random().toString(36).substr(2);
 
   /* Handles all the requests to our API. */
@@ -68,49 +70,27 @@ class ContactForm extends React.Component {
     const hash = this.generateHash();
     /* Sends the user details to the specified file and inserts the JSON into
     MySQL. */
-    this.props.sendToAPI({
-      userName: this.state.userName,
-      userEmail: this.state.userEmail,
-      userTelephone: this.state.userTelephone,
+    const userDetails = {
+      userName: this.props.viewstate.get('userName'),
+      userEmail: this.props.viewstate.get('userEmail'),
+      userTelephone: this.props.viewstate.get('userTelephone'),
       hash: hash
-  }, "post_user_details.php")
-    .then((userDetailsResponse) => {
-      /* A response comes back from the DB with an id that is used when inserting
-      a row into the post_booking.php file. This is because we want to separate
-      the user and the booking tables. */
-      const dateObjectToString = this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected);
-      this.props.sendToAPI({
-        date: dateObjectToString,
-        guests: this.props.bookingDetails.amountOfGuests,
-        time: this.props.bookingDetails.timeSelected,
-        userID: userDetailsResponse.id,
-        hash: hash
-      }, "post_booking.php")
-        .then((bookingDetailsResponse) => {
-          /* Sends JSON to send_email.php – a file that sends a confirmation E-Email
-          to the user. */
-          this.props.sendToAPI({
-            userName: this.state.userName,
-            userEmail: this.state.userEmail,
-            userTelephone: this.state.userTelephone,
-            guests: this.props.bookingDetails.amountOfGuests,
-            date: this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected),
-            time: this.props.bookingDetails.timeSelected,
-            hash: hash
-          }, "send_email.php")
-            .then((emailResponse) => {
-              this.setState({ allBookingDetails: emailResponse, stepCompleted: true }, () => {
-                /* We set the progress bar to full width here so we don't need
-                to use componentWillMount in the Confirmation.js-file. */
-                this.props.setAppState({ progressBar: 100 });
-              });
-            })
-        });
-    })
-  }
+    };
+    const bookingDetails = {
+      date: this.props.viewstate.get('selectedDate'),
+      guests: this.props.viewstate.get('amountOfGuests'),
+      time: this.props.viewstate.get('selectedTime'),
+      userID: '',
+      hash: hash
+    };
+    this.props.makeBookingRequest(userDetails, bookingDetails);
+    }
 
   render = () => {
-    if (!this.state.stepCompleted) {
+    if (this.props.viewstate.get('bookingCompleted', false) === true) {
+      return <Redirect to={'/booking/confirmation'} />
+    }
+
     return (
       <React.Fragment>
         <Transition
@@ -123,9 +103,9 @@ class ContactForm extends React.Component {
               <div className="contact-form">
                 <div className="booking-details">
                   <ul>
-                    <li><span className="bold">Guests:</span> { this.props.bookingDetails.amountOfGuests } </li>
-                    <li><span className="bold">Date:</span> { this.props.convertDateObjectToString(this.props.bookingDetails.dateSelected) } </li>
-                    <li><span className="bold">Time:</span> { this.props.bookingDetails.timeSelected + ":00" } </li>
+                    <li><span className="bold">Guests:</span> { this.props.viewstate.get('amountOfGuests') } </li>
+                    <li><span className="bold">Date:</span> { this.props.viewstate.get('selectedDate') } </li>
+                    <li><span className="bold">Time:</span> { this.props.viewstate.get('selectedTime') + ":00" } </li>
                   </ul>
                 </div>
                 <form>
@@ -188,32 +168,10 @@ class ContactForm extends React.Component {
         </Transition>
         <ProgressBar progressValue="75"/>
       </React.Fragment>
-      );
-    }
-    else {
-      return (
-        <React.Fragment>
-          <Transition
-            from={{right: "-50%", position: "absolute", transform: "translateX(100%)" }}
-            enter={{right: "50%", transform: "translateX(50%)" }}
-            leave={{ transform: "translateX(-200%)" }}
-          >
-          { styles =>
-            <div className="container flex hcenter" style={styles}>
-              <Confirmation
-                setAppState={ this.props.setAppState }
-                name={ this.state.allBookingDetails.userName }
-                date={ this.state.allBookingDetails.date }
-                time={ this.state.allBookingDetails.time + ":00" }
-                guests={ this.state.allBookingDetails.guests }
-              />
-            </div>
-          }
-        </Transition>
-        <ProgressBar progressValue="100"/>
-      </React.Fragment>
-      );
-    }
+    );
   }
 }
-export default ContactForm;
+
+export default connect(ContactForm, { setViewstate, makeBookingRequest }, (store) => ({
+  viewstate: store.viewstate,
+}))

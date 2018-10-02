@@ -1,9 +1,9 @@
-import { FETCH_BOOKINGS_REQUEST, FETCH_BOOKINGS_SUCCESS, DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS,
+import { FETCH_ADMIN_BOOKINGS_REQUEST, FETCH_BOOKINGS_SUCCESS, DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS,
 SAVE_BOOKING_REQUEST, SAVE_BOOKING_SUCCESS } from '../constants/actionTypes';
 
 
-export const requestBookings = () => ({
-  type: FETCH_BOOKINGS_REQUEST
+export const requestAdminBookings = () => ({
+  type: FETCH_ADMIN_BOOKINGS_REQUEST
 });
 
 export const receiveBookings = (bookings) => ({

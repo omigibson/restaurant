@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:8888';
+const base_url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8888';
 
 export const fetchBookings = (fileName) => fetch(`${base_url}/${fileName}`)
     .then((response) => response.json());
@@ -10,5 +10,5 @@ export const sendToAPI = (json, fileName) => {
     method: "POST",
     mode: "cors",
     body: JSON.stringify(json)
-  }).then((response) => response.json())
-}
+  }).then((response) => response.json());
+  }

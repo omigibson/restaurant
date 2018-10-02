@@ -1,25 +1,40 @@
-import React from "react";
+import React, { Component, Fragment } from "react";
 import checkmark from "./../../images/checkmark.svg";
 
-const Confirmation = (props) => {
-  return (
-    <React.Fragment>
-      <div className="booking-details-container">
-        <div className="checkmark-container flex hcenter">
-          <img src={ checkmark } alt="checkmark" />
+//Actions
+import { setViewstate } from '../../actions/viewstate';
+
+//Utilities
+import connect from '../../utilities/connect';
+
+class Confirmation extends Component {
+
+  componentDidMount() {
+    this.props.setViewstate('progressBar', 100);
+  }
+
+  render = () => {
+    return (
+      <Fragment>
+        <div className="booking-details-container">
+          <div className="checkmark-container flex hcenter">
+            <img src={ checkmark } alt="checkmark" />
+          </div>
+          <h2>4/4 Thank you for your reservation!</h2>
+          <h3>Details:</h3>
+          <div className="booking-details">
+            <p><span className="bold">Name:</span> { this.props.viewstate.get('userName') } </p>
+            <p><span className="bold">Date:</span> { this.props.viewstate.get('selectedDate') } </p>
+            <p><span className="bold">Time:</span> { this.props.viewstate.get('selectedTime') } </p>
+            <p><span className="bold">Guests:</span> { this.props.viewstate.get('amountOfGuests') } </p>
+          </div>
         </div>
-        <h2>4/4 Thank you for your reservation!</h2>
-        <h3>Details:</h3>
-        <div className="booking-details">
-          <p><span className="bold">Name:</span> { props.name } </p>
-          <p><span className="bold">Date:</span> { props.date } </p>
-          <p><span className="bold">Time:</span> { props.time } </p>
-          <p><span className="bold">Guests:</span> { props.guests } </p>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
+      </Fragment>
+    );
+  };
+}
 
 
-export default Confirmation;
+export default connect(Confirmation, {setViewstate}, (store) => ({
+  viewstate: store.viewstate,
+}))

@@ -5,11 +5,9 @@ import "./../css/style.css";
 import LandingPage from "./LandingPage";
 import Booking from "./booking/Booking";
 import About from "./About";
-import SelectGuests from "./booking/SelectGuests";
 import Admin from "./admin/Admin";
 import CancelBooking from "./CancelBooking";
 import Menu from "./Menu";
-import ProgressBar from "./booking/BookingProgress";
 
 import Logo from "./../images/nanofood-logo.svg";
 import {
@@ -20,28 +18,12 @@ import {
 class App extends Component {
 
   state = {
-    progressBar: 0
+
   }
 
-  /* Converts this.state.allBookings from MySQL date-format to something that
-  JavaScript can understand through new Date. */
-
-  // convertFromStringToDate = (arrayWithBookedDates) => {
-  //   if (arrayWithBookedDates) {
-  //     let alldaysThatAreFull = [];
-  //     arrayWithBookedDates.forEach((date) => {
-  //       alldaysThatAreFull.push(new Date(date));
-  //     });
-  //     return alldaysThatAreFull;
-  //   }
-  // }
-
-  /* We always want the activePage to change whenever a link is clicked.
-  Also the progressBar is set to 0 when clicking a link which causes the
-  bar to animate itself to width 0%.  */
+  // We always want the activePage to change whenever a link is clicked.
   handleChange = (e) => {
-    //dispatch(setActivePage(e.target.innerHTML))
-    this.setState({ activePage: [e.target.innerHTML], progressBar: 0 });
+    this.setState({ activePage: [e.target.innerHTML]});
   }
 
   setAppState = (json) => this.setState(json);
@@ -66,7 +48,7 @@ class App extends Component {
         <div className="outer-container">
           <div className="navbar-container">
             <Link to="/home">
-              <div onClick={ () => this.setState({ activePage: "Home", progressBar: 0 }) } className="logo">
+              <div onClick={ () => this.setState({ activePage: "Home"}) } className="logo">
                 <img src={ Logo } className="logo" alt="Nano Food logo" />
               </div>
             </Link>
@@ -92,7 +74,6 @@ class App extends Component {
               sendToAPI={ this.sendToAPI } />}
             />
             <Route path="/menu" component={Menu} />
-            <ProgressBar progressClass={'progress-bar-show-' + this.state.progressBar}/>
         </div>
     );
   }

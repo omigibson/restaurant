@@ -99,7 +99,7 @@ class BookingItem extends PureComponent {
 
     return (
       <tr key={item.get('id')}>
-        <td>{`${item.get('date')}-${item.get('id')}`}</td>
+        <td>{item.get('date')}</td>
         <td>{ item.get('time') }</td>
         <td>{ item.get('guests') }</td>
         <td>{ item.get('name') }</td>

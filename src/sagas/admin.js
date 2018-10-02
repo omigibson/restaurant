@@ -6,7 +6,7 @@ import { fetchBookings } from '../api/bookings';
 import { sendToAPI } from '../api/bookings';
 
 //Action Types
-import { FETCH_BOOKINGS_REQUEST, DELETE_BOOKING_REQUEST, SAVE_BOOKING_REQUEST } from '../constants/actionTypes';
+import { FETCH_ADMIN_BOOKINGS_REQUEST, DELETE_BOOKING_REQUEST, SAVE_BOOKING_REQUEST } from '../constants/actionTypes';
 
 // Action Creators
 import { receiveBookings, deleteBookingSuccess, saveBookingSuccess } from '../actions/admin';
@@ -44,7 +44,7 @@ function* handleFetchOfBookings(action) {
   }
 
 export default function* adminSaga() {
-  yield takeLatest(FETCH_BOOKINGS_REQUEST, handleFetchOfBookings);
+  yield takeLatest(FETCH_ADMIN_BOOKINGS_REQUEST, handleFetchOfBookings);
   yield takeLatest(DELETE_BOOKING_REQUEST, handleDeletionOfBooking);
   yield takeLatest(SAVE_BOOKING_REQUEST, handleSavingOfBooking)
 }
