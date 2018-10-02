@@ -32,16 +32,13 @@ export const getBookedDates = createSelector(getAllBookings, bookings => {
       })
     });
 
-  // console.log('numberOfBookingsPerDateAndTime', numberOfBookingsPerDateAndTime);
+  // console.log('numberOfBookingsPerDateAndTime', numberOfBookingsPerDateAndTime.toJS());
 
-  const fullyBookedDates = numberOfBookingsPerDateAndTime.map((bookings, date) => {
-    if ( bookings.get('18', 0) >= 8 && bookings.get('21', 0) >= 8 ) {
-      return date;
-    }
-    return null;
-  });
+  const fullyBookedDates = numberOfBookingsPerDateAndTime.filter((date) =>
+    date.get('18', 0) >= 1 && date.get('21', 0) >= 1
+  );
 
-  // console.log('fullyBookedDates', fullyBookedDates);
+  // console.log('fullyBookedDates', fullyBookedDates.toJS());
 
   return fullyBookedDates;
 });

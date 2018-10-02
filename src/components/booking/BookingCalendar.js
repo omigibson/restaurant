@@ -23,7 +23,6 @@ class BookingCalendar extends Component {
     fullyBookedDates: List()
   }
 
-  //Ska inte selectedDate och selectedTime sparas i storen via viewstate reducern?
   state = {
     stepCompleted: false,
     // selectedDate: new Date(),
@@ -44,17 +43,11 @@ class BookingCalendar extends Component {
     this.setState(() => ({ stepCompleted: true }))
   }
 
-  decideIfTileShouldBeDisabled = ({activeStartDate, date, view }) => {
+  decideIfTileShouldBeDisabled = ({activeStartDate, date, view = 'month' }) => {
 
-    const dateString = `${date.getYear()}-${date.getMonth()}-${date.getDay()}`;
-
-    // Disable if less then todays date
-    if ( date.getDay() > new Date().getDay() ) {
-      return false;
-    }
-
+    const dateString = `${date.getFullYear()}-${date.getMonth()+1}-${('0' + date.getDate()).slice(-2)}`;
     // Disable if the date is contained in the fully booked array of dates
-    if ( this.props.fullyBookedDates.contains(dateString) ) {
+    if ( this.props.fullyBookedDates.toJS().hasOwnProperty(dateString) ) {
       return true;
     }
 
@@ -69,6 +62,7 @@ class BookingCalendar extends Component {
   }
 
   render() {
+    console.log(this.props.fullyBookedDates.toJS())
 
     if ( this.state.stepCompleted ) {
       return <Redirect to={'/booking/contactform'} />
@@ -91,6 +85,8 @@ class BookingCalendar extends Component {
               value={this.state.selectedDate}
               onChange={this.handleOnDateChange}
               tileDisabled={this.decideIfTileShouldBeDisabled}
+              minDate={new Date()}
+              showNeighboringMonth={false}
             />
             {chooseTime}
           </div>
